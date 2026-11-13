@@ -37,8 +37,19 @@ const SITE = {
       nav.classList.toggle("is-hidden", y > last && y > 240 && !nav.classList.contains("is-open"));
       last = y;
     }, { passive: true });
+    // Phone/tablet: full-screen menu. Opens/closes on the ☰/× button,
+    // closes on Escape or when a link is tapped; page can't scroll behind it.
     const toggle = $(".nav-toggle", nav);
-    toggle?.addEventListener("click", () => toggle.setAttribute("aria-expanded", nav.classList.toggle("is-open")));
+    const setMenu = (open) => {
+      nav.classList.toggle("is-open", open);
+      document.documentElement.classList.toggle("menu-open", open);
+      toggle?.setAttribute("aria-expanded", open);
+      toggle?.setAttribute("aria-label", open ? "Close menu" : "Menu");
+    };
+    toggle?.addEventListener("click", () => setMenu(!nav.classList.contains("is-open")));
+    $$(".nav-links a", nav).forEach((a) => a.addEventListener("click", () => setMenu(false)));
+    addEventListener("keydown", (e) => { if (e.key === "Escape" && nav.classList.contains("is-open")) { setMenu(false); toggle?.focus(); } });
+    matchMedia("(min-width: 861px)").addEventListener("change", (e) => { if (e.matches) setMenu(false); });
   }
 
   /* ---------- Split headings into words ---------- */

@@ -160,20 +160,55 @@ p { margin: 0; }
 .nav.is-open .nav-toggle span { background: transparent; }
 .nav.is-open .nav-toggle span::before { top: 0; transform: rotate(45deg); }
 .nav.is-open .nav-toggle span::after { top: 0; transform: rotate(-45deg); }
+html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-screen menu */
+@media (prefers-reduced-motion: reduce) { .nav .nav-links, .nav .nav-links a { transition-duration: .01s !important; transition-delay: 0s !important; transform: none !important; } }
 
 @media (max-width: 860px) {
-  .nav-menu { padding: 4px; gap: 0; }
-  .nav-links { position: absolute; top: calc(100% + 10px); right: 0; flex-direction: column; align-items: stretch; min-width: 220px; padding: 10px; border-radius: 22px;
-    background: rgba(255, 255, 255, 0.95); border: var(--glass-border); box-shadow: var(--glass-shadow);
-    opacity: 0; pointer-events: none; transform: translateY(-8px) scale(.98); transform-origin: top right; transition: .35s var(--ease); }
-  .nav.is-open .nav-links { opacity: 1; pointer-events: auto; transform: none; }
+  /* Bar: only the logo and a glass ☰ button. The pill loses its glass
+     (a blurred parent would trap the full-screen menu inside it). */
+  .nav-menu { padding: 0; gap: 0; background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
   .nav-divider { display: none; }
-  /* Resume moves inside the menu: hide the bar button, show the menu one */
   .nav-menu > .nav-resume { display: none; }
-  .nav-links a.nav-resume--menu, .nav-links a.nav-resume--menu:hover {
-    display: flex; justify-content: center; margin-top: 8px; padding: 13px 20px; font-size: 16px; color: #fff;
+  .logo, .nav-toggle { position: relative; z-index: 2; }
+  .nav-toggle {
+    display: inline-flex; background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow);
+    -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
   }
-  .nav-toggle { display: inline-flex; }
+
+  /* Full-screen menu: soft, slightly see-through lavender → butter wash */
+  .nav-links {
+    position: fixed; inset: 0; z-index: 1;
+    flex-direction: column; justify-content: center; align-items: center; gap: 6px; padding: 96px 24px 48px;
+    background:
+      radial-gradient(60% 45% at 15% 12%, rgba(255, 255, 255, 0.7), transparent 70%),
+      radial-gradient(55% 40% at 90% 88%, rgba(255, 243, 204, 0.75), transparent 70%),
+      linear-gradient(165deg, rgba(232, 225, 255, 0.86), rgba(245, 241, 255, 0.82) 55%, rgba(255, 243, 204, 0.8));
+    -webkit-backdrop-filter: blur(22px) saturate(1.3); backdrop-filter: blur(22px) saturate(1.3);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .45s var(--ease), visibility 0s linear .45s;
+  }
+  .nav.is-open .nav-links { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .45s var(--ease), visibility 0s; }
+
+  /* Big centred links that drift up one after another */
+  .nav .nav-links a {
+    font-family: var(--font-display); font-size: clamp(34px, 8vw, 46px); font-weight: 400; letter-spacing: -0.01em;
+    line-height: 1.15; padding: 6px 12px; color: var(--ink);
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .35s var(--ease), transform .35s var(--ease), color .25s;
+  }
+  .nav .nav-links a:not(.nav-resume--menu):hover { color: var(--lav-deep); }
+  .nav.is-open .nav-links a { opacity: 1; transform: none; transition: opacity .6s var(--ease), transform .6s var(--ease), color .25s; }
+  .nav.is-open .nav-links a:nth-child(1) { transition-delay: .08s; }
+  .nav.is-open .nav-links a:nth-child(2) { transition-delay: .13s; }
+  .nav.is-open .nav-links a:nth-child(3) { transition-delay: .18s; }
+  .nav.is-open .nav-links a:nth-child(4) { transition-delay: .23s; }
+  .nav.is-open .nav-links a:nth-child(5) { transition-delay: .30s; }
+  .nav .nav-links a[target="_blank"]:not(.nav-resume--menu)::after { content: "↗"; font-family: var(--font-body); font-size: .45em; margin-left: 6px; color: var(--ink-3); vertical-align: super; }
+
+  /* Resume: navy button under the links */
+  .nav .nav-links a.nav-resume--menu, .nav .nav-links a.nav-resume--menu:hover {
+    display: inline-flex; margin-top: 22px; padding: 14px 28px; font-family: var(--font-body); font-size: 16px; font-weight: 600; letter-spacing: 0; color: #fff;
+  }
 }
 
 /* ---------- Hero (home) ---------- */
