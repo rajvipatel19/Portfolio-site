@@ -26,7 +26,7 @@ def head(title, desc, root):
 <meta property="og:title" content="{escape(title)}">
 <meta property="og:description" content="{escape(desc)}">
 <meta name="theme-color" content="#fdfcff">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.3' cy='.3'%3E%3Cstop offset='0' stop-color='%23fff'/%3E%3Cstop offset='.4' stop-color='%23e8e1ff'/%3E%3Cstop offset='1' stop-color='%238a76ee'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='15' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="{root}assets/img/avatar.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@ def nav(root, active):
         cls = ' class="is-active"' if key == active else ""
         return f'<a href="{root}{href}"{cls}>{label}{extra}</a>'
     return f"""<header class="nav">
-  <a class="logo glass" href="{root}index.html" aria-label="Rajvi Patel — home"><span class="dot"></span>Rajvi<b>.</b></a>
+  <a class="logo glass" href="{root}index.html" aria-label="Rajvi Patel — home"><img class="logo-avatar" src="{root}assets/img/avatar.svg" alt="" width="36" height="36"><span class="logo-name">Rajvi <span class="logo-last">Patel</span></span></a>
   <nav class="nav-links glass" aria-label="Main">
     {link("index.html#work", "Work", "work")}
     {link("about.html", "About", "about")}
