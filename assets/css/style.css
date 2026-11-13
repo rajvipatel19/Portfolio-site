@@ -272,6 +272,7 @@ html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-
 
 @media (max-width: 860px) {
   .hero { padding: 120px 0 80px; }
+  .hero-media video { object-position: 74% 50%; } /* keep the woman in view on narrow screens */
   .scroll-cue { display: none; }
 }
 
@@ -692,5 +693,6 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   .persona .qs span { font-size: 18px; }
   .cd-hint, .desk-hint, .img-ph .ph-in b { font-size: 17px; }
   .hero-media .video-note { font-size: 16px; }
+  .hero-media video { object-position: 84% 50%; } /* phone: slide further so the woman is fully visible */
   .footer-bottom .hand { font-size: 17px; }
 }
