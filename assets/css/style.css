@@ -573,3 +573,60 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .desk-item { width: calc(var(--w) * 1px); }
 @media (max-width: 900px) { .desk-item { width: calc(var(--w) * 0.78px); } }
 @media (max-width: 600px) { .desk-item { width: calc(var(--w) * 0.6px); } }
+
+/* =========================================================
+   Responsive type scale
+   Desktop sizes above step down gradually:
+   tablet (≤1024px) ≈ 90–95%, phone (≤640px) ≈ 80–88%.
+   Reading text never goes below 16px (iOS / Material standard),
+   small labels never below 12px.
+   ========================================================= */
+@media (max-width: 1024px) {
+  body { font-size: 16.5px; }
+  .hero-side p, .cs-sec > p, .cs-sec .prose p, .about-copy p { font-size: 17px; }
+  .cs-hero .lede { font-size: 19px; }
+  .card h3 { font-size: 27px; }
+  .persona h4 { font-size: 22px; }
+  .cs-sec h3 { font-size: 21px; }
+  .nav-links a { font-size: 15px; padding-inline: 13px; }
+  .nav-resume { font-size: 15px; padding: 12px 20px; }
+  .logo { font-size: 16px; }
+  /* decorative italic notes */
+  .hero .hi, .polaroid .caption { font-size: 27px; }
+  .section-head .hand, .cd-copy .hand, .call .hand, .cd-case .case-label { font-size: 23px; }
+  .ticker-head .hand { font-size: 25px; }
+  .roadmap h4, .shot-inner .ph { font-size: 22px; }
+  .cd-hint, .desk-hint, .img-ph .ph-in b { font-size: 20px; }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .hero-side p, .cs-sec > p, .cs-sec .prose p, .about-copy p, .cal-top, .g-cards .c h4, .two-col .col h4 { font-size: 16px; }
+  .cs-hero .lede { font-size: 17px; }
+  .two-col li, .cs-sec ul.list li, .g-cards .c p, .cs-meta span { font-size: 15px; }
+  /* headings */
+  .hero h1 { font-size: 38px; }
+  .about-copy h1, .cs-hero h1 { font-size: 36px; }
+  .footer-top h2 { font-size: 40px; }
+  .section-head h2, .call h2, .cd-copy h2 { font-size: 30px; }
+  .ticker-head h2, .cs-sec h2 { font-size: 27px; }
+  .card h3 { font-size: 24px; }
+  .next-cs h3 { font-size: 24px; }
+  .persona h4 { font-size: 20px; }
+  .cs-sec h3 { font-size: 19px; }
+  .quote { font-size: 20px; padding: 24px 22px; }
+  .stat b { font-size: 34px; }
+  /* nav */
+  .logo { font-size: 15px; }
+  .nav-resume { font-size: 14px; padding: 10px 16px; }
+  .nav-links a { font-size: 16px; }
+  /* decorative italic notes */
+  .hero .hi, .polaroid .caption { font-size: 23px; }
+  .section-head .hand, .cd-copy .hand, .call .hand, .cd-case .case-label { font-size: 20px; }
+  .ticker-head .hand { font-size: 21px; }
+  .roadmap h4, .shot-inner .ph { font-size: 19px; }
+  .persona .qs span { font-size: 18px; }
+  .cd-hint, .desk-hint, .img-ph .ph-in b { font-size: 17px; }
+  .hero-media .video-note { font-size: 16px; }
+  .footer-bottom .hand { font-size: 17px; }
+}
