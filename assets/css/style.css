@@ -243,12 +243,12 @@ html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-
   position: absolute; inset: 0; overflow: hidden; z-index: 0;
   /* scroll effect: lifts gently upward, softly fades and blurs away */
   transform: translate3d(0, calc(var(--hero-p) * -12%), 0) scale(calc(1 + var(--hero-p) * 0.05));
-  opacity: calc(1 - var(--hero-p) * 1.1);
-  filter: blur(calc(var(--hero-p) * 6px));
+  opacity: calc(1 - var(--hero-p) * 0.55);  /* how much it fades (0 = never, 1 = fully) */
+  filter: blur(calc(var(--hero-p) * 2px));   /* how soft it gets */
   will-change: transform, opacity;
   /* bottom edge stays crisp at the top; only melts into the page as you scroll */
-  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - var(--hero-p) * 45%), transparent 100%);
-  mask-image: linear-gradient(180deg, #000 calc(100% - var(--hero-p) * 45%), transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - var(--hero-p) * 22%), transparent 100%);
+  mask-image: linear-gradient(180deg, #000 calc(100% - var(--hero-p) * 22%), transparent 100%);
 }
 .hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-media .mesh { position: absolute; inset: -20%;
@@ -262,7 +262,7 @@ html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-
 @keyframes meshMove { 0% { transform: rotate(0deg) scale(1); } 100% { transform: rotate(8deg) scale(1.12); } }
 .hero-media::after { content: ""; position: absolute; inset: 0; background:
   linear-gradient(90deg, rgba(253,252,255,.55) 0%, rgba(253,252,255,.25) 40%, rgba(253,252,255,0) 65%), /* soft light behind the text on the left */
-  linear-gradient(180deg, rgba(253,252,255,0) 40%, rgba(253,252,255, calc(var(--hero-p) * .65)) 100%); } /* bottom haze only appears on scroll */
+  linear-gradient(180deg, rgba(253,252,255,0) 40%, rgba(253,252,255, calc(var(--hero-p) * .3)) 100%); } /* bottom haze only appears on scroll */
 .hero-media .video-note { position: absolute; top: 96px; right: 28px; z-index: 2; font-family: var(--font-hand); font-style: italic; font-size: 20px; color: var(--ink-3); transform: rotate(3deg); }
 .sparkle { position: absolute; width: 10px; height: 10px; z-index: 1; color: #fff; opacity: .9; animation: twinkle 4s ease-in-out infinite; }
 .sparkle svg { width: 100%; height: 100%; }
@@ -705,6 +705,6 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   .cd-hint, .desk-hint, .img-ph .ph-in b { font-size: 17px; }
   .hero-media .video-note { font-size: 16px; }
   .hero-media video { object-position: 70% 50%; } /* phone: part of the woman shows, text stays clear */
-  .hero-media::after { background: linear-gradient(180deg, rgba(253,252,255,.3) 0%, rgba(253,252,255,.62) 38%, rgba(253,252,255,.55) 62%, rgba(253,252,255,.15) 78%, rgba(253,252,255, calc(.15 + var(--hero-p) * .5)) 100%); } /* soft light behind the text; bottom haze grows on scroll */
+  .hero-media::after { background: linear-gradient(180deg, rgba(253,252,255,.3) 0%, rgba(253,252,255,.62) 38%, rgba(253,252,255,.55) 62%, rgba(253,252,255,.15) 78%, rgba(253,252,255, calc(.15 + var(--hero-p) * .25)) 100%); } /* soft light behind the text; bottom haze grows on scroll */
   .footer-bottom .hand { font-size: 17px; }
 }
