@@ -1327,3 +1327,27 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   .sila .sk-concl h2 { font-size: 36px; }
   .sk-gif, .sk-story { padding: 48px 0; }
 }
+
+/* ---------- Footer (same as the Framer site) ---------- */
+.ft { background: #18181b; color: #fafafa; font-family: var(--font-body); }
+.ft-in { width: min(1200px, calc(100% - 40px)); margin-inline: auto; padding: 48px 0; }
+.ft-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; }
+.ft-title { font-size: 36px; font-weight: 700; letter-spacing: .1em; line-height: 1.4; color: #fafafa; }
+.ft-caret { display: inline-block; width: 2px; height: .95em; margin-left: 3px; vertical-align: -0.1em; background: #fafafa; animation: ftBlink 1s steps(1) infinite; }
+@keyframes ftBlink { 50% { opacity: 0; } }
+.ft-sub { margin-top: 12px; font-size: 20px; font-weight: 500; letter-spacing: .1em; color: #d4d4d8; }
+.ft-btns { display: grid; gap: 16px; justify-items: end; }
+.ft-btns a { display: inline-flex; align-items: center; justify-content: center; min-width: 104px; padding: 14px 24px; border-radius: 12px; background: #27272a; border: 1px solid #3f3f46; font-size: 16px; font-weight: 500; color: #fafafa; transition: background .25s, border-color .25s; }
+.ft-btns a:hover { background: #3f3f46; border-color: #52525b; }
+.ft-bottom { margin-top: 48px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.ft-bottom p { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 500; font-style: italic; letter-spacing: .1em; color: #a1a1aa; }
+.ft-heart { width: 22px; height: 22px; color: #b794f6; }
+@media (max-width: 760px) {
+  .ft-top { flex-direction: column; }
+  .ft-title { font-size: 28px; }
+  .ft-sub { font-size: 16px; }
+  .ft-btns { display: flex; justify-items: start; }
+  .ft-bottom { margin-top: 36px; flex-direction: column; }
+  .ft-bottom p { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .ft-caret { animation: none; } }

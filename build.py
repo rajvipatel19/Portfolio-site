@@ -62,24 +62,23 @@ def nav(root, active):
 
 
 def footer(root):
-    return f"""<footer class="footer" id="contact">
-  <div class="wrap">
-    <div class="footer-top">
-      <h2 data-reveal>Let's make it<br>easy to use <span class="hand">together</span></h2>
-      <div class="footer-links" data-reveal style="--d:.1s">
-        <a class="btn magnetic" href="{root}index.html#call" data-cal>Book a call {ARROW}</a>
-        <a class="btn magnetic" href="{C.LINKEDIN}" target="_blank" rel="noopener">LinkedIn {ARROW_UR}</a>
-        <a class="btn magnetic" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW_UR}</a>
+    """Dark footer, same as the Framer site: typing 'Let's …', Resume + LinkedIn, copyright line."""
+    heart = '<svg class="ft-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.1C.9 8.6 3 5 6.5 5c2 0 3.5 1.1 5.5 3.2C14 6.1 15.5 5 17.5 5 21 5 23.1 8.6 21.6 11.9 19.5 16.4 12 21 12 21Z" fill="currentColor"/></svg>'
+    return f"""<footer class="ft" id="contact">
+  <div class="ft-in">
+    <div class="ft-top">
+      <div>
+        <p class="ft-title">Let's <span class="ft-type" data-type="connect|collaborate|work together!">connect</span><span class="ft-caret" aria-hidden="true"></span></p>
+        <p class="ft-sub">Would love to talk about projects, growth &amp; anything design!</p>
+      </div>
+      <div class="ft-btns">
+        <a href="{C.RESUME}" target="_blank" rel="noopener">Resume</a>
+        <a href="{C.LINKEDIN}" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
-  </div>
-  <div class="desk" aria-label="My desk — drag things around">
-    <div class="desk-surface"></div>
-    <div class="desk-hint">psst… you can move things around on my desk ☕</div>
-    {desk_items()}
-    <div class="wrap footer-bottom">
-      <span>© <span data-year>2026</span> Rajvi Patel · Dubai</span>
-      <span class="hand">built with code &amp; lots of coffee</span>
+    <div class="ft-bottom">
+      <p>© <span data-year>2026</span> Rajvi Patel</p>
+      <p>Built with {heart} &amp; lots of coffee!</p>
     </div>
   </div>
 </footer>
