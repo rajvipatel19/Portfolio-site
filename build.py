@@ -880,6 +880,216 @@ def citylockers_page():
     return head("CityLockers Kiosk · Rajvi Patel", "Helping travellers go hands-free in under 4 minutes, 2,000+ bookings completed across Dubai.", root) + body
 
 
+# ---------------------------------------------------------------- SKU Platform (matches the Framer case study)
+KM = "../assets/media/sku/"
+SK_CMD = '<svg class="sk-cmd" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6a3 3 0 1 0-3 3h3V6Zm0 0v12m0-12h6m-6 12a3 3 0 1 1-3-3h3v3Zm0 0h6m0 0a3 3 0 1 0 3-3h-3v3Zm0 0V6m0 0a3 3 0 1 1 3 3h-3V6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>'
+SK_EXT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+SK_ICONS = {
+    "sitemap": '<svg viewBox="0 0 32 32"><rect x="12" y="3" width="8" height="6" rx="1.5"/><rect x="3" y="23" width="8" height="6" rx="1.5"/><rect x="12" y="23" width="8" height="6" rx="1.5"/><rect x="21" y="23" width="8" height="6" rx="1.5"/><path d="M16 9v7M7 23v-7h18v7M16 16v7" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+    "flow": '<svg viewBox="0 0 32 32"><rect x="3" y="4" width="9" height="7" rx="1.5"/><rect x="20" y="12.5" width="9" height="7" rx="1.5"/><rect x="3" y="21" width="9" height="7" rx="1.5"/><path d="M12 7.5h4v17h-4M16 16h4" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+    "wire": '<svg viewBox="0 0 32 32"><rect x="3" y="4" width="26" height="24" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M3 10h26" stroke="currentColor" stroke-width="2.4"/><rect x="7" y="14" width="8" height="10" rx="1"/><path d="M18 15h7M18 19h7M18 23h5" stroke="currentColor" stroke-width="2"/></svg>',
+    "pen": '<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#efe9f8"/><path d="M9 23l2-6 9-9 4 4-9 9-6 2Z"/><path d="M18 10l4 4" stroke="#efe9f8" stroke-width="1.5"/></svg>',
+}
+
+
+def sk_head(icon, title, text, cls=""):
+    ic = f'<span class="sk-ic">{SK_ICONS[icon]}</span>' if icon in SK_ICONS else (f'<img class="sk-ic" src="{KM}{icon}" alt="" width="56" height="56">' if icon else "")
+    return f'<div class="sk-head {cls}"><div>{ic}<h3>{title}</h3></div><p>{text}</p></div>'
+
+
+def sk_split(pill, text):
+    return f'<div class="sk-head sk-head--pill"><div><span class="sk-pill">{pill}</span></div><p>{text}</p></div>'
+
+
+def sk_intro(small, big):
+    return f'<div class="sk-intro" data-reveal><p>{small}</p><h2>{big}</h2></div>'
+
+
+def sku_page():
+    root = "../"
+    rail, bar = cs_rail([("context", "Context"), ("summary", "Project summary"), ("problem", "The problem"), ("goals", "The goals"),
+                         ("discover", "Discover"), ("define", "Define"), ("design", "Design"), ("deliver", "Deliver"),
+                         ("results", "Results"), ("takeaways", "Key takeaways"), ("conclusion", "Conclusion")])
+    PROTO = "https://www.figma.com/proto/ZCjXwYFBb5MsBgypUKW4CD/Prototype?page-id=0%3A1&amp;node-id=1-5646&amp;p=f&amp;viewport=3367%2C-476%2C0.32&amp;t=4joBuUKoRZuxixNm-1&amp;scaling=min-zoom&amp;content-scaling=fixed&amp;starting-point-node-id=4%3A3296"
+    problems = ["Inventory management creates financial risk and logistical challenges", "Product sourcing requires navigating multiple platforms and suppliers",
+                "Store integration often involves complex technical knowledge", "Order fulfillment adds another layer of operational complexity"]
+    prios = ["<b>Simplicity of integration</b> with their existing platforms", "Less technical <b>user experience</b>", "<b>Ready to sell</b> high quality products",
+             "<b>Ability to customize product details</b> according to their brand needs", "<b>Speed</b> of adding products to their store"]
+    takeaways_l = ["User finds difficult to handle orders across different e-commerce platforms simultaneously", "Users want a platform that helps them to customize and build their own brand experience",
+                   "A platform which Addresses underserved markets while maintaining global capabilities", "Limited options of products to select from"]
+    takeaways_r = ["78% of sellers felt overwhelmed by the technical complexity of managing multiple platforms,", "100% of participants struggled with pricing decisions due to unclear product cost, shipping fees and profit margins",
+                   "Users experience Manual Product Import Fatigue", "90% Users feel Inventory Anxiety &amp; Storage Limitations"]
+    tk = lambda items: "".join(f'<div class="sk-note" data-reveal>{SK_CMD}<p>{t}</p></div>' for t in items)
+    wires = [("Dashboard", "wire-dashboard.png"), ("Orders", "wire-orders.png"), ("Products", "wire-products.png"),
+             ("My Stores", "wire-stores.png"), ("My Products", "wire-myproducts.png"), ("Import List", "wire-importlist.png")]
+    features = ["The central hub providing users with an overview of their dropshipping business", "Centralized order management across all connected stores",
+                "Product discovery and sourcing interface", "Staging area for product customization before adding to stores",
+                "Management of products successfully added to connected stores", "Store connection &amp; statistics", "User profile and platform configuration"]
+    steps = [("Click on add store", "store-1.png"), ("Add new store modal opens", "store-2.png"),
+             ("Select store &amp; add store URL", "store-3.png"), ("With just one step of “confirm permissions”, Its done!", "store-4.png")]
+    results = [("User Growth", "500+ seller onboarding within 6 months with 75% retention rate through simplified one-click integration reducing setup time from hours to minutes."),
+               ("User Experience", "Integration time reduced by 93% (from 30+ minutes to under 2 minutes) &amp; Product discovery and addition accelerated by 87% (from 15 minutes per product to under 2 minutes)"),
+               ("Platform Performance", "Handle 10,000+ daily product imports with 50% improved order processing efficiency and real-time synchronization across integrated platforms.")]
+    keys = ["I learned how to think beyond screens, to design systems that scale and simplify complex business models. As the sole designer in early stages, I wore many hats and learned to balance speed with precision.",
+            "Realized that successful B2B platforms must clearly demonstrate ROI to users. Every design decision needed to translate into measurable time savings or revenue opportunities for sellers.",
+            "Discovered that revealing information gradually from store connection to product browsing to detailed editing prevents cognitive overload and helps users feel confident navigating complex business tools.",
+            "Learned to design for growth from day one considering how the interface would handle thousands of products and multiple store connections without losing usability or performance."]
+
+    body = f"""{nav(root, 'work')}
+<main class="sila sk">
+{rail}
+<div class="sl-main">
+<section class="sl-hero sk-hero">
+  <div class="in">
+    <a class="sl-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Go Back</a>
+    <h1>SKU Platform</h1>
+    <div class="sk-meta">
+      <div><p>Role</p><b>Product designer</b><b>User Journey</b><b>User Research</b></div>
+      <div><p>Duration</p><b>4 Months</b></div>
+      <div><p>Team</p><b>Designer 🙋🏻‍♀️</b><b>2 Backend Developers</b><b>1 Frontend Developer</b><b>CEO</b></div>
+      <div class="sk-links"><a href="https://skuplatform.com/" target="_blank" rel="noopener">Live website link {SK_EXT}</a><a href="{PROTO}" target="_blank" rel="noopener">Prototype link {SK_EXT}</a></div>
+    </div>
+    <div class="sk-context" id="context"><h2 class="sk-ghost">Context</h2><p>SKU Platform helps e-commerce sellers grow by connecting their already exisitng stores (Shopify, Salla, WooCommerce ) and importing ready-to-sell products no inventory or logistics needed.</p></div>
+  </div>
+  <div class="sk-hero-img"><img src="{KM}hero.png" alt="SKU Platform product discovery screen on a laptop" width="2048" height="1152"></div>
+</section>
+{bar}
+
+<section class="sl-sec" id="summary"><div class="in">
+  <div class="sk-summary">
+    <div><p class="sk-kick">An unconventional journey of designer!</p><h2>Project summary</h2>
+      <p class="sk-summary-text">As the <b>founding product designer</b> behind SKU Platform - a <b>global drop-shipping solution,</b> I worked closely with the founder &amp; engineers, shaped the product direction, and helped turn a raw concept into a full, scalable platform. I <b>led</b> the design, turning <b>a raw idea</b> into a <b>fully functional platform</b> &amp; created efficient user experience that would make dropshipping accessible to sellers with <b>minimal technical knowledge.</b></p></div>
+    <div class="sk-promo" data-reveal><img class="sk-promo-woman" src="{KM}summary-phone.png" alt="A seller smiling at her laptop" loading="lazy"><div class="sk-promo-side"><div class="sk-promo-logo"><img src="{KM}summary-logo.png" alt="SKU Platform" loading="lazy"></div><p>SKU makes dropshipping easy connect your store, import products, and sell without inventory.</p></div></div>
+  </div>
+</div></section>
+
+<section class="sl-sec" id="problem"><div class="in">
+  <div class="sk-split"><div><p class="sk-kick">But first!</p><h2>The Problem</h2></div>
+    <p class="sk-lead">Sellers want to scale their product listings without <b>the hassle of inventory</b> or <b>manual uploads</b> , but most tools make it <b>complicated to find suitable products, difficult to integrate with stores</b>, or <b>time-consuming.</b></p></div>
+  <div class="sk-problems">{''.join(f'<div class="sk-problem" data-reveal>{p}</div>' for p in problems)}</div>
+</div></section>
+
+<section class="sl-sec sk-tight-top" id="goals"><div class="in">
+  {sk_intro("Not to forget", "The Goals")}
+  <div class="sk-goals">
+    <div class="sk-goal sk-goal--wide" data-reveal><h3>User</h3><p>Making it <b>easy for sellers to scale their stores</b> - by giving them ready-to-sell products, smooth integrations, and zero inventory stress.</p></div>
+    <div class="sk-goal" data-reveal><h3>Business</h3><p>Creating a <b>drop-shipping website</b> with smooth user experience</p></div>
+    <div class="sk-goal" data-reveal><h3>Design</h3><p>Transform technical complexity into intuitive, <b>scalable solutions</b></p></div>
+  </div>
+</div></section>
+<div class="sk-band"><img src="{KM}goals-band.png" alt="Design process: Discover, Define, Design, Deliver" loading="lazy"></div>
+
+<section class="sl-sec" id="discover"><div class="in">
+  {sk_intro("Let’s", "Discover")}
+  <div class="sk-head"><div><div class="sk-faces">{''.join(f'<img src="{KM}user-{i}.jpg" alt="" width="48" height="48" loading="lazy">' for i in range(1, 6))}</div><h3>User Research</h3></div>
+    <p>To understand the real challenges facing e-commerce sellers, I conducted interviews with <b>5 e-commerce store owners</b> across different platforms.</p></div>
+  <div class="sk-prio"><h2 class="sk-ghost">Their Priorities</h2><div class="sk-prio-cards">{''.join(f'<div class="sk-prio-card" data-reveal><span>{i+1}.</span><p>{p}</p></div>' for i, p in enumerate(prios))}</div></div>
+</div></section>
+<section class="sl-sec sk-gray"><div class="in">
+  <h2 class="sk-ghost">Competitive Research</h2>
+  <img class="sk-wide" src="{KM}competitive.svg" alt="Competitive research table comparing Spocket, Salehoo, Modalyst and SKU Platform on integrations, order management, target user, supplier region, branded packaging, product import and user experience" loading="lazy" data-reveal>
+</div></section>
+<section class="sl-sec sk-lav"><div class="in">
+  {sk_intro("Everything i found during all kind of research", "Major takeaways from research")}
+  <div class="sk-notes"><div>{tk(takeaways_l)}</div><div class="sk-notes-r">{tk(takeaways_r)}</div></div>
+</div></section>
+
+<section class="sl-sec" id="define"><div class="in">
+  {sk_intro("Let’s", "Define")}
+  {sk_head("persona-avatar.png", "User Persona", "The fictional represesntation of the key user of this app.")}
+  <div class="sk-persona">
+    <p class="sk-quote">“I spend hours every day juggling between different supplier websites, manually adding products, and tracking inventory across multiple platforms. It is exhausting."</p>
+    <div class="sk-persona-row">
+      <div class="sk-persona-id"><h4>Rohan Sharma</h4><p>Age - 32 Years</p><p>Occupation -E-commerce Entrepreneur &amp; Clothing Store Owner</p><p>Income - 12,000 AED/month</p><p>Platform: Shopify store with growing customer base</p><p>Experience: 3 years in e-commerce, self-taught digital marketing skills</p></div>
+      <div class="sk-persona-story"><h4>Background Story</h4><p>Rohan started his Clothing E-commerce website from his apartment in 2021, initially selling a collection of locally-sourced items. As his Instagram following grew and customer demand increased, he quickly realized that his small inventory couldn't keep pace with market opportunities.  Rohan faces a common challenge: <b>Finding unique products to sell without the hassle of inventory management.</b> He's tech-savvy enough to manage his Shopify store and social media marketing, but gets overwhelmed by the technical aspects of supplier integration and inventory management.</p></div>
+    </div>
+    <div class="sk-quads">
+      <div><span class="sk-pill">Goals</span><img src="{KM}persona-goals.svg" alt="Goals: expand product catalog without increasing storage costs or inventory risk; manage orders from one platform; find unique, trending home decor items that align with his brand aesthetic" loading="lazy"></div>
+      <div class="sk-quad-r"><span class="sk-pill">Motivations</span><img src="{KM}persona-motivations.svg" alt="Motivations: build a sustainable business model; scale his current product catalogue; find more time for marketing and brand building" loading="lazy"></div>
+      <div><span class="sk-pill">Pain points &amp; frustrations</span><img src="{KM}persona-pains.svg" alt="Pain points: high upfront costs for stocking new product lines; difficulty predicting which products will sell; overwhelmed by complex dropshipping platform interfaces; spends too much time on operational tasks; struggles with integrating multiple tools; time-consuming supplier research" loading="lazy"></div>
+      <div class="sk-quad-r"><span class="sk-pill">Needs &amp; Expectations</span><img src="{KM}persona-needs.svg" alt="Needs: simple one-click integration with his existing Shopify store; access to unique products that fit his niche; automated inventory and order management; reliable suppliers with quality products and reasonable shipping times; simple and less technical user experience" loading="lazy"></div>
+    </div>
+  </div>
+</div></section>
+<section class="sl-sec sk-pattern"><div class="in">
+  {sk_head("sitemap", "Site map", "Created a comprehensive site map to visualize the platform's information architecture and ensure logical navigation flows between core features")}
+  <img class="sk-wide sk-wide--md" src="{KM}sitemap.png" alt="SKU Platform site map: sign up, home page, then dashboard, orders, products, my stores and settings with their sub-pages" loading="lazy" data-reveal>
+</div></section>
+<section class="sl-sec sk-gray"><div class="in">
+  {sk_head("flow", "Primary user flow", "This flow represents the core SKU experience - taking a new user from initial login through successfully importing their first customized product to their e-commerce store.")}
+  <img class="sk-wide" src="{KM}userflow.png" alt="Primary user flow from login through store connection, product exploration and customization to importing the product to the store" loading="lazy" data-reveal>
+</div></section>
+<section class="sl-sec sk-dots"><div class="in">
+  {sk_head("wire", "Wireframes", "Initial wireframes showing the dashboard, orders list, explore products interface, and product category navigation")}
+  <div class="sk-wires">{''.join(f'<div class="sk-wire" data-reveal><span class="sk-pill">{n}</span><img src="{KM}{f}" alt="{n} wireframe" loading="lazy"></div>' for n, f in wires)}</div>
+</div></section>
+
+<section class="sl-sec" id="design"><div class="in">
+  {sk_intro("It’s time to", "Design")}
+  {sk_head("pen", "Final Design", "SKU removes that friction by offering an all-in-one product sourcing and syncing experience. This flow was central to making SKU actually useful.")}
+</div></section>
+<section class="sl-sec sk-pattern"><div class="in">
+  {sk_split("Dashboard", "The dashboard provides a clean, minimalist overview with key metrics and navigation")}
+  <img class="sk-shot sk-shot--md" src="{KM}dashboard.png" alt="SKU dashboard with account overview, orders graph and order summary" loading="lazy" data-reveal>
+</div></section>
+<section class="sl-sec sk-gray"><div class="in">
+  <div class="sk-center"><span class="sk-pill sk-pill--lg">Main Features</span></div>
+  <div class="sk-features"><ul>{''.join(f'<li>{x}</li>' for x in features)}</ul><img src="{KM}features-nav.png" alt="SKU sidebar navigation: Home, Order list, Products, All products, Import list, My products, My stores, Account settings" loading="lazy" data-reveal></div>
+</div></section>
+<section class="sl-sec sk-pattern"><div class="in">
+  {sk_split("Store integration &amp; My Stores", "My Store has one click store integration process, individual store cards &amp; their analytics in most simple form")}
+  <div class="sk-steps">{''.join(f'<div class="sk-step" data-reveal><h4>{t}</h4><img src="{KM}{f}" alt="{t}" loading="lazy"></div>' for t, f in steps)}</div>
+</div></section>
+<section class="sk-gif"><div class="in"><img src="{KM}store-flow.gif" alt="Animation of connecting a new store in My Stores" loading="lazy"></div></section>
+<section class="sl-sec sk-gray"><div class="in">
+  {sk_split("Product Discovery", "This feature has thousands of products but with all useful filters! User can also see SKU suggested “Selling price” for maximum profits!")}
+  <div class="sk-two"><div data-reveal><h4>All products has categories &amp; sub categories to make it easier</h4><img class="sk-framed" src="{KM}discovery-1.png" alt="Product discovery grid with categories" loading="lazy"></div>
+    <div data-reveal><h4>Bulk “add to import list” is an easy &amp; quick option to add products in “import list”</h4><img class="sk-framed" src="{KM}discovery-2.png" alt="Product discovery grid with bulk add to import list" loading="lazy"></div></div>
+  <h4 class="sk-center sk-cap">Product details shows all important features and details about product</h4>
+  <img class="sk-shot sk-shot--sm sk-framed" src="{KM}product-details.png" alt="Product details page with images, pricing, key features and similar products" loading="lazy" data-reveal>
+</div></section>
+<section class="sl-sec sk-pattern"><div class="in">
+  {sk_split("Import list", "It is a space where users could personalize products before adding them to their stores.")}
+  <div class="sk-import">
+    <div class="sk-import-note"><p>I conceptualized the "Import List" (Playground) as a staging area where users could</p><p>Customize product titles and descriptions</p><p>Adjust pricing and profit margins</p><img src="{KM}importlist-note.png" alt="Import list product card with pricing tab" loading="lazy"></div>
+    <img class="sk-import-main sk-framed" src="{KM}importlist.png" alt="Import list screen with products ready to customize" loading="lazy" data-reveal>
+    <div class="sk-import-side"><p>Add to store button adds selected product to user’s store in one click!</p><img src="{KM}importlist-toast.png" alt="Product card with the Add to store button" loading="lazy"><p class="sk-added"><span>✓</span>Product added to store</p></div>
+  </div>
+</div></section>
+<section class="sl-sec sk-gray"><div class="in">
+  {sk_split("My Products", "It shows all the products user has added with all important measures like total profit, total sellings, store name &amp; status of product")}
+  <img class="sk-shot sk-shot--md sk-framed" src="{KM}myproducts.png" alt="My Products table with profit, sales, store and status" loading="lazy" data-reveal>
+</div></section>
+<section class="sl-sec sk-pattern"><div class="in">
+  {sk_split("Orders", "The Orders List provides a consolidated view of orders across all connected stores")}
+  <div class="sk-two"><img class="sk-framed" src="{KM}orders-1.png" alt="Orders list" loading="lazy" data-reveal><img class="sk-framed" src="{KM}orders-2.png" alt="Order details" loading="lazy" data-reveal></div>
+</div></section>
+<section class="sk-story"><div class="in"><img src="{KM}deliver.png" alt="Storyboard: Rohan has a Shopify store, wants to expand without inventory, signs up with SKU, integrates his store, adds products to the import list and imports them to Shopify in one click, and is now a happy dropshipper" loading="lazy" data-reveal></div></section>
+
+<section class="sl-sec" id="deliver"><div class="in">
+  {sk_intro("Is it ready already?", "Deliver")}
+  <p class="sk-center"><a class="sk-proto" href="{PROTO}" target="_blank" rel="noopener">Let’s Check Prototype {SK_EXT}</a></p>
+</div></section>
+<section class="sl-sec sk-gray" id="results"><div class="in">
+  <h2 class="sk-h">Results</h2><p class="sk-sub">Although the project is at the prototype stage, the following outcomes are anticipated upon the app's launch:</p>
+  <div class="sk-results">{''.join(f'<div class="sk-result" data-reveal><h3>{t}</h3><p>{d}</p></div>' for t, d in results)}</div>
+</div></section>
+<section class="sl-sec sk-gray sk-tight-top" id="takeaways"><div class="in">
+  <h2 class="sk-h sk-center">Key takeaways</h2>
+  <div class="sk-keys">{''.join(f'<div class="sk-note sk-note--lg" data-reveal>{SK_CMD}<p>{k}</p></div>' for k in keys)}</div>
+</div></section>
+<section class="sl-sec"><div class="in">
+  <div class="sk-forward"><h2 class="sk-ghost">Looking Forward</h2><div><p>If continuing development on SKU, I would focus on enhancing the platform with</p><ul><li>AI-powered product recommendations based on store performance</li><li>Advanced analytics to identify trending products</li><li>Additional e-commerce platform integrations</li></ul></div></div>
+</div></section>
+<section class="sl-sec sk-concl-band" id="conclusion"><div class="in">
+  <div class="sk-concl" data-reveal><h2>Conclusion</h2><p>This project demonstrates my approach to solving complex UX challenges through thorough research, iterative design,  creating intuitive solutions that feel natural to users.. The SKU platform showcases my ability to simplify technical complexity while creating powerful, flexible solutions for real business problems.</p></div>
+</div></section>
+</div>
+</main>
+{footer(root)}"""
+    return head("SKU Platform · Rajvi Patel", "SKU Platform helps e-commerce sellers grow by connecting their stores and importing ready-to-sell products, no inventory needed.", root) + body
+
+
 if __name__ == "__main__":
     (ROOT / "work").mkdir(exist_ok=True)
     (ROOT / "index.html").write_text(home())
@@ -888,6 +1098,6 @@ if __name__ == "__main__":
     projs = C.PROJECTS
     for i, cs in enumerate(C.CASE_STUDIES):
         nxt = projs[(i + 1) % len(projs)]
-        page = {"sila": sila_page, "citylockers-kiosk": citylockers_page}.get(cs["slug"], lambda: case_study(cs, nxt))()
+        page = {"sila": sila_page, "citylockers-kiosk": citylockers_page, "sku-platform": sku_page}.get(cs["slug"], lambda: case_study(cs, nxt))()
         (ROOT / "work" / f"{cs['slug']}.html").write_text(page)
     print("built", 3 + len(C.CASE_STUDIES), "pages")
