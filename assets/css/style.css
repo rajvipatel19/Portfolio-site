@@ -717,3 +717,8 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   .hero-media::after { background: linear-gradient(180deg, rgba(253,252,255,.3) 0%, rgba(253,252,255,.62) 38%, rgba(253,252,255,.55) 62%, rgba(253,252,255,.15) 78%, rgba(253,252,255, calc(.15 + var(--hero-p) * .12)) 100%); } /* soft light behind the text; bottom haze grows on scroll */
   .footer-bottom .hand { font-size: 17px; }
 }
+
+/* ---------- Case study (internal) pages: one accent colour, no yellow dot ---------- */
+.cs-hero, .cs-layout { --lav-deep: #4d2c86; }
+.cs-hero .eyebrow::before, .cs-layout .eyebrow::before { display: none; }
+.cs-layout .stat b { background: none; color: #4d2c86; }
