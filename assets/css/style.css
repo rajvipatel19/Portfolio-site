@@ -693,6 +693,7 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   .persona .qs span { font-size: 18px; }
   .cd-hint, .desk-hint, .img-ph .ph-in b { font-size: 17px; }
   .hero-media .video-note { font-size: 16px; }
-  .hero-media video { object-position: 84% 50%; } /* phone: slide further so the woman is fully visible */
+  .hero-media video { object-position: 70% 50%; } /* phone: part of the woman shows, text stays clear */
+  .hero-media::after { background: linear-gradient(180deg, rgba(253,252,255,.3) 0%, rgba(253,252,255,.62) 38%, rgba(253,252,255,.55) 62%, rgba(253,252,255,.15) 78%, rgba(253,252,255,.6) 100%); } /* soft light behind the text */
   .footer-bottom .hand { font-size: 17px; }
 }
