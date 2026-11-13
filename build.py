@@ -429,6 +429,244 @@ def art_lab():
     return head("Art Lab · Rajvi Patel", "Visual experiments by Rajvi Patel — coming soon.", root) + body
 
 
+# ---------------------------------------------------------------- SILA (matches the Framer case study)
+SL_ICON = '<svg class="sl-ic" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 5.3 17.6 8.9 14 12.5 10.4 8.9ZM19.1 10.4 22.7 14 19.1 17.6 15.5 14ZM8.9 10.4 12.5 14 8.9 17.6 5.3 14ZM14 15.5 17.6 19.1 14 22.7 10.4 19.1Z" fill="currentColor"/></svg>'
+SL_UP = '<svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 23V5M6 13l8-8 8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+SL_DOWN = '<svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 5v18M6 15l8 8 8-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+M = "../assets/media/sila/"
+
+
+def sl_points(items, dark=False):
+    """Purple icon + title + description rows (used in flows, tier 2, edge case, learnings)."""
+    return '<ul class="sl-points">' + "".join(
+        f'<li>{SL_ICON}<div><h4>{t}</h4><p>{d}</p></div></li>' for t, d in items) + "</ul>"
+
+
+def sl_video(src, label, round_=False):
+    cls = "sl-phone sl-phone--round" if round_ else "sl-phone"
+    return f'<video class="{cls}" src="{M}{src}" muted loop playsinline preload="none" data-autoplay aria-label="{label}"></video>'
+
+
+def sl_numcards(items, cls="sl-card"):
+    return "".join(f'<div class="{cls}" data-reveal><span class="sl-num">{i+1}.</span><h4>{t}</h4><p>{d}</p></div>'
+                   for i, (t, d) in enumerate(items))
+
+
+def sila_page():
+    root = "../"
+    secs = [("context", "The context"), ("problem", "The problem"), ("research", "Research"),
+            ("discovery", "Discovery"), ("persona", "User persona"), ("constraints", "Constraints & KYC"),
+            ("decisions", "Key decisions"), ("flow", "User flow"), ("tier2", "Tier 2"),
+            ("edge", "Edge case"), ("impact", "Projected impact"), ("retention", "Retention"),
+            ("learnings", "Learnings")]
+    stations = "".join(f'<li><a href="#{i}"><span class="node"></span>{n}</a></li>' for i, n in secs)
+
+    users = [("Surprise fees", '"zero fees" apps hide the margin in the rate; less lands than expected'),
+             ("A wall before value", "ID and income asked in onboarding before even user experience the app"),
+             ("Unexplained holds", "No reason, no document named, no timeline clarified"),
+             ("Silence after sending", 'Money enters a black box; "did it arrive?"')]
+    biz = [("Drop-off at the door", "Front-loaded KYC is the funnel's biggest leak"),
+           ("Increased support tickets", '"Where is my money" is the top support cost'),
+           ("Rejections lose users", 'Vague "verification failed" means retry blind, then uninstall'),
+           ("Bad UX is compliance risk", "confusing forms produce wrong answers and flagged accounts")]
+    notes = ["KYC acted as a wall, everything asked upfront, causing drop-off",
+             'Rates change mid-transaction &amp; "Free" hides fees, cost shows up after sending',
+             "Transfers held for days, without clarifying reason, no timeline",
+             "Support goes silent when money is stuck",
+             "Verification feels endless, rules change every time"]
+    peach = [("Identity must be verified", "No anonymous accounts. ID, date of birth and address are legally required."),
+             ("Every user is screened", "Sanctions and PEP checks run before onboarding completes."),
+             ("Consent is explicit", "The selfie is biometric data, it needs its own agreement, not a buried checkbox.")]
+    yellow = [("Purpose must be recorded", "A required question on every transfer, not optional data."),
+              ("Declared plans set the baseline", 'Monthly sending plans are what the system measures "unusual" against.'),
+              ("Thresholds trigger proofs", "Above set limits, source-of-funds evidence is mandatory. No design can skip it.")]
+    decisions = [('"They receive ₹25,809" is the biggest number on screen',
+                  "Users think in what lands at home, not exchange rates. It even rides on the CTA."),
+                 ("Signup asks for 3 things<br>Email, Phone &amp; MPIN", "KYC when Arjun is motivated, not at the door"),
+                 ("MPIN, OTP, UPI name-check patterns Arjun already knows",
+                  "His money habits come from GPay and PhonePe. No new behavior to learn")]
+    flows = [
+        ("flow-onboarding.mp4", "Flow 1 - Onboarding", "An account in under a minute", [
+            ("Contact and a PIN", "Email, phone, and an MPIN. Signup gets you an account; it doesn't verify you."),
+            ("A step counter shows how far you are", "Four-step signup feels like four steps  not an open-ended form."),
+            ("Auto save progress", "User can quit in between and come back anytime, start from where he left"),
+            ("Rates visible with zero verification", "Tier 0 means a newcomer comparing three apps can judge SILA on price and speed")]),
+        ("flow-kyc.mp4", "Flow 2 - KYC", "KYC at the moment of intent", [
+            ("Triggered by the first send, not signup", "Verification lands when motivation is highest"),
+            ("The ID scan does the typing", "Name, DOB, address and nationality auto-fill from one Emirates ID scan."),
+            ("Verified instantly, or an honest 24h wait", 'Most users see "You\'re verified" instantly. The rest see "Almost there" with a 24-hour promise')]),
+        ("flow-send.mp4", "Flow 3 - Add recipient + Send", "Send money to India", [
+            ("Follows UPI pattern", "Recipients can be added by UPI ID or bank account + IFSC"),
+            ("Rate, fee and total  upfront", "All amounts clear on one screen"),
+            ("Dual input", '"Send 1,000 AED" or "they receive exactly 25,000 INR." Senders think in what the family needs.'),
+            ('"They receive ₹25,000" leads everywhere', "The biggest number on the calculator, the review, and the CTA itself."),
+            ('Expected by 9:55" becomes "in 14 minutes', "The success screen is a state machine, the app makes a claim, then shows its receipt. Trust compounds per transfer.")]),
+    ]
+    flow_rows = "".join(f"""<div class="sl-row" data-reveal>
+      <div class="sl-row-media">{sl_video(v, title)}</div>
+      <div class="sl-row-text"><p class="sl-flow">{lab}</p><h3>{title}</h3>{sl_points(pts)}</div>
+    </div>""" for v, lab, title, pts in flows)
+    impact = [(SL_UP, "Signup completion", "Three inputs instead of a KYC wall"),
+              (SL_UP, "First-transfer conversion", "Rate and fees visible before any sensitive ask"),
+              (SL_DOWN, '"Where is my money" tickets', "Every hold answers what / how long / where")]
+
+    body = f"""{nav(root, 'work')}
+<main class="sila">
+<section class="sl-hero">
+  <div class="in">
+    <a class="sl-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Go Back</a>
+    <p class="sl-kicker">SILA - UAE TO INDIA REMITTANCE</p>
+    <h1>Helping UAE expats send money to India in under 15 minutes with a 3-tier KYC that asks only what each transfer needs</h1>
+  </div>
+  <div class="sl-hero-band"><img src="{M}hero.png" alt="Three SILA app screens: tracking, home with first transfer, and the send amount screen" width="2048" height="1418"></div>
+</section>
+
+<aside class="roadmap glass sl-side" aria-label="Case study sections">
+  <h4>the roadmap ✿</h4>
+  <ol><span class="progress"></span>{stations}</ol>
+</aside>
+
+<section class="sl-sec" id="context"><div class="in">
+  <p class="sl-eyebrow">THE CONTEXT</p>
+  <h2><em>SILA</em> is a UAE → India remittance app with transparent fees, clarity at every step, and step-by-step KYC.</h2>
+  <p class="sl-lead">The UAE to India corridor moves billions in remittances every year, largely from workers supporting families back home. I joined a founder as the freelance designer on his MVP which is a money transfer app built to feel fast and trustworthy rather than cluttered. I owned the design end to end, discovery through high-fidelity UI.</p>
+  <div class="sl-chips"><span>End-to-end UX</span><span>UX writing</span><span>Compliance research</span></div>
+</div></section>
+
+<section class="sl-sec" id="problem"><div class="in">
+  <p class="sl-eyebrow">THE PROBLEM</p>
+  <h2>What users and businesses face in money transfer apps</h2>
+  <h3 class="sl-sub">Users problems</h3>
+  <div class="sl-grid4">{sl_numcards(users)}</div>
+  <h3 class="sl-sub">Business problems</h3>
+  <div class="sl-grid4">{sl_numcards(biz)}</div>
+  <p class="sl-trust" data-reveal>Trust is the “product” in fintech</p>
+  <div class="sl-stats">
+    <div class="sl-stat" data-reveal><p>Onboarding drop-off</p><b>63–68%</b><p>of users abandon fintech onboarding - Signicat, Battle to Onboard</p><a href="https://www.signicat.com/the-battle-to-onboard-2022" target="_blank" rel="noopener">Read here</a></div>
+    <div class="sl-stat" data-reveal><p>The KYC leak</p><b>~70%</b><p>abandon identity checks that take over 3 minutes -  Zyphe, Perspective AI</p><a href="https://www.zyphe.com/resources/blog/reduce-kyc-onboarding-drop-off" target="_blank" rel="noopener">Read here</a></div>
+  </div>
+  <div class="sl-articles" data-reveal>
+    <p>Articles I referred for more KYC and Compliance related research</p>
+    <div>
+      <a href="https://wsa.design/news/top-10-fintech-ux-design-best-practices-for-2026" target="_blank" rel="noopener">Article 1 {ARROW}</a>
+      <a href="https://www.forbes.com/councils/forbestechcouncil/2026/03/04/fintech-friction-common-ux-pain-points-and-how-to-fix-them/" target="_blank" rel="noopener">Article 2 {ARROW}</a>
+      <a href="https://goodface.agency/insight/fintech-mobile-app-onboarding-checklist/" target="_blank" rel="noopener">Article 3 {ARROW}</a>
+    </div>
+  </div>
+</div></section>
+
+<section class="sl-sec sl-band-gray" id="research"><div class="in">
+  <p class="sl-eyebrow">THE RESEARCH</p>
+  <h2>The pain points, in users' own words</h2>
+  <p class="sl-lead">Before designing, I read through App Store and Play Store reviews of the biggest transfer apps in the UAE</p>
+  <div class="sl-reviews">
+    <div><h4>Hidden costs</h4><img src="{M}research-1.png" alt="App store reviews about hidden costs" loading="lazy"></div>
+    <div><h4>Unexplained holds</h4><img class="r" src="{M}research-2.png" alt="App store review about a failed transfer" loading="lazy"><img class="r" src="{M}research-3.png" alt="App store review about funds being held" loading="lazy"></div>
+    <div><h4>Verification pain</h4><img src="{M}research-4.png" alt="App store reviews about verification delays" loading="lazy"></div>
+    <div><h4>Support</h4><img src="{M}research-5.png" alt="App store reviews about poor support" loading="lazy"></div>
+  </div>
+</div></section>
+
+<section class="sl-sec" id="discovery"><div class="in">
+  <p class="sl-eyebrow">DISCOVERY</p>
+  <h2>UX Problems identified</h2>
+  <div class="sl-notes">{''.join(f'<div class="sl-note" data-reveal>{n}</div>' for n in notes)}</div>
+</div></section>
+
+<section class="sl-sec" id="persona"><div class="in">
+  <p class="sl-eyebrow">USER PERSONA</p>
+  <h2>Meet Arjun, 27.<br>Moved to Dubai before 3 months . Sends money home every month.</h2>
+  <img class="sl-persona-img" src="{M}persona.jpg" alt="Illustration of Arjun on his sofa, frowning at his phone: why do they need my KYC and salary proof before I can even see the rates and fees?" loading="lazy" data-reveal>
+  <div class="sl-persona">
+    <div class="sl-card" data-reveal><h4>His situation</h4>
+      <p>Relocated from India 3 months ago. Sends money to family once or twice a month.</p>
+      <p>Tech comfortable, low patience for friction. Currently finding the best apps to send money.</p>
+      <p>Price-sensitive as sending often means small rate differences compound over a year.</p></div>
+    <div class="sl-card sl-quotes" data-reveal>
+      <p>“Will my money reach home quickly &amp; will I know when it does?”</p>
+      <p>"Am I getting a fair rate, or losing money to hidden charges?"</p>
+      <p>"Why do they need my KYC and salary proof before I can even see the rates and fees?"</p></div>
+  </div>
+</div></section>
+
+<section class="sl-sec" id="constraints"><div class="in">
+  <p class="sl-eyebrow">CONSTRAINTS &amp; KYC</p>
+  <h2>Designing inside the rules</h2>
+  <p class="sl-lead sl-lead--s">Knowing which frictions are legally mandatory and which are lazy defaults is the whole game.</p>
+  <h3 class="sl-sub sl-sub--l">Constraints</h3>
+  <div class="sl-rules">
+    <div>{''.join(f'<div class="sl-rule sl-rule--peach" data-reveal><h4>{t}</h4><p>{d}</p></div>' for t, d in peach)}</div>
+    <div>{''.join(f'<div class="sl-rule sl-rule--yellow" data-reveal><h4>{t}</h4><p>{d}</p></div>' for t, d in yellow)}</div>
+  </div>
+  <h3 class="sl-sub sl-sub--l">Progressive KYC</h3>
+  <p class="sl-lead sl-lead--s">Instead of demanding full verification upfront, I designed a three-tier model that asks only for what's needed to get started, then layers verification as the user's activity requires it. This lowers the initial wall while staying compliant.</p>
+  <img class="sl-wide" src="{M}kyc-tiers.png" alt="Progressive KYC table. Tier 0 Browse: sign up, no money moving, email + phone + MPIN, frictionless. Tier 1 First transfer: Emirates ID scan + selfie, purpose, income range, sending plans, quick. Tier 2 Higher amount: above monthly limits, source of funds, explained." loading="lazy" data-reveal>
+</div></section>
+
+<section class="sl-sec" id="decisions"><div class="in">
+  <p class="sl-eyebrow">KEY DECISIONS</p>
+  <h2>Decisions that shaped the product</h2>
+  <div class="sl-grid3">{sl_numcards(decisions, "sl-card sl-card--line")}</div>
+</div></section>
+
+<section class="sl-sec" id="flow"><div class="in">
+  <p class="sl-eyebrow">THE USER-FLOW</p>
+  <h2>See it in motion</h2>
+  <p class="sl-lead">The complete experience across onboarding, sending money, and the states</p>
+  {flow_rows}
+</div></section>
+
+<section class="sl-sec sl-band-dark" id="tier2"><div class="in">
+  <p class="sl-eyebrow">TIER 2 VERIFICATION</p>
+  <h2>Sending more than the monthly limit</h2>
+  <p class="sl-lead">Bigger transfers need proof of income, a requirement under UAE regulation. The design job was to make it clear, early, and one-time.</p>
+  <div class="sl-row" data-reveal>
+    <div class="sl-row-media">{sl_video("tier2.mp4", "Tier 2 verification flow", round_=True)}</div>
+    <div class="sl-row-text">{sl_points([("Shown before he pays, not after", "An amber note and a meter as he types the amount."), ("Never blocked", '"Send AED 6,000 instead"  his remaining limit, calculated for him.'), ("One document, one time", "Salary certificate or 3-month bank statement. Named upfront, so he knows what to look for.")])}</div>
+  </div>
+</div></section>
+
+<section class="sl-sec" id="edge"><div class="in">
+  <p class="sl-eyebrow">EDGE CASE</p>
+  <h2>When the document is <span class="sl-red">rejected</span></h2>
+  <p class="sl-lead">In cases like this, SILA shows the reason and the fix rather than generic "verification failed" and leave the user guessing.</p>
+  <div class="sl-row" data-reveal>
+    <div class="sl-row-media">{sl_video("rejected.mp4", "Document rejected flow")}</div>
+    <div class="sl-row-text">{sl_points([("The reason is specific", '"The photo was too blurry to read"  never "invalid document".'), ("One fix, in plain words", "Rest the document on a flat surface and hold your phone steady.")])}</div>
+  </div>
+</div></section>
+<section class="sl-band-grad"><div class="in">
+  <h3 class="sl-center">Rejection reasons, with its fixes</h3>
+  <img class="sl-wide" src="{M}rejection-reasons.png" alt="Error in document reading screen, surrounded by rejection reasons and fixes: wrong document type, too old, cut off corners, name mismatch, glare or shadow." loading="lazy" data-reveal>
+</div></section>
+
+<section class="sl-sec" id="impact"><div class="in">
+  <p class="sl-eyebrow">PROJECTED IMPACT</p>
+  <h2>What should improve</h2>
+  <div class="sl-impact">{''.join(f'<div class="sl-card" data-reveal><span class="sl-arrow">{ic}</span><h4>{t}</h4><p>{d}</p></div>' for ic, t, d in impact)}</div>
+</div></section>
+
+<section class="sl-sec" id="retention"><div class="in">
+  <div class="sl-row sl-row--retention" data-reveal>
+    <div class="sl-row-media"><img src="{M}retention.png" alt="Delivered screen with a 'Send again next month?' prompt" loading="lazy"></div>
+    <div class="sl-row-text"><p class="sl-eyebrow">RETENTION</p><h3>Return loops designed in</h3>{sl_points([('"Send this again next month?"', "Appears only at delivered. One tap from a scheduled monthly transfer.")])}</div>
+  </div>
+</div></section>
+
+<section class="sl-sec" id="learnings"><div class="in">
+  <p class="sl-eyebrow">LEARNINGS &amp; NEXT STEPS</p>
+  <h2>Designing for trust is a different problem!!</h2>
+  <h3 class="sl-sub sl-sub--m">Learnings</h3>
+  {sl_points([("The worst screen sets the tone.", "Along with good success messages,  users remember is what the app said when their money stopped."), ("Regulation made the design easier, not harder.", 'Once I knew which rules were real, every field had a reason I could point to. "This exists because of a threshold" ends debates'), ("Clarity is a feature, not a finish.", "Step counters, named documents, live status, none of these are visual polish. They're the product doing its main job - telling the user the truth about where they stand.")])}
+  <h3 class="sl-sub sl-sub--m">What I would do next if still working on the product</h3>
+  <ul class="sl-points sl-points--inline">{''.join(f'<li>{SL_ICON}<p><b>{t}</b> {d}</p></li>' for t, d in [("KYC step-completion rate", "per step, to find the exact drop-off point"), ("Time-to-verification", "against the ~3-minute abandonment threshold"), ("Re-upload rate", "the document step is the highest-leverage lever"), ("Transfer completion vs. cancellation", "split by where users drop")])}</ul>
+  <p class="sl-quote" data-reveal>“A remittance app has to manufacture the trust a bank inherits”</p>
+</div></section>
+</main>
+{footer(root)}"""
+    return head("SILA · Rajvi Patel", "Helping UAE expats send money to India in under 15 minutes with a 3-tier KYC that asks only what each transfer needs.", root) + body
+
+
 if __name__ == "__main__":
     (ROOT / "work").mkdir(exist_ok=True)
     (ROOT / "index.html").write_text(home())
@@ -437,5 +675,6 @@ if __name__ == "__main__":
     projs = C.PROJECTS
     for i, cs in enumerate(C.CASE_STUDIES):
         nxt = projs[(i + 1) % len(projs)]
-        (ROOT / "work" / f"{cs['slug']}.html").write_text(case_study(cs, nxt))
+        page = sila_page() if cs["slug"] == "sila" else case_study(cs, nxt)
+        (ROOT / "work" / f"{cs['slug']}.html").write_text(page)
     print("built", 3 + len(C.CASE_STUDIES), "pages")

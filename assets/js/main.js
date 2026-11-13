@@ -258,13 +258,31 @@ const SITE = {
         prog.style.height = node.getBoundingClientRect().top - ol.getBoundingClientRect().top - 6 + "px";
       }
       // keep the active pill visible on mobile
-      if (innerWidth < 980 && items[idx]) {
+      if (getComputedStyle(roadmap).position === "sticky" && items[idx] && roadmap.scrollWidth > roadmap.clientWidth) {
         const li = items[idx];
         roadmap.scrollTo({ left: li.offsetLeft - roadmap.clientWidth / 2 + li.offsetWidth / 2, behavior: "smooth" });
+      }
+      // SILA side nav: show once past the hero, hide again over the footer
+      if (roadmap.classList.contains("sl-side")) {
+        const band = $(".sl-hero-band"), foot = $(".footer");
+        const past = band ? band.getBoundingClientRect().bottom < innerHeight * 0.6 : true;
+        const atFoot = foot ? foot.getBoundingClientRect().top < innerHeight * 0.85 : false;
+        roadmap.classList.toggle("is-shown", past && !atFoot);
       }
     };
     let raf; addEventListener("scroll", () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
     addEventListener("resize", update); update();
+  }
+
+  /* ---------- Case study videos: play only while on screen ---------- */
+  const autoVids = $$("video[data-autoplay]");
+  if (autoVids.length && "IntersectionObserver" in window) {
+    const vio = new IntersectionObserver((entries) => entries.forEach((en) => {
+      const v = en.target;
+      if (en.isIntersecting) { if (v.preload === "none") v.preload = "auto"; if (!reduce) v.play().catch(() => {}); }
+      else v.pause();
+    }), { rootMargin: "200px 0px" });
+    autoVids.forEach((v) => vio.observe(v));
   }
 
   /* ---------- Footer year ---------- */
