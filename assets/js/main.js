@@ -152,6 +152,19 @@ const SITE = {
     hv.querySelector("source")?.addEventListener("error", () => hv.remove());
   }
 
+  /* ---------- Hero scroll: video drifts down + fades as the next section slides over it ---------- */
+  const hero = $(".hero");
+  if (hero && !reduce) {
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const p = Math.min(Math.max(scrollY / hero.offsetHeight, 0), 1); // 0 at top → 1 when hero has scrolled away
+      hero.style.setProperty("--hero-p", p.toFixed(3));
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
+
   /* ---------- CD player (Spotify iFrame API) ---------- */
   const stage = $(".cd-stage");
   if (stage) {
