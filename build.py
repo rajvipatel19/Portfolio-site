@@ -673,6 +673,213 @@ def sila_page():
     return head("SILA · Rajvi Patel", "Helping UAE expats send money to India in under 15 minutes with a 3-tier KYC that asks only what each transfer needs.", root) + body
 
 
+# ---------------------------------------------------------------- CityLockers (matches the Framer case study)
+CM = "../assets/media/citylockers/"
+
+
+def cs_rail(secs):
+    """Static left column (wide screens) + sliding section bar (phone/tablet), shared by the Framer-style case studies."""
+    stations = "".join(f'<li><a href="#{i}"><span class="node"></span>{n}</a></li>' for i, n in secs)
+    rail = f"""<aside class="roadmap sl-rail" aria-label="Case study sections">
+  <a class="sl-rail-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to work</a>
+  <ol><span class="progress"></span>{stations}</ol>
+</aside>"""
+    bar = f"""<aside class="roadmap glass sl-side" aria-label="Case study sections">
+  <h4>the roadmap ✿</h4>
+  <ol><span class="progress"></span>{stations}</ol>
+</aside>"""
+    return rail, bar
+
+
+def cl_bullets(items, cls="cl-bul"):
+    return f'<ul class="{cls}">' + "".join(f"<li>{x}</li>" for x in items) + "</ul>"
+
+
+def citylockers_page():
+    root = "../"
+    rail, bar = cs_rail([("context", "The context"), ("impact", "The impact"), ("problem", "The problem"),
+                         ("previous", "Previous design"), ("research", "Research"), ("decision1", "Decision 1"),
+                         ("decision2", "Decision 2"), ("decision3", "Decision 3"), ("walkthrough", "Walkthrough"),
+                         ("beforeafter", "Before / After"), ("learnings", "Learnings")])
+    prev = [("No locker door IDs", ["No A1, B2 labels so users had no way to confirm which locker they selected."]),
+            ("Horizontal scroll on the locker grid", ["Some lockers weren't visible without scrolling.", "On a touch kiosk, most users never find them."]),
+            ("Action buttons share same visual weight", ["Continue and Back looked identical so no clear primary action."]),
+            ("No colour coding on the locker grid", ["Every door looked the same. Available, taken, selected which was impossible to tell apart."]),
+            ("No visual hierarchy or clear entry point", ["Every element competed equally. A first-time user had no obvious next step."]),
+            ("Missing information", ["Selected duration is missing from the booking summary.", "Cant find which duration option is selected too."])]
+    prev_html = "".join(f'<div class="cl-card cl-card--pink" data-reveal><span class="cl-num">{i+1:02d}</span><h4>{t}</h4>{cl_bullets(b)}</div>'
+                        for i, (t, b) in enumerate(prev))
+    comp = [("DIGITAL COMPETITOR", "Bounce &amp; LuggageHero", ["Used both end-to-end to understand existing booking flows.", "They work through <b>third-party shops, different trust model, different safety level.</b> Same core problem, different solution."]),
+            ("IN PERSON OBSERVATION - BUDAPEST &amp; PRAGUE", "Train station lockers, used in person", ["Used lockers at Budapest Keleti and Prague main station to study what works.", "No size guide were available on the doors."]),
+            ("HARDWARE REFERENCE", "Noon Lockers, Dubai", ["Studied for hardware interaction patterns how users approach a physical locker unit and how the screen relates to the doors."]),
+            ("USER CONVERSATIONS", "Frequent travellers in my network", ["Talked to friends who travel often.", "They brought up locker experiences in Paris and Spain confirming the checkout gap is a real recurring frustration, not a niche edge case."])]
+    comp_html = "".join(f'<div class="cl-comp" data-reveal><div class="cl-comp-head"><span class="cl-tag">{tag}</span><h4>{t}</h4></div>{cl_bullets(b)}</div>'
+                        for tag, t, b in comp)
+    changed = [("Label every door", ["Added Medium / Large size labels on every door in kiosk grid so no instructions needed."]),
+               ("Let users pick their locker", ["No competitor does this. Auto-assignment ignores that travellers with large bags need large lockers, or may want adjacent doors for multiple bags."]),
+               ("Keep it simple above all", ["The best lockers I used in Europe were obvious. That became the bar.", "If a first-time user can't figure it out in under 30 seconds, it's not done."])]
+    changed_html = "".join(f'<div class="cl-changed" data-reveal><span class="cl-num">{i+1:02d}</span><h4>{t}</h4><div class="cl-sticky">{cl_bullets(b)}</div></div>'
+                           for i, (t, b) in enumerate(changed))
+
+    def numbered(items, tone):
+        return '<ol class="cl-badges cl-badges--' + tone + '">' + "".join(f"<li><span>{i+1}</span><p>{x}</p></li>" for i, x in enumerate(items)) + "</ol>"
+
+    persona = lambda letter, img, name, role, text, chips: f"""<div class="cl-persona" data-reveal>
+      <div class="cl-persona-top">User {letter}</div>
+      <div class="cl-persona-body">
+        <div class="cl-persona-id"><img src="{CM}{img}" alt="" width="64" height="64" loading="lazy"><div><h4>{name}</h4><p>{role}</p></div></div>
+        <p class="cl-persona-text">{text}</p>
+        <div class="cl-chips">{''.join(f'<span>{c}</span>' for c in chips)}</div>
+      </div>
+    </div>"""
+
+    body = f"""{nav(root, 'work')}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Indie+Flower&display=swap">
+<main class="sila cl">
+{rail}
+<div class="sl-main">
+<section class="sl-hero">
+  <div class="in">
+    <a class="sl-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Go Back</a>
+    <p class="sl-kicker">CITYLOCKERS KIOSK EXPERIENCE</p>
+    <h1>Helping travellers go hands-free in under 4 minutes, 2,000+ bookings completed across Dubai.</h1>
+  </div>
+  <div class="cl-hero-band"><img src="{CM}hero.png" alt="CityLockers kiosk home screen: Book Locker, Open My Locker, Delivery, and Book a free locker for 30 minutes" width="2048" height="1258"></div>
+</section>
+{bar}
+
+<section class="sl-sec cl-gray" id="context"><div class="in">
+  <p class="sl-eyebrow">THE CONTEXT</p>
+  <h2>CityLockers gives travellers a safe place to drop their bags and help them keep moving!</h2>
+  <p class="sl-lead">CityLockers is an <b>early-stage Dubai startup building smart locker infrastructure across malls, hotels, beaches, and residential buildings</b>. I was brought in to redesign the kiosk experience, rethinking the flows, rebuilding the interface, and designing every edge case from the ground up.</p>
+  <div class="cl-facts">
+    <div><p class="sl-eyebrow">TEAM</p><p>Product designer (Me)<br>4 Frontend &amp; backend developers<br>Founder &amp; Investor</p></div>
+    <div><p class="sl-eyebrow">LOCATION</p><p>UAE</p></div>
+    <div><p class="sl-eyebrow">PLATFORM</p><p>Touch Kiosk</p></div>
+  </div>
+  <p class="sl-eyebrow cl-impact-label" id="impact">THE IMPACT</p>
+  <div class="cl-impact" data-reveal>
+    <div><p>Used by</p><b>2000+</b></div>
+    <div><p>Real users tested: prototype and post-deployment</p><b>10</b></div>
+    <div><p>Average booking time</p><b>&lt; 4 Mins</b></div>
+  </div>
+</div></section>
+
+<section class="sl-sec" id="problem"><div class="in">
+  <p class="sl-eyebrow">THE PROBLEM</p>
+  <h2>Luggage holds<br>travellers back.</h2>
+  <p class="sl-lead">UAE welcomes <b>over 20 million tourists annually</b>. The gap between hotel checkout and departure sometimes 6 to 8 hours forces <b>travellers to drag luggage through malls, beaches, and tourist spots. No direct competitor solves this in Dubai</b> with a dedicated locker network.</p>
+  <div class="cl-problem">
+    <div class="cl-problem-cards">
+      <div class="cl-card" data-reveal><h4>The checkout gap</h4><p>Hotels check you out at 12pm. Your flight is at 10pm. That's 10 hours with nowhere to leave your bags.</p></div>
+      <div class="cl-card" data-reveal><h4>Luggage kills the experience</h4><p>Travellers skip attractions or pay for hotel storage just to move freely for a few hours.</p></div>
+      <div class="cl-card" data-reveal><h4>No dedicated solution in Dubai</h4><p>Bounce and LuggageHero use grocery stores. CityLockers offers proper dedicated lockers, a different level of trust.</p></div>
+    </div>
+    <svg class="cl-links" aria-hidden="true"><defs><marker id="clArr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#17171a"/></marker></defs>
+      <line x1="54%" y1="16.5%" x2="84%" y2="16.5%"/><line x1="84%" y1="16.5%" x2="84%" y2="22%" marker-end="url(#clArr)"/>
+      <line x1="54%" y1="50%" x2="68%" y2="50%" marker-end="url(#clArr)"/>
+      <line x1="54%" y1="83.5%" x2="84%" y2="83.5%"/><line x1="84%" y1="83.5%" x2="84%" y2="78%" marker-end="url(#clArr)"/>
+    </svg>
+    <div class="cl-dark" data-reveal><b>20M+</b><p>Tourists visit UAE annually,</p><p>most experiencing the checkout-to-departure luggage problem firsthand.</p></div>
+  </div>
+</div></section>
+
+<section class="sl-sec cl-gray" id="previous"><div class="in">
+  <p class="sl-eyebrow">WHAT THEY HAD WHEN I JOINED</p>
+  <h2>The previous design</h2>
+  <p class="sl-lead">Before I could design anything new, I had to understand exactly <b>what was broken</b> and why <b>rebuilding from scratch</b> was the right call.</p>
+  <img class="cl-prev-img" src="{CM}previous-design.png" alt="The previous CityLockers Book a Locker screen" loading="lazy" data-reveal>
+  <div class="cl-grid3">{prev_html}</div>
+</div></section>
+
+<section class="sl-sec" id="research"><div class="in">
+  <p class="sl-eyebrow">THE RESEARCH</p>
+  <h2>I studied what already works &amp;<br>what breaks.</h2>
+  <p class="sl-lead">I used real lockers, studied competitors end-to-end, and talked to frequent travellers in my network.</p>
+  <h3 class="cl-sub">Who I was designing for</h3>
+  <div class="cl-grid2">
+    {persona("A", "persona-emma.png", "Emma Richardson", "Marketing Manager · Visiting from London", "<b>First-time tourist in Dubai</b> on a 5-day solo trip. She has a gap between hotel checkout and check-in with luggage to manage. She wants to <b>explore freely without carrying bags in the hand.</b>", ["Store luggage between hotel changes", "Easy to understand", "Affordable for a few hours"])}
+    {persona("B", "persona-ahmed.png", "Ahmed Hassan", "Software Developer · JBR, Dubai", "<b>Egyptian expat in a high-security residential tower</b> where delivery personnel aren't permitted beyond the lobby. Works from home but <b>misses 60% of deliveries because security won't allow couriers upstairs.</b>", ["Receive orders without missing deliveries", "Reliable solution", "24/7 access"])}
+  </div>
+  <h3 class="cl-sub">Competitive &amp; observational analysis</h3>
+  <div class="cl-grid2">{comp_html}</div>
+  <h3 class="cl-sub">What the research changed?</h3>
+  <div class="cl-changed-row">{changed_html}</div>
+  <p class="cl-boring">Boring part is over! 😮‍💨</p>
+</div></section>
+
+<section class="sl-sec cl-gray" id="decision1"><div class="in">
+  <p class="sl-eyebrow">KEY DECISIONS</p>
+  <h2>With the research done, I rebuilt all screens.<br>Three decisions defined the experience.</h2>
+  <p class="sl-eyebrow cl-dec">DECISION 1</p>
+  <h3 class="cl-sub cl-sub--tight">Consolidate the home screen options</h3>
+  <div class="cl-box" data-reveal>
+    <div class="cl-box-row">{numbered(["4 options in a 2×2 grid → cognitive load, unclear priority", '"Manage My Booking" and "Extend Booking" are the same user journey split into two options unnecessarily.', "No low-friction entry point for first-time users"], "red")}<img src="{CM}home-before.png" alt="Previous home screen with four options in a 2×2 grid" loading="lazy"></div>
+    <p class="cl-divider"><span>What changed and why</span></p>
+    <div class="cl-box-row">{numbered(["3 options in a row → clear hierarchy, one decision", '"Extend Booking" consolidated under "Open My Locker" → one entry point', '"Open my locker" → clear, specific copy', '"Book a free locker for 30 minutes" → a business decision which drives conversion'], "green")}<img src="{CM}home-after.png" alt="New home screen with three options in a row and a free 30 minute locker button" loading="lazy"></div>
+  </div>
+</div></section>
+
+<section class="sl-sec cl-gray cl-tight-top" id="decision2"><div class="in">
+  <p class="sl-eyebrow cl-dec">DECISION 2</p>
+  <h3 class="cl-sub cl-sub--tight">The manage booking screen had three options.<br>I reduced it to two - clearer actions, fewer steps.</h3>
+  <div class="cl-ba-card" data-reveal><img src="{CM}manage-before.png" alt="Previous manage bookings screen with three choices" loading="lazy"><div><p class="cl-ba-label">Before</p>{cl_bullets(['Opened to three choices -"Access &amp; End Booking", "Access &amp; Continue Booking", "Extend Booking"', "First two meant the same thing, users had to read carefully to spot the difference"])}</div></div>
+  <div class="cl-ba-card" data-reveal><img src="{CM}manage-after.png" alt="New booked lockers screen with Open Locker and Extend Current Booking" loading="lazy"><div><p class="cl-ba-label">After</p>{cl_bullets(["Opens directly to two clear actions, Open Locker or Extend Booking", "Confirmation dialogue inside the flow handles the end booking vs continue decision", "Extend Booking opens the same locker selection screen so no new patterns to learn."])}</div></div>
+</div></section>
+
+<section class="sl-sec" id="decision3"><div class="in">
+  <p class="sl-eyebrow cl-dec">DECISION 3</p>
+  <h3 class="cl-sub cl-sub--tight">Let users pick their own locker.</h3>
+  <div class="cl-grid-evo" data-reveal>
+    <p class="cl-evo-title"><span>Grid Evolution</span></p>
+    <div class="cl-evo-row">
+      <div><span class="cl-tag">Previous</span><img src="{CM}grid-previous.png" alt="Previous locker grid, all doors look the same" loading="lazy"></div>
+      <div><span class="cl-tag">V1</span><img src="{CM}grid-v1.png" alt="First version of the colour-coded grid" loading="lazy"></div>
+      <div><span class="cl-tag">Final</span><img src="{CM}grid-final.png" alt="Final locker grid with door IDs, sizes and availability colours" loading="lazy"></div>
+    </div>
+    <div class="cl-evo-arrow"></div>
+    {cl_bullets(["No competitor lets users pick their own locker, everyone auto-assigns based on size selection. I gave users a visual grid, colour-coded by availability, so they tap exactly the door they want.", "Auto-assignment can't account for a traveller with a large suitcase, or someone who needs two adjacent doors. The grid handles all of it without a single line of instruction copy."])}
+  </div>
+</div></section>
+
+<section class="sl-sec cl-tight-bottom" id="walkthrough"><div class="in">
+  <p class="sl-eyebrow">WALKTHROUGH</p>
+  <h2>Here's how kiosk works</h2>
+  <p class="sl-lead">A complete kiosk experience from first touch to locker open.</p>
+</div></section>
+<section class="cl-video-band"><div class="in"><h3>Booking locker flow</h3><video src="{CM}flow-booking.mp4" muted loop playsinline preload="none" data-autoplay aria-label="Booking locker flow on the kiosk"></video></div></section>
+<section class="cl-video-band"><div class="in"><h3>Manage booking flow</h3><video src="{CM}flow-manage.mp4" muted loop playsinline preload="none" data-autoplay aria-label="Manage booking flow on the kiosk"></video></div></section>
+
+<section class="sl-sec" id="beforeafter"><div class="in">
+  <p class="sl-eyebrow">Before / After</p>
+  <h3 class="cl-sub cl-sub--tight">Slide to see changes</h3>
+  <div class="cl-slider" data-ba style="--pos:50%" data-reveal>
+    <img src="{CM}slider-a.png" alt="New Book a Locker screen" loading="lazy">
+    <div class="cl-slider-before"><img src="{CM}slider-b.png" alt="Old Book a Locker screen" loading="lazy"></div>
+    <span class="cl-slider-handle" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 7-5 5 5 5M15 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <input type="range" min="0" max="100" value="50" aria-label="Slide to compare the old and new screen">
+  </div>
+  <div class="cl-proto" data-reveal>
+    <div><h3>Want to try Prototype?</h3><p>Click here to check Figma Prototype!</p></div>
+    <a href="https://www.figma.com/proto/cV1RM3IOsOe1lO1wSM8GV3/CityLockers-Kiosk?node-id=691-11992&amp;viewport=678%2C334%2C0.11&amp;t=ShPyNHbvu6HOM7Ha-1&amp;scaling=min-zoom&amp;content-scaling=fixed&amp;starting-point-node-id=691%3A11992&amp;show-proto-sidebar=1&amp;page-id=628%3A8739" target="_blank" rel="noopener">View Prototype {ARROW}</a>
+  </div>
+</div></section>
+
+<section class="sl-sec" id="learnings"><div class="in">
+  <p class="sl-eyebrow">MY LEARNINGS</p>
+  <h2>What CityLockers Kiosk Project<br>Taught Me</h2>
+  <div class="cl-learn">
+    <div class="cl-card cl-learn-card" data-reveal><h4>Designing for a small screen kiosk is different</h4>{cl_bullets(["This wasn't an app someone opens on their sofa. <b>It's a kiosk in a metro station or mall while luggage in hand, somewhere to be.</b>", "That context changed how I thought about every screen, how much text to add, <b>how big the buttons should be, how many steps.</b>", "<b>Testing in the real environment taught me more than any prototype session.</b>", "<b>The colour-coded locker grid came as a savior.</b> Nobody needs to read anything. That one decision made the screen work for everyone, regardless of language"])}</div>
+    <figure class="cl-me" data-reveal><figcaption>That’s me!</figcaption><img src="{CM}me.jpg" alt="Rajvi testing the CityLockers kiosk in person" loading="lazy"></figure>
+  </div>
+  <div class="cl-card cl-learn-card" data-reveal><h4>What I'd do next with more time and data</h4>{cl_bullets(["Run usability sessions at the physical kiosk testing 5 users, <b>observing the manage booking flow specifically</b>", "Add a <b>remote end-booking option</b> in the app as post-deployment testing showed users didn't always know they had to end at the kiosk", "<b>Booking drop-off tracking</b> to identify exactly where users abandon the flow", "Test Arabic RTL layout as it is functional but not fully optimised for RTL reading patterns"])}</div>
+</div></section>
+</div>
+</main>
+{footer(root)}"""
+    return head("CityLockers Kiosk · Rajvi Patel", "Helping travellers go hands-free in under 4 minutes, 2,000+ bookings completed across Dubai.", root) + body
+
+
 if __name__ == "__main__":
     (ROOT / "work").mkdir(exist_ok=True)
     (ROOT / "index.html").write_text(home())
@@ -681,6 +888,6 @@ if __name__ == "__main__":
     projs = C.PROJECTS
     for i, cs in enumerate(C.CASE_STUDIES):
         nxt = projs[(i + 1) % len(projs)]
-        page = sila_page() if cs["slug"] == "sila" else case_study(cs, nxt)
+        page = {"sila": sila_page, "citylockers-kiosk": citylockers_page}.get(cs["slug"], lambda: case_study(cs, nxt))()
         (ROOT / "work" / f"{cs['slug']}.html").write_text(page)
     print("built", 3 + len(C.CASE_STUDIES), "pages")

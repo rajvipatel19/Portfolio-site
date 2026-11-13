@@ -284,6 +284,13 @@ const SITE = {
     autoVids.forEach((v) => vio.observe(v));
   }
 
+  /* ---------- Before / after slider ---------- */
+  $$("[data-ba]").forEach((box) => {
+    const r = $("input", box); if (!r) return;
+    const set = () => box.style.setProperty("--pos", r.value + "%");
+    r.addEventListener("input", set); set();
+  });
+
   /* ---------- Footer year ---------- */
   $$("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
 })();
