@@ -44,7 +44,7 @@ def nav(root, active):
         cls = ' class="is-active"' if key == active else ""
         return f'<a href="{root}{href}"{cls}>{label}{extra}</a>'
     return f"""<header class="nav">
-  <a class="logo glass" href="{root}index.html" aria-label="Rajvi Patel — home"><img class="logo-avatar" src="{root}assets/img/avatar.svg" alt="" width="36" height="36"><span class="logo-name">Rajvi <span class="logo-last">Patel</span></span></a>
+  <a class="logo glass" href="{root}index.html" aria-label="Rajvi Patel — home"><img class="logo-avatar" src="{root}assets/img/avatar.svg" alt="" width="52" height="52"><span class="logo-name">Rajvi <span class="logo-last">Patel</span></span></a>
   <nav class="nav-links glass" aria-label="Main">
     {link("index.html#work", "Work", "work")}
     {link("about.html", "About", "about")}

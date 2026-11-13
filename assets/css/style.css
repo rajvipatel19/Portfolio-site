@@ -126,8 +126,8 @@ p { margin: 0; }
   transition: transform 0.5s var(--ease), opacity 0.4s;
 }
 .nav.is-hidden { transform: translateY(-120%); }
-.logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: 0.04em; padding: 6px 18px 6px 6px; border-radius: 999px; }
-.logo-avatar { width: 36px; height: 36px; border-radius: 50%; flex: none; }
+.logo { display: inline-flex; align-items: center; font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: 0.04em; gap: 12px; padding: 5px 20px 5px 5px; border-radius: 999px; }
+.logo-avatar { width: 52px; height: 52px; border-radius: 50%; flex: none; }
 .logo-last { color: var(--ink-3); }
 .nav-links { display: flex; gap: 4px; padding: 6px; border-radius: 999px; }
 .nav-links a { position: relative; padding: 9px 16px; border-radius: 999px; font-size: 15px; color: var(--ink-2); transition: color .25s, background .25s; }
