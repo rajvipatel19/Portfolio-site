@@ -44,7 +44,7 @@ def nav(root, active):
         cls = ' class="is-active" aria-current="page"' if key == active else ""
         return f'<a href="{root}{href}"{cls}>{label}{extra}</a>'
     return f"""<header class="nav">
-  <a class="logo" href="{root}index.html" aria-label="Rajvi Patel — home"><img class="logo-avatar" src="{root}assets/img/avatar.svg" alt="" width="42" height="42"><span class="logo-name">Rajvi <span class="logo-last">Patel</span></span></a>
+  <a class="logo" href="{root}index.html" aria-label="Rajvi Patel — home"><img class="logo-avatar" src="{root}assets/img/avatar.svg" alt="" width="46" height="46"><span class="logo-name">Rajvi <span class="logo-last">Patel</span></span></a>
   <nav class="nav-menu glass" aria-label="Main">
     <div class="nav-links">
       {link("about.html", "About", "about")}
@@ -219,7 +219,7 @@ def home():
 <section class="section" id="work">
   <div class="wrap">
     <div class="section-head">
-      <div data-reveal><span class="hand">case studies, start to finish</span><h2>Selected work</h2></div>
+      <div data-reveal><h2>Selected work</h2></div>
       <p data-reveal style="--d:.1s">Fintech, travel tech and B2B commerce. Research-led, shipped with small teams, written up in plain words.</p>
     </div>
     <div class="work-grid">
