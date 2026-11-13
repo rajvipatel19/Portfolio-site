@@ -512,6 +512,11 @@ def sila_page():
 
     body = f"""{nav(root, 'work')}
 <main class="sila">
+<aside class="roadmap sl-rail" aria-label="Case study sections">
+  <a class="sl-rail-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to work</a>
+  <ol><span class="progress"></span>{stations}</ol>
+</aside>
+<div class="sl-main">
 <section class="sl-hero">
   <div class="in">
     <a class="sl-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Go Back</a>
@@ -662,6 +667,7 @@ def sila_page():
   <ul class="sl-points sl-points--inline">{''.join(f'<li>{SL_ICON}<p><b>{t}</b> {d}</p></li>' for t, d in [("KYC step-completion rate", "per step, to find the exact drop-off point"), ("Time-to-verification", "against the ~3-minute abandonment threshold"), ("Re-upload rate", "the document step is the highest-leverage lever"), ("Transfer completion vs. cancellation", "split by where users drop")])}</ul>
   <p class="sl-quote" data-reveal>“A remittance app has to manufacture the trust a bank inherits”</p>
 </div></section>
+</div>
 </main>
 {footer(root)}"""
     return head("SILA · Rajvi Patel", "Helping UAE expats send money to India in under 15 minutes with a 3-tier KYC that asks only what each transfer needs.", root) + body

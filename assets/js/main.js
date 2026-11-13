@@ -245,8 +245,7 @@ const SITE = {
   }
 
   /* ---------- Case study roadmap scrollspy ---------- */
-  const roadmap = $(".roadmap");
-  if (roadmap) {
+  $$(".roadmap").forEach((roadmap) => {
     const items = $$("li", roadmap), secs = items.map((li) => $(li.querySelector("a").getAttribute("href"))).filter(Boolean);
     const prog = $(".progress", roadmap), ol = $("ol", roadmap);
     const update = () => {
@@ -272,7 +271,7 @@ const SITE = {
     };
     let raf; addEventListener("scroll", () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
     addEventListener("resize", update); update();
-  }
+  });
 
   /* ---------- Case study videos: play only while on screen ---------- */
   const autoVids = $$("video[data-autoplay]");
