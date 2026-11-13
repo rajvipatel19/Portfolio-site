@@ -203,12 +203,9 @@ def home():
     <span class="video-note">← your hero video plays here</span>
   </div>
   <div class="wrap hero-inner">
-    <div>
-      <span class="hand hi" data-reveal>hi! i'm Rajvi ✿</span>
-      <h1 class="split">I design products that are <em>easy to understand</em> &amp; use.</h1>
-    </div>
+    <span class="hand hi" data-reveal>hi! i'm Rajvi ✿</span>
+    <h1 class="split">I design products that are <em>easy to understand</em> &amp; use.</h1>
     <div class="hero-side" data-reveal style="--d:.35s">
-      <span class="status glass"><i></i>Senior Product Designer · Dubai · open to roles</span>
       <p>{C.INTRO}</p>
       <div class="hero-cta">
         <a class="btn btn--dark magnetic" href="#work">See my work {ARROW}</a>
