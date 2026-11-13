@@ -10,12 +10,12 @@
   --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-hand: "Libre Baskerville", Georgia, serif; /* decorative notes, shown in italic */
 
-  /* Ink */
-  --ink: #231e35;
-  --ink-2: #5d5774;
-  --ink-3: #8f8aa3;
-  --line: rgba(80, 64, 140, 0.12);
-  --nav-link: #4b5872;   /* slate gray-blue nav text (swap for Figma gray later) */
+  /* Ink — grays from Figma "Neutral" color styles */
+  --ink: #171717;     /* Neutral/900 — headings, main text */
+  --ink-2: #525252;   /* Neutral/600 — paragraphs, secondary text */
+  --ink-3: #737373;   /* Neutral/500 — muted text, captions */
+  --line: #e5e5e5;    /* Neutral/200 — lines, dividers */
+  --nav-link: #525252; /* Neutral/600 — nav links */
   --nav-resume: #16233b; /* deep navy Resume button */
 
   /* Soft palette */
@@ -143,7 +143,7 @@ p { margin: 0; }
 .nav-links { display: flex; align-items: center; gap: 2px; }
 .nav-links a { padding: 10px 16px; border-radius: 999px; font-size: 16px; font-weight: 600; color: var(--nav-link); transition: color .25s; }
 .nav-links a:hover, .nav-links a.is-active { color: var(--ink); }
-.nav-divider { width: 1px; height: 28px; background: rgba(35, 30, 53, 0.12); }
+.nav-divider { width: 1px; height: 28px; background: var(--line); }
 .nav-resume {
   display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 999px;
   font-size: 16px; font-weight: 600; color: #fff; background: var(--nav-resume);
