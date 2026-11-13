@@ -41,20 +41,21 @@ def head(title, desc, root):
 
 def nav(root, active):
     def link(href, label, key, extra=""):
-        cls = ' class="is-active"' if key == active else ""
+        cls = ' class="is-active" aria-current="page"' if key == active else ""
         return f'<a href="{root}{href}"{cls}>{label}{extra}</a>'
     return f"""<header class="nav">
-  <a class="logo glass" href="{root}index.html" aria-label="Rajvi Patel — home"><img class="logo-avatar" src="{root}assets/img/avatar.svg" alt="" width="52" height="52"><span class="logo-name">Rajvi <span class="logo-last">Patel</span></span></a>
-  <nav class="nav-links glass" aria-label="Main">
-    {link("index.html#work", "Work", "work")}
-    {link("about.html", "About", "about")}
-    {link("art-lab.html", "Art Lab", "art", '<span class="soon">soon</span>')}
-    <a href="{C.RESUME}" target="_blank" rel="noopener">Resume</a>
+  <a class="logo" href="{root}index.html" aria-label="Rajvi Patel — home"><img class="logo-avatar" src="{root}assets/img/avatar.svg" alt="" width="52" height="52"><span class="logo-name">Rajvi <span class="logo-last">Patel</span></span></a>
+  <nav class="nav-menu glass" aria-label="Main">
+    <div class="nav-links">
+      {link("about.html", "About", "about")}
+      {link("art-lab.html", "Art Lab", "art")}
+      {link("index.html#work", "Projects", "work")}
+      <a href="{C.LINKEDIN}" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <span class="nav-divider" aria-hidden="true"></span>
+    <a class="nav-resume" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW_UR}</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
   </nav>
-  <div class="nav-right">
-    <a class="btn btn--dark btn--sm magnetic" href="{root}index.html#call" data-cal>Book a call {ARROW}</a>
-    <button class="nav-toggle glass" aria-label="Menu"><span></span></button>
-  </div>
 </header>
 """
 

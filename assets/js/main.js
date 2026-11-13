@@ -37,7 +37,8 @@ const SITE = {
       nav.classList.toggle("is-hidden", y > last && y > 240 && !nav.classList.contains("is-open"));
       last = y;
     }, { passive: true });
-    $(".nav-toggle", nav)?.addEventListener("click", () => nav.classList.toggle("is-open"));
+    const toggle = $(".nav-toggle", nav);
+    toggle?.addEventListener("click", () => toggle.setAttribute("aria-expanded", nav.classList.toggle("is-open")));
   }
 
   /* ---------- Split headings into words ---------- */
