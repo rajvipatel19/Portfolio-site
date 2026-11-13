@@ -163,6 +163,31 @@ p { margin: 0; }
 html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-screen menu */
 @media (prefers-reduced-motion: reduce) { .nav .nav-links, .nav .nav-links a { transition-duration: .01s !important; transition-delay: 0s !important; transform: none !important; } }
 
+/* =========================================================
+   PHONE / TABLET MENU SETTINGS — change these numbers to adjust the menu.
+   Tablet values here; phone values just below.
+   ========================================================= */
+@media (max-width: 860px) {
+  .nav {
+    --menu-link-size: 28px;      /* About, Art Lab, Projects, LinkedIn */
+    --menu-link-gap: 16px;       /* space between those links */
+    --menu-button-gap: 28px;     /* extra space above the Resume button */
+    --menu-button-text: 17px;    /* Resume text size */
+    --menu-button-pad-y: 17px;   /* Resume button: space above + below text */
+    --menu-button-pad-x: 26px;   /* Resume button: space left + right of text */
+  }
+}
+@media (max-width: 640px) {
+  .nav {
+    --menu-link-size: 23px;
+    --menu-link-gap: 12px;
+    --menu-button-gap: 24px;
+    --menu-button-text: 16px;
+    --menu-button-pad-y: 15px;
+    --menu-button-pad-x: 24px;
+  }
+}
+
 @media (max-width: 860px) {
   /* Bar: only the logo and a glass ☰ button. The pill loses its glass
      (a blurred parent would trap the full-screen menu inside it). */
@@ -178,7 +203,7 @@ html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-
   /* Full-screen menu: soft, slightly see-through lavender → butter wash */
   .nav-links {
     position: fixed; inset: 0; z-index: 1;
-    flex-direction: column; justify-content: center; align-items: center; gap: 16px; padding: 96px 24px 48px;
+    flex-direction: column; justify-content: center; align-items: center; gap: var(--menu-link-gap); padding: 96px 24px 48px;
     background:
       radial-gradient(60% 45% at 15% 12%, rgba(255, 255, 255, 0.7), transparent 70%),
       radial-gradient(55% 40% at 90% 88%, rgba(255, 243, 204, 0.75), transparent 70%),
@@ -191,7 +216,7 @@ html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-
 
   /* Big centred links that drift up one after another */
   .nav .nav-links a {
-    font-family: var(--font-display); font-size: 28px; font-weight: 400; letter-spacing: -0.01em;
+    font-family: var(--font-display); font-size: var(--menu-link-size); font-weight: 400; letter-spacing: -0.01em;
     line-height: 1.15; padding: 6px 12px; color: var(--ink);
     opacity: 0; transform: translateY(14px);
     transition: opacity .35s var(--ease), transform .35s var(--ease), color .25s;
@@ -206,13 +231,7 @@ html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-
 
   /* Resume: navy button under the links */
   .nav .nav-links a.nav-resume--menu, .nav .nav-links a.nav-resume--menu:hover {
-    display: inline-flex; justify-content: center; min-width: 200px; margin-top: 28px; padding: 17px 36px; font-family: var(--font-body); font-size: 17px; font-weight: 600; letter-spacing: 0; color: #fff;
-  }
-  /* Phone: one step smaller */
-  @media (max-width: 640px) {
-    .nav-links { gap: 12px; }
-    .nav .nav-links a { font-size: 23px; }
-    .nav .nav-links a.nav-resume--menu { min-width: 180px; margin-top: 24px; font-size: 16px; padding: 15px 32px; }
+    display: inline-flex; justify-content: center; margin-top: var(--menu-button-gap); padding: var(--menu-button-pad-y) var(--menu-button-pad-x); font-family: var(--font-body); font-size: var(--menu-button-text); font-weight: 600; letter-spacing: 0; color: #fff;
   }
 }
 
