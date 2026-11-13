@@ -896,9 +896,18 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   .sl-side { position: sticky; top: 76px; z-index: 20; margin: 0 auto; width: calc(100% - 32px); max-width: 1072px; padding: 8px; border-radius: 999px; overflow-x: auto; scrollbar-width: none; }
   .sl-side::-webkit-scrollbar { display: none; }
   .sl-side h4, .sl-side .progress, .sl-side ol::before { display: none; }
-  .sl-side ol { display: flex; gap: 4px; width: max-content; }
-  .sl-side li a { padding: 8px 14px 8px 8px; gap: 8px; white-space: nowrap; border-radius: 999px; }
-  .sl-side .node { margin-left: 0; width: 12px; height: 12px; }
+  .sl-side { padding: 8px 10px; background: rgba(255,255,255,.94); }
+  .sl-side ol { display: flex; align-items: center; gap: 0; width: max-content; }
+  .sl-side li { display: flex; align-items: center; }
+  /* dotted line joining each point; turns solid purple for the sections you've passed */
+  .sl-side li:not(:last-child)::after { content: ""; width: 22px; margin: 0 4px; border-top: 2px dotted #b9b0d4; }
+  .sila .sl-side li.done::after { border-top-style: solid; border-color: var(--sl-accent); }
+  .sila .sl-side li a { padding: 8px 10px; gap: 10px; white-space: nowrap; border-radius: 999px; font-size: 15px; font-weight: 500; color: #6b6880; background: none; box-shadow: none; }
+  .sila .sl-side li.done a { color: #6b6880; }
+  .sila .sl-side li.active a { padding: 9px 18px 9px 14px; color: var(--sl-accent); font-weight: 700; background: #f3f0fe; box-shadow: none; }
+  .sila .sl-side .node { margin-left: 0; width: 10px; height: 10px; border: 2px solid #b9b0d4; background: #fff; transform: none; box-shadow: none; }
+  .sila .sl-side li.done .node { border-color: var(--sl-accent); background: var(--sl-accent); box-shadow: none; }
+  .sila .sl-side li.active .node { border-color: var(--sl-accent); background: var(--sl-accent); transform: scale(1.2); box-shadow: 0 0 0 4px rgba(77,44,134,.14); }
   .sila .sl-hero-band { margin-bottom: 16px; }
 }
 
