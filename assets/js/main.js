@@ -3,7 +3,7 @@
    ========================================================= */
 const SITE = {
   // Cal.com username/event, e.g. "rajvipatel/30min". Leave "" to show the preview calendar.
-  calLink: "",
+  calLink: "rajvi-patel-3l0bak/30min",
   // Spotify track ID (from the share link) played by the CD
   spotifyTrack: "5MPLeS9KdZlA04OOCUb5Bt",
 };
