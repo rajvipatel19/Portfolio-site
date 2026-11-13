@@ -191,7 +191,7 @@ html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-
 
   /* Big centred links that drift up one after another */
   .nav .nav-links a {
-    font-family: var(--font-display); font-size: 32px; font-weight: 400; letter-spacing: -0.01em;
+    font-family: var(--font-display); font-size: 28px; font-weight: 400; letter-spacing: -0.01em;
     line-height: 1.15; padding: 6px 12px; color: var(--ink);
     opacity: 0; transform: translateY(14px);
     transition: opacity .35s var(--ease), transform .35s var(--ease), color .25s;
@@ -203,17 +203,16 @@ html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-
   .nav.is-open .nav-links a:nth-child(3) { transition-delay: .18s; }
   .nav.is-open .nav-links a:nth-child(4) { transition-delay: .23s; }
   .nav.is-open .nav-links a:nth-child(5) { transition-delay: .30s; }
-  .nav .nav-links a[target="_blank"]:not(.nav-resume--menu)::after { content: "↗"; font-family: var(--font-body); font-size: .45em; margin-left: 6px; color: var(--ink-3); vertical-align: super; }
 
   /* Resume: navy button under the links */
   .nav .nav-links a.nav-resume--menu, .nav .nav-links a.nav-resume--menu:hover {
-    display: inline-flex; margin-top: 24px; padding: 14px 30px; font-family: var(--font-body); font-size: 16px; font-weight: 600; letter-spacing: 0; color: #fff;
+    display: inline-flex; justify-content: center; min-width: 200px; margin-top: 28px; padding: 17px 36px; font-family: var(--font-body); font-size: 17px; font-weight: 600; letter-spacing: 0; color: #fff;
   }
   /* Phone: one step smaller */
   @media (max-width: 640px) {
     .nav-links { gap: 12px; }
-    .nav .nav-links a { font-size: 26px; }
-    .nav .nav-links a.nav-resume--menu { margin-top: 20px; font-size: 15px; padding: 13px 26px; }
+    .nav .nav-links a { font-size: 23px; }
+    .nav .nav-links a.nav-resume--menu { min-width: 180px; margin-top: 24px; font-size: 16px; padding: 15px 32px; }
   }
 }
 
