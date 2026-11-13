@@ -51,6 +51,7 @@ def nav(root, active):
       {link("art-lab.html", "Art Lab", "art")}
       {link("index.html#work", "Projects", "work")}
       <a href="{C.LINKEDIN}" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="nav-resume nav-resume--menu" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW_UR}</a>
     </div>
     <span class="nav-divider" aria-hidden="true"></span>
     <a class="nav-resume" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW_UR}</a>
