@@ -1351,3 +1351,6 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   .ft-bottom p { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) { .ft-caret { animation: none; } }
+
+/* Land the Projects link just below the fixed top menu */
+#work, #call, #contact { scroll-margin-top: 72px; }

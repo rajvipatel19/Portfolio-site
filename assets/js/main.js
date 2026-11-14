@@ -305,6 +305,33 @@ const SITE = {
     setTimeout(tick, 1800);
   }
 
+  /* ---------- Arriving with a #section in the link (e.g. Projects from a case study): jump straight there ---------- */
+  if (location.hash.length > 1) {
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target) {
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      const jump = () => target.scrollIntoView({ behavior: "instant", block: "start" });
+      jump();
+      addEventListener("load", () => { jump(); setTimeout(jump, 250); }, { once: true });
+    }
+  }
+
+  /* ---------- Links to a section on this same page (e.g. Projects on the home page): scroll to it ---------- */
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href*='#']");
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || a.target === "_blank") return;
+    const url = new URL(a.href, location.href);
+    if (url.pathname !== location.pathname || url.hash.length < 2) return;
+    const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    if (!target) return;
+    e.preventDefault();
+    const startY = scrollY;
+    target.scrollIntoView({ behavior: reduce ? "instant" : "smooth", block: "start" });
+    history.pushState(null, "", url.hash);
+    // if the browser skipped the smooth scroll (e.g. a background tab), jump straight there
+    setTimeout(() => { if (scrollY === startY) target.scrollIntoView({ behavior: "instant", block: "start" }); }, 400);
+  });
+
   /* ---------- Footer year ---------- */
   $$("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
 })();
