@@ -79,15 +79,12 @@ const SITE = {
     walk(el);
   });
 
-  /* ---------- Case studies: each section fades up as it scrolls in, only the first time a page is opened ---------- */
+  /* ---------- Case studies: each section fades up once as it scrolls in, on every page load ---------- */
   const cs = document.querySelector("main.sila");
   if (cs) {
-    const key = "seen:" + location.pathname.replace(/index\.html$/, "");
-    let seen = false;
-    try { seen = localStorage.getItem(key) === "1"; localStorage.setItem(key, "1"); } catch (e) {}
     // these pages use the block reveal below instead of the per-card one
     cs.querySelectorAll("[data-reveal]").forEach((el) => el.removeAttribute("data-reveal"));
-    if (!seen && !reduce) {
+    if (!reduce) {
       // each whole section appears as one piece when its top comes into view
       const blocks = [...cs.querySelectorAll(":scope > section, :scope > .sl-main > section")];
       const rvIO = new IntersectionObserver((entries) => {
