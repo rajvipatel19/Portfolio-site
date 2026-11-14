@@ -1580,17 +1580,3 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .ob.dragging .cloud { opacity: 0 !important; }
 .ob.homing { transition: transform 1.4s cubic-bezier(.34,1.3,.5,1), opacity .5s var(--ease), filter .5s var(--ease); }
 .ob img { -webkit-user-drag: none; user-select: none; }
-
-/* hover bubble: comic-book speech bubble */
-.cloud { padding: 12px 20px 11px; border-radius: 20px; font-family: "Bangers", var(--font-display); font-weight: 400; font-size: 23px; letter-spacing: .06em; line-height: 1;
-  color: #1d1a2e; text-align: center; background: #fff; border: 3px solid #1d1a2e; box-shadow: 5px 5px 0 #1d1a2e;
-  -webkit-backdrop-filter: none; backdrop-filter: none;
-  background-image: radial-gradient(rgba(77,44,134,.16) 1.2px, transparent 1.4px); background-size: 7px 7px;
-  transform: translate(-50%, 14px) scale(.4) rotate(-8deg); transition: opacity .2s ease, transform .45s cubic-bezier(.3,1.7,.5,1); }
-.ob:nth-child(even) .cloud { --tilt: 2.5deg; }
-.ob:hover .cloud, .ob:focus-visible .cloud { transform: translate(-50%, 0) scale(1) rotate(var(--tilt, -2.5deg)); }
-/* pointed tail */
-.cloud::before, .cloud::after { border-radius: 0; box-shadow: none; background: none; width: 0; height: 0; margin: 0; }
-.cloud::before { left: 38%; bottom: -21px; border: 0 solid transparent; border-width: 21px 18px 0 0; border-top-color: #1d1a2e; }
-.cloud::after { left: calc(38% + 4px); bottom: -13px; border: 0 solid transparent; border-width: 13px 11px 0 0; border-top-color: #fff; }
-.cloud small { margin-top: 5px; font-family: var(--font-hand); font-size: 15px; letter-spacing: 0; color: var(--lav-deep); font-weight: 600; }
