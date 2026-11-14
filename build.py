@@ -441,9 +441,21 @@ def sl_points(items, dark=False):
         f'<li>{SL_ICON}<div><h4>{t}</h4><p>{d}</p></div></li>' for t, d in items) + "</ul>"
 
 
+# Each recording has white square corners around the phone; clip it to the phone's own rounded outline.
+# (top, side, bottom inset %, corner radius % of width / % of height) — measured from each video.
+SL_CLIPS = {
+    "flow-onboarding.mp4": (0.40, 1.20, 0.40, 18.1, 8.8),
+    "flow-kyc.mp4":        (0.40, 1.35, 0.40, 18.6, 9.0),
+    "flow-send.mp4":       (0.40, 1.40, 0.50, 18.4, 8.9),
+    "tier2.mp4":           (0.50, 1.60, 0.30, 17.9, 8.7),
+    "rejected.mp4":        (0.50, 1.60, 0.60, 19.0, 9.2),
+}
+
+
 def sl_video(src, label, round_=False):
-    cls = "sl-phone sl-phone--round" if round_ else "sl-phone"
-    return f'<video class="{cls}" src="{M}{src}" muted loop playsinline preload="none" data-autoplay aria-label="{label}"></video>'
+    t, sd, b, rx, ry = SL_CLIPS.get(src, (0.5, 1.5, 0.5, 18, 9))
+    clip = f"clip-path: inset({t}% {sd}% {b}% {sd}% round {rx}% / {ry}%)"
+    return f'<video class="sl-phone" style="{clip}" src="{M}{src}" muted loop playsinline preload="none" data-autoplay aria-label="{label}"></video>'
 
 
 def sl_numcards(items, cls="sl-card"):

@@ -821,7 +821,7 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .sl-row { display: grid; grid-template-columns: 280px 406px; justify-content: center; column-gap: 114px; align-items: center; margin-top: 120px; }
 .sl-row + .sl-row { margin-top: 160px; }
 .sl-phone { display: block; width: 280px; aspect-ratio: 380 / 786; object-fit: cover; background: transparent; }
-.sl-phone--round { border-radius: 50px; }
+/* .sl-phone videos are clipped to the phone outline per video (see SL_CLIPS in build.py) */
 .sl-flow { font-size: 18px; font-weight: 600; color: var(--sl-accent); }
 .sila .sl-row-text h3 { margin-top: 6px; font-size: 24px; line-height: 1.4; }
 .sl-points { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 22px; }
