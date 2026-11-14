@@ -1589,3 +1589,6 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .ob { top: calc(var(--y) * 780 / 860); }
 .gt-hint { bottom: clamp(14px, 2.8cqw, 34px); }
 @media (max-width: 600px) { .gt { aspect-ratio: 1220 / 780; } .ob { top: var(--y); } }
+
+/* the hovered sticker (and its bubble) always comes to the front */
+.ob:hover, .ob:focus-visible, .ob.dragging { z-index: 900 !important; }
