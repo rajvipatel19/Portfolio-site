@@ -1566,3 +1566,8 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   .gt-hint { left: 0; right: 0; bottom: auto; top: calc(100% + 14px); text-align: center; font-size: 15px; } }
 @media (prefers-reduced-motion: reduce) { .ob-float, .o-box .box-nudge, .o-box .beam::before { animation:none; } .o-box.is-open .spark { animation:none; opacity:.8; } }
 .o-box .cloud { display:none; }
+
+/* Case studies: blocks fade up on first visit (added by main.js) */
+.sila .rv { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.sila .rv.rv-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .sila .rv { opacity: 1; transform: none; } }

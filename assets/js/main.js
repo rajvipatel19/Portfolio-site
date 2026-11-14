@@ -79,6 +79,27 @@ const SITE = {
     walk(el);
   });
 
+  /* ---------- Case studies: each block fades up as it scrolls in, only the first time a page is opened ---------- */
+  const cs = document.querySelector("main.sila");
+  if (cs) {
+    const key = "seen:" + location.pathname.replace(/index\.html$/, "");
+    let seen = false;
+    try { seen = localStorage.getItem(key) === "1"; localStorage.setItem(key, "1"); } catch (e) {}
+    // these pages use the block reveal below instead of the per-card one
+    cs.querySelectorAll("[data-reveal]").forEach((el) => el.removeAttribute("data-reveal"));
+    if (!seen && !reduce) {
+      const blocks = [];
+      cs.querySelectorAll(":scope > section, :scope > .sl-main > section").forEach((sec) => {
+        const box = sec.querySelector(":scope > .in") || sec;
+        blocks.push(...box.children);
+      });
+      const rvIO = new IntersectionObserver((entries) => {
+        entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("rv-in"); rvIO.unobserve(en.target); } });
+      }, { threshold: 0.08 });
+      blocks.forEach((el) => { el.classList.add("rv"); rvIO.observe(el); });
+    }
+  }
+
   /* ---------- Reveal on scroll ---------- */
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } });
