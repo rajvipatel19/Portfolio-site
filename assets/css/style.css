@@ -258,7 +258,7 @@ html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-
   -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - var(--hero-p) * 12%), transparent 100%);
   mask-image: linear-gradient(180deg, #000 calc(100% - var(--hero-p) * 12%), transparent 100%);
 }
-.hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-media video, .hero-media .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-media .mesh { position: absolute; inset: -20%;
   background:
     radial-gradient(40% 50% at 20% 30%, #e9e1ff 0%, transparent 60%),
@@ -292,7 +292,7 @@ html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-
 @media (max-width: 860px) {
   .hero { padding: 120px 0 64px; }
   .hero + .section { padding-top: 40px; }
-  .hero-media video { object-position: 74% 50%; } /* keep the woman in view on narrow screens */
+  .hero-media video, .hero-media .hero-img { object-position: 74% 50%; } /* keep the woman in view on narrow screens */
   .scroll-cue { display: none; }
 }
 
@@ -713,7 +713,7 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   .persona .qs span { font-size: 18px; }
   .cd-hint, .desk-hint, .img-ph .ph-in b { font-size: 17px; }
   .hero-media .video-note { font-size: 16px; }
-  .hero-media video { object-position: 70% 50%; } /* phone: part of the woman shows, text stays clear */
+  .hero-media video, .hero-media .hero-img { object-position: 70% 50%; } /* phone: part of the woman shows, text stays clear */
   .hero-media::after { background: linear-gradient(180deg, rgba(253,252,255,.3) 0%, rgba(253,252,255,.62) 38%, rgba(253,252,255,.55) 62%, rgba(253,252,255,.15) 78%, rgba(253,252,255, calc(.15 + var(--hero-p) * .12)) 100%); } /* soft light behind the text; bottom haze grows on scroll */
   .footer-bottom .hand { font-size: 17px; }
 }

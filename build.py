@@ -257,10 +257,8 @@ def home():
 <main>
 <section class="hero">
   <div class="hero-media" aria-hidden="true">
-    <div class="mesh"></div>
-    <video autoplay muted loop playsinline preload="auto" poster=""><source src="assets/media/hero.mp4" type="video/mp4"></video>
+    <img class="hero-img" src="assets/media/hero.jpg" alt="" fetchpriority="high" decoding="async">
     {sparkles}
-    <span class="video-note">← your hero video plays here</span>
   </div>
   <div class="wrap hero-inner">
     <span class="hand hi" data-reveal>hi! i'm Rajvi ✿</span>
