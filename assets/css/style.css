@@ -1354,3 +1354,18 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 
 /* Land the Projects link just below the fixed top menu */
 #work, #call, #contact { scroll-margin-top: 72px; }
+
+/* ---------- Case study page background: one long, very soft gradient (SILA first) ----------
+   It spans the whole page, so colours shift almost unnoticeably as you scroll — no JS, no jank. */
+.sila.sl-bg {
+  background:
+    radial-gradient(circle at 92% 140px, rgba(255, 226, 196, .38) 0, rgba(255, 226, 196, 0) 320px),
+    linear-gradient(180deg,
+      #e9e4fb 0px,
+      #ecf0fc 900px,
+      #ebe7fb 40%,
+      #f5eaf3 70%,
+      #f6f0e5 100%);
+}
+.sila.sl-bg .sl-rail { background: transparent; }
+.sila.sl-bg .sl-band-gray { background: rgba(255, 255, 255, .45); }

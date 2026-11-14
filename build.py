@@ -510,7 +510,7 @@ def sila_page():
               (SL_DOWN, '"Where is my money" tickets', "Every hold answers what / how long / where")]
 
     body = f"""{nav(root, 'work')}
-<main class="sila">
+<main class="sila sl-bg">
 <aside class="roadmap sl-rail" aria-label="Case study sections">
   <a class="sl-rail-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to work</a>
   <ol><span class="progress"></span>{stations}</ol>
