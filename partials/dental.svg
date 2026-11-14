@@ -1,0 +1,13 @@
+<svg viewBox="0 0 1376 768" aria-hidden="true">
+        <defs>
+          <!-- x-ray film: TL(654,516) TR(1012,358) BR(1086,566) BL(728,724); hidden where the coat lies on top -->
+          <radialGradient id="lightG" cx=".62" cy=".45" r=".7"><stop offset="0" stop-color="#f4fbff" stop-opacity=".95"/><stop offset=".55" stop-color="#bfe1f6" stop-opacity=".7"/><stop offset="1" stop-color="#8fbfe0" stop-opacity=".45"/></radialGradient>
+          <filter id="boneGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+
+        <!-- embroidered name on the pocket -->
+        <g transform="rotate(-1.5 560 500)">
+          <text class="stitch" x="560" y="500" text-anchor="middle" style="font-size:25px">Dr. Rajvi Patel</text>
+          <text class="stitch-sub" x="562" y="521" text-anchor="middle" style="font-size:11px">BDS</text>
+        </g>
+      </svg>

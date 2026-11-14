@@ -341,3 +341,129 @@ const SITE = {
   /* ---------- Footer year ---------- */
   $$("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
 })();
+
+/* =========================================================
+   WHAT I BRING TO THE TABLE
+   ========================================================= */
+(() => {
+  const wrap = document.querySelector(".gt-wrap");
+  if (!wrap) return;
+  const gt = wrap.querySelector(".gt"), panel = wrap.querySelector(".panel");
+  const obs = [...gt.querySelectorAll(".ob")];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const touch = matchMedia("(hover: none)").matches;
+  const DATA = [
+    { title: "I ask why before how.", text: "I want to understand the problem before jumping into solutions. The right question saves weeks of the wrong screens.",
+      proof: "Before designing SILA, I read through App Store and Play Store reviews of the biggest transfer apps in the UAE." },
+    { title: "I think in systems.", text: "I look at the bigger picture, not just the screen in front of me: flows, edge cases, states, and how it all scales.",
+      proof: "At CityLockers I designed one ecosystem across four surfaces: app, website, kiosk and client portal." },
+    { title: "I like getting my hands dirty.", text: "From Figma to prototypes to code, I enjoy bringing ideas to life myself. With AI, concept and shipped product sit closer than ever.",
+      proof: "This portfolio was designed and coded by me, with Claude Code." },
+    { title: "I value honest collaboration.", text: "Good work comes from curiosity, trust and challenging each other's thinking, with founders, developers and users alike.",
+      proof: "Built and led a design team from scratch at Kilopoints, side by side with founders and developers." },
+    { title: "My toolkit, AI included.", text: "AI is my thinking partner, not my replacement. I use it to explore faster, challenge my assumptions and get from idea to prototype sooner. The decisions stay human.",
+      proof: "From messy brief to working prototype, faster.",
+      tools: ["Figma", "Claude", "ChatGPT", "Notion", "GitHub", "Vercel", "Canva", "Spotify"] },
+    { title: "I design with a clinician's care.", text: "Years as a dentist taught me to look beneath the surface, explain clearly, and earn trust before asking for it.",
+      proof: "That's why I'm drawn to health-tech and fintech, where trust is the product." },
+  ];
+
+  /* ---- detail window ---- */
+  const $ = (s) => panel.querySelector(s), swap = $(".swap");
+  let cur = -1;
+  const fill = (i) => {
+    const d = DATA[i];
+    $(".p-num").textContent = String(i + 1).padStart(2, "0") + " / " + String(DATA.length).padStart(2, "0");
+    $("h3").textContent = d.title; $(".p-text").textContent = d.text; $(".p-proof span").textContent = d.proof;
+    $(".p-tools").innerHTML = (d.tools || []).map((t) => `<span>${t}</span>`).join("");
+  };
+  const open = (i) => {
+    i = (i + DATA.length) % DATA.length;
+    const was = wrap.classList.contains("has-open");
+    obs.forEach((o) => o.classList.toggle("on", +o.dataset.k === i));
+    wrap.classList.add("has-open");
+    if (was && i !== cur) { swap.classList.add("out"); setTimeout(() => { fill(i); swap.classList.remove("out"); }, 220); } else fill(i);
+    cur = i;
+  };
+  const close = () => { wrap.classList.remove("has-open"); obs.forEach((o) => o.classList.remove("on")); cur = -1; };
+  obs.forEach((o) => {
+    o.addEventListener("click", (e) => { if (e.target.closest(".tool")) return; e.stopPropagation(); +o.dataset.k === cur ? close() : open(+o.dataset.k); });
+    o.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); o.click(); } });
+  });
+  $(".panel-close").addEventListener("click", (e) => { e.stopPropagation(); close(); });
+  $(".p-next").addEventListener("click", (e) => { e.stopPropagation(); open(cur + 1); });
+  $(".p-prev").addEventListener("click", (e) => { e.stopPropagation(); open(cur - 1); });
+  panel.addEventListener("click", (e) => e.stopPropagation());
+  gt.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => { if (cur < 0) return; if (e.key === "Escape") close(); if (e.key === "ArrowRight") open(cur + 1); if (e.key === "ArrowLeft") open(cur - 1); });
+
+  /* ---- light streak + checks follow the cursor (smoothed) ---- */
+  let tx = 0, ty = 0, mx = 0, my = 0, running = false;
+  const tick = () => {
+    mx += (tx - mx) * .14; my += (ty - my) * .14;
+    gt.style.setProperty("--mx", mx + "px"); gt.style.setProperty("--my", my + "px");
+    if (Math.abs(tx - mx) + Math.abs(ty - my) > .3) requestAnimationFrame(tick); else running = false;
+  };
+  gt.addEventListener("pointerenter", (e) => { const r = gt.getBoundingClientRect(); mx = tx = e.clientX - r.left; my = ty = e.clientY - r.top; });
+  gt.addEventListener("pointermove", (e) => { const r = gt.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; if (!running) { running = true; requestAnimationFrame(tick); } });
+
+  /* ---- gift box: confetti burst of tool logos ---- */
+  const box = gt.querySelector(".o-box");
+  if (!box) return;
+  const TOOLS = [
+    { slug: "figma", name: "Figma", use: "where ideas take shape" }, { slug: "claude", name: "Claude", use: "my thinking partner" },
+    { slug: "chatgpt", name: "ChatGPT", use: "untangling the brief" }, { slug: "notion", name: "Notion", use: "my second brain" },
+    { slug: "github", name: "GitHub", use: "where the code lives" }, { slug: "vercel", name: "Vercel", use: "where this site lives" },
+    { slug: "canva", name: "Canva", use: "quick visuals" }, { slug: "spotify", name: "Spotify", use: "focus mode on" },
+  ];
+  const tw = box.querySelector(".tools"), sw = box.querySelector(".sparks");
+  const tiles = TOOLS.map((t) => {
+    const el = document.createElement("div"); el.className = "tool";
+    el.innerHTML = `<img src="assets/icons/${t.slug}.svg" alt="${t.name}"><span class="tip"><b>${t.name}</b><span>${t.use}</span></span>`;
+    tw.appendChild(el); return el;
+  });
+  const rand = (s) => { const x = Math.sin(s * 99.13) * 43758.5453; return x - Math.floor(x); };
+  const STAR = '<svg viewBox="0 0 20 20"><path d="M10 0 C11 7 13 9 20 10 C13 11 11 13 10 20 C9 13 7 11 0 10 C7 9 9 7 10 0Z" fill="currentColor"/></svg>';
+  const colors = ["#f3cf6a", "#f6dc93", "#fff2c6", "#e9c25c", "#d9cdf5", "#f7c9d6"];
+  for (let k = 0; k < 16; k++) {
+    const sp = document.createElement("span"); sp.className = "spark"; sp.innerHTML = STAR; const r = (a) => rand(k * 13 + a);
+    sp.style.cssText = `--s:${6 + r(1) * 11}px;--c:${colors[k % colors.length]};--x0:${(r(2) - .5) * 180}px;--drift:${(r(3) - .5) * 100}px;--h:${180 + r(4) * 200}px;--d:${2.6 + r(5) * 2.4}s;--dl:${r(6) * 3}s`;
+    sw.appendChild(sp);
+  }
+  let slots = [], popY = 0, isOpen = false, anims = [];
+  const layout = () => {
+    const w = box.offsetWidth, narrow = innerWidth < 860, ts = narrow ? 50 : 60;
+    box.style.setProperty("--ts", ts + "px");
+    const rows = [3, 3, 2], dx = ts * 1.42, dy = ts * 1.22, baseY = -w * .5 - ts * .6; popY = -w * .25;
+    slots = []; let i = 0;
+    rows.forEach((count, r) => { for (let c = 0; c < count; c++, i++) {
+      slots.push({ x: (c - (count - 1) / 2) * dx + (r % 2 ? dx * .32 : -dx * .18) + (rand(i + 1) - .5) * ts * .22,
+        y: baseY - r * dy + (rand(i + 7) - .5) * ts * .28, r: (rand(i + 3) - .5) * 30, spin: (rand(i + 5) > .5 ? 1 : -1) * (180 + rand(i + 9) * 200) });
+    } });
+    tiles.forEach((t, k) => (t.style.zIndex = k + 1));
+  };
+  const openBox = () => {
+    if (isOpen) return; isOpen = true; box.classList.add("is-open");
+    anims.forEach((a) => a.cancel());
+    anims = tiles.map((t, i) => { const s = slots[i]; return t.animate(reduce ? [
+      { transform: `translate(${s.x}px, ${s.y}px) rotate(${s.r}deg)`, opacity: 1 }, { transform: `translate(${s.x}px, ${s.y}px) rotate(${s.r}deg)`, opacity: 1 }] : [
+      { transform: `translate(0px, ${popY}px) scale(.3) rotate(0deg)`, opacity: 0 },
+      { transform: `translate(${s.x * 1.35}px, ${s.y - 70}px) scale(1.1) rotate(${s.r + s.spin}deg)`, opacity: 1, offset: .5 },
+      { transform: `translate(${s.x}px, ${s.y + 6}px) scale(.98) rotate(${s.r - 4}deg)`, opacity: 1, offset: .82 },
+      { transform: `translate(${s.x}px, ${s.y}px) scale(1) rotate(${s.r}deg)`, opacity: 1 }
+    ], { duration: reduce ? 1 : 950, delay: reduce ? 0 : 240 + i * 115, easing: "cubic-bezier(.2,.8,.3,1)", fill: "both" }); });
+  };
+  const closeBox = () => {
+    if (!isOpen) return; isOpen = false; box.classList.remove("is-open");
+    anims.forEach((a) => a.cancel());
+    anims = tiles.map((t, i) => { const s = slots[i]; return t.animate([
+      { transform: `translate(${s.x}px, ${s.y}px) scale(1) rotate(${s.r}deg)`, opacity: 1 },
+      { transform: `translate(${s.x * .4}px, ${s.y - 20}px) scale(.9) rotate(${s.r + s.spin * .4}deg)`, opacity: 1, offset: .4 },
+      { transform: `translate(0px, ${popY}px) scale(.3) rotate(0deg)`, opacity: 0 }
+    ], { duration: reduce ? 1 : 520, delay: reduce ? 0 : (tiles.length - 1 - i) * 50, easing: "cubic-bezier(.55,0,.45,1)", fill: "both" }); });
+  };
+  layout(); addEventListener("resize", () => { layout(); if (isOpen) { isOpen = false; openBox(); } });
+  if (!touch) { box.addEventListener("mouseenter", openBox); box.addEventListener("mouseleave", closeBox); }
+  else box.addEventListener("click", () => (isOpen ? closeBox : openBox)());
+  box.addEventListener("focus", openBox); box.addEventListener("blur", closeBox);
+})();

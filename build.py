@@ -173,6 +173,67 @@ def scene(kind):
 
 
 # ---------------------------------------------------------------- home
+# ---------------------------------------------------------------- what I bring to the table
+def bring():
+    P = ROOT / "partials"
+    diary = (P / "diary.html").read_text()
+    sticky = (P / "sticky.svg").read_text()
+    dental = (P / "dental.svg").read_text()
+    def ob(k, cls, x, y, w, r, dl, title, art):
+        return f"""<div class="ob {cls}" data-k="{k}" tabindex="0" role="button" aria-label="{escape(title)}" style="--x:{x}%;--y:{y}%;--w:{w}%;--r:{r}deg;--dl:{dl}s">
+  <span class="cloud">{escape(title)}<small>click to read more</small></span>
+  <span class="ob-float"><span class="ob-art">{art}</span></span>
+</div>"""
+    box_art = """<span class="box-nudge" style="position:absolute;inset:0">
+      <svg class="layer interior" viewBox="0 0 880 728" aria-hidden="true">
+        <defs><linearGradient id="inG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bdb2a3"/><stop offset="1" stop-color="#e6ddcf"/></linearGradient>
+        <radialGradient id="litG" cx=".5" cy=".55" r=".6"><stop offset="0" stop-color="#fffaf0"/><stop offset=".5" stop-color="#fbe8b8"/><stop offset="1" stop-color="#e9d6a8" stop-opacity=".2"/></radialGradient></defs>
+        <polygon points="70,322 441,194 806,318 435,446" fill="url(#inG)"/>
+        <polygon points="70,322 441,194 806,318 790,330 441,214 88,332" fill="#a99d8d" opacity=".55"/>
+        <polygon class="lit" points="70,322 441,194 806,318 435,446" fill="url(#litG)"/>
+        <polyline points="70,322 435,446 806,318" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round"/>
+      </svg>
+      <img class="layer base" src="assets/media/box-base.png" alt="">
+      <img class="layer lid" src="assets/media/box-lid.png" alt="">
+      <span class="beam" aria-hidden="true"></span>
+      <span class="sparks" aria-hidden="true"></span>
+      <span class="tools"></span>
+    </span>"""
+    objs = [
+        ob(0, "o-diary", 21, 30, 29, -3, 0, "I ask why before how",
+           f'<img src="assets/media/diary-sticker.png" alt="Open diary: questions before designing a SaaS dashboard, and a pencil wireframe"><span class="photo">{diary}</span>'),
+        ob(5, "o-dental", 50.5, 29, 19, 3, -2.5, "I design with a clinician's care",
+           f'<img src="assets/media/dental-sticker.png" alt="Lab coat with dental tools, a tooth model and an x-ray"><span class="photo">{dental}</span>'),
+        ob(1, "o-sticky", 80, 29, 26, 4, -1.2, "I think in systems",
+           f'<img src="assets/media/sticky-sticker.png" alt="Sticky notes mapping a product flow"><span class="photo">{sticky}</span>'),
+        ob(2, "o-mac", 20, 74, 21, 6, -3.6, "I like getting my hands dirty",
+           '<img src="assets/media/macbook-sticker.png" alt="Closed MacBook">'),
+        ob(4, "o-box", 50, 75, 18, 0, -1.8, "My toolkit, AI included", box_art),
+        ob(3, "o-cups", 80, 73, 21, -5, -4.4, "I value honest collaboration",
+           '<img src="assets/media/cups-sticker.png" alt="Three coffees and a matcha latte, like a team meeting">'),
+    ]
+    return f"""<section class="bring" id="bring">
+  <div class="bring-head wrap" data-reveal>
+    <span class="hand">pull up a chair</span>
+    <h2>What I bring to the table</h2>
+    <p>Hover to peek, click to read more.</p>
+  </div>
+  <div class="gt-wrap" data-reveal style="--d:.1s">
+    <div class="gt-glow" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="gt">
+      <div class="fx fx-checks" aria-hidden="true"></div><div class="fx fx-glow" aria-hidden="true"></div>
+      {''.join(objs)}
+      <span class="gt-hint">psst… everything on my table means something ✿</span>
+    </div>
+    <aside class="panel" aria-live="polite">
+      <button class="panel-close" aria-label="Close">×</button>
+      <div class="swap"><span class="p-num"></span><h3></h3><p class="p-text"></p><div class="p-tools"></div></div>
+      <div class="p-proof"><b>From my work</b><span></span></div>
+      <div class="p-nav"><button class="p-prev">← prev</button><button class="p-next">next →</button></div>
+    </aside>
+  </div>
+</section>"""
+
 def home():
     root = ""
     cards = []
@@ -226,6 +287,8 @@ def home():
     </div>
   </div>
 </section>
+
+{bring()}
 
 <section class="ticker-section" aria-label="Visual journey">
   <div class="ticker-head wrap" data-reveal><span class="hand">a sneak peek of my</span><h2>visual journey</h2></div>

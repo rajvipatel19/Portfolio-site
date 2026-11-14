@@ -1,0 +1,44 @@
+<svg viewBox="0 0 1376 768">
+    <defs>
+      <filter id="ink" filterUnits="userSpaceOnUse" x="0" y="0" width="1376" height="768">
+        <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="7" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="2"/>
+      </filter>
+      <marker id="head" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+        <path d="M2 2 L10 6 L2 10" fill="none" stroke="#2a2930" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+      <marker id="headp" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+        <path d="M2 2 L10 6 L2 10" fill="none" stroke="#a9586b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <!-- ROW 1 -->
+    <g ><text class="lbl" x="458" y="150" transform="rotate(-1.5 458 160)">Sign up</text><text class="lbl sm" x="458" y="190" transform="rotate(-1.5 458 190)">email + PIN</text></g>
+    <path class="arrow " d="M556 158 L 590 157" marker-end="url(#head)"/>
+    <g ><text class="lbl" x="689" y="150" transform="rotate(-.5 689 150)">Onboarding</text><text class="lbl sm" x="689" y="190">3 steps max</text></g>
+    <path class="arrow " d="M786 156 L 824 156" marker-end="url(#head)"/>
+    <g ><text class="lbl" x="920" y="148" transform="rotate(1 920 148)">First win</text><text class="lbl sm" x="920" y="188">aha moment ✦</text></g>
+
+    <!-- link to dashboard -->
+    <path class="arrow " d="M868 248 C 840 272, 770 266, 724 292" marker-end="url(#head)"/>
+
+    <!-- ROW 2 -->
+    <g ><text class="lbl" x="455" y="380" transform="rotate(2 455 380)">Empty state</text><text class="lbl sm" x="455" y="420" transform="rotate(2 455 420)">no data yet</text></g>
+    <path class="arrow " d="M557 392 L 593 391" marker-end="url(#head)"/>
+    <g ><text class="lbl" x="689" y="378" style="font-weight:700">Dashboard</text><text class="lbl sm" x="689" y="418">hero metric up top</text></g>
+    <path class="arrow " d="M784 390 L 824 390" marker-end="url(#head)"/>
+    <g ><text class="lbl" x="921" y="380">Alerts</text><text class="lbl sm" x="921" y="420">only what's urgent</text></g>
+
+    <!-- returning user loop: alerts back to dashboard -->
+    <path class="arrow " d="M921 482 C 921 512, 760 512, 735 482" marker-end="url(#head)"/>
+    <text class="lbl sm " x="828" y="530">returning user ↺</text>
+
+    <!-- ROW 3 -->
+    <path class="arrow " d="M640 482 C 625 500, 605 508, 590 524" marker-end="url(#head)"/>
+    <g ><text class="lbl" x="569" y="612">Settings</text><text class="lbl sm" x="569" y="652">profile, team</text></g>
+    <g ><text class="lbl" x="802" y="606" transform="rotate(-.5 802 606)">Help</text><text class="lbl sm" x="802" y="646">docs + chat</text></g>
+    <path class="arrow " d="M664 620 L 702 618" marker-end="url(#head)"/>
+
+    <!-- pink annotations -->
+    <path class="pink " d="M592 296 C 588 340, 586 450, 600 480 C 660 492, 740 490, 782 482 C 790 440, 790 330, 780 298 C 720 290, 640 290, 592 296"/>
+  </svg>
