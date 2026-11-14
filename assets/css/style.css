@@ -1583,3 +1583,9 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 
 /* gift box: logos burst out in front of every other sticker */
 .o-box.is-open { z-index: 999 !important; }
+
+/* extra strip at the bottom of the table so the hint has room (stickers keep their spots) */
+.gt { aspect-ratio: 1220 / 860; }
+.ob { top: calc(var(--y) * 780 / 860); }
+.gt-hint { bottom: clamp(14px, 2.8cqw, 34px); }
+@media (max-width: 600px) { .gt { aspect-ratio: 1220 / 780; } .ob { top: var(--y); } }

@@ -507,7 +507,7 @@ const SITE = {
   const layout = () => {
     const w = box.offsetWidth, ts = Math.round(Math.max(26, Math.min(60, gt.offsetWidth * .05)));
     box.style.setProperty("--ts", ts + "px");
-    const rows = [3, 3, 2], dx = ts * 1.42, dy = ts * 1.22, baseY = -w * .5 - ts * .6; popY = -w * .25;
+    const rows = [4, 4], dx = ts * 1.42, dy = ts * 1.22, baseY = -w * .34 - ts * .45; popY = -w * .25;
     slots = []; let i = 0;
     rows.forEach((count, r) => { for (let c = 0; c < count; c++, i++) {
       slots.push({ x: (c - (count - 1) / 2) * dx + (r % 2 ? dx * .32 : -dx * .18) + (rand(i + 1) - .5) * ts * .22,

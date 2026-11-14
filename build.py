@@ -208,8 +208,8 @@ def bring():
            f'<img src="assets/media/sticky-sticker.png" alt="Sticky notes mapping a product flow"><span class="photo">{sticky}</span>'),
         ob(2, "o-mac", 20, 74, 21, 6, -3.6, "I like getting my hands dirty",
            '<img src="assets/media/macbook-sticker.png" alt="Closed MacBook">'),
-        ob(4, "o-box", 50, 75, 18, 0, -1.8, "My toolkit, AI included", box_art),
-        ob(3, "o-cups", 50.5, 29, 21, -5, -4.4, "I value honest collaboration",
+        ob(4, "o-box", 50, 31, 18, 0, -1.8, "My toolkit, AI included", box_art),
+        ob(3, "o-cups", 50.5, 73, 21, -5, -4.4, "I value honest collaboration",
            '<img src="assets/media/cups-sticker.png" alt="Three coffees and a matcha latte, like a team meeting">'),
     ]
     return f"""<section class="bring" id="bring">
