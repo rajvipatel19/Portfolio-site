@@ -79,7 +79,7 @@ const SITE = {
     walk(el);
   });
 
-  /* ---------- Case studies: each block fades up as it scrolls in, only the first time a page is opened ---------- */
+  /* ---------- Case studies: each section fades up as it scrolls in, only the first time a page is opened ---------- */
   const cs = document.querySelector("main.sila");
   if (cs) {
     const key = "seen:" + location.pathname.replace(/index\.html$/, "");
@@ -88,14 +88,11 @@ const SITE = {
     // these pages use the block reveal below instead of the per-card one
     cs.querySelectorAll("[data-reveal]").forEach((el) => el.removeAttribute("data-reveal"));
     if (!seen && !reduce) {
-      const blocks = [];
-      cs.querySelectorAll(":scope > section, :scope > .sl-main > section").forEach((sec) => {
-        const box = sec.querySelector(":scope > .in") || sec;
-        blocks.push(...box.children);
-      });
+      // each whole section appears as one piece when its top comes into view
+      const blocks = [...cs.querySelectorAll(":scope > section, :scope > .sl-main > section")];
       const rvIO = new IntersectionObserver((entries) => {
         entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("rv-in"); rvIO.unobserve(en.target); } });
-      }, { threshold: 0.08 });
+      }, { threshold: 0, rootMargin: "0px 0px -12% 0px" });
       blocks.forEach((el) => { el.classList.add("rv"); rvIO.observe(el); });
     }
   }
