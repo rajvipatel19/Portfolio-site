@@ -257,7 +257,7 @@ def home():
 <main>
 <section class="hero">
   <div class="hero-media" aria-hidden="true">
-    <img class="hero-img" src="assets/media/hero.jpg" alt="" fetchpriority="high" decoding="async">
+    <img class="hero-img" src="assets/media/hero-illustration.jpg" alt="" fetchpriority="high" decoding="async">
     {sparkles}
   </div>
   <div class="wrap hero-inner">
