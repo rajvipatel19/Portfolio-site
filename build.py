@@ -212,7 +212,8 @@ def bring():
         ob(3, "o-cups", 50.5, 29, 21, -5, -4.4, "I value honest collaboration",
            '<img src="assets/media/cups-sticker.png" alt="Three coffees and a matcha latte, like a team meeting">'),
     ]
-    return f"""<section class="bring" id="bring">
+    return f"""<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap">
+<section class="bring" id="bring">
   <div class="bring-head wrap" data-reveal>
     <span class="hand">pull up a chair</span>
     <h2>What I bring to the table</h2>
