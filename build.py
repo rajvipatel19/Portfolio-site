@@ -202,14 +202,14 @@ def bring():
     objs = [
         ob(0, "o-diary", 21, 30, 29, -3, 0, "I ask why before how",
            f'<img src="assets/media/diary-sticker.png" alt="Open diary: questions before designing a SaaS dashboard, and a pencil wireframe"><span class="photo">{diary}</span>'),
-        ob(5, "o-dental", 50.5, 29, 19, 3, -2.5, "I design with a clinician's care",
+        ob(5, "o-dental", 80, 73, 19, 3, -2.5, "I design with a clinician's care",
            f'<img src="assets/media/dental-sticker.png" alt="Lab coat with dental tools, a tooth model and an x-ray"><span class="photo">{dental}</span>'),
         ob(1, "o-sticky", 80, 29, 26, 4, -1.2, "I think in systems",
            f'<img src="assets/media/sticky-sticker.png" alt="Sticky notes mapping a product flow"><span class="photo">{sticky}</span>'),
         ob(2, "o-mac", 20, 74, 21, 6, -3.6, "I like getting my hands dirty",
            '<img src="assets/media/macbook-sticker.png" alt="Closed MacBook">'),
         ob(4, "o-box", 50, 75, 18, 0, -1.8, "My toolkit, AI included", box_art),
-        ob(3, "o-cups", 80, 73, 21, -5, -4.4, "I value honest collaboration",
+        ob(3, "o-cups", 50.5, 29, 21, -5, -4.4, "I value honest collaboration",
            '<img src="assets/media/cups-sticker.png" alt="Three coffees and a matcha latte, like a team meeting">'),
     ]
     return f"""<section class="bring" id="bring">

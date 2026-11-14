@@ -405,6 +405,64 @@ const SITE = {
     o.addEventListener("click", (e) => { if (e.target.closest(".tool")) return; e.stopPropagation(); +o.dataset.k === cur ? close() : open(+o.dataset.k); });
     o.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); o.click(); } });
   });
+  /* ---- drag stickers around the table; they drift home a few minutes after the last move ---- */
+  const HOME_AFTER = 3 * 60 * 1000;
+  let homeTimer = 0, topZ = 10, justDragged = false;
+  const goHome = () => obs.forEach((o) => {
+    if (!o.style.getPropertyValue("--dx")) return;
+    o.classList.add("homing"); o.style.removeProperty("--dx"); o.style.removeProperty("--dy");
+    setTimeout(() => { o.classList.remove("homing"); o.style.zIndex = ""; }, 1500);
+  });
+  const startDrag = (o, x0, y0) => {
+    const g = gt.getBoundingClientRect(), cqw = g.width / 100;
+    const sx = parseFloat(o.style.getPropertyValue("--dx")) || 0, sy = parseFloat(o.style.getPropertyValue("--dy")) || 0;
+    const r = o.getBoundingClientRect(), cx = r.left + r.width / 2 - sx * cqw, cy = r.top + r.height / 2 - sy * cqw;
+    o.classList.remove("homing"); o.classList.add("dragging"); o.style.zIndex = ++topZ;
+    clearTimeout(homeTimer);
+    return {
+      move(x, y) {
+        // keep the sticker's centre on the table
+        const nx = Math.min(g.right - 10, Math.max(g.left + 10, cx + sx * cqw + x - x0));
+        const ny = Math.min(g.bottom - 10, Math.max(g.top + 10, cy + sy * cqw + y - y0));
+        o.style.setProperty("--dx", ((nx - cx) / cqw).toFixed(2)); o.style.setProperty("--dy", ((ny - cy) / cqw).toFixed(2));
+      },
+      end() { o.classList.remove("dragging"); homeTimer = setTimeout(goHome, HOME_AFTER); },
+    };
+  };
+  obs.forEach((o) => {
+    // mouse / pen: drag straight away
+    o.addEventListener("pointerdown", (e) => {
+      if (e.pointerType === "touch" || e.button !== 0 || e.target.closest(".tool")) return;
+      const x0 = e.clientX, y0 = e.clientY; let d = null;
+      const mv = (ev) => {
+        if (!d && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 5) return;
+        if (!d) d = startDrag(o, x0, y0);
+        d.move(ev.clientX, ev.clientY);
+      };
+      const up = () => { removeEventListener("pointermove", mv); removeEventListener("pointerup", up);
+        if (d) { d.end(); justDragged = true; setTimeout(() => (justDragged = false), 0); } };
+      addEventListener("pointermove", mv); addEventListener("pointerup", up);
+      e.preventDefault();
+    });
+    // touch: press and hold briefly, then drag (a normal swipe still scrolls the page)
+    o.addEventListener("touchstart", (e) => {
+      if (e.touches.length > 1 || e.target.closest(".tool")) return;
+      const t = e.touches[0], x0 = t.clientX, y0 = t.clientY; let d = null, cancelled = false;
+      const hold = setTimeout(() => { if (!cancelled) { d = startDrag(o, x0, y0); navigator.vibrate?.(8); } }, 280);
+      const mv = (ev) => {
+        const p = ev.touches[0];
+        if (d) { ev.preventDefault(); d.move(p.clientX, p.clientY); }
+        else if (Math.hypot(p.clientX - x0, p.clientY - y0) > 8) { cancelled = true; clearTimeout(hold); }
+      };
+      const end = (ev) => { clearTimeout(hold); o.removeEventListener("touchmove", mv); o.removeEventListener("touchend", end); o.removeEventListener("touchcancel", end);
+        if (d) { d.end(); if (ev.cancelable) ev.preventDefault(); justDragged = true; setTimeout(() => (justDragged = false), 50); } };
+      o.addEventListener("touchmove", mv, { passive: false }); o.addEventListener("touchend", end); o.addEventListener("touchcancel", end);
+    }, { passive: true });
+    o.addEventListener("contextmenu", (e) => e.preventDefault());
+    // a drag is not a click
+    o.addEventListener("click", (e) => { if (justDragged) { e.stopImmediatePropagation(); e.preventDefault(); } }, true);
+  });
+
   $(".panel-close").addEventListener("click", (e) => { e.stopPropagation(); close(); });
   $(".p-next").addEventListener("click", (e) => { e.stopPropagation(); open(cur + 1); });
   $(".p-prev").addEventListener("click", (e) => { e.stopPropagation(); open(cur - 1); });
