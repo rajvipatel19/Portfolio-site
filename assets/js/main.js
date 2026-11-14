@@ -13,9 +13,12 @@ const SITE = {
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  // "/" and "/index.html" are the same page
+  const samePage = (u) => u.pathname.replace(/index\.html$/, "") === location.pathname.replace(/index\.html$/, "");
 
   /* ---------- Page load / leave transition ---------- */
   requestAnimationFrame(() => document.body.classList.add("loaded"));
+  setTimeout(() => document.body.classList.add("loaded"), 600); // never leave the page faded out
   window.addEventListener("pageshow", (e) => { if (e.persisted) document.body.classList.remove("leaving"); });
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a");
@@ -23,6 +26,9 @@ const SITE = {
     const href = a.getAttribute("href");
     if (!href || href.startsWith("#") || a.target === "_blank" || e.metaKey || e.ctrlKey || e.shiftKey) return;
     if (/^(https?:|mailto:|tel:)/.test(href)) return;
+    // a link to a section on this same page (e.g. Projects on the home page) doesn't leave — no fade-out
+    const to = new URL(a.href, location.href);
+    if (samePage(to) && to.hash) return;
     e.preventDefault();
     document.body.classList.add("leaving");
     setTimeout(() => (window.location.href = href), 320);
@@ -321,7 +327,7 @@ const SITE = {
     const a = e.target.closest("a[href*='#']");
     if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || a.target === "_blank") return;
     const url = new URL(a.href, location.href);
-    if (url.pathname !== location.pathname || url.hash.length < 2) return;
+    if (!samePage(url) || url.hash.length < 2) return;
     const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
     if (!target) return;
     e.preventDefault();
