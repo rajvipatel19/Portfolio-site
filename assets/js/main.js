@@ -361,7 +361,7 @@ const SITE = {
       proof: "This portfolio was designed and coded by me, with Claude Code." },
     { title: "I value honest collaboration.", text: "Good work comes from curiosity, trust and challenging each other's thinking, with founders, developers and users alike.",
       proof: "Built and led a design team from scratch at Kilopoints, side by side with founders and developers." },
-    { title: "My toolkit, AI included.", text: "AI is my thinking partner, not my replacement. I use it to explore faster, challenge my assumptions and get from idea to prototype sooner. The decisions stay human.",
+    { title: "My toolkit, AI included.", text: "AI is my thinking partner, not my replacement. I use Claude to pressure-test flows, write UX copy and build faster, getting from idea to prototype sooner. The decisions stay human.",
       proof: "From messy brief to working prototype, faster.",
       tools: ["Figma", "Claude", "ChatGPT", "Notion", "GitHub", "Vercel", "Canva", "Spotify"] },
     { title: "I design with a clinician's care.", text: "Years as a dentist taught me to look beneath the surface, explain clearly, and earn trust before asking for it.",
@@ -411,7 +411,7 @@ const SITE = {
   const box = gt.querySelector(".o-box");
   if (!box) return;
   const TOOLS = [
-    { slug: "figma", name: "Figma", use: "where ideas take shape" }, { slug: "claude", name: "Claude", use: "my thinking partner", tag: "Think", desc: "My thinking partner. I use it to pressure-test flows, write UX copy and build faster." },
+    { slug: "figma", name: "Figma", use: "where ideas take shape" }, { slug: "claude", name: "Claude", use: "my thinking partner" },
     { slug: "chatgpt", name: "ChatGPT", use: "untangling the brief" }, { slug: "notion", name: "Notion", use: "my second brain" },
     { slug: "github", name: "GitHub", use: "where the code lives" }, { slug: "vercel", name: "Vercel", use: "where this site lives" },
     { slug: "canva", name: "Canva", use: "quick visuals" }, { slug: "spotify", name: "Spotify", use: "focus mode on" },
@@ -419,9 +419,7 @@ const SITE = {
   const tw = box.querySelector(".tools"), sw = box.querySelector(".sparks");
   const tiles = TOOLS.map((t) => {
     const el = document.createElement("div"); el.className = "tool";
-    el.innerHTML = `<img src="assets/icons/${t.slug}.svg" alt="${t.name}">` + (t.desc
-      ? `<span class="tip tip--card"><b>${t.name}</b><em>${t.tag}</em><span>${t.desc}</span></span>`
-      : `<span class="tip"><b>${t.name}</b><span>${t.use}</span></span>`);
+    el.innerHTML = `<img src="assets/icons/${t.slug}.svg" alt="${t.name}"><span class="tip"><b>${t.name}</b><span>${t.use}</span></span>`;
     tw.appendChild(el); return el;
   });
   const rand = (s) => { const x = Math.sin(s * 99.13) * 43758.5453; return x - Math.floor(x); };
