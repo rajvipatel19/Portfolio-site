@@ -223,7 +223,7 @@ def bring():
     <div class="gt">
       <div class="fx fx-checks" aria-hidden="true"></div><div class="fx fx-glow" aria-hidden="true"></div>
       {''.join(objs)}
-      <span class="gt-hint">psst… everything on my table means something ✿</span>
+      <span class="gt-hint">psst… click on the stickers to know the meaning ✿</span>
     </div>
     <aside class="panel" aria-live="polite">
       <button class="panel-close" aria-label="Close">×</button>

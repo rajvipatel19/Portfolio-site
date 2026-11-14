@@ -1391,7 +1391,7 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .gt-glow i:nth-child(2){ width:42%; height:62%; right:3%; top:2%; background: var(--g2); opacity:.7; animation-duration:30s; }
 .gt-glow i:nth-child(3){ width:40%; height:58%; left:33%; bottom:0; background: var(--g3); animation-duration:36s; }
 
-.gt { position: relative; z-index:1; height: 780px; border-radius: 44px; isolation:isolate;
+.gt { position: relative; z-index:1; aspect-ratio: 1220 / 780; container-type: inline-size; border-radius: clamp(18px, 3.6cqw, 44px); isolation:isolate;
   background: linear-gradient(145deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.28) 55%, rgba(255,255,255,.4) 100%);
   border: 1px solid rgba(255,255,255,.9);
   box-shadow: inset 0 1.5px 1px #fff, inset 0 -24px 40px -30px rgba(255,255,255,.9), inset 0 0 0 1px rgba(255,255,255,.25),
@@ -1399,7 +1399,7 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   -webkit-backdrop-filter: blur(30px) saturate(1.5); backdrop-filter: blur(30px) saturate(1.5); }
 .gt::after { content:""; position:absolute; inset:0; border-radius: inherit; pointer-events:none; z-index:0;
   background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.26) 42%, transparent 54%); }
-.gt-hint { position:absolute; left: 30px; bottom: 22px; z-index: 2; font-family: var(--font-hand); font-size: 22px; color: var(--ink-3); transition: opacity .4s; }
+.gt-hint { position:absolute; left: clamp(14px, 2.5cqw, 30px); bottom: clamp(8px, 1.8cqw, 22px); z-index: 2; font-family: var(--font-hand); font-size: clamp(13px, 1.8cqw, 22px); color: var(--ink-3); transition: opacity .4s; }
 .gt-wrap.has-open .gt-hint { opacity: 0; }
 
 /* hover light: soft streak following the cursor + barely-there checks */
@@ -1518,12 +1518,17 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .o-box.is-open .tool { pointer-events:auto; }
 .tool img { width:56%; height:56%; object-fit:contain; }
 .tool img[src*="chatgpt"] { width:82%; height:82%; }
-.tool .tip { position:absolute; top: calc(100% + 12px); left:50%; transform: translate(-50%, -4px); white-space:nowrap; opacity:0; pointer-events:none; z-index:3;
+.tool .tip { position:absolute; top: calc(100% + 12px); left:50%; transform: translate(-50%, -4px) rotate(calc(var(--rot, 0deg) * -1)); white-space:nowrap; opacity:0; pointer-events:none; z-index:3;
   padding:8px 12px; border-radius:12px; font-size:13px; text-align:center; background: rgba(255,255,255,.95); border:1px solid #fff; box-shadow: 0 10px 24px -12px rgba(60,40,110,.45); transition: .3s var(--ease); }
 .tool .tip b { display:block; font-weight:600; font-size:14px; }
 .tool .tip span { font-family: var(--font-hand); font-size:18px; color:#a9586b; }
+/* richer card tip (Claude) */
+.tool .tip--card { white-space: normal; width: 250px; text-align: left; padding: 14px 16px; border-radius: 16px; }
+.tool .tip--card b { font-size: 17px; }
+.tool .tip--card em { display:block; font-style: normal; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin: 1px 0 6px; }
+.tool .tip--card span { font-family: var(--font-body); font-size: 14px; line-height: 1.45; color: var(--ink-2); }
 .tool:hover { z-index: 20 !important; }
-.tool:hover .tip { opacity:1; transform: translate(-50%, 0); }
+.tool:hover .tip { opacity:1; transform: translate(-50%, 0) rotate(calc(var(--rot, 0deg) * -1)); }
 .o-box .box-nudge { display:block; transform: rotate(-4deg); animation: nudge 5s ease-in-out infinite 2s; transition: transform .7s var(--ease-spring); }
 .o-box.is-open .box-nudge { animation:none; transform: rotate(0deg) translateY(-2%); }
 @keyframes nudge { 0%, 84%, 100% { transform: rotate(-4deg); } 87% { transform: rotate(-7deg) translateY(-1%); } 90% { transform: rotate(-1deg); } 93% { transform: rotate(-5.5deg); } 96% { transform: rotate(-3deg); } }
@@ -1555,20 +1560,14 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .panel .swap { display:flex; flex-direction:column; gap: 14px; transition: opacity .3s var(--ease), transform .3s var(--ease); }
 .panel .swap.out { opacity: 0; transform: translateY(8px); }
 
-/* ---------- smaller screens: objects in a loose 2-column spread ---------- */
+/* ---------- smaller screens: the whole table scales down, stickers keep their places ---------- */
 @media (max-width: 860px) {
-  .gt { height: auto; display:grid; grid-template-columns: 1fr 1fr; gap: 54px 16px; padding: 70px 18px 70px; border-radius: 32px; }
-  .ob { position:relative; left:auto; top:auto; width:auto; transform:none; }
-  .o-diary, .o-sticky { grid-column: 1 / -1; width: 86%; justify-self:center; }
-  .o-box { margin-top: 150px; }
-  .cloud, .gt-hint { display:none; }
   .panel { position: fixed; left: 12px; right: 12px; top: auto; bottom: 12px; width: auto; max-height: 74vh; transform: translateY(calc(100% + 30px)); }
   .gt-wrap.has-open .panel { transform: none; }
+  .bring-head { margin-bottom: 40px; }
 }
+@media (hover: none), (max-width: 700px) { .cloud { display:none; } }
+@media (max-width: 600px) { .gt-wrap { width: calc(100% - 20px); } .bring { padding: 80px 0 90px; }
+  .gt-hint { left: 0; right: 0; bottom: auto; top: calc(100% + 14px); text-align: center; font-size: 15px; } }
 @media (prefers-reduced-motion: reduce) { .ob-float, .o-box .box-nudge, .o-box .beam::before { animation:none; } .o-box.is-open .spark { animation:none; opacity:.8; } }
 .o-box .cloud { display:none; }
-@media (max-width: 860px) {
-  .gt { align-items: end; }
-  .o-diary { order: 1; } .o-dental { order: 2; } .o-mac { order: 3; align-self: center; }
-  .o-sticky { order: 4; } .o-cups { order: 5; } .o-box { order: 6; margin-top: 170px; }
-}
