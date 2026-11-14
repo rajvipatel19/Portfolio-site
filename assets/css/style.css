@@ -1369,3 +1369,8 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 }
 .sila.sl-bg .sl-rail { background: transparent; }
 .sila.sl-bg .sl-band-gray { background: rgba(255, 255, 255, .45); }
+/* full-width tinted bands let the page gradient show through on every case study */
+.sila.sl-bg .cl-gray, .sila.sl-bg .cl-video-band, .sila.sl-bg .sk-gray, .sila.sl-bg .sk-lav { background: rgba(255, 255, 255, .45); }
+.sila.sl-bg .sk-concl-band { background: rgba(77, 44, 134, .06); }
+/* the kiosk recordings sit on white — blend so the white disappears into the page (the kiosk and its soft shadow stay) */
+.cl-video-band video { mix-blend-mode: multiply; filter: brightness(1.055); } /* their backdrop is #f2f2f2 → lift it to pure white so it vanishes */

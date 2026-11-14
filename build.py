@@ -746,7 +746,7 @@ def citylockers_page():
 
     body = f"""{nav(root, 'work')}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Indie+Flower&display=swap">
-<main class="sila cl">
+<main class="sila cl sl-bg">
 {rail}
 <div class="sl-main">
 <section class="sl-hero">
@@ -947,7 +947,7 @@ def sku_page():
             "Learned to design for growth from day one considering how the interface would handle thousands of products and multiple store connections without losing usability or performance."]
 
     body = f"""{nav(root, 'work')}
-<main class="sila sk">
+<main class="sila sk sl-bg">
 {rail}
 <div class="sl-main">
 <section class="sl-hero sk-hero">
