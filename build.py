@@ -234,7 +234,7 @@ def bring():
   </div>
 </section>"""
 
-def fireflies(n=22):
+def fireflies(n=15):
     """Warm glowing dots drifting slowly outside the window (between the view and the room layers)."""
     import random
     rnd = random.Random(7)  # same layout on every build
