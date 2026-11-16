@@ -1650,3 +1650,7 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .sila.cl .roadmap { --sl-accent: #4d2c86; }
 .cl .cl-tag { background: rgba(232,144,11,.12); }
 .cl .cl-chips span { background: #fdf3e3; }
+
+/* CityLockers: very light warm background instead of the lavender one, to sit with the orange */
+.sila.cl.sl-bg { background: linear-gradient(180deg, #fffdfa 0px, #fffaf4 900px, #fdf8f1 45%, #fffbf6 75%, #fefcf8 100%); }
+.sila.cl.sl-bg .cl-gray, .sila.cl.sl-bg .cl-video-band { background: rgba(250,244,236,.7); }
