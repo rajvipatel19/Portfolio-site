@@ -57,8 +57,12 @@ const SITE = {
   const nav = $(".nav");
   if (nav) {
     let last = scrollY;
+    const heroBox = $(".hero");
+    const onHero = () => nav.classList.toggle("on-hero", !!heroBox && scrollY < heroBox.offsetHeight - 90);
+    onHero();
     addEventListener("scroll", () => {
       const y = scrollY;
+      onHero();
       nav.classList.toggle("is-hidden", y > last && y > 240 && !nav.classList.contains("is-open"));
       last = y;
     }, { passive: true });
@@ -534,8 +538,13 @@ const SITE = {
     o.addEventListener("click", (e) => { if (e.target.closest(".tool")) return; e.stopPropagation(); +o.dataset.k === cur ? close() : open(+o.dataset.k); });
     o.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); o.click(); } });
   });
-  /* ---- drag stickers around the table; they drift home a few minutes after the last move ---- */
-  const HOME_AFTER = 3 * 60 * 1000;
+  /* ---- drag stickers around the table; they drift home 20 seconds after the last move, or when the page scrolls ---- */
+  const HOME_AFTER = 20 * 1000;
+  let scrollFrom = null;
+  addEventListener("scroll", () => {
+    if (scrollFrom === null || Math.abs(scrollY - scrollFrom) < 40) return; // a small nudge doesn't count
+    scrollFrom = null; clearTimeout(homeTimer); goHome();
+  }, { passive: true });
   let homeTimer = 0, topZ = 10, justDragged = false;
   const goHome = () => obs.forEach((o) => {
     if (!o.style.getPropertyValue("--dx")) return;
@@ -547,7 +556,7 @@ const SITE = {
     const sx = parseFloat(o.style.getPropertyValue("--dx")) || 0, sy = parseFloat(o.style.getPropertyValue("--dy")) || 0;
     const r = o.getBoundingClientRect(), cx = r.left + r.width / 2 - sx * cqw, cy = r.top + r.height / 2 - sy * cqw;
     o.classList.remove("homing"); o.classList.add("dragging"); o.style.zIndex = ++topZ;
-    clearTimeout(homeTimer);
+    clearTimeout(homeTimer); scrollFrom = null;
     return {
       move(x, y) {
         // keep the sticker's centre on the table
@@ -555,7 +564,7 @@ const SITE = {
         const ny = Math.min(g.bottom - 10, Math.max(g.top + 10, cy + sy * cqw + y - y0));
         o.style.setProperty("--dx", ((nx - cx) / cqw).toFixed(2)); o.style.setProperty("--dy", ((ny - cy) / cqw).toFixed(2));
       },
-      end() { o.classList.remove("dragging"); homeTimer = setTimeout(goHome, HOME_AFTER); },
+      end() { o.classList.remove("dragging"); scrollFrom = scrollY; homeTimer = setTimeout(() => { scrollFrom = null; goHome(); }, HOME_AFTER); },
     };
   };
   obs.forEach((o) => {

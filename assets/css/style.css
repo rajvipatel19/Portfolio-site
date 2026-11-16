@@ -2177,3 +2177,91 @@ main.home.sl-bg + .ft--scene { background: linear-gradient(180deg, #e6dcd1 0%, r
 .af, .cd-section, .bring { overflow-x: clip; }
 /* phones: the shorter iPod note fits inside the screen */
 @media (max-width: 600px) { .pod-note { width: auto; max-width: 46%; } }
+
+/* ================= Round of polish (Nov 2026) ================= */
+
+/* 1. over the hero picture the name in the nav is white, like the hero text */
+.nav.on-hero:not(.is-open) .logo-name { color: #fff; text-shadow: 0 1px 10px rgba(40,25,70,.45), 0 1px 2px rgba(40,25,70,.3); transition: color .3s; }
+.nav.on-hero:not(.is-open) .logo-last { color: rgba(255,255,255,.8); }
+
+/* 2. "Hi! I'm Rajvi 👋" uses the same font as the intro text */
+.hero-hi, main:has(> .hero) .hero-hi { font-family: var(--font-body); font-style: normal; font-weight: 600; letter-spacing: 0; font-size: 21px; }
+@media (max-width: 600px) { main:has(> .hero) .hero-hi { font-size: 19px; } }
+
+/* 3. the hero picture melts into the page: a long, eased fade at the bottom (no visible edge), growing as you scroll */
+.hero-media {
+  --fade: calc(16% + var(--hero-p) * 22%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - var(--fade)), rgba(0,0,0,.86) calc(100% - var(--fade) * .72), rgba(0,0,0,.6) calc(100% - var(--fade) * .48), rgba(0,0,0,.3) calc(100% - var(--fade) * .26), rgba(0,0,0,.08) calc(100% - var(--fade) * .08), transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - var(--fade)), rgba(0,0,0,.86) calc(100% - var(--fade) * .72), rgba(0,0,0,.6) calc(100% - var(--fade) * .48), rgba(0,0,0,.3) calc(100% - var(--fade) * .26), rgba(0,0,0,.08) calc(100% - var(--fade) * .08), transparent 100%);
+}
+
+/* 4. headings: never bigger than 56px */
+.hero h1 { font-size: clamp(36px, 4vw, 56px); }
+.section-head h2, .bring-head h2, .call h2, .lab-head h2 { font-size: clamp(32px, 4.2vw, 52px); }
+.cd-copy h2 { font-size: clamp(30px, 3.8vw, 48px); }
+.ticker-head h2 { font-size: clamp(30px, 3.8vw, 48px); }
+.footer-top h2 { font-size: clamp(40px, 5vw, 56px); }
+.ft--scene .ft-title { font-size: clamp(36px, 4.4vw, 56px); }
+.cs-hero h1, .about-copy h1 { font-size: clamp(38px, 4.6vw, 56px); }
+.sky-title { font-size: clamp(42px, 5vw, 56px); }
+.sk h2.sk-ghost, .sk .sk-forward h2.sk-ghost { font-size: 56px; }
+@media (max-width: 860px) { .sk h2.sk-ghost, .sk .sk-forward h2.sk-ghost { font-size: 44px; } }
+
+/* 5. card arrow: on hover the circle stays white (subtle), it just turns */
+.card:hover h3 .go { background: #fff; color: var(--ink-2); }
+
+/* 6. smaller case study headings: the home cards, and the section headings inside the case studies */
+.card h3 { font-size: 24px; }
+@media (max-width: 1100px) { .card h3 { font-size: 23px; } }
+@media (max-width: 600px) { .card h3 { font-size: 21px; } }
+.sk-hero h1 { font-size: 42px !important; }
+.sila .sk h2, .sk .sk-summary h2, .sk .sk-split h2, .sila .sk-intro h2, .sk h2.sk-h { font-size: 38px; }
+.sila .sk-concl h2 { font-size: 46px; }
+.cs-sec h2 { font-size: clamp(28px, 3vw, 38px); }
+@media (max-width: 600px) {
+  .sk-hero h1 { font-size: 32px !important; }
+  .sila .sk h2, .sk .sk-summary h2, .sk .sk-split h2, .sila .sk-intro h2, .sk h2.sk-h { font-size: 28px; }
+  .sila .sk-concl h2 { font-size: 34px; }
+}
+
+/* 8. "How I work with AI": each step's icon moves gently (the selected one a little livelier) */
+.ai-i { transform-box: fill-box; transform-origin: center; }
+.ai-search { animation: aiSearch 3.2s ease-in-out infinite; }
+@keyframes aiSearch { 0%,100% { transform: translate(0,0); } 25% { transform: translate(1.5px,-1px); } 50% { transform: translate(0,-2px); } 75% { transform: translate(-1.5px,-1px); } }
+.ai-doc .ai-ln { stroke-dasharray: 8; stroke-dashoffset: 8; animation: aiWrite 3s ease-in-out infinite; }
+.ai-doc .ai-ln2 { animation-delay: .5s; }
+@keyframes aiWrite { 0% { stroke-dashoffset: 8; } 35%,80% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -8; } }
+.ai-spark { animation: aiSpark 4s ease-in-out infinite; }
+@keyframes aiSpark { 0%,100% { transform: rotate(0) scale(1); } 50% { transform: rotate(45deg) scale(.86); } }
+.ai-image .ai-sun { transform-box: fill-box; transform-origin: center; animation: aiSun 3s ease-in-out infinite; }
+@keyframes aiSun { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-1.6px) scale(1.18); } }
+.ai-loop { animation: aiLoop 6s linear infinite; }
+@keyframes aiLoop { to { transform: rotate(360deg); } }
+.ai-rocket { animation: aiRocket 2.6s ease-in-out infinite; }
+@keyframes aiRocket { 0%,100% { transform: translate(0,0); } 50% { transform: translate(1.5px,-1.5px); } }
+.af-step[aria-selected="true"] .ai-i, .af-step:hover .ai-i, .af-step[aria-selected="true"] .ai-ln, .af-step[aria-selected="true"] .ai-sun { animation-duration: 1.8s; }
+.af-step[aria-selected="true"] .ai-loop { animation-duration: 3s; }
+@media (prefers-reduced-motion: reduce) { .ai-i, .ai-ln, .ai-sun { animation: none !important; stroke-dashoffset: 0 !important; } }
+
+/* 9. more room between the handwritten note and the "How I work with AI" heading */
+.af-head .hand { display: block; margin-bottom: 12px; }
+
+/* 10. visual journey: every image sits in a glass frame on a soft rose glow */
+.shot--img { padding: 10px; border-radius: 28px; border: 1px solid rgba(255,255,255,.7) !important;
+  background: linear-gradient(140deg, rgba(255,255,255,.55), rgba(255,236,240,.28) 50%, rgba(232,220,244,.4)) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.85), 0 24px 50px -30px rgba(70,40,80,.4); }
+.shot--img img { border-radius: 19px; box-shadow: 0 0 0 1px rgba(90,60,90,.06); }
+
+/* 11. iPod earphones: the cable comes out of the headphone jack on top, so it moves with the iPod */
+.pod-wire { position: absolute; left: -26.67%; bottom: 100%; width: 100%; height: auto; overflow: visible; pointer-events: none; transform: translateY(5.8%); z-index: 0; }
+.pod-wire .pw-cord { fill: none; stroke: #fff; stroke-width: 3.6; stroke-linecap: round; filter: drop-shadow(0 2px 2px rgba(40,30,80,.2)); }
+.pod-wire .pw-bud, .pod-wire .pw-stem, .pod-wire .pw-split, .pod-wire .pw-relief, .pod-wire .pw-plug { fill: #fbfbfe; stroke: #e2deee; stroke-width: 1.4; }
+.pod-wire .pw-bud { filter: drop-shadow(0 4px 5px rgba(40,30,80,.22)); }
+.pod-wire .pw-mesh { fill: #e9e6f2; }
+.pod-wire .pw-plug { fill: #eeecf5; stroke: #cfcadf; }
+.pod-wire .pw-ring { fill: #bdb7cf; }
+/* phones: the earphones fall to the right of the jack instead, so they stay on screen */
+@media (max-width: 600px) { .pod-wire { transform-origin: 46.67% 100%; transform: translateY(5.8%) scaleX(-1); } }
+/* stacked layout: room above the iPod for the earphones, so they never sit on the text */
+@media (max-width: 860px) { .pod-stage { padding-top: 120px; } }

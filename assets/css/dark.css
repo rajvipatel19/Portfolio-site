@@ -215,3 +215,9 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .cl-video-band video { mix-blend-mode: normal; filter: none; border-radius: 24px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.8); }
 /* the custom cursor dot: glow instead of darken */
 [data-theme="dark"] .cursor { mix-blend-mode: screen; }
+
+/* polish round: card arrow hover stays subtle; visual journey glass frames on the night page */
+[data-theme="dark"] .card:hover h3 .go { background: rgba(255,255,255,.18); color: #fff; }
+[data-theme="dark"] .shot--img { border-color: rgba(255,255,255,.14) !important;
+  background: linear-gradient(140deg, rgba(255,255,255,.1), rgba(255,255,255,.03) 50%, rgba(201,187,255,.08)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 24px 50px -30px rgba(0,0,0,.6); }

@@ -199,9 +199,9 @@ def scene(kind):
 # ---------------------------------------------------------------- what I bring to the table
 AI_ICONS = {
     "search": '<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>',
-    "doc": '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
+    "doc": '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path class="ai-ln" d="M9 13h6"/><path class="ai-ln ai-ln2" d="M9 17h4"/>',
     "spark": '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/>',
-    "image": '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/>',
+    "image": '<rect x="3" y="4" width="18" height="16" rx="2"/><circle class="ai-sun" cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/>',
     "loop": '<path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/>',
     "rocket": '<path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.9A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5"/>',
 }
@@ -210,7 +210,7 @@ AI_ICONS = {
 def ai_flow():
     """Home: an interactive flowchart of how I use AI, from research to delivery. Click a step to see its tools."""
     def icon(k):
-        return f'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{AI_ICONS[k]}</svg>'
+        return f'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g class="ai-i ai-{k}">{AI_ICONS[k]}</g></svg>'
     tabs, panels = [], []
     for i, f in enumerate(C.AI_FLOW):
         on = i == 0
@@ -328,16 +328,16 @@ def home():
   </div>
 </a>""")
     # visual journey: (file, width, height, alt). Each tile keeps its image's own shape.
-    V = {1: ("v1-light", 2000, 1442, "SILA transfer tracking screens"), 2: ("v2-light", 1964, 2000, "SILA home and send screens"),
-         3: ("v3-light", 2000, 1442, "SILA onboarding screens"), 4: ("v4-light", 1964, 2000, "Arabic chat app with money transfer"),
-         5: ("v5", 2000, 1622, "wildfern landing page hero"), 6: ("v6", 2000, 1532, "wildfern programme features"),
-         7: ("v7", 2000, 1532, "Novaflux robotics news homepage")}
+    V = {1: ("v1-rose.jpg", 2000, 1442, "SILA transfer tracking screens"), 2: ("v2-rose.jpg", 1964, 2000, "SILA home and send screens"),
+         3: ("v3-rose.jpg", 2000, 1442, "SILA onboarding screens"), 4: ("v4-rose.jpg", 1964, 2000, "Arabic chat app with money transfer"),
+         5: ("v5.webp", 2000, 1622, "wildfern landing page hero"), 6: ("v6.webp", 2000, 1532, "wildfern programme features"),
+         7: ("v7.webp", 2000, 1532, "Novaflux robotics news homepage")}
     def shot(n, copy=False):
         f, w, h, alt = V[n]
         # each tile is a button that opens the glass preview; the second (looping) copy is hidden from screen readers
         extra = ' tabindex="-1" aria-hidden="true"' if copy else f' aria-label="Preview: {alt}"'
         return (f'<button type="button" class="shot shot--img" data-vj="{f}"{extra} style="aspect-ratio:{w}/{h}">'
-                f'<img src="assets/media/visuals/{f}.webp" alt="{"" if copy else alt}" loading="lazy" decoding="async"></button>')
+                f'<img src="assets/media/visuals/{f}" alt="{"" if copy else alt}" loading="lazy" decoding="async"></button>')
     order = [1, 5, 2, 6, 3, 7, 4]  # one row
     shots = "".join(shot(n) for n in order)
     shots_copy = "".join(shot(n, True) for n in order)
@@ -406,13 +406,18 @@ def home():
       <div class="spotify-dock"></div>
     </div>
     <div class="cd-stage pod-stage" data-reveal style="--d:.15s">
-      <svg class="pod-cable" viewBox="0 0 400 300" aria-hidden="true">
-        <path d="M210 300 C 210 230, 170 210, 150 160 S 120 70, 70 52" />
-        <path d="M150 160 C 175 120, 230 110, 262 66" />
-        <ellipse cx="62" cy="46" rx="15" ry="19" transform="rotate(-28 62 46)" />
-        <ellipse cx="270" cy="58" rx="15" ry="19" transform="rotate(24 270 58)" />
-      </svg>
       <div class="pod">
+        <svg class="pod-wire" viewBox="-80 -132 300 140" aria-hidden="true">
+          <path class="pw-cord" d="M60 -27 C 60 -62, 34 -58, 16 -72 S 6 -88, 10 -92" />
+          <path class="pw-cord" d="M10 -92 C 0 -110, -26 -114, -46 -104" />
+          <path class="pw-cord" d="M10 -92 C 30 -116, 66 -124, 88 -112" />
+          <rect class="pw-split" x="5" y="-99" width="10" height="13" rx="4" transform="rotate(20 10 -92)" />
+          <g transform="rotate(-38 -56 -98)"><rect class="pw-stem" x="-60" y="-100" width="8" height="15" rx="3.5" /><ellipse class="pw-bud" cx="-56" cy="-112" rx="13" ry="15" /><ellipse class="pw-mesh" cx="-56" cy="-114" rx="7" ry="8" /></g>
+          <g transform="rotate(30 98 -106)"><rect class="pw-stem" x="94" y="-108" width="8" height="15" rx="3.5" /><ellipse class="pw-bud" cx="98" cy="-120" rx="13" ry="15" /><ellipse class="pw-mesh" cx="98" cy="-122" rx="7" ry="8" /></g>
+          <rect class="pw-relief" x="57" y="-30" width="6" height="14" rx="3" />
+          <rect class="pw-plug" x="54" y="-18" width="12" height="20" rx="2.5" />
+          <rect class="pw-ring" x="54" y="-6" width="12" height="2" />
+        </svg>
         <div class="pod-screen">
           <div class="pod-view pod-now">
             <div class="pod-bar"><span class="pod-state">❚❚</span><span>Now Playing</span><i class="pod-batt"></i></div>
