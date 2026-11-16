@@ -283,10 +283,15 @@ def home():
          3: ("v3-light", 2000, 1442, "SILA onboarding screens"), 4: ("v4-light", 1964, 2000, "Arabic chat app with money transfer"),
          5: ("v5", 2000, 1622, "wildfern landing page hero"), 6: ("v6", 2000, 1532, "wildfern programme features"),
          7: ("v7", 2000, 1532, "Novaflux robotics news homepage")}
-    def shot(n):
+    def shot(n, copy=False):
         f, w, h, alt = V[n]
-        return f'<div class="shot shot--img" style="aspect-ratio:{w}/{h}"><img src="assets/media/visuals/{f}.webp" alt="{alt}" loading="lazy" decoding="async"></div>'
-    shots = "".join(shot(n) for n in [1, 5, 2, 6, 3, 7, 4])  # one row
+        # each tile is a button that opens the glass preview; the second (looping) copy is hidden from screen readers
+        extra = ' tabindex="-1" aria-hidden="true"' if copy else f' aria-label="Preview: {alt}"'
+        return (f'<button type="button" class="shot shot--img" data-vj="{f}"{extra} style="aspect-ratio:{w}/{h}">'
+                f'<img src="assets/media/visuals/{f}.webp" alt="{"" if copy else alt}" loading="lazy" decoding="async"></button>')
+    order = [1, 5, 2, 6, 3, 7, 4]  # one row
+    shots = "".join(shot(n) for n in order)
+    shots_copy = "".join(shot(n, True) for n in order)
     sparkles = "".join(f'<span class="sparkle" style="left:{l}%;top:{t}%;animation-delay:{d}s;width:{s}px;height:{s}px">{SPARK}</span>'
                        for l, t, d, s in [(12, 22, 0, 10), (78, 18, 1.2, 14), (64, 40, 2.1, 8), (30, 58, .6, 12), (88, 62, 1.8, 10), (48, 14, 2.6, 9)])
     body = f"""{nav(root, 'work')}
@@ -331,8 +336,14 @@ def home():
 {bring()}
 
 <section class="ticker-section" aria-label="Visual journey">
-  <div class="ticker-head wrap" data-reveal><span class="hand">a sneak peek of my</span><h2>visual journey</h2></div>
-  <div class="ticker"><div class="ticker-track">{shots}{shots}</div></div>
+  <div class="ticker-head wrap" data-reveal><span class="hand">a sneak peek of my</span><h2>Visual journey</h2></div>
+  <div class="ticker"><div class="ticker-track">{shots}{shots_copy}</div></div>
+  <dialog class="vj-modal" aria-label="Image preview">
+    <button type="button" class="vj-close" aria-label="Close preview">&times;</button>
+    <button type="button" class="vj-nav vj-prev" aria-label="Previous image">&larr;</button>
+    <figure class="vj-frame"><img class="vj-img" src="" alt=""><figcaption class="vj-cap"></figcaption></figure>
+    <button type="button" class="vj-nav vj-next" aria-label="Next image">&rarr;</button>
+  </dialog>
 </section>
 
 <section class="cd-section">

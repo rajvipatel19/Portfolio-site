@@ -280,6 +280,38 @@ const SITE = {
       const w = $(".pod-wheel", stage); w.classList.remove("tick"); void w.offsetWidth; w.classList.add("tick"); }));
   }
 
+  /* ---------- Visual journey: click a tile to open it in the glass preview ---------- */
+  const vj = $(".vj-modal");
+  if (vj) {
+    const tiles = $$(".shot--img:not([aria-hidden])");
+    const img = $(".vj-img", vj), cap = $(".vj-cap", vj);
+    let at = 0, opener = null;
+    const show = (i) => {
+      at = (i + tiles.length) % tiles.length;
+      const src = $("img", tiles[at]);
+      img.src = src.currentSrc || src.src; img.alt = src.alt; cap.textContent = src.alt;
+    };
+    $$(".shot--img").forEach((t) => t.addEventListener("click", () => {
+      opener = t;
+      show(tiles.findIndex((x) => x.dataset.vj === t.dataset.vj));
+      vj.showModal(); document.documentElement.classList.add("modal-open");
+    }));
+    $(".vj-prev", vj).addEventListener("click", () => show(at - 1));
+    $(".vj-next", vj).addEventListener("click", () => show(at + 1));
+    $(".vj-close", vj).addEventListener("click", () => vj.close());
+    vj.addEventListener("click", (e) => { if (e.target === vj) vj.close(); }); // click outside the glass
+    vj.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") show(at - 1);
+      if (e.key === "ArrowRight") show(at + 1);
+    });
+    vj.addEventListener("close", () => {
+      document.documentElement.classList.remove("modal-open");
+      // the looping copy can't take focus, so return focus to the matching real tile
+      const back = opener && opener.hasAttribute("aria-hidden") ? tiles.find((x) => x.dataset.vj === opener.dataset.vj) : opener;
+      if (back) back.focus({ preventScroll: true });
+    });
+  }
+
   /* ---------- Book a call: any "Book a call" button opens the Cal.com calendar in a pop-up ---------- */
   const calModal = $(".cal-modal");
   if (calModal && SITE.calLink) {
