@@ -1,0 +1,293 @@
+<!doctype html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SILA — Wallet</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700&family=Space+Mono:wght@400;700&display=swap');
+  :root{ --paper:#F4F0FB; --muted:#C9B8EA; }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:transparent;
+    font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    display:flex;align-items:flex-start;justify-content:center;min-height:100%;padding:22px 16px 40px;overflow:auto}
+
+  /* ---------------- iPhone ---------------- */
+  .phone{position:relative;width:384px;height:796px;border-radius:60px;padding:13px;transform:scale(.8);transform-origin:top center;
+    background:linear-gradient(145deg,#43434a 0%,#26262c 42%,#1b1b20 100%);
+    box-shadow:0 2px 3px rgba(255,255,255,.18) inset,0 0 0 1px rgba(255,255,255,.06) inset,
+      0 40px 80px -30px rgba(30,20,50,.55),0 12px 30px -18px rgba(0,0,0,.5)}
+  .phone::after{content:"";position:absolute;inset:5px;border-radius:56px;border:1px solid rgba(0,0,0,.4);pointer-events:none}
+  .btn{position:absolute;background:linear-gradient(180deg,#3a3a41,#222227);border-radius:3px;box-shadow:0 1px 1px rgba(0,0,0,.4)}
+  .btn.action{left:-3px;top:150px;width:4px;height:34px}
+  .btn.vup{left:-3px;top:210px;width:4px;height:56px}
+  .btn.vdn{left:-3px;top:280px;width:4px;height:56px}
+  .btn.power{right:-3px;top:230px;width:4px;height:92px}
+  .btn.cam{right:-3px;top:150px;width:4px;height:44px}
+
+  .screen{position:relative;width:358px;height:770px;border-radius:48px;overflow:hidden;
+    background:radial-gradient(120% 90% at 50% 30%,#28262F 0%,#191622 55%,#110E19 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+  .island{position:absolute;top:13px;left:50%;transform:translateX(-50%);width:112px;height:33px;
+    background:#000;border-radius:20px;z-index:20}
+  .island::after{content:"";position:absolute;right:14px;top:50%;transform:translateY(-50%);
+    width:9px;height:9px;border-radius:50%;background:#0b0b12;box-shadow:0 0 0 1px rgba(120,120,160,.25)}
+  .statusbar{position:absolute;top:20px;left:0;right:0;padding:0 30px;display:flex;justify-content:space-between;
+    color:#EEE9F6;font-size:13px;font-weight:600;z-index:19;letter-spacing:.3px}
+  .statusbar .r{display:flex;align-items:center;gap:6px}
+  .bat{width:22px;height:11px;border:1px solid rgba(238,233,246,.8);border-radius:3px;position:relative;display:inline-block}
+  .bat::before{content:"";position:absolute;left:1px;top:1px;bottom:1px;width:70%;background:#EEE9F6;border-radius:1px}
+  .bat::after{content:"";position:absolute;right:-3px;top:3px;height:5px;width:2px;background:rgba(238,233,246,.8);border-radius:0 1px 1px 0}
+
+  /* faint sparkle watermark behind the wallet */
+  .watermark{position:absolute;top:200px;left:50%;transform:translateX(-50%);width:340px;height:340px;z-index:0;
+    display:flex;align-items:center;justify-content:center}
+  .watermark .glow{position:absolute;width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(closest-side,rgba(167,139,250,.28),transparent 70%);filter:blur(6px)}
+  .watermark svg{position:relative;width:150px;height:150px;opacity:.5}
+
+  .close{position:absolute;top:52px;right:20px;z-index:15;width:40px;height:40px;cursor:pointer;
+    border:none;background:none;padding:0;display:grid;place-items:center}
+  .close svg{width:38px;height:38px}
+
+  /* ---------------- wallet ---------------- */
+  .frame{position:relative;width:340px;height:372px;margin-top:-70px;perspective:1200px;perspective-origin:50% 42%;z-index:5}
+  .pocket-back{position:absolute;left:10px;bottom:0;width:320px;height:238px;border-radius:26px;
+    background:linear-gradient(180deg,#4A2A7E 0%,#37205F 100%);
+    box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 26px 48px -22px rgba(20,12,40,.7)}
+  .pocket-back::before{content:"";position:absolute;left:22px;right:22px;top:142px;height:12px;border-radius:12px;
+    background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,0))}
+
+  .card{position:absolute;left:22px;bottom:36px;width:296px;height:187px;border-radius:17px;overflow:hidden;
+    cursor:grab;touch-action:none;
+    transform:translateY(var(--ty,0px)) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+    transform-style:preserve-3d;transition:transform .5s cubic-bezier(.22,.8,.24,1);
+    background:linear-gradient(150deg,#9E7BE6 0%,#7A54C4 48%,#5E3FAA 100%);
+    box-shadow:0 1px 0 rgba(255,255,255,.28) inset,0 16px 30px -14px rgba(30,16,60,.7);
+    color:var(--paper);user-select:none;z-index:2}
+  .card:active{cursor:grabbing}
+
+  .art{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .art svg{position:absolute;inset:0;width:100%;height:100%}
+  .overlay{position:absolute;inset:0;mix-blend-mode:soft-light;
+    background:radial-gradient(90% 70% at 16% 6%,rgba(255,255,255,.16),transparent 45%),
+      radial-gradient(80% 80% at 92% 22%,rgba(214,184,255,.2),transparent 55%),
+      linear-gradient(150deg,rgba(120,80,200,.14),rgba(70,40,130,.26))}
+  .sheen{position:absolute;inset:0;mix-blend-mode:screen;filter:saturate(.9);
+    background:linear-gradient(115deg,
+      rgba(235,90,120,0) 0%,rgba(235,90,120,.62) 14%,rgba(238,168,90,.56) 30%,
+      rgba(232,222,110,.56) 44%,rgba(120,210,150,.56) 58%,rgba(110,175,232,.58) 74%,
+      rgba(175,120,225,.6) 88%,rgba(235,90,120,0) 100%);
+    background-size:210% 210%;background-position:var(--gx,50%) var(--gy,50%);
+    opacity:calc(.04 + var(--glow,0) * .46);transition:opacity .3s ease}
+  .idle{position:absolute;inset:0;mix-blend-mode:screen;filter:saturate(.9);pointer-events:none;
+    background:linear-gradient(115deg,
+      rgba(235,90,120,0) 0%,rgba(235,90,120,.62) 14%,rgba(238,168,90,.56) 30%,
+      rgba(232,222,110,.56) 44%,rgba(120,210,150,.56) 58%,rgba(110,175,232,.58) 74%,
+      rgba(175,120,225,.6) 88%,rgba(235,90,120,0) 100%);
+    background-size:230% 230%;opacity:.09;animation:shimmer 7s ease-in-out infinite}
+  @keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  .specular{position:absolute;inset:0;mix-blend-mode:screen;
+    background:radial-gradient(170px 170px at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.32),rgba(255,255,255,0) 60%);
+    opacity:calc(var(--glow,0) * .7);transition:opacity .25s ease}
+
+  .card-inner{position:relative;z-index:1;height:100%;padding:20px 22px;display:flex;flex-direction:column;justify-content:space-between}
+  .top{display:flex;align-items:center;justify-content:space-between}
+  .mark{display:flex;align-items:center}
+  .mark svg{width:30px;height:30px;filter:drop-shadow(0 1px 2px rgba(30,15,60,.35))}
+  .visa{font-style:italic;font-weight:700;font-size:19px;letter-spacing:.5px;color:#fff;text-shadow:0 1px 2px rgba(40,20,80,.35)}
+  .number{font-family:'Space Mono',monospace;font-weight:700;font-size:15px;letter-spacing:1.5px;
+    display:flex;justify-content:space-between;filter:blur(6px);transition:filter .45s ease}
+  .number span:last-child{letter-spacing:0}
+  .card.revealed .number{filter:blur(0)}
+  .foot{display:flex;align-items:flex-end;gap:24px}
+  .foot .label{font-size:8px;color:var(--muted);letter-spacing:.5px;margin-bottom:3px;font-weight:500}
+  .foot .value{font-family:'Space Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.5px}
+  .foot .value.masked{filter:blur(5px);transition:filter .45s ease}
+  .card.revealed .foot .value.masked{filter:blur(0)}
+
+  .frost{position:absolute;inset:0;z-index:3;border-radius:inherit;
+    background:radial-gradient(120% 120% at 30% 20%,rgba(200,228,255,.22),transparent 55%),rgba(190,214,238,.16);
+    backdrop-filter:blur(7px) saturate(.7);-webkit-backdrop-filter:blur(7px) saturate(.7);
+    border:1px solid rgba(206,228,255,.3);display:flex;align-items:center;justify-content:center;
+    opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;pointer-events:none}
+  .card.frozen .frost{opacity:1;visibility:visible}
+  .frost b{font-size:11px;letter-spacing:2px;color:#EAF4FF;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,.3)}
+
+  .pocket-front{position:absolute;left:10px;bottom:0;width:320px;z-index:4;pointer-events:none}
+  .hint{position:absolute;left:0;right:0;bottom:92px;z-index:6;text-align:center;color:rgba(255,255,255,.72);
+    font-size:11px;letter-spacing:.6px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:3px;
+    pointer-events:none;transition:opacity .3s ease}
+  .hint svg{width:15px;height:15px;opacity:.85;animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  .frame.out .hint{opacity:0}
+
+  .controls{display:flex;gap:14px;justify-content:center;margin-top:22px;z-index:5;
+    opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s ease;pointer-events:none}
+  .frame.out ~ .controls{opacity:1;transform:none;pointer-events:auto}
+  .icon-btn{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+    background:rgba(255,255,255,.9);border:1.5px solid rgba(255,255,255,.5);color:#5E3FAA;cursor:pointer;
+    transition:background .2s,color .2s,transform .08s}
+  .icon-btn:active{transform:translateY(1px)}
+  .icon-btn:focus-visible{outline:2px solid #C7B4E6;outline-offset:2px}
+  .icon-btn svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .icon-btn[aria-pressed="true"]{background:#6B4C9E;border-color:#6B4C9E;color:#fff}
+  .icon-btn.freeze[aria-pressed="true"]{background:#8FCBEC;border-color:#8FCBEC;color:#0C3145}
+
+  .home{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);width:120px;height:5px;border-radius:3px;background:rgba(240,236,247,.55);z-index:19}
+
+  @media (prefers-reduced-motion: reduce){.card{transition:transform .2s ease}.hint svg{animation:none}.idle{animation:none}}
+  @media (max-width:440px){.phone{transform:scale(.82);transform-origin:top center}}
+  /* inside the portfolio's AI Lab frame on phones: a little smaller so the whole phone fits */
+  @media (max-width:340px){body{padding-top:14px}.phone{transform:scale(.7)}}
+</style>
+
+<div class="phone">
+  <span class="btn action"></span><span class="btn vup"></span><span class="btn vdn"></span>
+  <span class="btn cam"></span><span class="btn power"></span>
+
+  <div class="screen">
+    <div class="island"></div>
+    <div class="statusbar"><span>9:41</span><span class="r">5G <span class="bat"></span></span></div>
+
+    <div class="watermark" aria-hidden="true">
+      <div class="glow"></div>
+      <svg viewBox="0 0 28 28" fill="none">
+        <path d="M14 3C15.6 9.6 18.4 12.4 25 14C18.4 15.6 15.6 18.4 14 25C12.4 18.4 9.6 15.6 3 14C9.6 12.4 12.4 9.6 14 3Z" fill="url(#wm)"/>
+        <defs><linearGradient id="wm" x1="3" y1="3" x2="25" y2="25" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#DDD6FE"/><stop offset="1" stop-color="#A78BFA"/></linearGradient></defs>
+      </svg>
+    </div>
+
+    <button class="close" aria-label="Close">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <rect width="40" height="40" rx="20" fill="#A1A1AA" fill-opacity="0.1"/>
+        <path d="M15.7071 14.2929C15.3166 13.9024 14.6834 13.9024 14.2929 14.2929C13.9024 14.6834 13.9024 15.3166 14.2929 15.7071L18.5858 20L14.2929 24.2929C13.9024 24.6834 13.9024 25.3166 14.2929 25.7071C14.6834 26.0976 15.3166 26.0976 15.7071 25.7071L20 21.4142L24.2929 25.7071C24.6834 26.0976 25.3166 26.0976 25.7071 25.7071C26.0976 25.3166 26.0976 24.6834 25.7071 24.2929L21.4142 20L25.7071 15.7071C26.0976 15.3166 26.0976 14.6834 25.7071 14.2929C25.3166 13.9024 24.6834 13.9024 24.2929 14.2929L20 18.5858L15.7071 14.2929Z" fill="white"/>
+      </svg>
+    </button>
+
+    <div class="frame" id="frame">
+      <div class="pocket-back"></div>
+
+      <div class="card" id="card" role="button" tabindex="0" aria-label="SILA card — drag up to remove from wallet">
+        <div class="art">
+          <svg class="engrave" id="engrave" viewBox="0 0 296 187" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <div class="overlay"></div><div class="idle"></div><div class="sheen"></div><div class="specular"></div>
+        </div>
+        <div class="card-inner">
+          <div class="top">
+            <span class="mark">
+              <svg width="30" height="30" viewBox="0 0 28 28" fill="none">
+                <path d="M14 1.92285C14.9867 5.25722 16.3109 7.79141 18.2598 9.74023C20.2084 11.6889 22.7423 13.0134 26.0762 14C22.7423 14.9866 20.2084 16.3111 18.2598 18.2598C16.3111 20.2084 14.9866 22.7423 14 26.0762C13.0134 22.7423 11.6889 20.2084 9.74023 18.2598C7.79141 16.3109 5.25722 14.9867 1.92285 14C5.25722 13.0133 7.79141 11.6891 9.74023 9.74023C11.6891 7.79141 13.0133 5.25722 14 1.92285Z" stroke="rgba(255,255,255,.6)"/>
+                <path d="M14 3C15.6 9.6 18.4 12.4 25 14C18.4 15.6 15.6 18.4 14 25C12.4 18.4 9.6 15.6 3 14C9.6 12.4 12.4 9.6 14 3Z" fill="#ffffff"/>
+                <defs><linearGradient id="lg1" x1="3" y1="3" x2="25" y2="25" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#DDD6FE"/><stop offset="1" stop-color="#A78BFA"/></linearGradient></defs>
+              </svg>
+            </span>
+            <span class="visa">VISA</span>
+          </div>
+          <div class="number"><span>4917</span><span>6032</span><span>8845</span><span>2210</span></div>
+          <div class="foot">
+            <div><div class="label">Card holder</div><div class="value">RAJVI PATEL</div></div>
+            <div><div class="label">Valid thru</div><div class="value masked">08/29</div></div>
+            <div><div class="label">CVV</div><div class="value masked">341</div></div>
+          </div>
+        </div>
+        <div class="frost" aria-hidden="true"><b>&#10052; FROZEN</b></div>
+      </div>
+
+      <div class="hint" id="hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+        drag card from here
+      </div>
+
+      <svg class="pocket-front" viewBox="0 0 320 138" aria-hidden="true">
+        <defs><linearGradient id="leather" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6A3FA6"/><stop offset="1" stop-color="#472879"/></linearGradient></defs>
+        <path d="M20,28 C82,28 82,54 160,54 C238,54 238,28 300,28 Q320,28 320,48 L320,120 Q320,138 302,138 L18,138 Q0,138 0,120 L0,48 Q0,28 20,28 Z" fill="url(#leather)"/>
+        <path d="M20,28 C82,28 82,54 160,54 C238,54 238,28 300,28 Q320,28 320,48 L320,120 Q320,138 302,138 L18,138 Q0,138 0,120 L0,48 Q0,28 20,28 Z"
+          fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1" stroke-dasharray="3 4"
+          transform="translate(160 83) scale(.955) translate(-160 -83)"/>
+      </svg>
+    </div>
+
+    <div class="controls" id="controls">
+      <button class="icon-btn reveal" id="reveal" aria-pressed="false" aria-label="Reveal card details">
+        <svg viewBox="0 0 24 24" id="eye"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+      <button class="icon-btn freeze" id="freeze" aria-pressed="false" aria-label="Freeze card">
+        <svg viewBox="0 0 24 24"><path d="M12 2v20M4 6l16 12M20 6L4 18"/><path d="M12 6l2.5-2M12 6L9.5 4M12 18l2.5 2M12 18l-2.5 2M6.5 9L4 8.7M6.5 9l-.4-2.6M17.5 15l2.5.3M17.5 15l.4 2.6"/></svg>
+      </button>
+    </div>
+
+    <div class="home"></div>
+  </div>
+</div>
+
+<script>
+  const NS='http://www.w3.org/2000/svg';
+  // ---- engraved SILA sparkle field ----
+  (function(){
+    const eng=document.getElementById('engrave');
+    const STAR="M14 3C15.6 9.6 18.4 12.4 25 14C18.4 15.6 15.6 18.4 14 25C12.4 18.4 9.6 15.6 3 14C9.6 12.4 12.4 9.6 14 3Z";
+    function star(cx,cy,s,dA,lA){
+      const g=(dy,color,a)=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',STAR);
+        p.setAttribute('transform','translate('+cx+' '+(cy+dy)+') scale('+s+') translate(-14 -14)');
+        p.setAttribute('fill','none');p.setAttribute('stroke',color);p.setAttribute('stroke-opacity',a);
+        p.setAttribute('stroke-width',(0.9/s).toFixed(3));eng.appendChild(p);};
+      g(0.7,'#180634',dA);g(-0.4,'#ffffff',lA);
+    }
+    star(226,96,4.9,.2,.14);   // single large engraved sparkle on the right
+  })();
+
+  const frame=document.getElementById('frame'),card=document.getElementById('card'),
+    reveal=document.getElementById('reveal'),freeze=document.getElementById('freeze'),eye=document.getElementById('eye');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const EYE_ON='<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="3" x2="21" y2="21"/>';
+  const EYE_OFF='<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>';
+  const EJECT=-146,THRESH=-68,MAX=9;
+  let ejected=false,dragging=false,startY=0,startTy=0,ty=0,moved=0;
+  const set=(k,v)=>card.style.setProperty(k,v);
+
+  // ---- gyroscope: on phones, tilting the device drives the sheen (no hover needed) ----
+  let gyroOn=false;
+  function onTilt(e){
+    if(!ejected||dragging||reduce)return;
+    const gx=Math.max(-1,Math.min(1,(e.gamma||0)/28));
+    const gy=Math.max(-1,Math.min(1,((e.beta||0)-32)/28));
+    set('--ry',(gx*MAX).toFixed(2)+'deg');set('--rx',(-gy*MAX).toFixed(2)+'deg');
+    set('--gx',((gx*.5+.5)*100).toFixed(1)+'%');set('--gy',((gy*.5+.5)*100).toFixed(1)+'%');set('--glow','1');
+  }
+  function enableGyro(){
+    if(gyroOn||reduce)return;const DOE=window.DeviceOrientationEvent;
+    if(DOE&&typeof DOE.requestPermission==='function'){
+      DOE.requestPermission().then(s=>{if(s==='granted'){addEventListener('deviceorientation',onTilt);gyroOn=true;}}).catch(()=>{});
+    }else if(DOE){addEventListener('deviceorientation',onTilt);gyroOn=true;}
+  }
+
+  card.addEventListener('pointerdown',e=>{dragging=true;moved=0;startY=e.clientY;startTy=ty;enableGyro();
+    card.setPointerCapture(e.pointerId);card.style.transition='none';});
+  card.addEventListener('pointermove',e=>{
+    if(dragging){const dy=e.clientY-startY;moved=Math.max(moved,Math.abs(dy));
+      ty=Math.min(0,Math.max(EJECT,startTy+dy));set('--ty',ty+'px');
+      const r=card.getBoundingClientRect();
+      set('--gx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+      set('--gy',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');set('--glow','1');}
+    else if(ejected&&!reduce){const r=card.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+      set('--ry',((px-.5)*MAX*2).toFixed(2)+'deg');set('--rx',(-(py-.5)*MAX*2).toFixed(2)+'deg');
+      set('--gx',(px*100).toFixed(1)+'%');set('--gy',(py*100).toFixed(1)+'%');set('--glow','1');}
+  });
+  function endDrag(){if(!dragging)return;dragging=false;card.style.transition='';
+    if(moved<6){ejected=!ejected;}else{ejected=ty<THRESH;}settle();}
+  card.addEventListener('pointerup',endDrag);card.addEventListener('pointercancel',endDrag);
+  card.addEventListener('pointerleave',()=>{set('--rx','0deg');set('--ry','0deg');set('--glow','0');});
+  card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();ejected=!ejected;settle();}});
+  function settle(){ty=ejected?EJECT:0;set('--ty',ty+'px');frame.classList.toggle('out',ejected);
+    if(!ejected){card.classList.remove('revealed','frozen');reveal.setAttribute('aria-pressed','false');
+      freeze.setAttribute('aria-pressed','false');eye.innerHTML=EYE_OFF;
+      set('--rx','0deg');set('--ry','0deg');set('--glow','0');}}
+  reveal.addEventListener('click',()=>{if(card.classList.contains('frozen'))return;
+    const on=card.classList.toggle('revealed');reveal.setAttribute('aria-pressed',on);eye.innerHTML=on?EYE_ON:EYE_OFF;});
+  freeze.addEventListener('click',()=>{const on=card.classList.toggle('frozen');freeze.setAttribute('aria-pressed',on);
+    if(on){card.classList.remove('revealed');reveal.setAttribute('aria-pressed','false');eye.innerHTML=EYE_OFF;}});
+</script>

@@ -569,11 +569,40 @@ def ai_net():
         nodes.append(f'<i class="nd{" nd--big" if big else ""}" style="{pos};--dl:{-(k * 0.7):.1f}s"></i>')
         if big:
             side, label = NET_TAGS[k]
-            nodes.append(f'<span class="nd-tag nd-tag--{side}" style="{pos};--dl:{-(k * 0.9):.1f}s">{label}</span>')
+            edge = " nd-tag--l" if x < 25 else " nd-tag--r" if x > 75 else ""  # near an edge: grow inwards so it never runs off
+            nodes.append(f'<span class="nd-tag nd-tag--{side}{edge}" style="{pos};--dl:{-(k * 0.9):.1f}s">{label}</span>')
     return f"""<div class="net" data-reveal style="--d:.3s" aria-hidden="true">
       <svg viewBox="0 0 100 90">{"".join(lines)}{"".join(pulses)}</svg>
       {"".join(nodes)}
     </div>"""
+
+
+def lab_experiments():
+    out = []
+    for e in C.LAB_EXPERIMENTS:
+        steps = "".join(f"<li>{x}</li>" for x in e["steps"])
+        tags = "".join(f'<span class="sky-chip">{x}</span>' for x in e["tags"])
+        href, label = e["link"]
+        out.append(f"""<article class="lab-exp">
+    <div class="lab-copy" data-reveal>
+      <span class="lab-num hand">experiment {e['num']}</span>
+      <h2>{e['title']}</h2>
+      <p>{e['text']}</p>
+      <p class="lab-try">Try it</p>
+      <ol class="lab-steps">{steps}</ol>
+      <div class="lab-tags">{tags}</div>
+      <a class="sky-btn" href="{href}">{label} {ARROW}</a>
+    </div>
+    <div class="lab-stage" data-reveal style="--d:.15s">
+      <iframe src="{e['src']}" title="{e['title']}: interactive prototype" loading="lazy" scrolling="no" allow="accelerometer; gyroscope"></iframe>
+    </div>
+  </article>""")
+    return f"""<section class="lab" id="experiments">
+  <div class="wrap">
+    <div class="lab-head" data-reveal><span class="hand">the first one's in ✿</span><h2>Experiments</h2></div>
+    {"".join(out)}
+  </div>
+</section>"""
 
 
 def ai_lab():
@@ -596,6 +625,7 @@ def ai_lab():
     {ai_net()}
   </div>
 </section>
+{lab_experiments()}
 </main>
 {footer(root)}"""
     return head("AI Lab · Rajvi Patel", "AI experiments by Rajvi Patel: prompt play, tiny tools and prototypes. Coming soon.", root) + body

@@ -14,6 +14,14 @@ ABOUT_BIO = [
 ]
 ABOUT_TYPING = ["a product designer", "an ex-dentist", "a coffee person", "a firefly catcher"]  # the typing line on About
 AI_LAB_TEXT = "A corner for my experiments with AI: prompt play, tiny tools and prototypes I build with Claude, plus notes on designing AI products people can trust. The lights are on, the furniture isn't in yet."
+# AI Lab experiments (shown under the AI Lab sky, in this order). "src" is the interactive file in assets/lab/.
+LAB_EXPERIMENTS = [
+    {"num": "01", "src": "assets/lab/sila-wallet.html", "title": "A card you pull out of the wallet",
+     "text": "A playful card screen for SILA, the remittance app from my case study. I built it with Claude to feel how a card could live inside an app: tucked in a wallet, revealed only when you ask, and frozen in one tap.",
+     "steps": ["Drag the card up out of the wallet", "Tap the eye to show the card details", "Tap the snowflake to freeze it", "On a phone, tilt it to see the shine move"],
+     "tags": ["Built with Claude", "Interaction", "Fintech"],
+     "link": ("work/sila.html", "Read the SILA case study")},
+]
 ABOUT_FACTS = ["📍 Dubai", "4+ years in product design", "🦷 BDS, ex-dentist", "Fintech · Health-tech · AI", "☕ powered by coffee"]
 
 # Home page cards (order = order on the page). Add  "video": "assets/media/sila.mp4"  once you have a video.
