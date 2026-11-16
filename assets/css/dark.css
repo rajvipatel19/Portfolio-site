@@ -321,3 +321,15 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .cl-vclip { display: block; overflow: hidden; border-radius: 4cqi; }
 [data-theme="dark"] .cl-vframe .cl-vclip video { width: 111.5%; max-width: none; margin: -5.1% -7.4% -6.9% -4.1%; }
 [data-theme="dark"] .cl-vframe--manage .cl-vclip video { margin-top: -3.5%; margin-bottom: -8.5%; }
+/* case study section bar (tablets and phones): dark smoky glass instead of a white pill */
+@media (max-width: 1199px) {
+  [data-theme="dark"] .sl-side { background: rgba(36,34,62,.82); border: 1px solid rgba(255,255,255,.14);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 30px -16px rgba(12,10,32,.7);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4); }
+  [data-theme="dark"] .sl-side li:not(:last-child)::after { border-top-color: rgba(255,255,255,.22); }
+  [data-theme="dark"] .sila .sl-side li.done::after { border-top-color: var(--sl-accent); }
+  [data-theme="dark"] .sila .sl-side .node { border-color: rgba(255,255,255,.35); background: transparent; }
+  [data-theme="dark"] .sila .sl-side li.done .node, [data-theme="dark"] .sila .sl-side li.active .node { border-color: var(--sl-accent); background: var(--sl-accent); }
+  [data-theme="dark"] .sila .sl-side li.active .node { box-shadow: 0 0 0 4px rgba(199,186,255,.18); }
+  [data-theme="dark"] .sila .sl-side li.active a { color: #f6f3fb; background: rgba(255,255,255,.12); }
+}
