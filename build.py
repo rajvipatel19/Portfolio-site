@@ -62,13 +62,11 @@ def nav(root, active):
 
 
 def footer(root):
-    """Footer scene: the hero picture builds back up as you reach the end (room first, then the view), with the typing 'Let's …', Resume + LinkedIn and the copyright line on top."""
+    """Footer scene: the meadow video settles into view as you reach the end of the page, with the typing 'Let's …', Resume + LinkedIn and the copyright line on top."""
     heart = '<svg class="ft-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.1C.9 8.6 3 5 6.5 5c2 0 3.5 1.1 5.5 3.2C14 6.1 15.5 5 17.5 5 21 5 23.1 8.6 21.6 11.9 19.5 16.4 12 21 12 21Z" fill="currentColor"/></svg>'
     return f"""<footer class="ft ft--scene" id="contact">
   <div class="ft-media" aria-hidden="true">
-    <img class="ft-view" src="{root}assets/media/hero-view.jpg" alt="" loading="lazy" decoding="async">
-    {fireflies()}
-    <div class="ft-room"></div>
+    <video class="ft-video" src="{root}assets/media/footer-meadow.mp4" muted loop playsinline preload="none" data-autoplay></video>
   </div>
   <div class="ft-in">
     <div class="ft-top">
