@@ -1876,3 +1876,7 @@ html.modal-open { overflow: hidden; }
 /* footer: recolour only the cyan sky (behind the text) to a soft lavender-peach; clouds, woman and meadow keep their colours */
 .ft-media::before { mix-blend-mode: color;
   background: linear-gradient(180deg, rgba(206,190,228,.9) 0%, rgba(226,200,214,.82) 30%, rgba(240,206,186,.6) 50%, rgba(240,206,186,0) 66%); }
+
+/* footer text sits a little lower */
+.ft--scene .ft-in { padding-top: clamp(130px, 20vh, 190px); }
+@media (max-width: 600px) { .ft--scene .ft-in { padding-top: clamp(110px, 16vh, 150px); } }
