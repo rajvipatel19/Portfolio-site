@@ -8,6 +8,8 @@ from html import escape
 import content as C
 
 ROOT = Path(__file__).parent
+import hashlib
+ASSET_V = hashlib.md5((ROOT / "assets/css/style.css").read_bytes() + (ROOT / "assets/js/main.js").read_bytes()).hexdigest()[:8]
 
 ARROW = '<svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 ARROW_UR = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -30,7 +32,7 @@ def head(title, desc, root):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css">
+<link rel="stylesheet" href="{root}assets/css/style.css?v={ASSET_V}">
 </head>
 <body>
 <div class="page-fade" aria-hidden="true"></div>
@@ -85,7 +87,7 @@ def footer(root):
     </div>
   </div>
 </footer>
-<script src="{root}assets/js/main.js"></script>
+<script src="{root}assets/js/main.js?v={ASSET_V}"></script>
 </body>
 </html>
 """
@@ -334,7 +336,6 @@ def home():
       <span class="hand">before you scroll on…</span>
       <h2>Here's a song for you while you see what I do</h2>
       <p>Press play on the wheel. It's on my repeat list while I design.</p>
-      <div class="now-playing glass"><span class="eq"><i></i><i></i><i></i><i></i></span><span>Press play on the wheel</span></div>
       <div class="spotify-dock"></div>
     </div>
     <div class="cd-stage pod-stage" data-reveal style="--d:.15s">
@@ -368,7 +369,13 @@ def home():
           <button type="button" class="pod-center cd" aria-label="Play or pause the song"></button>
         </div>
       </div>
-      <div class="cd-hint">← press play!</div>
+      <div class="pod-note">
+        <svg class="pod-arrow" viewBox="0 0 120 90" aria-hidden="true">
+          <path d="M112 78 C 92 80, 62 70, 50 52 C 40 37, 40 22, 30 12" />
+          <path d="M20 22 L 30 11 L 40 20" />
+        </svg>
+        <span>back to the times when I had the OG iPod ♫</span>
+      </div>
     </div>
   </div>
 </section>
