@@ -1601,10 +1601,10 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   background: url("../media/hero-room.jpg") var(--hpos) / cover no-repeat;
   -webkit-mask: url("../media/hero-room-mask.png") var(--hpos) / cover no-repeat;
   mask: url("../media/hero-room-mask.png") var(--hpos) / cover no-repeat;
-  /* phase 2 (second part of the scroll): the room zooms in from the bottom, lifts and fades last */
+  /* phase 2 (second part of the scroll): the room zooms in from the bottom and fades last */
   --r: clamp(0, calc((var(--hs) - .3) / .7), 1);
   transform-origin: 50% 100%;
-  transform: translate3d(0, calc(var(--r) * -40%), 0) scale(calc(1 + var(--r) * .15));
+  transform: scale(calc(1 + var(--r) * .2)); /* bottom edge stays pinned, so no strip opens up below the floor */
   opacity: calc(1 - var(--r));
   will-change: transform, opacity; }
 /* phase 1 (first part of the scroll): the mountain view zooms gently and fades away first, leaving a soft glow in the window */
