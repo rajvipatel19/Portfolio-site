@@ -2159,19 +2159,20 @@ main:has(> .hero) .hero-hi { font-size: 20px; } /* same as the notes */
 @media (prefers-reduced-motion: reduce) { .af-line i { animation: none; display: none; } .af-panel:not([hidden]) { animation: none; } }
 
 /* home page: a soft, page-long gradient starting under the hero
-   Rose haze: starts in the hero's dusty sunset pink so the hero melts into the page,
-   then drifts through mauve, lilac-pink and peach, ending in a warm sand that fades into the footer */
+   Oak + mist: a pale oak (the floor in the daytime hero) that cools into a soft grey-blue mist (the valley haze),
+   ending in a warm off-white that fades into the footer */
 main.home.sl-bg {
   background: linear-gradient(180deg,
-      #d8c3c6 0px,
-      #d8c3c6 100svh,
-      #ddcbd0 calc(100svh + 480px),
-      #d9cede 30%,
-      #dfd1db 55%,
-      #e3d4d2 80%,
-      #e6dcd1 100%);
+      #ebe4da 0px,
+      #ebe4da 100svh,
+      #eae5de calc(100svh + 480px),
+      #e6e6e3 28%,
+      #e9edef 48%,
+      #eef1f2 66%,
+      #f3f2ee 84%,
+      #f6f2ec 100%);
 }
-main.home.sl-bg + .ft--scene { background: linear-gradient(180deg, #e6dcd1 0%, rgba(230,220,209,.85) 18%, rgba(230,220,209,.4) 38%, rgba(230,220,209,0) 60%); }
+main.home.sl-bg + .ft--scene { background: linear-gradient(180deg, #f6f2ec 0%, rgba(246,242,236,.85) 18%, rgba(246,242,236,.4) 38%, rgba(246,242,236,0) 60%); }
 
 /* the AI-workflow step row reaches to the screen edges on phones; clip it so the page never scrolls sideways */
 .af, .cd-section, .bring { overflow-x: clip; }
@@ -2298,3 +2299,22 @@ main.home.sl-bg + .ft--scene { background: linear-gradient(180deg, #e6dcd1 0%, r
 @media (prefers-reduced-motion: reduce) { .pod-rig { animation: none; } }
 /* phones: nudge the iPod right so the coiled earphones on its left stay on screen */
 @media (max-width: 600px) { .pod-rig { left: 34px; } }
+
+/* ---------- Two heroes: light theme = the daytime mountain room; dark theme = the evening room (view + room layers) ---------- */
+.hero-media .hero-day { object-position: 70% 100%; transform-origin: 50% 100%; transform: scale(calc(1 + var(--hs) * .06)); will-change: transform; }
+[data-theme="dark"] .hero-media .hero-day { display: none; }
+html:not([data-theme="dark"]) .hero-media .hero-view,
+html:not([data-theme="dark"]) .hero-room,
+html:not([data-theme="dark"]) .hero .fireflies,
+html:not([data-theme="dark"]) .hero .ff-links { display: none; }
+html:not([data-theme="dark"]) .hero-media { background: #ebe4da; }
+/* a soft blue shade on the left so the white text reads over the bright sky */
+.hero-media::after { background:
+  linear-gradient(90deg, rgba(20,40,70,.42) 0%, rgba(20,40,70,.22) 36%, rgba(20,40,70,0) 62%),
+  linear-gradient(180deg, rgba(20,40,70,.12) 0%, rgba(20,40,70,0) 35%); }
+@media (max-width: 860px) { .hero-media .hero-day { object-position: 80% 100%; } }
+@media (max-width: 600px) {
+  .hero-media .hero-day { object-position: 88% 100%; }
+  .hero-media::after { background: linear-gradient(180deg, rgba(20,40,70,.3) 0%, rgba(20,40,70,.46) 40%, rgba(20,40,70,.38) 70%, rgba(20,40,70,.1) 90%); }
+}
+@media (prefers-reduced-motion: reduce) { .hero-media .hero-day { transform: none; } }

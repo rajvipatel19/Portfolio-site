@@ -347,7 +347,8 @@ def home():
 <main class="home sl-bg">
 <section class="hero">
   <div class="hero-media" aria-hidden="true">
-    <img class="hero-img hero-view" src="assets/media/hero-view.jpg" alt="" fetchpriority="high" decoding="async">
+    <img class="hero-img hero-day" src="assets/media/hero-day.jpg" alt="" fetchpriority="high" decoding="async">
+    <img class="hero-img hero-view" src="assets/media/hero-view.jpg" alt="" loading="lazy" decoding="async">
     {fireflies()}
     <div class="hero-room"></div>
     {sparkles}
