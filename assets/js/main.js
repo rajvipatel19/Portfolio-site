@@ -222,14 +222,23 @@ const SITE = {
   const stage = $(".cd-stage");
   if (stage) {
     const cd = $(".cd", stage), dock = $(".spotify-dock"), np = $(".now-playing");
-    let controller = null, ready = false, playing = false, pendingPlay = false;
+    let controller = null, ready = false, playing = false, pendingPlay = false, lastPos = 0;
     const setPlaying = (p) => { playing = p; stage.classList.toggle("is-playing", p); np?.classList.toggle("is-playing", p);
-      if (np) np.querySelector("span").textContent = p ? "Now playing" : "Paused — tap the CD"; };
+      if (np) np.querySelector("span").textContent = p ? "Now playing" : "Paused, press play on the wheel";
+      const st = $(".pod-state", stage); if (st) st.textContent = p ? "▶" : "❚❚"; };
+    // music player screen: progress bar and times
+    const fmt = (ms) => { const s = Math.max(0, Math.round(ms / 1000)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
+    const showProgress = (pos, dur) => {
+      if (!dur) return;
+      const bar = $(".pod-prog i", stage); if (bar) bar.style.width = (pos / dur * 100).toFixed(2) + "%";
+      const c = $(".pod-cur", stage), l = $(".pod-left", stage);
+      if (c) c.textContent = fmt(pos); if (l) l.textContent = "-" + fmt(dur - pos);
+    };
     window.onSpotifyIframeApiReady = (IFrameAPI) => {
       const el = document.createElement("div"); dock.appendChild(el);
       IFrameAPI.createController(el, { uri: `spotify:track:${SITE.spotifyTrack}`, width: "100%", height: 80, theme: "light" }, (ctrl) => {
         controller = ctrl; ready = true;
-        ctrl.addListener("playback_update", (e) => setPlaying(!e.data.isPaused));
+        ctrl.addListener("playback_update", (e) => { setPlaying(!e.data.isPaused); lastPos = e.data.position; showProgress(e.data.position, e.data.duration); });
         if (pendingPlay) { ctrl.togglePlay(); }
       });
     };
@@ -247,6 +256,15 @@ const SITE = {
     };
     cd.addEventListener("click", toggle);
     cd.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+    // click wheel buttons
+    const nowView = $(".pod-now", stage), menuView = $(".pod-menu", stage);
+    const showNow = () => { if (nowView && menuView) { nowView.hidden = false; menuView.hidden = true; } };
+    $(".pw-play", stage)?.addEventListener("click", () => { showNow(); toggle(); });
+    $(".pw-prev", stage)?.addEventListener("click", () => { showNow(); if (ready && controller) controller.seek(0); });
+    $(".pw-next", stage)?.addEventListener("click", () => { showNow(); if (ready && controller) controller.seek(Math.round((lastPos + 30000) / 1000)); });
+    $(".pw-menu", stage)?.addEventListener("click", () => { if (nowView && menuView) { const m = menuView.hidden; menuView.hidden = !m; nowView.hidden = m; } });
+    stage.querySelectorAll(".pw, .pod-center").forEach((btn) => btn.addEventListener("pointerdown", () => {
+      const w = $(".pod-wheel", stage); w.classList.remove("tick"); void w.offsetWidth; w.classList.add("tick"); }));
   }
 
   /* ---------- Book a call: any "Book a call" button opens the Cal.com calendar in a pop-up ---------- */

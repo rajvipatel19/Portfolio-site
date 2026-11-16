@@ -288,16 +288,42 @@
     <div class="cd-copy" data-reveal>
       <span class="hand">before you scroll on…</span>
       <h2>Here's a song for you while you see what I do</h2>
-      <p>Tap the CD to play. It's on my repeat list while I design.</p>
-      <div class="now-playing glass"><span class="eq"><i></i><i></i><i></i><i></i></span><span>Tap the CD to play</span></div>
+      <p>Press play on the wheel. It's on my repeat list while I design.</p>
+      <div class="now-playing glass"><span class="eq"><i></i><i></i><i></i><i></i></span><span>Press play on the wheel</span></div>
       <div class="spotify-dock"></div>
     </div>
-    <div class="cd-stage" data-reveal style="--d:.15s">
-      <div class="cd-case glass"><span class="case-label">rajvi's<br>design mix ♫</span></div>
-      <div class="cd" role="button" tabindex="0" aria-label="Play song">
-        <div class="cd-label"><span>side A</span><small>press play</small></div>
+    <div class="cd-stage pod-stage" data-reveal style="--d:.15s">
+      <svg class="pod-cable" viewBox="0 0 400 300" aria-hidden="true">
+        <path d="M210 300 C 210 230, 170 210, 150 160 S 120 70, 70 52" />
+        <path d="M150 160 C 175 120, 230 110, 262 66" />
+        <ellipse cx="62" cy="46" rx="15" ry="19" transform="rotate(-28 62 46)" />
+        <ellipse cx="270" cy="58" rx="15" ry="19" transform="rotate(24 270 58)" />
+      </svg>
+      <div class="pod">
+        <div class="pod-screen">
+          <div class="pod-view pod-now">
+            <div class="pod-bar"><span class="pod-state">❚❚</span><span>Now Playing</span><i class="pod-batt"></i></div>
+            <div class="pod-np">
+              <img class="pod-art" src="https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02dffe8e5a1e7c4eed82fbbfd5" alt="" loading="lazy">
+              <div class="pod-meta"><b>Los Angeles</b><span>The Midnight</span><small>Days of Thunder</small></div>
+            </div>
+            <div class="pod-prog"><i></i></div>
+            <div class="pod-time"><span class="pod-cur">0:00</span><span class="pod-left">-6:29</span></div>
+          </div>
+          <div class="pod-view pod-menu" hidden>
+            <div class="pod-bar"><span></span><span>rajvi's pod</span><i class="pod-batt"></i></div>
+            <ul><li class="on">Now Playing</li><li>Design Mix</li><li>Focus Songs</li><li>Shuffle Songs</li><li>Settings</li></ul>
+          </div>
+        </div>
+        <div class="pod-wheel" role="group" aria-label="Music controls">
+          <button type="button" class="pw pw-menu" aria-label="Menu">MENU</button>
+          <button type="button" class="pw pw-prev" aria-label="Back to the start"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM20 6v12l-9-6z"/></svg></button>
+          <button type="button" class="pw pw-next" aria-label="Skip ahead 30 seconds"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM4 6v12l9-6z"/></svg></button>
+          <button type="button" class="pw pw-play" aria-label="Play or pause"><svg viewBox="0 0 24 24"><path d="M3 6v12l8-6zM14 6h2.5v12H14zM18.5 6H21v12h-2.5z"/></svg></button>
+          <button type="button" class="pod-center cd" aria-label="Play or pause the song"></button>
+        </div>
       </div>
-      <div class="cd-hint">tap me! ↖</div>
+      <div class="cd-hint">← press play!</div>
     </div>
   </div>
 </section>
