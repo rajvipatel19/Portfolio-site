@@ -1656,3 +1656,6 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .sila.cl.sl-bg .cl-gray, .sila.cl.sl-bg .cl-video-band { background: rgba(250,244,236,.7); }
 /* CityLockers impact strip: Framer's cream with a bright orange underline */
 .cl .cl-impact { background: #fff5e7; box-shadow: 0 4px 0 #ff9900; }
+/* CityLockers: no page background, plain white with Framer's light grey bands */
+.sila.cl.sl-bg { background: #fff; }
+.sila.cl.sl-bg .cl-gray, .sila.cl.sl-bg .cl-video-band { background: #fafafa; }
