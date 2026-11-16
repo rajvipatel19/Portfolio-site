@@ -1872,3 +1872,7 @@ html.modal-open { overflow: hidden; }
 .ft-video { filter: none; }
 .ft-media::before { background: linear-gradient(180deg, rgba(150,145,140,1) 0%, rgba(150,145,140,.75) 12%, rgba(150,145,140,0) 26%); }
 .ft-media .ft-warm { display: none; }
+
+/* footer: recolour only the cyan sky (behind the text) to a soft lavender-peach; clouds, woman and meadow keep their colours */
+.ft-media::before { mix-blend-mode: color;
+  background: linear-gradient(180deg, rgba(206,190,228,.9) 0%, rgba(226,200,214,.82) 30%, rgba(240,206,186,.6) 50%, rgba(240,206,186,0) 66%); }
