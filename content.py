@@ -2,7 +2,7 @@
 
 EMAIL = "rajvi.patel60@gmail.com"
 LINKEDIN = "https://www.linkedin.com/in/rajvipatel1912"
-RESUME = "https://drive.google.com/file/d/1bOAGTSTExb-rXHW34ojewSo09fXcN6oJ/view?usp=sharing"
+RESUME = "https://drive.google.com/file/d/1aLerfDv--jNq0D1PowDIvbVdaXrZtzyQ/view?usp=sharing"
 
 META_DESC = "Rajvi Patel, Senior Product Designer in Dubai. 4+ years designing B2C, B2B, health-tech and e-commerce products that are easy to understand and use."
 INTRO = "4+ years designing across B2C, B2B, health-tech and e-commerce. Your product idea deserves a design that doesn't make users work as hard as you did."
