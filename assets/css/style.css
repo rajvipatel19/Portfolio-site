@@ -1745,3 +1745,14 @@ html.modal-open { overflow: hidden; }
   .ft--scene { --fpos: 78% 50%; }
   .ft--scene .ft-media::after { background: linear-gradient(180deg, rgba(250,252,255,.55) 0%, rgba(250,252,255,.3) 45%, rgba(250,252,255,0) 65%); }
 }
+
+/* footer: shorter, sky cropped from the top so the meadow and the woman stay in view */
+.ft--scene { min-height: min(72svh, 720px); --fpos: 50% 100%; }
+.ft--scene .ft-in { padding-top: clamp(80px, 11vh, 120px); }
+@media (max-width: 860px) { .ft--scene { --fpos: 70% 100%; } }
+@media (max-width: 600px) { .ft--scene { min-height: 78svh; --fpos: 78% 100%; } }
+
+/* hero: anchor the picture to its right edge so the girl always sits in the right corner, whatever the screen shape */
+.hero { --hpos: 100% 50%; }
+@media (max-width: 860px) { .hero { --hpos: 100% 50%; } }
+@media (max-width: 600px) { .hero { --hpos: 97% 50%; } }
