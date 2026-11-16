@@ -181,6 +181,15 @@ const SITE = {
       ticking = false;
       const p = Math.min(Math.max(scrollY / hero.offsetHeight, 0), 1); // 0 at top → 1 when hero has scrolled away
       hero.style.setProperty("--hero-p", p.toFixed(3));
+      target = p; if (!easing) { easing = true; requestAnimationFrame(ease); }
+    };
+    // a softly trailing copy of the scroll progress, so the room layer glides instead of jumping
+    let target = 0, hs = 0, easing = false;
+    const ease = () => {
+      hs += (target - hs) * 0.12;
+      if (Math.abs(target - hs) < 0.0005) hs = target;
+      hero.style.setProperty("--hs", hs.toFixed(4));
+      if (hs !== target) requestAnimationFrame(ease); else easing = false;
     };
     addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     update();

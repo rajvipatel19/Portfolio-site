@@ -1592,3 +1592,27 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 
 /* the hovered sticker (and its bubble) always comes to the front */
 .ob:hover, .ob:focus-visible, .ob.dragging { z-index: 900 !important; }
+
+/* ---------- Hero: two layers. The view through the window stays still; the room zooms in, lifts and fades as you scroll ---------- */
+.hero { --hpos: 50% 50%; --hs: 0; } /* --hs = smoothed scroll progress through the hero (main.js) */
+.hero-media { transform: none; opacity: 1; filter: none; }
+.hero-media .hero-img { object-position: var(--hpos); }
+.hero-room { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: url("../media/hero-room.jpg") var(--hpos) / cover no-repeat;
+  -webkit-mask: url("../media/hero-room-mask.png") var(--hpos) / cover no-repeat;
+  mask: url("../media/hero-room-mask.png") var(--hpos) / cover no-repeat;
+  transform-origin: 50% 100%;
+  transform: translate3d(0, calc(var(--hs) * -40%), 0) scale(calc(1 + var(--hs) * .15));
+  opacity: clamp(0, calc(1 - var(--hs) * 1.25), 1);
+  will-change: transform, opacity; }
+.hero-inner { transform: translate3d(0, calc(var(--hs) * -30vh), 0); opacity: clamp(0, calc(1 - var(--hs) * 1.6), 1); }
+@media (max-width: 860px) { .hero { --hpos: 74% 50%; } }
+@media (max-width: 600px) { .hero { --hpos: 90% 50%; } }
+@media (prefers-reduced-motion: reduce) { .hero-room, .hero-inner { transform: none; opacity: 1; } }
+/* readable text over the sunset picture: a bit more soft light on the left, darker intro text */
+@media (min-width: 601px) {
+  .hero-media::after { background:
+    linear-gradient(90deg, rgba(253,250,248,.72) 0%, rgba(253,250,248,.48) 34%, rgba(253,250,248,0) 62%),
+    linear-gradient(180deg, rgba(253,252,255,0) 40%, rgba(253,252,255, calc(var(--hero-p) * .15)) 100%); }
+}
+.hero-side p { color: var(--ink); }
