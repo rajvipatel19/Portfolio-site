@@ -13,6 +13,25 @@ const SITE = {
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  /* ---------- Dark mode: the sun/moon button in the nav. Starts light; the choice is remembered ---------- */
+  const themeBtn = $(".theme-toggle");
+  const setThemeUI = () => {
+    const dark = document.documentElement.dataset.theme === "dark";
+    if (!themeBtn) return;
+    themeBtn.setAttribute("aria-pressed", dark);
+    themeBtn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    const meta = $('meta[name="theme-color"]'); if (meta) meta.content = dark ? "#14121c" : "#fdfcff";
+  };
+  setThemeUI();
+  if (themeBtn) themeBtn.addEventListener("click", () => {
+    const dark = document.documentElement.dataset.theme !== "dark";
+    document.documentElement.classList.add("theme-switching");
+    if (dark) document.documentElement.dataset.theme = "dark"; else delete document.documentElement.dataset.theme;
+    try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) {}
+    setThemeUI();
+    setTimeout(() => document.documentElement.classList.remove("theme-switching"), 450);
+  });
   // "/" and "/index.html" are the same page
   const samePage = (u) => u.pathname.replace(/index\.html$/, "") === location.pathname.replace(/index\.html$/, "");
 

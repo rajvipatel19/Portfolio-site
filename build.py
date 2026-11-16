@@ -9,7 +9,7 @@ import content as C
 
 ROOT = Path(__file__).parent
 import hashlib
-ASSET_V = hashlib.md5((ROOT / "assets/css/style.css").read_bytes() + (ROOT / "assets/js/main.js").read_bytes()).hexdigest()[:8]
+ASSET_V = hashlib.md5((ROOT / "assets/css/style.css").read_bytes() + (ROOT / "assets/css/dark.css").read_bytes() + (ROOT / "assets/js/main.js").read_bytes()).hexdigest()[:8]
 
 ARROW = '<svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 ARROW_UR = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -33,6 +33,9 @@ def head(title, desc, root):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v={ASSET_V}">
+<link rel="stylesheet" href="{root}assets/css/dark.css?v={ASSET_V}">
+<script>/* dark mode: apply the saved choice before the page draws, so there is no flash */
+try {{ if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; }} catch (e) {{}}</script>
 </head>
 <body>
 <div class="page-fade" aria-hidden="true"></div>
@@ -56,6 +59,10 @@ def nav(root, active):
       <a class="nav-resume nav-resume--menu" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW_UR}</a>
     </div>
     <span class="nav-divider" aria-hidden="true"></span>
+    <button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">
+      <svg class="ic-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+      <svg class="ic-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+    </button>
     <a class="nav-resume" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW_UR}</a>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
   </nav>
