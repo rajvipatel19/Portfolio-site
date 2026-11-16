@@ -337,7 +337,7 @@ def home():
     sparkles = "".join(f'<span class="sparkle" style="left:{l}%;top:{t}%;animation-delay:{d}s;width:{s}px;height:{s}px">{SPARK}</span>'
                        for l, t, d, s in [(12, 22, 0, 10), (78, 18, 1.2, 14), (64, 40, 2.1, 8), (30, 58, .6, 12), (88, 62, 1.8, 10), (48, 14, 2.6, 9)])
     body = f"""{nav(root, 'work')}
-<main>
+<main class="home sl-bg">
 <section class="hero">
   <div class="hero-media" aria-hidden="true">
     <img class="hero-img hero-view" src="assets/media/hero-view.jpg" alt="" fetchpriority="high" decoding="async">
