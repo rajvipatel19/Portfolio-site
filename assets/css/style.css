@@ -2159,15 +2159,17 @@ main:has(> .hero) .hero-hi { font-size: 20px; } /* same as the notes */
 @media (prefers-reduced-motion: reduce) { .af-line i { animation: none; display: none; } .af-panel:not([hidden]) { animation: none; } }
 
 /* home page: the same soft, page-long gradient as the case studies, starting under the hero
-   (lavender → soft blue → lavender → blush → cream, ending in the footer's cream fade) */
+   Pastel garden: lavender → aqua → mint → pale lemon → blush → lilac → cream, ending in the footer's cream fade */
 main.home.sl-bg {
   background:
     radial-gradient(circle at 90% calc(100svh + 160px), rgba(255, 226, 196, .34) 0, rgba(255, 226, 196, 0) 360px),
     linear-gradient(180deg,
       #ece7fb 0px,
       #ece7fb 100svh,
-      #ecf0fc calc(100svh + 900px),
-      #ebe7fb 45%,
-      #f5eaf3 75%,
+      #e3f3f7 24%,
+      #e7f6ec 38%,
+      #fbf6df 52%,
+      #f9e9ef 68%,
+      #efe8fb 84%,
       #f6f0e5 100%);
 }
