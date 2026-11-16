@@ -339,7 +339,7 @@ def home():
   <div class="ticker-head wrap" data-reveal><span class="hand">a sneak peek of my</span><h2>Visual journey</h2></div>
   <div class="ticker"><div class="ticker-track">{shots}{shots_copy}</div></div>
   <dialog class="vj-modal" aria-label="Image preview">
-    <button type="button" class="vj-close" aria-label="Close preview">&times;</button>
+    <button type="button" class="vj-close" aria-label="Close preview"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <button type="button" class="vj-nav vj-prev" aria-label="Previous image">&larr;</button>
     <figure class="vj-frame"><img class="vj-img" src="" alt=""><figcaption class="vj-cap"></figcaption></figure>
     <button type="button" class="vj-nav vj-next" aria-label="Next image">&rarr;</button>
