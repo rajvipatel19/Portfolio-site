@@ -1880,3 +1880,4 @@ html.modal-open { overflow: hidden; }
 /* footer text sits a little lower */
 .ft--scene .ft-in { padding-top: clamp(130px, 20vh, 190px); }
 @media (max-width: 600px) { .ft--scene .ft-in { padding-top: clamp(110px, 16vh, 150px); } }
+.ft--scene .ft-sub { color: var(--ink-2); }
