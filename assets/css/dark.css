@@ -185,7 +185,8 @@ html.theme-switching body, html.theme-switching body * { transition: background-
       amber #f3a740 (CityLockers). A tinted area uses its accent at 10–14% opacity.
    5. Paper objects (sticky notes, rule cards, polaroids) keep their paper
       colour, a touch softer, and always use dark ink #1d1b26.
-   6. Screenshots, diagrams and light tables are never inverted or recoloured.
+   6. Screenshots, diagrams and light tables are never inverted or recoloured
+      (only their frame: every screenshot outline is light purple #b9a9e8).
       They sit in a soft frame (rounded, thin glass edge) and are dimmed by 6%
       so a white image doesn't glare on the dark page.
    7. Light textures (paper grids, dotted patterns) become a faint white grid.
@@ -338,7 +339,9 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 /* 1. strong purples become dusky, desaturated lavender */
 [data-theme="dark"] .sk-promo { background: linear-gradient(160deg, #6d6396, #4c4672); }
 [data-theme="dark"] .sk-promo-side p, [data-theme="dark"] .sk-promo-logo { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.2); }
-[data-theme="dark"] .sk-band img { filter: saturate(.5) brightness(1.05); }
+/* the Design Process band takes the page's dusk colour (keeps its light and shade, drops the strong purple) */
+[data-theme="dark"] .sk-band { background: #34324f; isolation: isolate; }
+[data-theme="dark"] .sk-band img { mix-blend-mode: luminosity; filter: brightness(1.55) contrast(.95); }
 /* 2. screen borders: light purple instead of deep purple */
 [data-theme="dark"] :is(.sk-framed, .sk-step img, .sk-import-note img, .sk-import-side img) { border-color: #b9a9e8; }
 [data-theme="dark"] .sk-prio-card { border-color: #b9a9e8; }
@@ -348,3 +351,18 @@ html.theme-switching body, html.theme-switching body * { transition: background-
   box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 30px 60px -34px rgba(12,10,32,.7); }
 /* 4. the storyboard line drawings turn white (colours keep their hue) */
 [data-theme="dark"] .sk-story img { filter: invert(1) hue-rotate(180deg) brightness(.95); }
+
+/* SKU screenshots: in dark mode, the copies whose built-in frame is light purple (same picture otherwise) */
+[data-theme="dark"] img[src$="/sku/dashboard.png"] { content: url("../media/sku/dashboard-dark.png"); }
+[data-theme="dark"] img[src$="/sku/importlist.png"] { content: url("../media/sku/importlist-dark.png"); }
+[data-theme="dark"] img[src$="/sku/myproducts.png"] { content: url("../media/sku/myproducts-dark.png"); }
+[data-theme="dark"] img[src$="/sku/orders-1.png"] { content: url("../media/sku/orders-1-dark.png"); }
+[data-theme="dark"] img[src$="/sku/orders-2.png"] { content: url("../media/sku/orders-2-dark.png"); }
+[data-theme="dark"] img[src$="/sku/product-details.png"] { content: url("../media/sku/product-details-dark.png"); }
+[data-theme="dark"] img[src$="/sku/store-1.png"] { content: url("../media/sku/store-1-dark.png"); }
+[data-theme="dark"] img[src$="/sku/store-2.png"] { content: url("../media/sku/store-2-dark.png"); }
+[data-theme="dark"] img[src$="/sku/store-3.png"] { content: url("../media/sku/store-3-dark.png"); }
+[data-theme="dark"] img[src$="/sku/store-4.png"] { content: url("../media/sku/store-4-dark.png"); }
+[data-theme="dark"] img[src$="/sku/discovery-1.png"] { content: url("../media/sku/discovery-1-dark.png"); }
+[data-theme="dark"] img[src$="/sku/discovery-2.png"] { content: url("../media/sku/discovery-2-dark.png"); }
+[data-theme="dark"] img[src$="/sku/features-nav.png"] { content: url("../media/sku/features-nav-dark.png"); }
