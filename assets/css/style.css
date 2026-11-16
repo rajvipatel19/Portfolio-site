@@ -1623,3 +1623,17 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
     linear-gradient(180deg, rgba(253,252,255,0) 40%, rgba(253,252,255, calc(var(--hero-p) * .15)) 100%); }
 }
 .hero-side p { color: var(--ink); }
+
+/* fireflies drifting outside the window: drawn between the view and the room, so the room hides any outside the glass */
+.fireflies { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: clamp(0, calc(1 - var(--hs) * 1.3), 1); }
+.ff { position: absolute; left: var(--x); top: var(--y); width: var(--s); height: var(--s); border-radius: 50%;
+  background: radial-gradient(circle, #fff8d6 0%, #ffd98a 40%, rgba(255,196,96,0) 72%);
+  box-shadow: 0 0 calc(var(--s) * 2.2) calc(var(--s) * .7) rgba(255,205,120,.7);
+  animation: ffDrift var(--dur) ease-in-out var(--dl) infinite alternate, ffGlow var(--glow) ease-in-out var(--dl) infinite alternate; }
+@keyframes ffDrift {
+  0%   { transform: translate(0, 0); }
+  30%  { transform: translate(calc(var(--dx) * .55), calc(var(--dy) * -.45)); }
+  65%  { transform: translate(calc(var(--dx) * -.25), calc(var(--dy) * -.8)); }
+  100% { transform: translate(var(--dx), calc(var(--dy) * -1)); } }
+@keyframes ffGlow { 0% { opacity: .3; } 55% { opacity: 1; } 100% { opacity: .5; } }
+@media (prefers-reduced-motion: reduce) { .ff { animation: none; opacity: .6; } }

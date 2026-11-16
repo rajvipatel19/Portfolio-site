@@ -234,6 +234,19 @@ def bring():
   </div>
 </section>"""
 
+def fireflies(n=22):
+    """Warm glowing dots drifting slowly outside the window (between the view and the room layers)."""
+    import random
+    rnd = random.Random(7)  # same layout on every build
+    dots = []
+    for _ in range(n):
+        x, y = rnd.uniform(6, 94), rnd.uniform(48, 90)
+        dots.append(f'<i class="ff" style="--x:{x:.1f}%;--y:{y:.1f}%;--s:{rnd.uniform(4.5, 8):.1f}px;'
+                    f'--dx:{rnd.uniform(-70, 70):.0f}px;--dy:{rnd.uniform(18, 60):.0f}px;'
+                    f'--dur:{rnd.uniform(9, 17):.1f}s;--glow:{rnd.uniform(2.2, 4.5):.1f}s;--dl:{-rnd.uniform(0, 17):.1f}s"></i>')
+    return f'<div class="fireflies" aria-hidden="true">{"".join(dots)}</div>'
+
+
 def home():
     root = ""
     cards = []
@@ -258,6 +271,7 @@ def home():
 <section class="hero">
   <div class="hero-media" aria-hidden="true">
     <img class="hero-img hero-view" src="assets/media/hero-view.jpg" alt="" fetchpriority="high" decoding="async">
+    {fireflies()}
     <div class="hero-room"></div>
     {sparkles}
   </div>
