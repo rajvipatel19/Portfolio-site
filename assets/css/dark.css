@@ -163,7 +163,7 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .sky-btn--dark:hover { background: #fff; }
 [data-theme="dark"] .sky-bar { background: rgba(255,255,255,.1); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
 [data-theme="dark"] .net .ln { stroke: rgba(201,187,255,.25); }
-[data-theme="dark"] .polaroid .img-ph { background: #423d68; }
+[data-theme="dark"] .polaroid .img-ph { background: #55536e; }
 [data-theme="dark"] .lab-exp { background: linear-gradient(150deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); border-color: rgba(255,255,255,.2);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 30px 60px -36px rgba(12,10,32,.55); }
 [data-theme="dark"] .lab-stage { background: radial-gradient(80% 60% at 50% 40%, rgba(167,139,250,.28), rgba(167,139,250,0) 70%), linear-gradient(180deg, #3a3560, #463c58); }
@@ -173,14 +173,16 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 /* =========================================================
    DARK THEME DESIGN RULES  (apply these to anything new)
    1. Page: the "blue hour" dusk sky. Base #2c2a46; never pure black.
-   2. Surfaces, three steps only:
+   2. Surfaces are light, desaturated glass (white at low opacity), never
+      solid saturated violet, three steps only:
         band   rgba(255,255,255,.04)  – full-width tinted sections
-        card   #393760 + 1px rgba(255,255,255,.12) edge
-        raised #433f6a – tinted panels, chips, active states
+        card   rgba(255,255,255,.07) + 1px rgba(255,255,255,.12) edge
+        raised rgba(255,255,255,.11) – highlighted panels, chips, active states
+      Solid fills (only where something must cover a line) use #4a4862.
    3. Text: headings #f6f3fb · body #d2cde0 · muted #a9a3bd.
       Nothing that must be read goes below #a9a3bd (4.5:1 on a card).
    4. Accents are for small labels only: lavender #c7baff (SILA, SKU),
-      amber #f3a740 (CityLockers). Large tinted areas use the raised surface.
+      amber #f3a740 (CityLockers). A tinted area uses its accent at 10–14% opacity.
    5. Paper objects (sticky notes, rule cards, polaroids) keep their paper
       colour, a touch softer, and always use dark ink #1d1b26.
    6. Screenshots, diagrams and light tables are never inverted or recoloured.
@@ -198,7 +200,7 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .sila { --sl-accent: #c4b0f5; --sl-ink: #eeeaf6; --sl-ink-2: #b9b3c8; --sl-ink-3: #8f889f; --sl-num: #4f4a70; --sl-icon: #b9a9ff; }
 [data-theme="dark"] .sila.cl { --sl-accent: #f3a740; }
 [data-theme="dark"] .sila.cl .roadmap { --sl-accent: #c4b0f5; }
-[data-theme="dark"] .sk { --sk-ink: #eeeaf6; --sk-ink-2: #b9b3c8; --sk-ghost: #4f4a70; --sk-lav: #423d68; }
+[data-theme="dark"] .sk { --sk-ink: #eeeaf6; --sk-ink-2: #b9b3c8; --sk-ghost: #5c5a74; --sk-lav: rgba(255,255,255,.06); }
 
 /* page backgrounds: the same soft colour journey, at night */
 [data-theme="dark"] .sila.sl-bg { background:
@@ -220,33 +222,33 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .cl-sticky, [data-theme="dark"] .cl-sticky * { color: #17171a; }
 
 /* the side progress rail */
-[data-theme="dark"] .roadmap .node { background: #3a3860; border-color: #5a5582; }
-[data-theme="dark"] .roadmap li.done .node { box-shadow: inset 0 0 0 3px #3a3860; }
+[data-theme="dark"] .roadmap .node { background: #4a4862; border-color: #6d6b86; }
+[data-theme="dark"] .roadmap li.done .node { box-shadow: inset 0 0 0 3px #4a4862; }
 
 /* cards and panels: white → dark surfaces */
 [data-theme="dark"] :is(.sl-card, .sl-card--line, .sl-stat, .sl-note, .cl-card, .cl-persona, .cl-comp, .cl-box, .cl-ba-card, .cl-learn-card,
   .sk-summary, .sk-problem, .sk-goal, .sk-note, .sk-persona, .sk-persona-story, .sk-result, .sk-concl) {
-  background: #3a3860; border-color: rgba(255,255,255,.14); }
-[data-theme="dark"] :is(.cl-persona-id, .cl-comp-head) { background: #44416a; }
+  background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.12); }
+[data-theme="dark"] :is(.cl-persona-id, .cl-comp-head) { background: rgba(255,255,255,.1); }
 /* lavender-tinted panels → deep plum */
-[data-theme="dark"] :is(.sl-quotes, .sk-goal--wide, .sk-prio-card, .sk-persona-id, .sk-pill) { background: #463f6e; color: var(--ink); }
+[data-theme="dark"] :is(.sl-quotes, .sk-goal--wide, .sk-prio-card, .sk-persona-id, .sk-pill) { background: rgba(255,255,255,.11); color: var(--ink); }
 [data-theme="dark"] .sila .sl-articles { background: linear-gradient(90deg, rgba(167,150,255,.14), rgba(167,150,255,.05)); }
 [data-theme="dark"] .sila .sl-hero-band { background: linear-gradient(180deg, rgba(167,150,255,.22), rgba(167,150,255,.04)); }
-[data-theme="dark"] .cl-impact { background: #4d3f30; box-shadow: 0 4px 0 #e8900b; }
+[data-theme="dark"] .cl-impact { background: rgba(243,167,64,.1); box-shadow: 0 4px 0 #e8900b; }
 [data-theme="dark"] .sila span[style*="background"], [data-theme="dark"] .sila .sl-tag { color: var(--ink); }
 /* full-width tinted bands */
 [data-theme="dark"] .sila.sl-bg :is(.sl-band-gray, .cl-gray, .cl-video-band, .sk-gray, .sk-lav) { background: rgba(255,255,255,.05); }
-[data-theme="dark"] .sila.cl.sl-bg :is(.cl-gray, .cl-video-band) { background: #363452; }
+[data-theme="dark"] .sila.cl.sl-bg :is(.cl-gray, .cl-video-band) { background: rgba(255,255,255,.04); }
 [data-theme="dark"] .sila.sl-bg .sk-concl-band { background: rgba(167,150,255,.06); }
 [data-theme="dark"] .sk-gif { background: transparent; }
-[data-theme="dark"] .cl-slider-handle { background: #44416a; color: var(--ink); }
+[data-theme="dark"] .cl-slider-handle { background: #55536e; color: var(--ink); }
 [data-theme="dark"] .sila .sk-result { box-shadow: 4px 4px 0 var(--sl-accent); }
 [data-theme="dark"] .sl-note { color: var(--ink); box-shadow: 0 6px 16px rgba(12,10,32,.4); }
 [data-theme="dark"] .sk-hero h1 { color: var(--ink) !important; }
 [data-theme="dark"] .sk-problem { color: var(--ink); }
-[data-theme="dark"] .sl-chips span, [data-theme="dark"] .cl-chips span, [data-theme="dark"] .cl .cl-chips span { background: #463f6e; color: var(--ink); }
-[data-theme="dark"] .cl .cl-chips span { background: #4d3f30; color: #f6c27a; }
-@media (max-width: 1199px) { [data-theme="dark"] .sila .sl-side li.active a { background: #463f6e; } [data-theme="dark"] .sila .sl-side li.done a { color: #b4aec6; } }
+[data-theme="dark"] .sl-chips span, [data-theme="dark"] .cl-chips span, [data-theme="dark"] .cl .cl-chips span { background: rgba(255,255,255,.1); color: var(--ink); }
+[data-theme="dark"] .cl .cl-chips span { background: rgba(243,167,64,.14); color: #f6c27a; }
+@media (max-width: 1199px) { [data-theme="dark"] .sila .sl-side li.active a { background: rgba(255,255,255,.12); } [data-theme="dark"] .sila .sl-side li.done a { color: #b4aec6; } }
 /* kiosk recordings: the white-hiding blend would turn them black on a dark page, so show them as soft light panels instead */
 [data-theme="dark"] .cl-video-band video { mix-blend-mode: normal; filter: none; border-radius: 24px; box-shadow: 0 30px 60px -30px rgba(12,10,32,.55); }
 /* the custom cursor dot: glow instead of darken */
