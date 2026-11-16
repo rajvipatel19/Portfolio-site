@@ -2064,24 +2064,25 @@ button.shot--img:focus-visible { outline: 3px solid var(--lav-deep); outline-off
 }
 @media (prefers-reduced-motion: reduce) { .vj-modal[open] { animation: none; } }
 
-/* ---------- Hero, v2: "Hi! I'm Rajvi" with a tilted photo (like the Framer site), smaller one-colour heading ---------- */
-.hero-hi { display: inline-flex; align-items: center; gap: 14px; margin: 0 0 18px; font-family: var(--font-display); font-style: italic; font-weight: 700;
-  font-size: 24px; letter-spacing: .1em; color: var(--ink); }
-.hero-photo { width: 60px; height: 60px; object-fit: cover; border-radius: 12px; border: 3px solid rgba(255,255,255,.95);
-  box-shadow: 0 10px 22px -10px rgba(30,20,70,.45); transform: rotate(-12deg); transition: transform .5s var(--ease); }
-.hero-hi:hover .hero-photo { transform: rotate(0deg) scale(1.08); }
-.hero h1 { font-size: clamp(36px, 4.2vw, 62px); max-width: 15ch; color: var(--ink); line-height: 1.1; }
+/* ---------- Hero, v3: all text white over the picture, "Hi! I'm Rajvi 👋", semibold heading close to the intro ---------- */
+.hero-hi { display: inline-flex; align-items: center; gap: 12px; margin: 0 0 16px; font-family: var(--font-display); font-style: italic; font-weight: 700;
+  font-size: 24px; letter-spacing: .1em; }
+.wave { display: inline-block; font-style: normal; letter-spacing: 0; transform-origin: 70% 75%; animation: wave 2.6s ease-in-out 1s infinite; }
+@keyframes wave { 0%, 60%, 100% { transform: rotate(0); } 10%, 30% { transform: rotate(16deg); } 20% { transform: rotate(-8deg); } 40% { transform: rotate(-4deg); } 50% { transform: rotate(10deg); } }
+.hero h1 { font-size: clamp(36px, 4.2vw, 62px); font-weight: 600; max-width: 15ch; line-height: 1.1; margin-bottom: 14px; }
+.hero-side { gap: 28px; }
 .hero-side p { max-width: 520px; }
+.hero-hi, .hero h1, .hero-side p { color: #fff; }
+.hero-hi, .hero h1 { text-shadow: 0 2px 18px rgba(40,25,70,.35), 0 1px 2px rgba(40,25,70,.25); }
+.hero-side p { text-shadow: 0 1px 10px rgba(40,25,70,.45), 0 1px 2px rgba(40,25,70,.3); }
+/* a dusk shade on the left so white text reads over the light misty valley */
+.hero-media::after { background:
+  linear-gradient(90deg, rgba(42,30,74,.5) 0%, rgba(42,30,74,.32) 34%, rgba(42,30,74,0) 64%),
+  linear-gradient(180deg, rgba(42,30,74,.14) 0%, rgba(42,30,74,0) 40%); }
 @media (max-width: 600px) {
-  .hero-hi { font-size: 20px; gap: 12px; }
-  .hero-photo { width: 50px; height: 50px; border-radius: 10px; }
+  .hero-hi { font-size: 20px; gap: 10px; }
   .hero h1 { font-size: 32px; }
+  /* phones: text covers the whole width, so shade the whole picture a little more */
+  .hero-media::after { background: linear-gradient(180deg, rgba(42,30,74,.3) 0%, rgba(42,30,74,.5) 40%, rgba(42,30,74,.42) 70%, rgba(42,30,74,.12) 90%); }
 }
-
-/* hero, white heading (desktop and tablet): a soft dusk shade behind the heading, soft light behind the intro. Phones keep dark text over their light haze */
-@media (min-width: 601px) {
-  .hero h1 { color: #fff; text-shadow: 0 2px 18px rgba(40,25,70,.35), 0 1px 2px rgba(40,25,70,.25); }
-  .hero-media::after { background:
-    radial-gradient(48% 26% at 20% 66%, rgba(253,250,248,.82), rgba(253,250,248,.4) 60%, rgba(253,250,248,0) 100%),
-    linear-gradient(180deg, rgba(45,32,80,.24) 0%, rgba(45,32,80,.12) 34%, rgba(45,32,80,0) 50%); }
-}
+@media (prefers-reduced-motion: reduce) { .wave { animation: none; } }

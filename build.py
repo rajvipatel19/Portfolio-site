@@ -31,7 +31,7 @@ def head(title, desc, root):
 <link rel="icon" type="image/svg+xml" href="{root}assets/img/avatar.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v={ASSET_V}">
 </head>
 <body>
@@ -309,7 +309,7 @@ def home():
     <a class="ff-link" href="work/sku-platform.html" aria-label="Open the SKU Platform case study" style="--x:77%;--y:34%;--mx:47%;--my:81%;--dur:12s;--dl:-9s"><i></i><span>click on me</span></a>
   </nav>
   <div class="wrap hero-inner">
-    <p class="hero-hi" data-reveal><span>Hi! I’m Rajvi</span><img class="hero-photo" src="assets/img/hi-photo.jpg" alt="Photo of Rajvi" width="60" height="60" decoding="async"></p>
+    <p class="hero-hi" data-reveal><span>Hi! I’m Rajvi</span><span class="wave" aria-hidden="true">👋</span></p>
     <h1 class="split">{C.HERO_TITLE}</h1>
     <div class="hero-side" data-reveal style="--d:.35s">
       <p>{C.INTRO}</p>
