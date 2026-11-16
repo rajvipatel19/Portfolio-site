@@ -2098,3 +2098,62 @@ button.shot--img:focus-visible { outline: 3px solid var(--lav-deep); outline-off
 main:has(> .hero) .hand { font-size: 20px; }
 main:has(> .hero) .hero-hi { font-size: 20px; } /* same as the notes */
 @media (max-width: 600px) { main:has(> .hero) .hand, main:has(> .hero) .hero-hi { font-size: 18px; } }
+
+/* ---------- Home: "How I work with AI" flowchart ---------- */
+.af { padding: 40px 0 110px; }
+.af-head { margin-bottom: 48px; }
+.af-chart { max-width: 1080px; margin: 0 auto; }
+.af-track { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+/* the line joining the steps, with a soft light travelling along it */
+.af-line { position: absolute; left: calc(100% / 12); right: calc(100% / 12); top: 31px; height: 2px; border-radius: 2px; overflow: hidden;
+  background: linear-gradient(90deg, rgba(70,56,107,.18), rgba(70,56,107,.32), rgba(70,56,107,.18)); }
+.af-line i { position: absolute; top: 0; left: 0; width: 18%; height: 100%; border-radius: inherit;
+  background: linear-gradient(90deg, transparent, #b8a6ff, #ffd98a, transparent); animation: afFlow 4.5s linear infinite; }
+@keyframes afFlow { from { transform: translateX(-100%); } to { transform: translateX(560%); } }
+.af-step { position: relative; z-index: 1; display: grid; justify-items: center; gap: 6px; padding: 0 4px 6px; border: 0; background: none; font: inherit; color: var(--ink); cursor: pointer; }
+.af-dot { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; color: var(--title-accent);
+  background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  transition: transform .4s var(--ease), background .3s, color .3s, box-shadow .4s; }
+.af-step:hover .af-dot { transform: translateY(-3px); }
+.af-step[aria-selected="true"] .af-dot { background: linear-gradient(180deg, #5a4a86, #46386b); color: #fff; border-color: rgba(255,255,255,.4);
+  box-shadow: 0 0 0 6px rgba(184,166,255,.22), 0 14px 30px -12px rgba(70,56,107,.7); transform: scale(1.06); }
+.af-num { font-size: 12px; font-weight: 600; letter-spacing: .12em; color: var(--ink-3); }
+.af-name { font-size: 15px; font-weight: 600; text-align: center; line-height: 1.25; }
+.af-step[aria-selected="true"] .af-name { color: var(--title-accent); }
+.af-step:focus-visible { outline: none; }
+.af-step:focus-visible .af-dot { outline: 3px solid var(--title-accent); outline-offset: 4px; }
+.af-hint { display: none; }
+.af-card { margin-top: 28px; border-radius: 28px; padding: 36px 40px; }
+.af-panel { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: start; }
+.af-panel[hidden] { display: none; }
+.af-panel:not([hidden]) { animation: afIn .45s var(--ease); }
+@keyframes afIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.af-panel:focus-visible { outline: 3px solid var(--title-accent); outline-offset: 6px; border-radius: 12px; }
+.af-copy .hand { display: block; font-size: 18px; margin-bottom: 6px; }
+.af-copy h3 { font-size: clamp(24px, 2.4vw, 32px); margin-bottom: 12px; }
+.af-copy p { color: var(--ink-2); font-size: 17px; max-width: 54ch; }
+.af-label { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 10px; }
+.af-tools { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.af-tools li { padding: 7px 14px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--title-accent);
+  background: rgba(255,255,255,.75); border: 1px solid rgba(70,56,107,.14); }
+.af-out { margin: 0; font-weight: 500; color: var(--ink); }
+.af-end { margin: 36px auto 0; max-width: 52ch; text-align: center; font-family: var(--font-display); font-style: italic; font-size: 20px; color: var(--ink-2); }
+
+@media (max-width: 860px) {
+  .af-card { padding: 28px; }
+  .af-panel { grid-template-columns: 1fr; gap: 24px; }
+}
+/* phones: the steps become a row you can swipe sideways */
+@media (max-width: 600px) {
+  .af { padding: 20px 0 80px; }
+  .af-track { display: flex; gap: 4px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -16px; padding: 6px 16px 4px; }
+  .af-track::-webkit-scrollbar { display: none; }
+  .af-step { flex: 0 0 92px; scroll-snap-align: center; }
+  .af-dot { width: 56px; height: 56px; }
+  .af-line { left: 62px; right: auto; width: calc(92px * 5 + 4px * 5); top: 34px; }
+  .af-hint { display: block; margin: 6px 0 0; text-align: center; font-family: var(--font-display); font-style: italic; font-size: 14px; color: var(--ink-3); }
+  .af-card { margin-top: 14px; padding: 24px 20px; border-radius: 22px; }
+  .af-copy p { font-size: 16px; }
+  .af-end { font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .af-line i { animation: none; display: none; } .af-panel:not([hidden]) { animation: none; } }

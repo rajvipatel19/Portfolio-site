@@ -360,3 +360,36 @@ CASE_STUDIES = [
    ]},
  ]},
 ]
+
+
+# ---------- Home: "How I work with AI" flowchart (after What I bring to the table) ----------
+AI_FLOW_TITLE = "How I work with AI"
+AI_FLOW_NOTE = "from messy notes to shipped screens"
+AI_FLOW_END = "The biggest change isn't speed. It's momentum: less time stuck at the start, more time refining."
+# icon: search, doc, spark, image, loop, rocket (drawn in build.py)
+AI_FLOW = [
+    {"step": "Research", "icon": "search", "title": "Making sense of the chaos",
+     "tools": ["Claude", "ChatGPT"],
+     "text": "Meeting notes, stakeholder feedback, research findings. I use Claude and ChatGPT to break it all down, spot the gaps and list the questions that still need answers.",
+     "out": "A clear problem and the right questions"},
+    {"step": "Define", "icon": "doc", "title": "Writing it down",
+     "tools": ["Notion", "Claude Code"],
+     "text": "My PRDs live in Notion. I draft and tighten them with Claude Code, so the team and the AI agents all start from the same brief.",
+     "out": "A PRD everyone can build from"},
+    {"step": "Explore", "icon": "spark", "title": "Exploring before committing",
+     "tools": ["Figma Make", "Magic Patterns", "Claude", "Lovable"],
+     "text": "When a wireframe takes minutes instead of hours, I explore more directions before picking one. Quick prototypes test the idea, not the pixels.",
+     "out": "Clickable concepts to compare"},
+    {"step": "Visuals", "icon": "image", "title": "Telling the story",
+     "tools": ["Flow", "Gemini", "Magnific"],
+     "text": "No photoshoot, no problem. I create images and videos with Flow and Gemini, then upscale them with Magnific, so concepts look real early.",
+     "out": "Images and videos for prototypes and pitches"},
+    {"step": "Refine & test", "icon": "loop", "title": "Iterate, test, repeat",
+     "tools": ["Figma Agents", "Claude"],
+     "text": "Figma Agents take care of variations and repetitive layout work. Claude challenges my assumptions and turns usability feedback into a clear list of what to fix next.",
+     "out": "A design tested with real people"},
+    {"step": "Deliver", "icon": "rocket", "title": "Closer to shipped",
+     "tools": ["design-system.md", "Claude Code"],
+     "text": "I write a design-system.md file so AI coding agents build with my colours, type and components, and everything stays consistent. On urgent projects, Claude Code takes ideas straight to working code. This portfolio included.",
+     "out": "Consistent, shippable product"},
+]

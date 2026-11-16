@@ -190,6 +190,48 @@ def scene(kind):
 
 # ---------------------------------------------------------------- home
 # ---------------------------------------------------------------- what I bring to the table
+AI_ICONS = {
+    "search": '<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>',
+    "doc": '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
+    "spark": '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/>',
+    "image": '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/>',
+    "loop": '<path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/>',
+    "rocket": '<path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.9A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5"/>',
+}
+
+
+def ai_flow():
+    """Home: an interactive flowchart of how I use AI, from research to delivery. Click a step to see its tools."""
+    def icon(k):
+        return f'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{AI_ICONS[k]}</svg>'
+    tabs, panels = [], []
+    for i, f in enumerate(C.AI_FLOW):
+        on = i == 0
+        tabs.append(f'''<button type="button" class="af-step" role="tab" id="af-tab-{i}" aria-controls="af-panel-{i}" aria-selected="{str(on).lower()}" tabindex="{0 if on else -1}" style="--i:{i}">
+      <span class="af-dot">{icon(f["icon"])}</span><span class="af-num">0{i + 1}</span><span class="af-name">{escape(f["step"])}</span>
+    </button>''')
+        tools = "".join(f'<li>{escape(x)}</li>' for x in f["tools"])
+        panels.append(f'''<div class="af-panel" role="tabpanel" id="af-panel-{i}" aria-labelledby="af-tab-{i}" tabindex="0"{"" if on else " hidden"}>
+      <div class="af-copy"><span class="hand">step 0{i + 1} · {escape(f["step"].lower())}</span><h3>{escape(f["title"])}</h3><p>{escape(f["text"])}</p></div>
+      <div class="af-side"><p class="af-label">Tools</p><ul class="af-tools">{tools}</ul>
+        <p class="af-label">What comes out</p><p class="af-out">{escape(f["out"])}</p></div>
+    </div>''')
+    return f'''<section class="af" aria-labelledby="af-title">
+  <div class="wrap">
+    <div class="bring-head af-head" data-reveal><span class="hand">{escape(C.AI_FLOW_NOTE)}</span><h2 id="af-title">{escape(C.AI_FLOW_TITLE)}</h2></div>
+    <div class="af-chart" data-reveal>
+      <div class="af-track" role="tablist" aria-label="AI workflow steps">
+        <span class="af-line" aria-hidden="true"><i></i></span>
+        {"".join(tabs)}
+      </div>
+      <p class="af-hint" aria-hidden="true">tap a step ✦</p>
+      <div class="af-card glass">{"".join(panels)}</div>
+    </div>
+    <p class="af-end" data-reveal>{escape(C.AI_FLOW_END)}</p>
+  </div>
+</section>'''
+
+
 def bring():
     P = ROOT / "partials"
     diary = (P / "diary.html").read_text()
@@ -334,6 +376,8 @@ def home():
 </section>
 
 {bring()}
+
+{ai_flow()}
 
 <section class="ticker-section" aria-label="Visual journey">
   <div class="ticker-head wrap" data-reveal><span class="hand">a sneak peek of my</span><h2>Visual journey</h2></div>
