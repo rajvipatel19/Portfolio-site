@@ -2157,8 +2157,3 @@ main:has(> .hero) .hero-hi { font-size: 20px; } /* same as the notes */
   .af-end { font-size: 18px; }
 }
 @media (prefers-reduced-motion: reduce) { .af-line i { animation: none; display: none; } .af-panel:not([hidden]) { animation: none; } }
-
-/* hero: a bit cooler, softens the orange sunset towards dusky lavender */
-.hero-media .hero-view { filter: saturate(.8) hue-rotate(-8deg) brightness(.98); }
-.hero-room { filter: saturate(.88); }
-.hero-media::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: rgba(122,128,205,.10); mix-blend-mode: color; }
