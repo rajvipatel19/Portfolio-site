@@ -1839,3 +1839,25 @@ html.modal-open { overflow: hidden; }
 .ft-media {
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.35) calc(18% - var(--fs) * 10%), #000 calc(46% - var(--fs) * 24%));
   mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.35) calc(18% - var(--fs) * 10%), #000 calc(46% - var(--fs) * 24%)); }
+
+/* tighter rhythm: projects → table → sneak peek */
+#work { padding-bottom: 56px; }
+.bring { padding: 48px 0 56px; }
+.bring-head { margin-bottom: 48px; }
+.ticker-section { padding-top: 48px; }
+
+/* case study cards: frosted glass background and border */
+.work-grid .card { background: linear-gradient(150deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.28) 100%);
+  border: 1px solid rgba(255,255,255,.85);
+  box-shadow: inset 0 1.5px 1px rgba(255,255,255,.95), inset 0 -18px 30px -24px rgba(255,255,255,.8), inset 0 0 0 1px rgba(255,255,255,.2),
+              0 30px 60px -36px rgba(70,50,140,.35), 0 8px 20px -14px rgba(70,50,140,.18);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5); }
+.work-grid .card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(115deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 32%); }
+.work-grid .card:hover { box-shadow: inset 0 1.5px 1px #fff, inset 0 0 0 1px rgba(255,255,255,.3), 0 36px 70px -32px rgba(70,50,140,.45); }
+
+/* footer: take the blue out of the sky so it reads soft and neutral */
+.ft-video { filter: saturate(.78) sepia(.12); }
+.ft-media::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: saturation;
+  background: linear-gradient(180deg, rgba(150,145,140,.85) 0%, rgba(150,145,140,.55) 35%, rgba(150,145,140,0) 62%); }
+.ft-media::after { z-index: 2; }

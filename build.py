@@ -230,7 +230,7 @@ def bring():
     ]
     return f"""<section class="bring" id="bring">
   <div class="bring-head wrap" data-reveal>
-    <span class="hand">pull up a chair</span>
+    <span class="hand">like literally</span>
     <h2>What I bring to the table</h2>
     <p>Hover to peek, click to read more.</p>
   </div>
