@@ -205,10 +205,21 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .sk { --sk-ink: #eeeaf6; --sk-ink-2: #b9b3c8; --sk-ghost: #5c5a74; --sk-lav: rgba(255,255,255,.06); }
 
 /* page backgrounds: the same soft colour journey, at night */
-[data-theme="dark"] .sila.sl-bg { background:
-  radial-gradient(circle at 92% 140px, rgba(226, 170, 150, .12) 0, rgba(226, 170, 150, 0) 320px),
-  linear-gradient(180deg, #33304f 0px, #31354f 900px, #34324f 40%, #3a3452 70%, #2c2a46 100%); }
-[data-theme="dark"] .sila.cl.sl-bg { background: #2f2d4a; }
+/* all three case studies share the home page's blue-hour sky: dusky purple drifting into blue-violet, with twinkling stars */
+[data-theme="dark"] .sila.sl-bg, [data-theme="dark"] .sila.cl.sl-bg { position: relative; isolation: isolate; background:
+  radial-gradient(60% 520px at 85% 160px, rgba(226,170,150,.14) 0, rgba(226,170,150,0) 100%),
+  linear-gradient(180deg, #3b3352 0px, #363553 900px, #323758 22%, #383c5e 45%, #3f4162 65%, #36365a 85%, #2c2a46 100%); }
+[data-theme="dark"] .sila.sl-bg::before, [data-theme="dark"] .sila.sl-bg::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 18%, rgba(255,255,255,.9), transparent 70%),
+    radial-gradient(1px 1px at 38% 62%, rgba(255,255,255,.75), transparent 70%),
+    radial-gradient(1.6px 1.6px at 71% 34%, rgba(255,240,215,.85), transparent 70%),
+    radial-gradient(1px 1px at 88% 79%, rgba(255,255,255,.7), transparent 70%),
+    radial-gradient(1.2px 1.2px at 55% 8%, rgba(255,255,255,.8), transparent 70%);
+  background-size: 520px 460px; animation: starTwinkle 5.5s ease-in-out infinite alternate; }
+[data-theme="dark"] .sila.sl-bg::after { background-size: 700px 610px; background-position: 230px 170px; animation-duration: 7.5s; animation-delay: -3s; }
+@media (prefers-reduced-motion: reduce) { [data-theme="dark"] .sila.sl-bg::before, [data-theme="dark"] .sila.sl-bg::after { animation: none; opacity: .7; } }
 
 /* headings and text that were hard-coded dark */
 [data-theme="dark"] .sila h1, [data-theme="dark"] .sila h2, [data-theme="dark"] .sila h3, [data-theme="dark"] .sila h4,
