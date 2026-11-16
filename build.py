@@ -298,6 +298,11 @@ def home():
     <div class="hero-room"></div>
     {sparkles}
   </div>
+  <nav class="ff-links" aria-label="Case studies">
+    <a class="ff-link" href="work/sila.html" aria-label="Open the SILA case study" style="--x:57%;--y:63%;--mx:10%;--my:81%;--dur:11s;--dl:-2s"><i></i><span>click on me</span></a>
+    <a class="ff-link" href="work/citylockers-kiosk.html" aria-label="Open the CityLockers Kiosk case study" style="--x:68%;--y:46%;--mx:29%;--my:84%;--dur:13s;--dl:-6s"><i></i><span>click on me</span></a>
+    <a class="ff-link" href="work/sku-platform.html" aria-label="Open the SKU Platform case study" style="--x:77%;--y:34%;--mx:47%;--my:81%;--dur:12s;--dl:-9s"><i></i><span>click on me</span></a>
+  </nav>
   <div class="wrap hero-inner">
     <span class="hand hi" data-reveal>hi! i'm Rajvi ✿</span>
     <h1 class="split">I design products that are <em>easy to understand</em> &amp; use.</h1>
