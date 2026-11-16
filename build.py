@@ -272,7 +272,6 @@ def home():
       </div>
     </div>
   </div>
-  <div class="scroll-cue" aria-hidden="true"><span></span>scroll</div>
 </section>
 
 <section class="section" id="work">

@@ -1602,16 +1602,16 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   -webkit-mask: url("../media/hero-room-mask.png") var(--hpos) / cover no-repeat;
   mask: url("../media/hero-room-mask.png") var(--hpos) / cover no-repeat;
   /* phase 2 (second part of the scroll): the room zooms in from the bottom, lifts and fades last */
-  --r: clamp(0, calc((var(--hs) - .4) / .55), 1);
+  --r: clamp(0, calc((var(--hs) - .3) / .7), 1);
   transform-origin: 50% 100%;
   transform: translate3d(0, calc(var(--r) * -40%), 0) scale(calc(1 + var(--r) * .15));
   opacity: calc(1 - var(--r));
   will-change: transform, opacity; }
 /* phase 1 (first part of the scroll): the mountain view zooms gently and fades away first, leaving a soft glow in the window */
-.hero-media { background: linear-gradient(180deg, #ece6f6 0%, #f6e8e0 60%, #fbf3ec 100%); }
+.hero-media { background: linear-gradient(180deg, #a99bb8 0%, #c9a7a8 45%, #e2b9a2 70%, #efd9cc 100%); } /* dusky sunset glow, never plain white */
 .hero-media .hero-view { transform-origin: 50% 60%;
-  transform: scale(calc(1 + min(1, var(--hs) * 2.2) * .12));
-  opacity: clamp(0, calc(1 - var(--hs) * 2.2), 1); will-change: transform, opacity; }
+  transform: scale(calc(1 + min(1, var(--hs) * 1.3) * .12));
+  opacity: clamp(0, calc(1 - var(--hs) * 1.3), 1); will-change: transform, opacity; }
 .hero-inner { transform: translate3d(0, calc(var(--hs) * -30vh), 0); opacity: clamp(0, calc(1 - var(--hs) * 1.6), 1); }
 @media (max-width: 860px) { .hero { --hpos: 74% 50%; } }
 @media (max-width: 600px) { .hero { --hpos: 90% 50%; } }
