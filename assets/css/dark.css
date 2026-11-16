@@ -186,7 +186,7 @@ html.theme-switching body, html.theme-switching body * { transition: background-
    5. Paper objects (sticky notes, rule cards, polaroids) keep their paper
       colour, a touch softer, and always use dark ink #1d1b26.
    6. Screenshots, diagrams and light tables are never inverted or recoloured
-      (only their frame: every screenshot outline is light purple #b9a9e8).
+      (only their frame: screenshots sit in the glass frame, never a coloured border).
       They sit in a soft frame (rounded, thin glass edge) and are dimmed by 6%
       so a white image doesn't glare on the dark page.
    7. Light textures (paper grids, dotted patterns) become a faint white grid.
@@ -343,7 +343,6 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .sk-band { background: #34324f; isolation: isolate; }
 [data-theme="dark"] .sk-band img { mix-blend-mode: luminosity; filter: brightness(1.55) contrast(.95); }
 /* 2. screen borders: light purple instead of deep purple */
-[data-theme="dark"] :is(.sk-framed, .sk-step img, .sk-import-note img, .sk-import-side img) { border-color: #b9a9e8; }
 [data-theme="dark"] .sk-prio-card { border-color: #b9a9e8; }
 /* 3. the store animation sits in a glass frame */
 [data-theme="dark"] .sk-gif img { padding: 14px; border-radius: 30px;
@@ -352,7 +351,7 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 /* 4. the storyboard line drawings turn white (colours keep their hue) */
 [data-theme="dark"] .sk-story img { filter: invert(1) hue-rotate(180deg) brightness(.95); }
 
-/* SKU screenshots: in dark mode, the copies whose built-in frame is light purple (same picture otherwise) */
+/* SKU screenshots: in dark mode, copies with the built-in purple frame removed (same picture otherwise) */
 [data-theme="dark"] img[src$="/sku/dashboard.png"] { content: url("../media/sku/dashboard-dark.png"); }
 [data-theme="dark"] img[src$="/sku/importlist.png"] { content: url("../media/sku/importlist-dark.png"); }
 [data-theme="dark"] img[src$="/sku/myproducts.png"] { content: url("../media/sku/myproducts-dark.png"); }
@@ -366,3 +365,22 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] img[src$="/sku/discovery-1.png"] { content: url("../media/sku/discovery-1-dark.png"); }
 [data-theme="dark"] img[src$="/sku/discovery-2.png"] { content: url("../media/sku/discovery-2-dark.png"); }
 [data-theme="dark"] img[src$="/sku/features-nav.png"] { content: url("../media/sku/features-nav-dark.png"); }
+
+/* every SKU screenshot frame: glass instead of a purple border */
+[data-theme="dark"] img[src$="/sku/dashboard.png"],
+[data-theme="dark"] img[src$="/sku/importlist.png"],
+[data-theme="dark"] img[src$="/sku/myproducts.png"],
+[data-theme="dark"] img[src$="/sku/orders-1.png"],
+[data-theme="dark"] img[src$="/sku/orders-2.png"],
+[data-theme="dark"] img[src$="/sku/product-details.png"],
+[data-theme="dark"] img[src$="/sku/store-1.png"],
+[data-theme="dark"] img[src$="/sku/store-2.png"],
+[data-theme="dark"] img[src$="/sku/store-3.png"],
+[data-theme="dark"] img[src$="/sku/store-4.png"],
+[data-theme="dark"] img[src$="/sku/discovery-1.png"],
+[data-theme="dark"] img[src$="/sku/discovery-2.png"],
+[data-theme="dark"] img[src$="/sku/features-nav.png"],
+[data-theme="dark"] :is(.sk-framed, .sk-step img, .sk-import-note img, .sk-import-side img) {
+  box-sizing: border-box; padding: 10px; border: 1px solid rgba(255,255,255,.2) !important; border-radius: 22px;
+  background: linear-gradient(150deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 24px 50px -30px rgba(12,10,32,.7); }
