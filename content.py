@@ -5,7 +5,8 @@ LINKEDIN = "https://www.linkedin.com/in/rajvipatel1912"
 RESUME = "https://drive.google.com/file/d/1aLerfDv--jNq0D1PowDIvbVdaXrZtzyQ/view?usp=sharing"
 
 META_DESC = "Rajvi Patel, Senior Product Designer in Dubai. 4+ years designing B2C, B2B, health-tech and e-commerce products that are easy to understand and use."
-INTRO = "4+ years designing across B2C, B2B, health-tech and e-commerce. Your product idea deserves a design that doesn't make users work as hard as you did."
+HERO_TITLE = "AI native product designer with interest in healthtech and fintech"
+INTRO = "I turn ambiguity into direction, and direction into thoughtful product experiences, bringing together product experience into B2B, B2C, and SaaS products to create products you would like to use."
 
 ABOUT_BIO = [
     "I'm a Senior Product Designer based in Dubai, with 4+ years of designing products end to end, from the first research call to the final shipped screen.",

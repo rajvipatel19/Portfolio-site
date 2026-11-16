@@ -2063,3 +2063,17 @@ button.shot--img:focus-visible { outline: 3px solid var(--lav-deep); outline-off
   .vj-close { top: -12px; right: -6px; }
 }
 @media (prefers-reduced-motion: reduce) { .vj-modal[open] { animation: none; } }
+
+/* ---------- Hero, v2: "Hi! I'm Rajvi" with a tilted photo (like the Framer site), smaller one-colour heading ---------- */
+.hero-hi { display: inline-flex; align-items: center; gap: 14px; margin: 0 0 18px; font-family: var(--font-display); font-style: italic; font-weight: 700;
+  font-size: 24px; letter-spacing: .1em; color: var(--ink); }
+.hero-photo { width: 60px; height: 60px; object-fit: cover; border-radius: 12px; border: 3px solid rgba(255,255,255,.95);
+  box-shadow: 0 10px 22px -10px rgba(30,20,70,.45); transform: rotate(-12deg); transition: transform .5s var(--ease); }
+.hero-hi:hover .hero-photo { transform: rotate(0deg) scale(1.08); }
+.hero h1 { font-size: clamp(36px, 4.2vw, 62px); max-width: 15ch; color: var(--ink); line-height: 1.1; }
+.hero-side p { max-width: 520px; }
+@media (max-width: 600px) {
+  .hero-hi { font-size: 20px; gap: 12px; }
+  .hero-photo { width: 50px; height: 50px; border-radius: 10px; }
+  .hero h1 { font-size: 32px; }
+}
