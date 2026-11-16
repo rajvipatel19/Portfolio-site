@@ -1,4 +1,7 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/art-lab", "destination": "/ai-lab", "permanent": true }
+  ]
 }

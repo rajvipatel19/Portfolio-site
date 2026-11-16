@@ -369,19 +369,17 @@ const SITE = {
     r.addEventListener("input", set); set();
   });
 
-  /* ---------- Footer: "Let's …" typing effect ---------- */
-  const typeEl = $(".ft-type");
-  if (typeEl && !reduce) {
+  /* ---------- Typing effect: the footer's "Let's …" and the About / AI Lab sky lines ---------- */
+  if (!reduce) $$("[data-type]").forEach((typeEl) => {
     const words = typeEl.dataset.type.split("|"); let w = 0, i = words[0].length, del = true;
     const tick = () => {
-      const word = words[w];
       if (del) { i--; if (i <= 0) { del = false; w = (w + 1) % words.length; } }
       else { i++; if (i >= words[w].length) { del = true; typeEl.textContent = words[w]; return setTimeout(tick, 1800); } }
       typeEl.textContent = words[w].slice(0, Math.max(i, 0));
       setTimeout(tick, del ? 45 : 85);
     };
     setTimeout(tick, 1800);
-  }
+  });
 
   /* ---------- Arriving with a #section in the link (e.g. Projects from a case study): jump straight there ---------- */
   if (location.hash.length > 1) {

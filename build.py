@@ -50,7 +50,7 @@ def nav(root, active):
   <nav class="nav-menu glass" aria-label="Main">
     <div class="nav-links">
       {link("about.html", "About", "about")}
-      {link("art-lab.html", "Art Lab", "art")}
+      {link("ai-lab.html", "AI Lab", "ai")}
       {link("index.html#work", "Projects", "work")}
       <a href="{C.LINKEDIN}" target="_blank" rel="noopener">LinkedIn</a>
       <a class="nav-resume nav-resume--menu" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW_UR}</a>
@@ -500,14 +500,27 @@ def case_study(cs, nxt):
     return head(f"{cs['name']} · Rajvi Patel", cs["lede"], root) + body
 
 
-# ---------------------------------------------------------------- about / art lab
+# ---------------------------------------------------------------- about / AI lab
+# Both pages open with a "sky" scene in the footer's lavender-peach palette: drifting clouds,
+# fireflies, a typing line and soft pill buttons. The sky melts into the page at the bottom.
+def sky_clouds():
+    return '<div class="sky-clouds" aria-hidden="true">' + "".join(f'<i class="c{i}"></i>' for i in range(1, 6)) + "</div>"
+
+
+def sky_btns(primary, secondary):
+    return f'<div class="sky-btns">{primary}{secondary}</div>'
+
+
 def about():
     root = ""
-    facts = "".join(f'<span class="chip">{f}</span>' for f in C.ABOUT_FACTS)
+    facts = "".join(f'<span class="sky-chip">{f}</span>' for f in C.ABOUT_FACTS)
     paras = "".join(f"<p>{p}</p>" for p in C.ABOUT_BIO)
+    words = "|".join(C.ABOUT_TYPING)
     body = f"""{nav(root, 'about')}
 <main>
-<section class="about-hero">
+<section class="sky sky--about">
+  {sky_clouds()}
+  {fireflies(12)}
   <div class="wrap about-grid">
     <div class="polaroid-wrap" data-reveal>
       <div class="polaroid"><span class="tape"></span>{img_ph('your photo', '4/5')}<span class="caption">that's me! ✿</span></div>
@@ -515,14 +528,13 @@ def about():
       <span class="sticker" style="left:-26px;bottom:22%;width:60px;animation-delay:-2s">{desk_sticker('heart')}</span>
     </div>
     <div class="about-copy">
-      <span class="eyebrow" data-reveal>About me</span>
+      <p class="sky-hi hand" data-reveal>hi, I'm Rajvi, <span class="sky-type" data-type="{words}">{C.ABOUT_TYPING[0]}</span><span class="sky-caret" aria-hidden="true"></span></p>
       <h1 class="split">From dental chairs to <em>design systems.</em></h1>
       <div data-reveal style="--d:.3s">{paras}</div>
       <div class="about-facts" data-reveal style="--d:.4s">{facts}</div>
-      <div class="hero-cta" data-reveal style="--d:.5s">
-        <a class="btn btn--dark magnetic" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW_UR}</a>
-        <a class="btn magnetic" href="index.html#call" data-cal>Book a call {ARROW}</a>
-      </div>
+      <div data-reveal style="--d:.5s">{sky_btns(
+          f'<a class="sky-btn sky-btn--dark" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW_UR}</a>',
+          f'<a class="sky-btn" href="index.html#call" data-cal>Book a call {ARROW}</a>')}</div>
     </div>
   </div>
 </section>
@@ -537,24 +549,56 @@ def desk_sticker(kind):
     return '<svg viewBox="0 0 80 72"><path d="M40 66 10 38C-2 26 6 6 22 6c8 0 14 5 18 11 4-6 10-11 18-11 16 0 24 20 12 32Z" fill="#ffc7d8" stroke="#fff" stroke-width="5"/></svg>'
 
 
-def art_lab():
+# A little "neural network" drawn as a constellation of fireflies. Points are in a 100 x 90 box.
+NET_NODES = [(10, 30), (30, 12), (52, 22), (78, 10), (92, 36), (66, 42), (40, 46), (16, 62), (46, 72), (74, 66), (90, 82), (26, 86)]
+NET_EDGES = [(0, 1), (1, 2), (2, 3), (3, 4), (2, 5), (4, 5), (5, 6), (0, 6), (1, 6), (6, 7), (6, 8), (7, 8), (8, 9), (5, 9), (9, 10), (8, 11), (7, 11), (4, 9)]
+NET_TAGS = {1: ("above", "prompt experiments"), 4: ("above", "tiny AI tools"), 7: ("below", "prototypes built with Claude"), 9: ("below", "notes on designing for AI")}
+
+
+def ai_net():
+    lines, pulses = [], []
+    for k, (a, b) in enumerate(NET_EDGES):
+        (x1, y1), (x2, y2) = NET_NODES[a], NET_NODES[b]
+        xy = f'x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}"'
+        lines.append(f'<line class="ln" {xy} style="--i:{k}"/>')
+        pulses.append(f'<line class="pulse" {xy} pathLength="100" style="--dl:{-(k * 0.83) % 6:.2f}s"/>')
+    nodes = []
+    for k, (x, y) in enumerate(NET_NODES):
+        pos = f"--x:{x}%;--y:{y / 90 * 100:.2f}%"
+        big = k in NET_TAGS
+        nodes.append(f'<i class="nd{" nd--big" if big else ""}" style="{pos};--dl:{-(k * 0.7):.1f}s"></i>')
+        if big:
+            side, label = NET_TAGS[k]
+            nodes.append(f'<span class="nd-tag nd-tag--{side}" style="{pos};--dl:{-(k * 0.9):.1f}s">{label}</span>')
+    return f"""<div class="net" data-reveal style="--d:.3s" aria-hidden="true">
+      <svg viewBox="0 0 100 90">{"".join(lines)}{"".join(pulses)}</svg>
+      {"".join(nodes)}
+    </div>"""
+
+
+def ai_lab():
     root = ""
-    body = f"""{nav(root, 'art')}
+    body = f"""{nav(root, 'ai')}
 <main>
-<section class="soon-page">
-  <div class="wrap">
-    <div class="soon-card glass" data-reveal style="margin-inline:auto">
-      <div class="palette-dots"><i style="background:var(--lav)"></i><i style="background:var(--butter);animation-delay:.2s"></i><i style="background:#ffc7d8;animation-delay:.4s"></i><i style="background:#cfe9de;animation-delay:.6s"></i></div>
-      <span class="hand" style="font-size:26px">still mixing the colours…</span>
-      <h1>Art Lab</h1>
-      <p>A space for visual experiments, AI explorations and things I make for fun. Coming soon.</p>
-      <a class="btn magnetic" href="index.html#work">Meanwhile, see my work {ARROW}</a>
+<section class="sky sky--lab">
+  {sky_clouds()}
+  {fireflies(12)}
+  <div class="wrap sky-grid">
+    <div class="sky-copy">
+      <p class="sky-hi hand" data-reveal>still teaching the robots some manners ✿</p>
+      <h1 class="sky-title" data-reveal style="--d:.1s">AI Lab is<br><span class="sky-type" data-type="brewing|prototyping|learning|almost here">brewing</span><span class="sky-caret" aria-hidden="true"></span></h1>
+      <p class="sky-lede" data-reveal style="--d:.2s">{C.AI_LAB_TEXT}</p>
+      <div class="sky-load" data-reveal style="--d:.3s"><span>warming up the lab…</span><div class="sky-bar"><i></i></div></div>
+      <div data-reveal style="--d:.4s">{sky_btns(
+          f'<a class="sky-btn sky-btn--dark" href="index.html#work">Meanwhile, see my work {ARROW}</a>',
+          f'<a class="sky-btn" href="index.html#call" data-cal>Book a call</a>')}</div>
     </div>
+    {ai_net()}
   </div>
 </section>
 </main>
 {footer(root)}"""
-    return head("Art Lab · Rajvi Patel", "Visual experiments by Rajvi Patel — coming soon.", root) + body
+    return head("AI Lab · Rajvi Patel", "AI experiments by Rajvi Patel: prompt play, tiny tools and prototypes. Coming soon.", root) + body
 
 
 # ---------------------------------------------------------------- SILA (matches the Framer case study)
@@ -1234,7 +1278,7 @@ if __name__ == "__main__":
     (ROOT / "work").mkdir(exist_ok=True)
     (ROOT / "index.html").write_text(home())
     (ROOT / "about.html").write_text(about())
-    (ROOT / "art-lab.html").write_text(art_lab())
+    (ROOT / "ai-lab.html").write_text(ai_lab())
     projs = C.PROJECTS
     for i, cs in enumerate(C.CASE_STUDIES):
         nxt = projs[(i + 1) % len(projs)]

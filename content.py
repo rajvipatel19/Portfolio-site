@@ -12,6 +12,8 @@ ABOUT_BIO = [
     "Before design, I trained as a dentist. That clinical background shaped how I work: listen first, explain clearly, and earn trust at every step. It's why I love fintech, health-tech and AI-native products, where clarity really matters.",
     "I've built and led a design team from scratch, been the sole designer at an early-stage startup, and shipped across mobile apps, kiosks, web platforms and client portals.",
 ]
+ABOUT_TYPING = ["a product designer", "an ex-dentist", "a coffee person", "a firefly catcher"]  # the typing line on About
+AI_LAB_TEXT = "A corner for my experiments with AI: prompt play, tiny tools and prototypes I build with Claude, plus notes on designing AI products people can trust. The lights are on, the furniture isn't in yet."
 ABOUT_FACTS = ["📍 Dubai", "4+ years in product design", "🦷 BDS, ex-dentist", "Fintech · Health-tech · AI", "☕ powered by coffee"]
 
 # Home page cards (order = order on the page). Add  "video": "assets/media/sila.mp4"  once you have a video.
