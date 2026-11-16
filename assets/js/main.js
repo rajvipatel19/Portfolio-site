@@ -195,6 +195,29 @@ const SITE = {
     update();
   }
 
+  /* ---------- Footer scene: the hero picture builds back up as you reach the end of the page ---------- */
+  const ftScene = $(".ft--scene");
+  if (ftScene && !reduce) {
+    let fTarget = 0, fs = 0, fEasing = false, fTick = false;
+    const fEase = () => {
+      fs += (fTarget - fs) * 0.12;
+      if (Math.abs(fTarget - fs) < 0.0005) fs = fTarget;
+      ftScene.style.setProperty("--fs", fs.toFixed(4));
+      if (fs !== fTarget) requestAnimationFrame(fEase); else fEasing = false;
+    };
+    const fUpdate = () => {
+      fTick = false;
+      const r = ftScene.getBoundingClientRect();
+      // 0 when the footer's top reaches the bottom of the screen, 1 at the very end of the page
+      const travel = Math.min(r.height, document.documentElement.scrollHeight - innerHeight) || 1;
+      fTarget = Math.min(Math.max((innerHeight - r.top) / travel, 0), 1);
+      if (!fEasing) { fEasing = true; requestAnimationFrame(fEase); }
+    };
+    addEventListener("scroll", () => { if (!fTick) { fTick = true; requestAnimationFrame(fUpdate); } }, { passive: true });
+    addEventListener("resize", fUpdate);
+    fUpdate();
+  }
+
   /* ---------- CD player (Spotify iFrame API) ---------- */
   const stage = $(".cd-stage");
   if (stage) {
