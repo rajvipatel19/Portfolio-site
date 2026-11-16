@@ -2286,3 +2286,15 @@ main.home.sl-bg + .ft--scene { background: linear-gradient(180deg, #e6dcd1 0%, r
 .card-media .scene--butter::before { background: linear-gradient(1deg, rgba(236,206,160,.4) 0%, rgba(252,246,238,.3) 100%); }
 .card-media .scene--mix::before { background: linear-gradient(1deg, rgba(190,172,214,.38) 0%, rgba(250,248,252,.3) 100%); }
 .work-grid .card:hover { box-shadow: inset 0 1.5px 1px #fff, inset 0 0 0 1px rgba(255,255,255,.3), 0 30px 60px -34px rgba(70,50,110,.3); }
+
+/* iPod earphones v3: plugged into the jack at the bottom, the cord loops up into a loose coil beside the iPod
+   with the earbuds resting on it. iPod + earphones move together inside .pod-rig, so they always stay connected. */
+.pod-rig { position: relative; z-index: 1; transform: rotate(-5deg); transition: transform .8s var(--ease); animation: podFloat 7s ease-in-out infinite; }
+.pod-stage.is-playing .pod-rig { transform: rotate(-2deg) scale(1.02); }
+.pod, .pod-stage.is-playing .pod { transform: none; animation: none; margin-top: 0; }
+.pod-wire { position: absolute; left: -56.67%; top: 20%; bottom: auto; width: 156.67%; max-width: none; height: auto; transform: none; z-index: 0; overflow: visible; pointer-events: none; }
+@media (max-width: 860px) { .pod-stage { padding-top: 24px; } }
+@media (max-width: 600px) { .pod-wire { transform-origin: 51.06% 87.2%; transform: scale(.62); } }
+@media (prefers-reduced-motion: reduce) { .pod-rig { animation: none; } }
+/* phones: nudge the iPod right so the coiled earphones on its left stay on screen */
+@media (max-width: 600px) { .pod-rig { left: 34px; } }
