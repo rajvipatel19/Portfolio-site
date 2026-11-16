@@ -1140,8 +1140,8 @@ def citylockers_page():
   <h2>Here's how kiosk works</h2>
   <p class="sl-lead">A complete kiosk experience from first touch to locker open.</p>
 </div></section>
-<section class="cl-video-band"><div class="in"><h3>Booking locker flow</h3><video src="{CM}flow-booking.mp4" muted loop playsinline preload="none" data-autoplay aria-label="Booking locker flow on the kiosk"></video></div></section>
-<section class="cl-video-band"><div class="in"><h3>Manage booking flow</h3><video src="{CM}flow-manage.mp4" muted loop playsinline preload="none" data-autoplay aria-label="Manage booking flow on the kiosk"></video></div></section>
+<section class="cl-video-band"><div class="in"><h3>Booking locker flow</h3><div class="cl-vframe cl-vframe--booking"><div class="cl-vclip"><video src="{CM}flow-booking.mp4" muted loop playsinline preload="none" data-autoplay aria-label="Booking locker flow on the kiosk"></video></div></div></div></section>
+<section class="cl-video-band"><div class="in"><h3>Manage booking flow</h3><div class="cl-vframe cl-vframe--manage"><div class="cl-vclip"><video src="{CM}flow-manage.mp4" muted loop playsinline preload="none" data-autoplay aria-label="Manage booking flow on the kiosk"></video></div></div></div></section>
 
 <section class="sl-sec" id="beforeafter"><div class="in">
   <p class="sl-eyebrow">Before / After</p>

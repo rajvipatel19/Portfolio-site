@@ -2383,3 +2383,6 @@ main.home > section.cd-section:not(.hero) { padding-top: calc(var(--sec-gap) - 1
 @media (max-width: 600px) { .sila .sk-goal h3, .sila .sk-head h3 { font-size: 24px; } }
 .sila .sl-flow { display: block; margin-bottom: 12px; }
 .sila .sl-flow + :is(h2, h3) { margin-top: 0; }
+
+/* kiosk recordings: wrappers used only in dark mode (glass frame); in light mode they don't change anything */
+.cl-vframe, .cl-vclip { display: contents; }
