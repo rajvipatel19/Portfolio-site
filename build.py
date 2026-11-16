@@ -69,6 +69,7 @@ def footer(root):
     return f"""<footer class="ft ft--scene" id="contact">
   <div class="ft-media" aria-hidden="true">
     <video class="ft-video" src="{root}assets/media/footer-meadow.mp4" muted loop playsinline preload="none" data-autoplay></video>
+    <span class="ft-warm"></span>
   </div>
   <div class="ft-in">
     <div class="ft-top">

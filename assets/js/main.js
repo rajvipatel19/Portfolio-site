@@ -173,6 +173,19 @@ const SITE = {
     hv.querySelector("source")?.addEventListener("error", () => hv.remove());
   }
 
+  /* ---------- Hero framing: on narrower screens, line the window's black right frame up with the screen's right edge ---------- */
+  const heroBox = $(".hero");
+  if (heroBox && $(".hero-room")) {
+    const IMG_W = 2000, IMG_H = 1116, FRAME_RIGHT = 0.965; // the window frame ends ~96.5% across the picture
+    const fitHero = () => {
+      const w = heroBox.offsetWidth, h = heroBox.offsetHeight;
+      const shownW = Math.max(w, h * IMG_W / IMG_H), r = w / shownW;   // how much of the picture's width fits on screen
+      const x = r >= FRAME_RIGHT ? 0.5 : (FRAME_RIGHT - r) / (1 - r);
+      heroBox.style.setProperty("--hpos", `${(x * 100).toFixed(2)}% 50%`);
+    };
+    fitHero(); addEventListener("resize", fitHero); addEventListener("load", fitHero);
+  }
+
   /* ---------- Hero scroll: video drifts down + fades as the next section slides over it ---------- */
   const hero = $(".hero");
   if (hero && !reduce) {

@@ -1861,3 +1861,9 @@ html.modal-open { overflow: hidden; }
 .ft-media::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: saturation;
   background: linear-gradient(180deg, rgba(150,145,140,.85) 0%, rgba(150,145,140,.55) 35%, rgba(150,145,140,0) 62%); }
 .ft-media::after { z-index: 2; }
+
+/* footer: no blue anywhere in the sky. Fully neutralise the colour down past the horizon, then warm it slightly */
+.ft-video { filter: saturate(.7) sepia(.18); }
+.ft-media::before { background: linear-gradient(180deg, rgba(150,145,140,1) 0%, rgba(150,145,140,.95) 45%, rgba(150,145,140,.6) 68%, rgba(150,145,140,0) 86%); }
+.ft-media .ft-warm { position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: soft-light;
+  background: linear-gradient(180deg, rgba(255,214,170,.55) 0%, rgba(255,214,170,.25) 60%, rgba(255,214,170,0) 85%); }
