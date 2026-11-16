@@ -171,6 +171,26 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .lab-stage iframe { color-scheme: light; }
 
 /* =========================================================
+   DARK THEME DESIGN RULES  (apply these to anything new)
+   1. Page: the "blue hour" dusk sky. Base #2c2a46; never pure black.
+   2. Surfaces, three steps only:
+        band   rgba(255,255,255,.04)  – full-width tinted sections
+        card   #393760 + 1px rgba(255,255,255,.12) edge
+        raised #433f6a – tinted panels, chips, active states
+   3. Text: headings #f6f3fb · body #d2cde0 · muted #a9a3bd.
+      Nothing that must be read goes below #a9a3bd (4.5:1 on a card).
+   4. Accents are for small labels only: lavender #c7baff (SILA, SKU),
+      amber #f3a740 (CityLockers). Large tinted areas use the raised surface.
+   5. Paper objects (sticky notes, rule cards, polaroids) keep their paper
+      colour, a touch softer, and always use dark ink #1d1b26.
+   6. Screenshots, diagrams and light tables are never inverted or recoloured.
+      They sit in a soft frame (rounded, thin glass edge) and are dimmed by 6%
+      so a white image doesn't glare on the dark page.
+   7. Light textures (paper grids, dotted patterns) become a faint white grid.
+   8. Shadows are deep indigo rgba(12,10,32,.x), never black.
+   ========================================================= */
+
+/* =========================================================
    Case studies (SILA, CityLockers, SKU)
    Screenshots and diagrams stay as they are; the page,
    cards and text around them go dark.
@@ -252,3 +272,29 @@ html.theme-switching body, html.theme-switching body * { transition: background-
   border-color: rgba(255,255,255,.12);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 40px 80px -50px rgba(12,10,32,.45); }
 [data-theme="dark"] .gt::after { background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.025) 42%, transparent 54%); }
+
+/* ---------- Case studies v2: following the rules above ---------- */
+[data-theme="dark"] .sila { --sl-num: #8a85b0; }
+/* rule 3: side progress links readable */
+[data-theme="dark"] .sila .sl-rail li a, [data-theme="dark"] .sila .sl-rail li.done a,
+[data-theme="dark"] .sila .sl-side li a, [data-theme="dark"] .sila .sl-side li.done a { color: #a9a3bd; }
+[data-theme="dark"] .sila .sl-rail li.active a, [data-theme="dark"] .sila .sl-side li.active a { color: #f6f3fb; }
+/* rule 5: paper objects keep paper colour with dark ink */
+[data-theme="dark"] .sl-rule--peach { background: #f3cdbf; }
+[data-theme="dark"] .sl-rule--yellow { background: #efd99c; }
+[data-theme="dark"] .cl-sticky { background: #8ccbef; }
+[data-theme="dark"] :is(.sl-rule, .cl-sticky) { box-shadow: 0 14px 24px -12px rgba(12,10,32,.6); }
+[data-theme="dark"] .sila :is(.sl-rule, .cl-sticky) :is(h3, h4, p, li, b, span, strong) { color: #1d1b26; }
+[data-theme="dark"] .sila .sl-rule p, [data-theme="dark"] .sila .cl-sticky li { color: #3a3846; }
+/* rule 6: light screenshots, tables and diagrams sit in a soft frame */
+[data-theme="dark"] .sila :is(.sl-wide, .sk-wide) { border-radius: 16px; box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 24px 50px -30px rgba(12,10,32,.6); filter: brightness(.94); }
+/* rule 7: light paper textures become a faint white grid */
+[data-theme="dark"] .sila .sk-pattern, [data-theme="dark"] .sila .sk-dots {
+  background: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px) 0 0 / 44px 44px,
+              linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px) 0 0 / 44px 44px, rgba(255,255,255,.035); }
+[data-theme="dark"] .sila .sk-story { background: rgba(255,255,255,.04); }
+/* SKU promo card: white text on its purple */
+[data-theme="dark"] .sila .sk-promo-side p { color: #fff; }
+/* rule 3: links and quotes that were deep purple become light lavender */
+[data-theme="dark"] .sila .sl-articles a, [data-theme="dark"] .sila .sl-quotes p { color: #d6cbff; }
+[data-theme="dark"] .sila .sl-quotes p::before { background: #c7baff; }
