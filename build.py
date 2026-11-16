@@ -390,7 +390,7 @@ def home():
           <path d="M112 78 C 92 80, 62 70, 50 52 C 40 37, 40 22, 30 12" />
           <path d="M20 22 L 30 11 L 40 20" />
         </svg>
-        <span>back to the times when I had the OG iPod ♫</span>
+        <span>feeling nostalgic eh? ♫</span>
       </div>
     </div>
   </div>
