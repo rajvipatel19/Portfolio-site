@@ -1654,3 +1654,5 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 /* CityLockers: very light warm background instead of the lavender one, to sit with the orange */
 .sila.cl.sl-bg { background: linear-gradient(180deg, #fffdfa 0px, #fffaf4 900px, #fdf8f1 45%, #fffbf6 75%, #fefcf8 100%); }
 .sila.cl.sl-bg .cl-gray, .sila.cl.sl-bg .cl-video-band { background: rgba(250,244,236,.7); }
+/* CityLockers impact strip: Framer's cream with a bright orange underline */
+.cl .cl-impact { background: #fff5e7; box-shadow: 0 4px 0 #ff9900; }
