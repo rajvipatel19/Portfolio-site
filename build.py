@@ -273,8 +273,17 @@ def home():
     <div class="tags">{tags}</div>
   </div>
 </a>""")
-    shots = "".join(f'<div class="shot glass"><div class="shot-inner"><span class="ph">visual {n:02d}</span></div></div>' for n in range(1, 9))
-    shots2 = "".join(f'<div class="shot glass"><div class="shot-inner"><span class="ph">visual {n:02d}</span></div></div>' for n in range(9, 17))
+    # visual journey: (file, width, height, alt). Each tile keeps its image's own shape.
+    V = {1: (2000, 1463, "SILA transfer tracking screens"), 2: (1966, 2000, "SILA home and send screens"),
+         3: (2000, 1463, "SILA onboarding screens"), 4: (1966, 2000, "Arabic chat app with money transfer"),
+         5: (2000, 1622, "wildfern landing page hero"), 6: (2000, 1532, "wildfern programme features"),
+         7: (2000, 1532, "Novaflux robotics news homepage")}
+    def shot(n):
+        w, h, alt = V[n]
+        return f'<div class="shot shot--img" style="aspect-ratio:{w}/{h}"><img src="assets/media/visuals/v{n}.webp" alt="{alt}" loading="lazy" decoding="async"></div>'
+    row1 = [1, 5, 2, 6]; row2 = [3, 7, 4]
+    shots = "".join(shot(n) for n in row1 * 2)
+    shots2 = "".join(shot(n) for n in row2 * 2)
     sparkles = "".join(f'<span class="sparkle" style="left:{l}%;top:{t}%;animation-delay:{d}s;width:{s}px;height:{s}px">{SPARK}</span>'
                        for l, t, d, s in [(12, 22, 0, 10), (78, 18, 1.2, 14), (64, 40, 2.1, 8), (30, 58, .6, 12), (88, 62, 1.8, 10), (48, 14, 2.6, 9)])
     body = f"""{nav(root, 'work')}
