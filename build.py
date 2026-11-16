@@ -141,6 +141,17 @@ def img_ph(label="Image coming soon", ratio="16/9", extra_cls=""):
 
 
 # ---------------------------------------------------------------- scenes
+CARD_ART = {"sila": ("scene--lav", "sila.png", "SILA app: verify-identity home screen and the send-money screen"),
+            "kiosk": ("scene--butter", "citylockers.png", "CityLockers kiosk welcome screen"),
+            "sku": ("scene--mix", "sku.png", "SKU Platform product catalogue on a tablet")}
+
+
+def card_art(kind):
+    """Home page card picture (same images as the Framer site), on the card's soft coloured panel."""
+    bg, img, alt = CARD_ART[kind]
+    return f'<div class="scene {bg}"><img class="card-img" src="assets/media/cards/{img}" alt="{alt}" loading="lazy" decoding="async"></div>'
+
+
 def scene(kind):
     if kind == "sila":
         return f"""<div class="scene scene--lav">
@@ -254,7 +265,7 @@ def home():
         wide = " card--wide" if p.get("wide") else ""
         tags = "".join(f'<span class="chip">{t}</span>' for t in p["tags"])
         cards.append(f"""<a class="card glass tilt{wide}" href="work/{p['slug']}.html" data-video="{p.get('video','')}" data-reveal style="--d:{i*0.08:.2f}s">
-  <div class="card-media">{scene(p['scene'])}</div>
+  <div class="card-media">{card_art(p['scene'])}</div>
   <div class="card-body">
     <div class="card-meta">{p['meta']} <span class="badge{' badge--soft' if p['badge']=='MVP' else ''}">{p['badge']}</span></div>
     <h3>{p['name']} <span class="go">{ARROW_UR}</span></h3>
