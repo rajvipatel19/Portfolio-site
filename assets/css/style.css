@@ -1056,7 +1056,7 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .cl-evo-row { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; align-items: start; }
 .cl-evo-row > div { display: grid; gap: 12px; justify-items: start; }
 .cl-evo-row img { width: 100%; height: auto; border-radius: 8px; }
-.cl-grid-evo .cl-tag { color: #f0c27a; background: rgba(232,144,11,.15); }
+.cl-grid-evo .cl-tag { color: #e8900b; background: rgba(232,144,11,.15); }
 .cl-evo-arrow { position: relative; margin: 24px 0 8px; height: 1px; background: rgba(255,255,255,.5); }
 .cl-evo-arrow::after { content: ""; position: absolute; right: -1px; top: -4px; border: 4.5px solid transparent; border-left: 7px solid rgba(255,255,255,.7); border-right: 0; }
 .cl-grid-evo .cl-bul li { font-size: 18px; color: #f3f3f4; }
@@ -1644,3 +1644,9 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .card-media .card-img { padding: 4% 4% 3%; }
 /* SILA: phones fill the panel and run off the bottom edge, like on Framer */
 .card-media .card-img[src$="sila.png"] { object-fit: cover; object-position: 50% 0; padding: 6% 6% 0; }
+
+/* CityLockers: titles and labels in the brand orange, as on the Framer page (side navigation keeps the shared purple) */
+.sila.cl { --sl-accent: #e8900b; }
+.sila.cl .roadmap { --sl-accent: #4d2c86; }
+.cl .cl-tag { background: rgba(232,144,11,.12); }
+.cl .cl-chips span { background: #fdf3e3; }
