@@ -176,8 +176,8 @@ html.theme-switching body, html.theme-switching body * { transition: background-
    2. Surfaces are light, desaturated glass (white at low opacity), never
       solid saturated violet, three steps only:
         band   rgba(255,255,255,.04)  – full-width tinted sections
-        card   rgba(255,255,255,.07) + 1px rgba(255,255,255,.12) edge
-        raised rgba(255,255,255,.11) – highlighted panels, chips, active states
+        card   rgba(255,255,255,.11) + 1px rgba(255,255,255,.16) edge
+        raised rgba(255,255,255,.16) – highlighted panels, chips, active states
       Solid fills (only where something must cover a line) use #4a4862.
    3. Text: headings #f6f3fb · body #d2cde0 · muted #a9a3bd.
       Nothing that must be read goes below #a9a3bd (4.5:1 on a card).
@@ -189,7 +189,8 @@ html.theme-switching body, html.theme-switching body * { transition: background-
       They sit in a soft frame (rounded, thin glass edge) and are dimmed by 6%
       so a white image doesn't glare on the dark page.
    7. Light textures (paper grids, dotted patterns) become a faint white grid.
-   8. Shadows are deep indigo rgba(12,10,32,.x), never black.
+   8. Shadows are deep indigo rgba(12,10,32,.x), tight and below the card
+      (never a soft light halo, never black).
    ========================================================= */
 
 /* =========================================================
@@ -228,10 +229,11 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 /* cards and panels: white → dark surfaces */
 [data-theme="dark"] :is(.sl-card, .sl-card--line, .sl-stat, .sl-note, .cl-card, .cl-persona, .cl-comp, .cl-box, .cl-ba-card, .cl-learn-card,
   .sk-summary, .sk-problem, .sk-goal, .sk-note, .sk-persona, .sk-persona-story, .sk-result, .sk-concl) {
-  background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.12); }
-[data-theme="dark"] :is(.cl-persona-id, .cl-comp-head) { background: rgba(255,255,255,.1); }
+  background: rgba(255,255,255,.11); border-color: rgba(255,255,255,.16);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 28px -18px rgba(12,10,32,.7); }
+[data-theme="dark"] :is(.cl-persona-id, .cl-comp-head) { background: rgba(255,255,255,.14); }
 /* lavender-tinted panels → deep plum */
-[data-theme="dark"] :is(.sl-quotes, .sk-goal--wide, .sk-prio-card, .sk-persona-id, .sk-pill) { background: rgba(255,255,255,.11); color: var(--ink); }
+[data-theme="dark"] :is(.sl-quotes, .sk-goal--wide, .sk-prio-card, .sk-persona-id, .sk-pill) { background: rgba(255,255,255,.16); color: var(--ink); }
 [data-theme="dark"] .sila .sl-articles { background: linear-gradient(90deg, rgba(167,150,255,.14), rgba(167,150,255,.05)); }
 [data-theme="dark"] .sila .sl-hero-band { background: linear-gradient(180deg, rgba(167,150,255,.22), rgba(167,150,255,.04)); }
 [data-theme="dark"] .cl-impact { background: rgba(243,167,64,.1); box-shadow: 0 4px 0 #e8900b; }
