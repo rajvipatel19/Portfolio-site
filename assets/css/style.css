@@ -2265,3 +2265,24 @@ main.home.sl-bg + .ft--scene { background: linear-gradient(180deg, #e6dcd1 0%, r
 @media (max-width: 600px) { .pod-wire { transform-origin: 46.67% 100%; transform: translateY(5.8%) scaleX(-1); } }
 /* stacked layout: room above the iPod for the earphones, so they never sit on the text */
 @media (max-width: 860px) { .pod-stage { padding-top: 120px; } }
+
+/* iPod earphones v2: Apple-style earbuds, a clearly visible white cord with a soft grey edge, plugged into the jack */
+.pod { margin-top: 40px; }
+.pod-wire { left: -36.67%; width: 133.33%; transform: translateY(4.76%); }
+.pod-wire .pw-cords-o use { fill: none; stroke: #c9c2d8; stroke-width: 5.6; stroke-linecap: round; }
+.pod-wire .pw-cords use { fill: none; stroke: #fff; stroke-width: 3.6; stroke-linecap: round; }
+.pod-wire .pw-cords-o { filter: drop-shadow(0 3px 3px rgba(40,30,80,.18)); }
+.pod-wire .pw-part, .pod-wire .pw-stem, .pod-wire .pw-head, .pod-wire .pw-tip { fill: #fdfdff; stroke: #cfc9dd; stroke-width: 1.2; }
+.pod-wire .pw-pod { filter: drop-shadow(0 4px 5px rgba(40,30,80,.22)); }
+.pod-wire .pw-mesh { fill: #d9d4e4; }
+.pod-wire .pw-dot { fill: #b9b2c9; }
+.pod-wire .pw-plug { fill: #eeecf5; stroke: #c4bed4; stroke-width: 1.2; }
+.pod-wire .pw-ring { fill: #b3adc6; }
+@media (max-width: 600px) { .pod-wire { transform-origin: 42.5% 100%; transform: translateY(4.76%) scale(-.85, .85); } }
+@media (max-width: 860px) { .pod-stage { padding-top: 130px; } .pod { margin-top: 0; } }
+
+/* case study cards: on hover a much softer, less saturated wash fades in */
+.card-media .scene--lav::before { background: linear-gradient(1deg, rgba(196,178,232,.38) 0%, rgba(246,243,251,.3) 95%); }
+.card-media .scene--butter::before { background: linear-gradient(1deg, rgba(236,206,160,.4) 0%, rgba(252,246,238,.3) 100%); }
+.card-media .scene--mix::before { background: linear-gradient(1deg, rgba(190,172,214,.38) 0%, rgba(250,248,252,.3) 100%); }
+.work-grid .card:hover { box-shadow: inset 0 1.5px 1px #fff, inset 0 0 0 1px rgba(255,255,255,.3), 0 30px 60px -34px rgba(70,50,110,.3); }

@@ -407,16 +407,21 @@ def home():
     </div>
     <div class="cd-stage pod-stage" data-reveal style="--d:.15s">
       <div class="pod">
-        <svg class="pod-wire" viewBox="-80 -132 300 140" aria-hidden="true">
-          <path class="pw-cord" d="M60 -27 C 60 -62, 34 -58, 16 -72 S 6 -88, 10 -92" />
-          <path class="pw-cord" d="M10 -92 C 0 -110, -26 -114, -46 -104" />
-          <path class="pw-cord" d="M10 -92 C 30 -116, 66 -124, 88 -112" />
-          <rect class="pw-split" x="5" y="-99" width="10" height="13" rx="4" transform="rotate(20 10 -92)" />
-          <g transform="rotate(-38 -56 -98)"><rect class="pw-stem" x="-60" y="-100" width="8" height="15" rx="3.5" /><ellipse class="pw-bud" cx="-56" cy="-112" rx="13" ry="15" /><ellipse class="pw-mesh" cx="-56" cy="-114" rx="7" ry="8" /></g>
-          <g transform="rotate(30 98 -106)"><rect class="pw-stem" x="94" y="-108" width="8" height="15" rx="3.5" /><ellipse class="pw-bud" cx="98" cy="-120" rx="13" ry="15" /><ellipse class="pw-mesh" cx="98" cy="-122" rx="7" ry="8" /></g>
-          <rect class="pw-relief" x="57" y="-30" width="6" height="14" rx="3" />
-          <rect class="pw-plug" x="54" y="-18" width="12" height="20" rx="2.5" />
-          <rect class="pw-ring" x="54" y="-6" width="12" height="2" />
+        <svg class="pod-wire" viewBox="-110 -200 400 210" aria-hidden="true">
+          <defs>
+            <path id="pwc1" d="M60 -30 C 60 -72, 40 -78, 40 -95" />
+            <path id="pwc2" d="M40 -95 C 25 -95, -55 -80, -55 -110" />
+            <path id="pwc3" d="M40 -95 C 60 -95, 120 -85, 120 -120" />
+          </defs>
+          <g class="pw-cords-o"><use href="#pwc1"/><use href="#pwc2"/><use href="#pwc3"/></g>
+          <g class="pw-cords"><use href="#pwc1"/><use href="#pwc2"/><use href="#pwc3"/></g>
+          <rect class="pw-part" x="-5" y="-8" width="10" height="16" rx="4.5" transform="translate(40 -95)" />
+          <rect class="pw-part" x="-12" y="-4.5" width="24" height="9" rx="4.5" transform="translate(97.6 -96.1) rotate(-13.7)" />
+          <g class="pw-pod" transform="translate(-55 -110) rotate(-16)"><rect class="pw-stem" x="-5" y="-42" width="10" height="42" rx="5"/><ellipse class="pw-head" cx="7" cy="-52" rx="17" ry="13.5" transform="rotate(-18 7 -52)"/><ellipse class="pw-mesh" cx="12" cy="-55" rx="7.5" ry="4.6" transform="rotate(-18 12 -55)"/><circle class="pw-dot" cx="-3" cy="-48" r="1.6"/><rect class="pw-tip" x="-5" y="-4" width="10" height="4" rx="1.5"/></g>
+          <g class="pw-pod" transform="translate(120 -120) rotate(14) scale(-1,1)"><rect class="pw-stem" x="-5" y="-42" width="10" height="42" rx="5"/><ellipse class="pw-head" cx="7" cy="-52" rx="17" ry="13.5" transform="rotate(-18 7 -52)"/><ellipse class="pw-mesh" cx="12" cy="-55" rx="7.5" ry="4.6" transform="rotate(-18 12 -55)"/><circle class="pw-dot" cx="-3" cy="-48" r="1.6"/><rect class="pw-tip" x="-5" y="-4" width="10" height="4" rx="1.5"/></g>
+          <rect class="pw-part" x="56.5" y="-32" width="7" height="16" rx="3.5" />
+          <rect class="pw-plug" x="53.5" y="-18" width="13" height="21" rx="2.5" />
+          <rect class="pw-ring" x="53.5" y="-7" width="13" height="1.6" />
         </svg>
         <div class="pod-screen">
           <div class="pod-view pod-now">
