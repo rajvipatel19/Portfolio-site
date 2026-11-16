@@ -21,7 +21,7 @@ const SITE = {
     if (!themeBtn) return;
     themeBtn.setAttribute("aria-pressed", dark);
     themeBtn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
-    const meta = $('meta[name="theme-color"]'); if (meta) meta.content = dark ? "#14121c" : "#fdfcff";
+    const meta = $('meta[name="theme-color"]'); if (meta) meta.content = dark ? "#2c2a46" : "#fdfcff";
   };
   setThemeUI();
   if (themeBtn) themeBtn.addEventListener("click", () => {

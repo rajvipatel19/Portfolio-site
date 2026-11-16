@@ -2318,3 +2318,17 @@ html:not([data-theme="dark"]) .hero-media { background: #ebe4da; }
   .hero-media::after { background: linear-gradient(180deg, rgba(20,40,70,.3) 0%, rgba(20,40,70,.46) 40%, rgba(20,40,70,.38) 70%, rgba(20,40,70,.1) 90%); }
 }
 @media (prefers-reduced-motion: reduce) { .hero-media .hero-day { transform: none; } }
+
+/* ---------- Home: one consistent rhythm between sections ---------- */
+main.home { --sec-gap: 70px; }
+@media (max-width: 860px) { main.home { --sec-gap: 56px; } }
+@media (max-width: 600px) { main.home { --sec-gap: 44px; } }
+main.home > section:not(.hero) { padding-top: var(--sec-gap); padding-bottom: var(--sec-gap); }
+main.home .pod-stage { min-height: 0; }
+main.home > section#work { padding-bottom: var(--sec-gap); }
+main.home > section.bring:not(.hero) { padding-top: calc(var(--sec-gap) - 28px); }
+main.home > section.cd-section:not(.hero) { padding-top: calc(var(--sec-gap) - 15px); padding-bottom: calc(var(--sec-gap) + 24px); }
+@media (max-width: 600px) {
+  main.home > section.bring:not(.hero), main.home > section.cd-section:not(.hero) { padding-top: calc(var(--sec-gap) - 28px); }
+  main.home > section.cd-section:not(.hero) { padding-bottom: calc(var(--sec-gap) + 32px); } /* the handwritten note hangs below the iPod */
+}
