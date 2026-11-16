@@ -1867,3 +1867,8 @@ html.modal-open { overflow: hidden; }
 .ft-media::before { background: linear-gradient(180deg, rgba(150,145,140,1) 0%, rgba(150,145,140,.95) 45%, rgba(150,145,140,.6) 68%, rgba(150,145,140,0) 86%); }
 .ft-media .ft-warm { position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: soft-light;
   background: linear-gradient(180deg, rgba(255,214,170,.55) 0%, rgba(255,214,170,.25) 60%, rgba(255,214,170,0) 85%); }
+
+/* footer: full colour again; only the thin top edge (where it fades into the page) loses its blue */
+.ft-video { filter: none; }
+.ft-media::before { background: linear-gradient(180deg, rgba(150,145,140,1) 0%, rgba(150,145,140,.75) 12%, rgba(150,145,140,0) 26%); }
+.ft-media .ft-warm { display: none; }
