@@ -1827,11 +1827,13 @@ html.modal-open { overflow: hidden; }
 @media (min-width: 601px) { .pod-note { right: -13%; bottom: 2%; } }
 @media (min-width: 601px) and (max-width: 1100px) { .pod-note { right: -6%; bottom: -2%; } }
 
-/* footer: no hard top edge. The picture melts into the page, with a long fade as it scrolls in that tightens as it settles */
-.ft--scene { background: transparent; }
-.ft-media {
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.35) calc(18% - var(--fs) * 10%), #000 calc(46% - var(--fs) * 24%));
-  mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.35) calc(18% - var(--fs) * 10%), #000 calc(46% - var(--fs) * 24%)); }
+/* footer: no hard top edge. The picture melts into the page through a long, eased fade (many soft steps, so no visible line).
+   It is longest while scrolling in and stays generous once settled */
+.ft--scene { background: transparent; --fm: calc((1 - var(--fs)) * 14%);
+  --ft-mask: linear-gradient(180deg, transparent 0%,
+    rgba(0,0,0,.04) calc(8% + var(--fm)), rgba(0,0,0,.14) calc(18% + var(--fm)), rgba(0,0,0,.32) calc(28% + var(--fm)),
+    rgba(0,0,0,.56) calc(38% + var(--fm)), rgba(0,0,0,.8) calc(48% + var(--fm)), rgba(0,0,0,.94) calc(56% + var(--fm)), #000 calc(64% + var(--fm))); }
+.ft-media { -webkit-mask-image: var(--ft-mask); mask-image: var(--ft-mask); }
 
 /* tighter rhythm: projects → table → sneak peek */
 #work { padding-bottom: 56px; }
@@ -1905,10 +1907,11 @@ html.modal-open { overflow: hidden; }
 @keyframes ffLinkDriftSm { 0% { transform: translate(0, 0); } 50% { transform: translate(10px, -6px); } 100% { transform: translate(-8px, 5px); } }
 @media (max-width: 860px) { .ff-link { animation-name: ffLinkDriftSm; } }
 
-/* ---------- Sky scene: the top of About and AI Lab, in the footer's lavender-peach palette ---------- */
+/* ---------- Sky scene: the top of About and AI Lab, in the footer's lavender-peach palette.
+   Its bottom fades to see-through, so it blends into the page (and the footer) with no edge ---------- */
 .sky { position: relative; isolation: isolate; overflow: hidden; min-height: 100svh; display: grid; align-items: center; padding: 130px 0 140px;
-  background: linear-gradient(180deg, #dcd2f5 0%, #e8d5ee 32%, #f5d8cd 60%, #fbece3 80%, var(--bg) 100%); }
-.sky--about { background: linear-gradient(180deg, #e7def8 0%, #f0dde8 38%, #f8e2d4 66%, #fcf0e8 84%, var(--bg) 100%); }
+  background: linear-gradient(180deg, #dcd2f5 0%, #e8d5ee 32%, #f5d8cd 58%, rgba(251,236,227,.75) 74%, rgba(253,246,242,.3) 88%, rgba(253,252,255,0) 100%); }
+.sky--about { background: linear-gradient(180deg, #e7def8 0%, #f0dde8 38%, #f8e2d4 62%, rgba(252,240,232,.75) 76%, rgba(253,248,244,.3) 89%, rgba(253,252,255,0) 100%); }
 .sky > .wrap { position: relative; z-index: 1; }
 .sky .fireflies { opacity: 1; }
 /* soft clouds drifting slowly across */
@@ -1990,3 +1993,8 @@ html.modal-open { overflow: hidden; }
   .sky-clouds i, .sky-caret, .sky-bar i, .nd, .nd-tag { animation: none; }
   .net .pulse { display: none; }
 }
+
+/* CityLockers has a plain white page: the footer starts white too and fades out, so there's no edge between them */
+main.cl + .ft--scene { background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,.85) 18%, rgba(255,255,255,.4) 38%, rgba(255,255,255,0) 60%); }
+/* SILA and SKU end in a soft cream: the footer picks up that cream and fades it out */
+main.sl-bg:not(.cl) + .ft--scene { background: linear-gradient(180deg, #f6f0e5 0%, rgba(246,240,229,.85) 18%, rgba(246,240,229,.4) 38%, rgba(246,240,229,0) 60%); }
