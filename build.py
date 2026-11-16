@@ -274,16 +274,14 @@ def home():
   </div>
 </a>""")
     # visual journey: (file, width, height, alt). Each tile keeps its image's own shape.
-    V = {1: (2000, 1463, "SILA transfer tracking screens"), 2: (1966, 2000, "SILA home and send screens"),
-         3: (2000, 1463, "SILA onboarding screens"), 4: (1966, 2000, "Arabic chat app with money transfer"),
-         5: (2000, 1622, "wildfern landing page hero"), 6: (2000, 1532, "wildfern programme features"),
-         7: (2000, 1532, "Novaflux robotics news homepage")}
+    V = {1: ("v1-light", 2000, 1442, "SILA transfer tracking screens"), 2: ("v2-light", 1964, 2000, "SILA home and send screens"),
+         3: ("v3-light", 2000, 1442, "SILA onboarding screens"), 4: ("v4-light", 1964, 2000, "Arabic chat app with money transfer"),
+         5: ("v5", 2000, 1622, "wildfern landing page hero"), 6: ("v6", 2000, 1532, "wildfern programme features"),
+         7: ("v7", 2000, 1532, "Novaflux robotics news homepage")}
     def shot(n):
-        w, h, alt = V[n]
-        return f'<div class="shot shot--img" style="aspect-ratio:{w}/{h}"><img src="assets/media/visuals/v{n}.webp" alt="{alt}" loading="lazy" decoding="async"></div>'
-    row1 = [1, 5, 2, 6]; row2 = [3, 7, 4]
-    shots = "".join(shot(n) for n in row1 * 2)
-    shots2 = "".join(shot(n) for n in row2 * 2)
+        f, w, h, alt = V[n]
+        return f'<div class="shot shot--img" style="aspect-ratio:{w}/{h}"><img src="assets/media/visuals/{f}.webp" alt="{alt}" loading="lazy" decoding="async"></div>'
+    shots = "".join(shot(n) for n in [1, 5, 2, 6, 3, 7, 4])  # one row
     sparkles = "".join(f'<span class="sparkle" style="left:{l}%;top:{t}%;animation-delay:{d}s;width:{s}px;height:{s}px">{SPARK}</span>'
                        for l, t, d, s in [(12, 22, 0, 10), (78, 18, 1.2, 14), (64, 40, 2.1, 8), (30, 58, .6, 12), (88, 62, 1.8, 10), (48, 14, 2.6, 9)])
     body = f"""{nav(root, 'work')}
@@ -325,7 +323,6 @@ def home():
 <section class="ticker-section" aria-label="Visual journey">
   <div class="ticker-head wrap" data-reveal><span class="hand">a sneak peek of my</span><h2>visual journey</h2></div>
   <div class="ticker"><div class="ticker-track">{shots}{shots}</div></div>
-  <div class="ticker reverse"><div class="ticker-track">{shots2}{shots2}</div></div>
 </section>
 
 <section class="cd-section">
