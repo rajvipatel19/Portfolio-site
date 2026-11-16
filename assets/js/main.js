@@ -226,29 +226,23 @@ const SITE = {
     cd.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
   }
 
-  /* ---------- Book a call: Cal.com embed or preview calendar ---------- */
-  const cal = $(".cal-frame");
-  if (cal) {
-    if (SITE.calLink) {
-      cal.innerHTML = `<iframe src="https://cal.com/${SITE.calLink}?embed=true&theme=light&layout=month_view" title="Book a call with Rajvi" loading="lazy"></iframe>`;
-      $$("[data-cal]").forEach((a) => (a.href = `https://cal.com/${SITE.calLink}`));
-    } else {
-      // Preview calendar so the layout reads right until a real link is added
-      const grid = $(".cal-grid", cal), slots = $(".cal-slots", cal), title = $(".cal-month", cal);
-      const now = new Date(), y = now.getFullYear(), m = now.getMonth();
-      title.textContent = now.toLocaleString("en", { month: "long", year: "numeric" });
-      const first = (new Date(y, m, 1).getDay() + 6) % 7, days = new Date(y, m + 1, 0).getDate();
-      grid.innerHTML = ["M", "T", "W", "T", "F", "S", "S"].map((d) => `<b>${d}</b>`).join("") + "<span></span>".repeat(first);
-      for (let d = 1; d <= days; d++) {
-        const dow = (first + d - 1) % 7, past = d < now.getDate(), weekend = dow > 4;
-        grid.insertAdjacentHTML("beforeend", `<span class="${past || weekend ? "off" : "av"}">${d}</span>`);
-      }
-      grid.addEventListener("click", (e) => {
-        const s = e.target.closest(".av"); if (!s) return;
-        $$(".on", grid).forEach((x) => x.classList.remove("on")); s.classList.add("on");
-        slots.innerHTML = ["10:00", "11:30", "14:00", "16:30"].map((t) => `<button type="button">${t} GST</button>`).join("");
-      });
-    }
+  /* ---------- Book a call: any "Book a call" button opens the Cal.com calendar in a pop-up ---------- */
+  const calModal = $(".cal-modal");
+  if (calModal && SITE.calLink) {
+    const body = $(".cal-body", calModal);
+    const openCal = (e) => {
+      e.preventDefault();
+      if (!body.firstChild) body.innerHTML = `<iframe src="https://cal.com/${SITE.calLink}?embed=true&theme=light&layout=month_view" title="Book a call with Rajvi"></iframe>`;
+      calModal.showModal(); document.documentElement.classList.add("modal-open");
+    };
+    $$("[data-cal]").forEach((a) => a.addEventListener("click", openCal));
+    const closeCal = () => calModal.close();
+    $(".cal-close", calModal).addEventListener("click", closeCal);
+    calModal.addEventListener("click", (e) => { if (e.target === calModal) closeCal(); }); // click outside the window
+    calModal.addEventListener("close", () => document.documentElement.classList.remove("modal-open"));
+  } else if (SITE.calLink) {
+    // pages without the pop-up: go straight to the booking page
+    $$("[data-cal]").forEach((a) => { a.href = `https://cal.com/${SITE.calLink}`; a.target = "_blank"; a.rel = "noopener"; });
   }
 
   /* ---------- Draggable coffee desk ---------- */

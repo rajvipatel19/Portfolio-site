@@ -352,21 +352,17 @@ def home():
         <h2>Let's talk about it</h2>
         <p>Would love to talk about projects, growth &amp; anything design. Pick a time that works for you, it's a relaxed 30-minute chat.</p>
         <div class="call-actions">
-          <a class="btn btn--dark magnetic" href="{C.LINKEDIN}" target="_blank" rel="noopener">LinkedIn {ARROW_UR}</a>
-          <a class="btn magnetic" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW_UR}</a>
+          <a class="btn btn--dark magnetic" href="#call" data-cal>Book a call {ARROW}</a>
+          <a class="btn magnetic" href="{C.LINKEDIN}" target="_blank" rel="noopener">LinkedIn {ARROW_UR}</a>
         </div>
         <p class="call-mail">or email me at <a href="mailto:{C.EMAIL}">{C.EMAIL}</a></p>
       </div>
-      <div class="cal-frame">
-        <div class="cal-placeholder">
-          <div class="cal-top"><span class="cal-month">Month</span><span class="chip">30 min · Google Meet</span></div>
-          <div class="cal-grid"></div>
-          <div class="cal-slots"></div>
-          <div class="cal-note">Preview only. Your real calendar (Cal.com) appears here once the link is added.</div>
-        </div>
-      </div>
     </div>
   </div>
+  <dialog class="cal-modal" aria-label="Book a call with Rajvi">
+    <button type="button" class="cal-close" aria-label="Close">&times;</button>
+    <div class="cal-body"></div>
+  </dialog>
 </section>
 </main>
 {footer(root)}"""

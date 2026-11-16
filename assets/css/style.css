@@ -1674,3 +1674,19 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 /* tablet screens (CityLockers, SKU) shown at the same size in every card */
 .card-media .card-img:not([src$="sila.png"]) { inset: auto; left: 50%; top: 50%; width: auto; height: auto; max-width: min(88%, 520px); max-height: 86%; padding: 0; transform: translate(-50%, -50%); }
 .card:hover .card-media .card-img:not([src$="sila.png"]) { transform: translate(-50%, -50%) scale(1.03); }
+
+/* Let's talk: one column now that the calendar lives in a pop-up */
+.call { grid-template-columns: 1fr; }
+.call p { max-width: 560px; }
+/* calendar pop-up */
+.cal-modal { width: min(1000px, 94vw); height: min(760px, 90vh); max-width: none; max-height: none; padding: 0; border: 0; border-radius: 28px; background: #fff; overflow: hidden;
+  box-shadow: 0 40px 100px -30px rgba(30,20,70,.45); }
+.cal-modal::backdrop { background: rgba(24,18,48,.42); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.cal-modal[open] { animation: calIn .35s var(--ease); }
+@keyframes calIn { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
+.cal-body, .cal-body iframe { width: 100%; height: 100%; border: 0; display: block; }
+.cal-close { position: absolute; top: 14px; right: 14px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-size: 22px; line-height: 1;
+  color: var(--ink); background: rgba(255,255,255,.92); border: 1px solid rgba(0,0,0,.06); box-shadow: 0 6px 16px -8px rgba(30,20,70,.4); cursor: pointer; transition: transform .3s var(--ease); }
+.cal-close:hover { transform: rotate(90deg); }
+html.modal-open { overflow: hidden; }
+@media (max-width: 600px) { .cal-modal { width: 100vw; height: 92vh; margin-bottom: 0; border-radius: 24px 24px 0 0; } }
