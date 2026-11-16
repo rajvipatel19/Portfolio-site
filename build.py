@@ -77,8 +77,8 @@ def footer(root):
         <p class="ft-sub">Would love to talk about projects, growth &amp; anything design!</p>
       </div>
       <div class="ft-btns">
-        <a href="{C.RESUME}" target="_blank" rel="noopener">Resume</a>
-        <a href="{C.LINKEDIN}" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn--dark magnetic" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW}</a>
+        <a class="btn magnetic" href="{C.LINKEDIN}" target="_blank" rel="noopener">LinkedIn {ARROW}</a>
       </div>
     </div>
     <div class="ft-bottom">
