@@ -2077,3 +2077,11 @@ button.shot--img:focus-visible { outline: 3px solid var(--lav-deep); outline-off
   .hero-photo { width: 50px; height: 50px; border-radius: 10px; }
   .hero h1 { font-size: 32px; }
 }
+
+/* hero, white heading (desktop and tablet): a soft dusk shade behind the heading, soft light behind the intro. Phones keep dark text over their light haze */
+@media (min-width: 601px) {
+  .hero h1 { color: #fff; text-shadow: 0 2px 18px rgba(40,25,70,.35), 0 1px 2px rgba(40,25,70,.25); }
+  .hero-media::after { background:
+    radial-gradient(48% 26% at 20% 66%, rgba(253,250,248,.82), rgba(253,250,248,.4) 60%, rgba(253,250,248,0) 100%),
+    linear-gradient(180deg, rgba(45,32,80,.24) 0%, rgba(45,32,80,.12) 34%, rgba(45,32,80,0) 50%); }
+}
