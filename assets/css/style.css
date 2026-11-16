@@ -1663,3 +1663,14 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 /* visual journey: real images, each tile its own shape, same height */
 .shot--img { width: auto; height: clamp(220px, 26vw, 400px); padding: 0; border-radius: 24px; background: none; box-shadow: 0 24px 50px -30px rgba(40,30,80,.35); }
 .shot--img img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+
+/* home cards like Framer: plain light grey by default, each card's own gradient fades in on hover */
+.card-media .scene { background: #f3f3f4; }
+.card-media .scene::before { content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity .5s var(--ease); pointer-events: none; }
+.card-media .scene--lav::before { background: linear-gradient(1deg, rgba(139,82,255,.6) 0%, rgba(240,235,255,.6) 95%); }
+.card-media .scene--butter::before { background: linear-gradient(1deg, rgba(232,162,56,.6) 0%, rgba(255,236,217,.6) 100%); }
+.card-media .scene--mix::before { background: linear-gradient(1deg, rgba(130,94,181,.6) 0%, rgba(249,245,255,.6) 100%); }
+.card:hover .card-media .scene::before, .card:focus-visible .card-media .scene::before { opacity: 1; }
+/* tablet screens (CityLockers, SKU) shown at the same size in every card */
+.card-media .card-img:not([src$="sila.png"]) { inset: auto; left: 50%; top: 50%; width: auto; height: auto; max-width: min(88%, 520px); max-height: 86%; padding: 0; transform: translate(-50%, -50%); }
+.card:hover .card-media .card-img:not([src$="sila.png"]) { transform: translate(-50%, -50%) scale(1.03); }
