@@ -333,3 +333,18 @@ html.theme-switching body, html.theme-switching body * { transition: background-
   [data-theme="dark"] .sila .sl-side li.active .node { box-shadow: 0 0 0 4px rgba(199,186,255,.18); }
   [data-theme="dark"] .sila .sl-side li.active a { color: #f6f3fb; background: rgba(255,255,255,.12); }
 }
+
+/* ---------- SKU at night ---------- */
+/* 1. strong purples become dusky, desaturated lavender */
+[data-theme="dark"] .sk-promo { background: linear-gradient(160deg, #6d6396, #4c4672); }
+[data-theme="dark"] .sk-promo-side p, [data-theme="dark"] .sk-promo-logo { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.2); }
+[data-theme="dark"] .sk-band img { filter: saturate(.5) brightness(1.05); }
+/* 2. screen borders: light purple instead of deep purple */
+[data-theme="dark"] :is(.sk-framed, .sk-step img, .sk-import-note img, .sk-import-side img) { border-color: #b9a9e8; }
+[data-theme="dark"] .sk-prio-card { border-color: #b9a9e8; }
+/* 3. the store animation sits in a glass frame */
+[data-theme="dark"] .sk-gif img { padding: 14px; border-radius: 30px;
+  background: linear-gradient(150deg, rgba(255,255,255,.16), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.2);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 30px 60px -34px rgba(12,10,32,.7); }
+/* 4. the storyboard line drawings turn white (colours keep their hue) */
+[data-theme="dark"] .sk-story img { filter: invert(1) hue-rotate(180deg) brightness(.95); }
