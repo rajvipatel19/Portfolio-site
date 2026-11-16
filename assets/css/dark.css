@@ -153,3 +153,65 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .lab-stage { background: radial-gradient(80% 60% at 50% 40%, rgba(167,139,250,.28), rgba(167,139,250,0) 70%), linear-gradient(180deg, #221c38, #2a1f2c); }
 /* the embedded prototype is a light-scheme page: matching it stops the browser painting a white box behind it */
 [data-theme="dark"] .lab-stage iframe { color-scheme: light; }
+
+/* =========================================================
+   Case studies (SILA, CityLockers, SKU)
+   Screenshots and diagrams stay as they are; the page,
+   cards and text around them go dark.
+   ========================================================= */
+[data-theme="dark"] .sila { --sl-accent: #c4b0f5; --sl-ink: #eeeaf6; --sl-ink-2: #b9b3c8; --sl-ink-3: #8f889f; --sl-num: #3a3548; --sl-icon: #b9a9ff; }
+[data-theme="dark"] .sila.cl { --sl-accent: #f3a740; }
+[data-theme="dark"] .sila.cl .roadmap { --sl-accent: #c4b0f5; }
+[data-theme="dark"] .sk { --sk-ink: #eeeaf6; --sk-ink-2: #b9b3c8; --sk-ghost: #3a3548; --sk-lav: #2a2340; }
+
+/* page backgrounds: the same soft colour journey, at night */
+[data-theme="dark"] .sila.sl-bg { background:
+  radial-gradient(circle at 92% 140px, rgba(240, 180, 140, .06) 0, rgba(240, 180, 140, 0) 320px),
+  linear-gradient(180deg, #17142a 0px, #131826 900px, #17142a 40%, #1f1622 70%, #14121c 100%); }
+[data-theme="dark"] .sila.cl.sl-bg { background: #14121c; }
+
+/* headings and text that were hard-coded dark */
+[data-theme="dark"] .sila h1, [data-theme="dark"] .sila h2, [data-theme="dark"] .sila h3, [data-theme="dark"] .sila h4,
+[data-theme="dark"] .sila figcaption { color: var(--ink); }
+[data-theme="dark"] .sila h2 em { color: inherit; }
+[data-theme="dark"] .sila p, [data-theme="dark"] .sila li { color: var(--ink-2); }
+[data-theme="dark"] .sila b, [data-theme="dark"] .cl .sl-lead b, [data-theme="dark"] .cl-persona-text b, [data-theme="dark"] .cl-learn-card .cl-bul li b { color: var(--ink); }
+[data-theme="dark"] .sila .sl-kicker, [data-theme="dark"] .sila .sl-eyebrow, [data-theme="dark"] .sila .sl-trust, [data-theme="dark"] .sila .sl-flow,
+[data-theme="dark"] .sila .sl-quote, [data-theme="dark"] .sila .sk-kick, [data-theme="dark"] .sila .sk-quote, [data-theme="dark"] .sila .sk-added { color: var(--sl-accent); }
+[data-theme="dark"] .sl-rail-back { color: var(--ink); }
+[data-theme="dark"] .sila .sl-red { color: #ff8a65; }
+/* the sticky note keeps its paper colour, so its writing stays dark */
+[data-theme="dark"] .cl-sticky, [data-theme="dark"] .cl-sticky * { color: #17171a; }
+
+/* the side progress rail */
+[data-theme="dark"] .roadmap .node { background: #1d1a28; border-color: #3a3452; }
+[data-theme="dark"] .roadmap li.done .node { box-shadow: inset 0 0 0 3px #1d1a28; }
+
+/* cards and panels: white → dark surfaces */
+[data-theme="dark"] :is(.sl-card, .sl-card--line, .sl-stat, .sl-note, .cl-card, .cl-persona, .cl-comp, .cl-box, .cl-ba-card, .cl-learn-card,
+  .sk-summary, .sk-problem, .sk-goal, .sk-note, .sk-persona, .sk-persona-story, .sk-result, .sk-concl) {
+  background: #1d1a28; border-color: rgba(255,255,255,.08); }
+[data-theme="dark"] :is(.cl-persona-id, .cl-comp-head) { background: #262234; }
+/* lavender-tinted panels → deep plum */
+[data-theme="dark"] :is(.sl-quotes, .sk-goal--wide, .sk-prio-card, .sk-persona-id, .sk-pill) { background: #2a2340; color: var(--ink); }
+[data-theme="dark"] .sila .sl-articles { background: linear-gradient(90deg, rgba(167,150,255,.14), rgba(167,150,255,.05)); }
+[data-theme="dark"] .sila .sl-hero-band { background: linear-gradient(180deg, rgba(167,150,255,.22), rgba(167,150,255,.04)); }
+[data-theme="dark"] .cl-impact { background: #2b2216; box-shadow: 0 4px 0 #e8900b; }
+[data-theme="dark"] .sila span[style*="background"], [data-theme="dark"] .sila .sl-tag { color: var(--ink); }
+/* full-width tinted bands */
+[data-theme="dark"] .sila.sl-bg :is(.sl-band-gray, .cl-gray, .cl-video-band, .sk-gray, .sk-lav) { background: rgba(255,255,255,.03); }
+[data-theme="dark"] .sila.cl.sl-bg :is(.cl-gray, .cl-video-band) { background: #1a1824; }
+[data-theme="dark"] .sila.sl-bg .sk-concl-band { background: rgba(167,150,255,.06); }
+[data-theme="dark"] .sk-gif { background: transparent; }
+[data-theme="dark"] .cl-slider-handle { background: #2a2638; color: var(--ink); }
+[data-theme="dark"] .sila .sk-result { box-shadow: 4px 4px 0 var(--sl-accent); }
+[data-theme="dark"] .sl-note { color: var(--ink); box-shadow: 0 6px 16px rgba(0,0,0,.5); }
+[data-theme="dark"] .sk-hero h1 { color: var(--ink) !important; }
+[data-theme="dark"] .sk-problem { color: var(--ink); }
+[data-theme="dark"] .sl-chips span, [data-theme="dark"] .cl-chips span, [data-theme="dark"] .cl .cl-chips span { background: #2a2340; color: var(--ink); }
+[data-theme="dark"] .cl .cl-chips span { background: #33291a; color: #f6c27a; }
+@media (max-width: 1199px) { [data-theme="dark"] .sila .sl-side li.active a { background: #2a2340; } [data-theme="dark"] .sila .sl-side li.done a { color: #9d97b0; } }
+/* kiosk recordings: the white-hiding blend would turn them black on a dark page, so show them as soft light panels instead */
+[data-theme="dark"] .cl-video-band video { mix-blend-mode: normal; filter: none; border-radius: 24px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.8); }
+/* the custom cursor dot: glow instead of darken */
+[data-theme="dark"] .cursor { mix-blend-mode: screen; }

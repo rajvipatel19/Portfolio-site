@@ -2173,3 +2173,8 @@ main.home.sl-bg {
       #efe8fb 84%,
       #f6f0e5 100%);
 }
+
+/* the AI-workflow step row reaches to the screen edges on phones; clip it so the page never scrolls sideways */
+.af, .cd-section, .bring { overflow-x: clip; }
+/* phones: the shorter iPod note fits inside the screen */
+@media (max-width: 600px) { .pod-note { width: auto; max-width: 46%; } }
