@@ -433,7 +433,7 @@ const SITE = {
       proof: "This portfolio was designed and coded by me, with Claude Code." },
     { title: "I value honest collaboration.", text: "Good work comes from curiosity, trust and challenging each other's thinking, with founders, developers and users alike.",
       proof: "Built and led a design team from scratch at Kilopoints, side by side with founders and developers." },
-    { title: "My toolkit, AI included.", text: "AI is my thinking partner, not my replacement. I use Claude to pressure-test flows, write UX copy and build faster, getting from idea to prototype sooner. The decisions stay human.",
+    { title: "My toolkit, AI included.", text: "AI is my thinking partner. I use Claude to pressure-test flows, write UX copy and build faster, getting from idea to prototype sooner. The decisions stay mine.",
       proof: "From messy brief to working prototype, faster.",
       tools: ["Figma", "Claude", "ChatGPT", "Notion", "GitHub", "Vercel", "Canva", "Spotify"] },
     { title: "I design with a clinician's care.", text: "Years as a dentist taught me to look beneath the surface, explain clearly, and earn trust before asking for it.",
