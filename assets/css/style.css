@@ -2089,3 +2089,7 @@ button.shot--img:focus-visible { outline: 3px solid var(--lav-deep); outline-off
 
 /* footer: the hero's glass pill buttons (Resume dark, LinkedIn light) */
 .ft--scene .ft-btns .btn { font-size: 15px; }
+
+/* coloured words in titles: one deep plum everywhere (handwritten notes above titles, highlighted words, typing words) */
+:root { --title-accent: #46386b; }
+.hand, .sky-type, .about-copy h1 em, .about-copy h1 em .w > span, .roadmap h4 { color: var(--title-accent); }
