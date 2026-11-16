@@ -2093,3 +2093,8 @@ button.shot--img:focus-visible { outline: 3px solid var(--lav-deep); outline-off
 /* coloured words in titles: one deep plum everywhere (handwritten notes above titles, highlighted words, typing words) */
 :root { --title-accent: #46386b; }
 .hand, .sky-type, .about-copy h1 em, .about-copy h1 em .w > span, .roadmap h4 { color: var(--title-accent); }
+
+/* home page: the italic handwritten notes above titles, just a little bigger than the subtext (17px desktop, 16px phone) */
+main:has(> .hero) .hand { font-size: 20px; }
+main:has(> .hero) .hero-hi { font-size: 20px; } /* same as the notes */
+@media (max-width: 600px) { main:has(> .hero) .hand, main:has(> .hero) .hero-hi { font-size: 18px; } }
