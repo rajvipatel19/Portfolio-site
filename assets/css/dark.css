@@ -4,20 +4,24 @@
    applies in dark mode; style.css stays the light site.
    ========================================================= */
 
-/* ---------- the toggle button (both themes) ---------- */
-.theme-toggle { position: relative; width: 44px; height: 44px; flex: none; border: 0; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
-  color: var(--ink); background: transparent; transition: background .25s, transform .4s var(--ease); }
-.theme-toggle:hover { background: rgba(255,255,255,.6); }
-.theme-toggle:focus-visible { outline: 3px solid var(--title-accent); outline-offset: 2px; }
-.theme-toggle svg { grid-area: 1 / 1; transition: opacity .35s var(--ease), transform .5s var(--ease); }
-.theme-toggle .ic-sun { opacity: 0; transform: rotate(-60deg) scale(.6); }
-[data-theme="dark"] .theme-toggle .ic-moon { opacity: 0; transform: rotate(60deg) scale(.6); }
-[data-theme="dark"] .theme-toggle .ic-sun { opacity: 1; transform: none; }
-@media (max-width: 860px) {
-  /* phones and tablets: its own glass circle next to the menu button */
-  .theme-toggle { width: 46px; height: 46px; margin-right: 8px; z-index: 2;
-    background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
-}
+/* ---------- the Light / Dark switch (both themes): a small glass pill, a white "thumb" slides to the chosen side ---------- */
+.theme-switch { position: relative; display: inline-flex; gap: 2px; padding: 3px; flex: none; border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,.28)); border: 1px solid rgba(255,255,255,.85);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.95), 0 6px 16px -10px rgba(70,50,140,.35);
+  -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5); }
+.ts-btn { position: relative; z-index: 1; width: 32px; height: 32px; border: 0; border-radius: 50%; padding: 0; display: grid; place-items: center;
+  background: none; color: var(--ink-3); cursor: pointer; transition: color .3s; }
+.ts-btn:hover, .ts-btn[aria-pressed="true"] { color: var(--ink); }
+.ts-btn:focus-visible { outline: 2px solid var(--title-accent); outline-offset: 2px; }
+.ts-thumb { position: absolute; top: 3px; left: 3px; width: 32px; height: 32px; border-radius: 50%; pointer-events: none;
+  background: linear-gradient(180deg, #fff, rgba(255,255,255,.8)); box-shadow: inset 0 1px 0 #fff, 0 4px 10px -4px rgba(70,50,140,.45);
+  transition: transform .45s var(--ease), background .3s; }
+[data-theme="dark"] .ts-thumb { transform: translateX(34px); background: linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,.16));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 4px 10px -4px rgba(10,8,30,.5); }
+[data-theme="dark"] .theme-switch { background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); border-color: rgba(255,255,255,.22);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 6px 16px -10px rgba(10,8,30,.5); }
+@media (max-width: 860px) { .theme-switch { margin-right: 8px; z-index: 2; } }
+@media (prefers-reduced-motion: reduce) { .ts-thumb { transition: none; } }
 /* a soft cross-fade while switching */
 html.theme-switching body, html.theme-switching body * { transition: background-color .4s ease, color .4s ease, border-color .4s ease !important; }
 
@@ -45,7 +49,6 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 [data-theme="dark"] .ambient .blob { opacity: .18; }
 [data-theme="dark"] .grain { opacity: .05; }
-[data-theme="dark"] .theme-toggle:hover { background: rgba(255,255,255,.14); }
 
 /* ---------- buttons: the dark pill becomes a soft lavender pill so it still stands out ---------- */
 [data-theme="dark"] .btn--dark, [data-theme="dark"] .nav-resume, [data-theme="dark"] .nav .nav-links a.nav-resume--menu {
