@@ -12,8 +12,9 @@ ABOUT_BIO = [
     "I'm a Senior Product Designer based in Dubai, with 4+ years of designing products end to end, from the first research call to the final shipped screen.",
     "Before design, I trained as a dentist. That clinical background shaped how I work: listen first, explain clearly, and earn trust at every step. It's why I love fintech, health-tech and AI-native products, where clarity really matters.",
     "I've built and led a design team from scratch, been the sole designer at an early-stage startup, and shipped across mobile apps, kiosks, web platforms and client portals.",
+    "When I'm not designing, I'm probably travelling, baking, overthinking, watching a sunset, hiking, trying new side quests, working out and living life to the fullest!",
 ]
-ABOUT_TYPING = ["a product designer", "an ex-dentist", "a coffee person", "a firefly catcher"]  # the typing line on About
+ABOUT_TYPING = ["a product designer", "an ex-dentist", "a coffee person", "a sunset catcher", "a baker", "an explorer"]  # the typing line on About
 AI_LAB_TEXT = "A corner for my experiments with AI: prompt play, tiny tools and prototypes I build with Claude, plus notes on designing AI products people can trust."
 # AI Lab experiments (shown under the AI Lab sky, in this order). "src" is the interactive file in assets/lab/.
 LAB_EXPERIMENTS = [
@@ -23,7 +24,6 @@ LAB_EXPERIMENTS = [
      "tags": ["Built with Claude", "Interaction", "Fintech"],
      "link": ("work/sila.html", "Read the SILA case study")},
 ]
-ABOUT_FACTS = ["📍 Dubai", "4+ years in product design", "🦷 BDS, ex-dentist", "Fintech · Health-tech · AI", "☕ powered by coffee"]
 
 # Home page cards (order = order on the page). Add  "video": "assets/media/sila.mp4"  once you have a video.
 PROJECTS = [

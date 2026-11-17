@@ -608,7 +608,6 @@ def sky_btns(primary, secondary):
 
 def about():
     root = ""
-    facts = "".join(f'<span class="sky-chip">{f}</span>' for f in C.ABOUT_FACTS)
     paras = "".join(f"<p>{p}</p>" for p in C.ABOUT_BIO)
     words = "|".join(C.ABOUT_TYPING)
     body = f"""{nav(root, 'about')}
@@ -626,10 +625,6 @@ def about():
       <p class="sky-hi hand" data-reveal>hi, I'm Rajvi, <span class="sky-type" data-type="{words}">{C.ABOUT_TYPING[0]}</span><span class="sky-caret" aria-hidden="true"></span></p>
       <h1 class="split">From dental chairs to <em>design systems.</em></h1>
       <div data-reveal style="--d:.3s">{paras}</div>
-      <div class="about-facts" data-reveal style="--d:.4s">{facts}</div>
-      <div data-reveal style="--d:.5s">{sky_btns(
-          f'<a class="sky-btn sky-btn--dark" href="{C.RESUME}" target="_blank" rel="noopener">Resume {ARROW_UR}</a>',
-          f'<a class="sky-btn" href="index.html#call" data-cal>Book a call {ARROW}</a>')}</div>
     </div>
   </div>
 </section>
