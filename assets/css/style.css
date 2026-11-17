@@ -2548,10 +2548,12 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 .stack-soon { font-size: 18px; color: var(--ink-2); max-width: 46ch; }
 
 @media (max-width: 640px) {
-  .stack { padding-bottom: 90px; }
+  .stack { padding-bottom: 24px; }
+  .stack::after { height: 18vh; }
   .stack-card { top: 76px; width: calc(100% - 24px); padding: 28px 22px 34px; border-radius: 26px; margin-bottom: 16px; }
   .stack-card + .stack-card { top: 92px; }
-  .stack-card { height: 74vh; }
+  .stack-card { height: auto; } /* phones: each card fits its content */
+  .stack-photos { height: min(70vh, 560px); } /* the photo wall needs a set height for its two rows */
   .do-list li { gap: 12px; padding: 10px 0; }
 }
 /* the photo library: a curved wall on soft lavender. Two rows drift sideways (main.js); photos near the edges turn inwards and come closer,
