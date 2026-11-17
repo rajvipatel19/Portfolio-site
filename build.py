@@ -610,6 +610,7 @@ def about():
     root = ""
     paras = "".join(f"<p>{p}</p>" for p in C.ABOUT_BIO)
     words = "|".join(C.ABOUT_TYPING)
+    do_items = "".join(f'<li><span class="do-n">{i:02d}</span><span class="do-t">{t}</span></li>' for i, t in enumerate(C.ABOUT_DO, 1))
     body = f"""{nav(root, 'about')}
 <main>
 <section class="sky sky--about">
@@ -627,6 +628,20 @@ def about():
       <div data-reveal style="--d:.3s">{paras}</div>
     </div>
   </div>
+</section>
+<section class="stack" aria-label="More about me">
+  <article class="stack-card stack-do">
+    <span class="do-glow" aria-hidden="true"></span>
+    <span class="do-spark" aria-hidden="true">✦</span>
+    <p class="stack-kicker">what all I do /</p>
+    <h2 class="stack-title">What all I <em>do</em></h2>
+    <ul class="do-list">{do_items}</ul>
+  </article>
+  <article class="stack-card stack-photos">
+    <p class="stack-kicker">through my lens /</p>
+    <h2 class="stack-title">My photo <em>library</em></h2>
+    <p class="stack-soon">Sunsets, side quests and places I've wandered. Coming soon ✿</p>
+  </article>
 </section>
 </main>
 {footer(root)}"""

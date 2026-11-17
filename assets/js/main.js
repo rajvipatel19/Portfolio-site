@@ -273,6 +273,26 @@ const SITE = {
   }, { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
   $$("[data-reveal], .split").forEach((el) => io.observe(el));
 
+  /* ---------- About: as the next stacking card slides over, the one underneath shrinks back a little ---------- */
+  const stackCards = $$(".stack-card");
+  if (stackCards.length > 1 && !reduce) {
+    let ticking = false;
+    const stackUpdate = () => {
+      ticking = false;
+      const vh = innerHeight;
+      stackCards.forEach((card, i) => {
+        const next = stackCards[i + 1];
+        if (!next) return;
+        const stuck = parseFloat(getComputedStyle(next).top) || 0;
+        const p = Math.min(1, Math.max(0, (vh - next.getBoundingClientRect().top) / (vh - stuck)));
+        card.style.setProperty("--p", p.toFixed(3));
+      });
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(stackUpdate); } }, { passive: true });
+    addEventListener("resize", stackUpdate);
+    stackUpdate();
+  }
+
   /* ---------- Count-up numbers ---------- */
   const countIO = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
