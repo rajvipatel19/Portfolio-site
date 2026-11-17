@@ -610,6 +610,11 @@ def about():
     root = ""
     paras = "".join(f"<p>{p}</p>" for p in C.ABOUT_BIO)
     words = "|".join(C.ABOUT_TYPING)
+    def lib_row(nums, rev):
+        one = "".join(f'<figure class="lib-ph"><img src="assets/media/library/p{n:02d}.jpg" alt="" loading="lazy" decoding="async" width="676" height="900"></figure>' for n in nums)
+        dup = one.replace('<figure', '<figure aria-hidden="true"')  # second copy, so the row loops without a gap
+        return f'<div class="lib-row{" lib-row--rev" if rev else ""}"><div class="lib-track">{one}{dup}</div></div>'
+    lib_rows = lib_row(range(1, 12), False) + lib_row(range(12, 23), True)
     do_items = "".join(f'<li><span class="do-n">{i:02d}</span><span class="do-t">{t}</span></li>' for i, t in enumerate(C.ABOUT_DO, 1))
     body = f"""{nav(root, 'about')}
 <main>
@@ -623,8 +628,8 @@ def about():
       <span class="sticker" style="left:-26px;bottom:22%;width:60px;animation-delay:-2s">{desk_sticker('heart')}</span>
     </div>
     <div class="about-copy">
-      <p class="sky-hi hand" data-reveal>hi, I'm Rajvi, <span class="sky-type" data-type="{words}">{C.ABOUT_TYPING[0]}</span><span class="sky-caret" aria-hidden="true"></span></p>
-      <h1 class="split">From dental chairs to <em>design systems.</em></h1>
+      <h1 class="split">Hi, I'm <em>Rajvi</em></h1>
+      <p class="sky-hi hand about-type" data-reveal><span class="sky-type" data-type="{words}">{C.ABOUT_TYPING[0]}</span><span class="sky-caret" aria-hidden="true"></span></p>
       <div data-reveal style="--d:.3s">{paras}</div>
     </div>
   </div>
@@ -639,7 +644,8 @@ def about():
   <article class="stack-card stack-photos">
     <p class="stack-kicker">through my lens /</p>
     <h2 class="stack-title">My photo <em>library</em></h2>
-    <p class="stack-soon">Sunsets, side quests and places I've wandered. Coming soon ✿</p>
+    <p class="stack-soon">Sunsets, side quests and places I've wandered. Hover to take a closer look ✿</p>
+    <div class="lib" aria-label="Photos from my travels and side quests">{lib_rows}</div>
   </article>
 </section>
 </main>

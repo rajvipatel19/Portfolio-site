@@ -2515,9 +2515,8 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 /* ---------- About: cards that stick and stack on top of each other as you scroll ----------
    Each card sticks near the top; the next one slides up over it, and the one underneath shrinks back a little (--p, set in main.js). */
 .stack { position: relative; padding: 30px 0 18vh; }
-.stack-card { position: sticky; top: 96px; width: min(1180px, calc(100% - 40px)); min-height: min(76vh, 660px); margin: 0 auto 20px; /* = the step between sticky tops, so the stack leaves together */ box-sizing: border-box;
+.stack-card { position: sticky; top: 96px; width: min(1180px, calc(100% - 40px)); height: min(80vh, 680px); margin: 0 auto 20px; /* = the step between sticky tops, so the stack leaves together */ box-sizing: border-box;
   padding: clamp(28px, 5vw, 64px); border-radius: 34px; overflow: hidden;
-  transform-origin: 50% 0; transform: scale(calc(1 - var(--p, 0) * .06)); will-change: transform;
   box-shadow: 0 -18px 50px -30px rgba(40, 30, 80, .35); }
 /* the card underneath darkens a little as the next one covers it (a cheap layer, so scrolling stays smooth) */
 .stack-card::after { content: ""; position: absolute; inset: 0; z-index: 3; border-radius: inherit; pointer-events: none; background: #0c0a18; opacity: calc(var(--p, 0) * .4); }
@@ -2550,8 +2549,25 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 
 @media (max-width: 640px) {
   .stack { padding-bottom: 90px; }
-  .stack-card { top: 76px; width: calc(100% - 24px); min-height: 0; padding: 28px 22px 34px; border-radius: 26px; margin-bottom: 16px; }
-  .stack-card + .stack-card { top: 92px; min-height: 60vh; }
+  .stack-card { top: 76px; width: calc(100% - 24px); padding: 28px 22px 34px; border-radius: 26px; margin-bottom: 16px; }
+  .stack-card + .stack-card { top: 92px; }
+  .stack-card { height: 74vh; }
   .do-list li { gap: 12px; padding: 10px 0; }
 }
-@media (prefers-reduced-motion: reduce) { .do-spark { animation: none; } .stack-card { transform: none; } .stack-card::after { display: none; } }
+/* the photo library: two rows drifting in opposite directions; hover a photo and it grows and tilts */
+.stack-photos { display: flex; flex-direction: column; }
+.stack-photos .stack-title { margin-bottom: 14px; }
+.lib { flex: 1; min-height: 0; display: grid; grid-template-rows: 1fr 1fr; gap: 14px; margin: clamp(18px, 3vw, 30px) calc(-1 * clamp(28px, 5vw, 64px)) 0; }
+.lib-row { min-height: 0; overflow: hidden; padding: 10px 0; margin: -10px 0; } /* a little room so a tilted photo isn't clipped */
+.lib-track { display: flex; height: 100%; width: max-content; animation: libMove 70s linear infinite; }
+.lib-row--rev .lib-track { animation-direction: reverse; animation-duration: 80s; }
+.lib-row:hover .lib-track { animation-play-state: paused; }
+@keyframes libMove { to { transform: translateX(-50%); } }
+.lib-ph { height: 100%; aspect-ratio: 3 / 4; margin: 0 14px 0 0; border-radius: 16px; overflow: hidden; position: relative;
+  box-shadow: 0 10px 24px -14px rgba(40, 30, 80, .35); transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+.lib-ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lib-ph:hover { transform: scale(1.12) rotate(-4deg); z-index: 2; box-shadow: 0 22px 40px -18px rgba(40, 30, 80, .5); }
+.lib-ph:nth-child(even):hover { transform: scale(1.12) rotate(4deg); }
+.about-type { margin-top: 6px; }
+@media (max-width: 640px) { .lib { margin-left: -22px; margin-right: -22px; gap: 10px; } .lib-ph { margin-right: 10px; border-radius: 12px; } }
+@media (prefers-reduced-motion: reduce) { .do-spark { animation: none; } .stack-card::after { display: none; } .lib-track { animation: none; } .lib-row { overflow-x: auto; } }
