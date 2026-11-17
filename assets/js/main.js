@@ -296,7 +296,7 @@ const SITE = {
   /* ---------- About: photo library, a curved wall of photos drifting sideways ---------- */
   const lib = $(".lib");
   if (lib) {
-    const GAP = 12;
+    const GAP = innerWidth < 640 ? 14 : 22; // space between photos
     const rows = $$(".lib-row", lib).map((row, r) => ({ row, tiles: $$(".lib-ph", row), off: 0, dir: r ? 1 : -1, speed: r ? 20 : 26, paused: false }));
     let W = 0, run = false, last = 0;
     const layout = () => {

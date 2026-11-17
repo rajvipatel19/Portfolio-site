@@ -2554,30 +2554,29 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
   .stack-card { height: 74vh; }
   .do-list li { gap: 12px; padding: 10px 0; }
 }
-/* the photo library: a dark, cinematic curved wall. Two rows drift sideways (main.js); photos near the edges turn inwards and come closer,
+/* the photo library: a curved wall on soft lavender. Two rows drift sideways (main.js); photos near the edges turn inwards and come closer,
    like the inside of a cylinder. a hovered photo grows and tilts and its row pauses. */
-.stack-photos { display: flex; flex-direction: column; background: #0e0c14; color: #f6f3ff; padding-bottom: 0; }
+.stack-photos { display: flex; flex-direction: column; background: linear-gradient(160deg, #efe8ff, #f6e6f3 55%, #fbe6dc); color: var(--ink); padding-bottom: 0; }
 .stack-photos::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(80% 60% at 50% 100%, rgba(247, 168, 120, .12), transparent 70%), radial-gradient(60% 50% at 50% 0%, rgba(138, 118, 238, .14), transparent 70%); }
+  background: radial-gradient(80% 60% at 50% 100%, rgba(247, 168, 120, .16), transparent 70%), radial-gradient(60% 50% at 50% 0%, rgba(138, 118, 238, .12), transparent 70%); }
 .stack-photos { padding-top: clamp(26px, 3.4vw, 42px); }
 .stack-photos .stack-kicker { margin-bottom: 8px; }
 .stack-photos .stack-title { margin-bottom: 6px; position: relative; font-size: clamp(30px, 3.6vw, 44px); }
-.stack-photos .stack-title em { color: #f7c9a8; }
+.stack-photos .stack-title em { color: var(--lav-deep); }
 .stack-photos .stack-kicker, .stack-photos .stack-soon { position: relative; }
-.stack-photos .stack-soon { color: rgba(246, 243, 255, .65); font-size: 15px; margin: 0; }
-.lib { position: relative; flex: 1; min-height: 0; display: grid; grid-template-rows: 1fr 1fr; gap: 12px; padding: clamp(14px, 2vw, 20px) 0 clamp(16px, 2vw, 24px);
+.stack-photos .stack-soon { color: var(--ink-2); font-size: 15px; margin: 0; }
+.lib { position: relative; flex: 1; min-height: 0; display: grid; grid-template-rows: 1fr 1fr; gap: 20px; padding: clamp(16px, 2vw, 22px) 0 clamp(30px, 4vw, 48px);
   margin: 0 calc(-1 * clamp(28px, 5vw, 64px)); }
-.lib::before, .lib::after { content: ""; position: absolute; top: 0; bottom: 0; width: 12%; z-index: 5; pointer-events: none; }
-.lib::before { left: 0; background: linear-gradient(90deg, #0e0c14, transparent); }
-.lib::after { right: 0; background: linear-gradient(270deg, #0e0c14, transparent); }
+/* the wall fades out softly at both sides, whatever the background colour */
+.lib { -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
 .lib-row { position: relative; min-height: 0; perspective: 1100px; }
 .lib-ph { position: absolute; left: 0; top: 0; height: 100%; aspect-ratio: 3 / 4; margin: 0; will-change: transform; }
-.lib-in { display: block; width: 100%; height: 100%; border-radius: 14px; overflow: hidden; box-shadow: 0 14px 30px -16px rgba(0, 0, 0, .7);
+.lib-in { display: block; width: 100%; height: 100%; border-radius: 14px; overflow: hidden; box-shadow: 0 14px 28px -16px rgba(60, 40, 120, .4);
   transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
 .lib-in img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .lib-ph:hover { z-index: 4; }
-.lib-ph:hover .lib-in { transform: scale(1.14) rotate(-3deg); box-shadow: 0 24px 44px -18px rgba(0, 0, 0, .85); }
+.lib-ph:hover .lib-in { transform: scale(1.14) rotate(-3deg); box-shadow: 0 24px 44px -18px rgba(60, 40, 120, .5); }
 .lib-ph:nth-child(even):hover .lib-in { transform: scale(1.14) rotate(3deg); }
 .about-type { margin-top: 6px; }
-@media (max-width: 640px) { .lib { margin-left: -22px; margin-right: -22px; gap: 10px; } .lib-in { border-radius: 10px; } }
+@media (max-width: 640px) { .lib { margin-left: -22px; margin-right: -22px; gap: 14px; padding-bottom: 28px; } .lib-in { border-radius: 10px; } }
 @media (prefers-reduced-motion: reduce) { .do-spark { animation: none; } .stack-card::after { display: none; } }
