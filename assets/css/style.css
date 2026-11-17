@@ -2404,6 +2404,26 @@ body.loaded .pf-msg { animation: none; opacity: 0; transition: opacity .25s; }
 .pf-spark { display: inline-block; font-style: normal; animation: pfSpin 1.6s linear infinite; }
 @keyframes pfShow { to { opacity: 1; } }
 @keyframes pfSpin { to { transform: rotate(360deg); } }
+/* shimmer skeleton: a rough outline of the page that appears only if loading takes longer than half a second */
+.pf-skel { position: absolute; inset: 0; opacity: 0; animation: pfShow .4s ease .5s forwards; --sk: rgba(110,90,170,.12); --sk-shine: rgba(255,255,255,.6); }
+.pf-skel i { position: absolute; display: block; border-radius: 999px; background: var(--sk); overflow: hidden; }
+.pf-skel i::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--sk-shine), transparent); animation: skShine 1.4s ease-in-out infinite; }
+.sk-av { left: 20px; top: 18px; width: 44px; height: 44px; }
+.sk-nav { right: 20px; top: 16px; width: min(430px, 50vw); height: 48px; }
+.sk-hero { position: absolute; left: clamp(20px, 5vw, 72px); top: 34%; width: min(520px, calc(100% - 40px)); }
+.sk-hero .sk-l { position: relative; height: 14px; margin-bottom: 14px; }
+.sk-hero .sk-s { width: 30%; }
+.sk-hero .sk-h { height: 38px; width: 92%; border-radius: 14px; }
+.sk-hero .sk-h2 { width: 60%; margin-bottom: 26px; }
+.sk-hero .sk-short { width: 55%; }
+.sk-btns { display: flex; gap: 12px; margin-top: 28px; }
+.sk-btns i { position: relative; width: 140px; height: 48px; }
+.pf-skel ~ .pf-msg { position: absolute; left: 50%; bottom: 12%; transform: translateX(-50%); white-space: nowrap; }
+body.loaded .pf-skel, body.leaving .pf-skel { display: none; }
+@keyframes skShine { to { transform: translateX(100%); } }
+@media (max-width: 640px) { .sk-nav { width: 46px; } .sk-hero { top: 30%; } .sk-hero .sk-h { height: 30px; } }
+@media (prefers-reduced-motion: reduce) { .pf-skel i::after { animation: none; } }
 @media (prefers-reduced-motion: reduce) { .page-fade { transition: opacity .4s ease; } body.loaded .page-fade { opacity: 0; } .pf-spark { animation: none; } }
 
 /* ---------- Round 12 ---------- */

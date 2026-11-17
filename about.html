@@ -11,16 +11,18 @@
 <link rel="icon" type="image/svg+xml" href="assets/img/avatar.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=86403d88">
-<link rel="stylesheet" href="assets/css/dark.css?v=86403d88">
+<!-- fonts load in the background, so the page can draw straight away (system fonts show for a moment) -->
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="assets/css/style.css?v=8a84d075">
+<link rel="stylesheet" href="assets/css/dark.css?v=8a84d075">
 <script>/* dark mode: apply the saved choice before the page draws, so there is no flash */
 try { if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
 /* the "just a minute" reveal plays only the first time the home page opens in a visit */
 try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.getItem("revealed")) { document.documentElement.classList.add("first-reveal"); sessionStorage.setItem("revealed", "1"); } } catch (e) {}</script>
 </head>
 <body>
-<div class="page-fade" aria-hidden="true"><p class="pf-msg"><span class="pf-spark">✦</span> just a minute</p></div>
+<div class="page-fade" aria-hidden="true"><div class="pf-skel"><i class="sk-av"></i><i class="sk-nav"></i><div class="sk-hero"><i class="sk-l sk-s"></i><i class="sk-l sk-h"></i><i class="sk-l sk-h sk-h2"></i><i class="sk-l"></i><i class="sk-l"></i><i class="sk-l sk-short"></i><div class="sk-btns"><i></i><i></i></div></div></div><p class="pf-msg"><span class="pf-spark">✦</span> just a minute</p></div>
 <div class="ambient" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 <div class="grain" aria-hidden="true"></div>
 <header class="nav">
@@ -91,6 +93,6 @@ try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.get
   <button type="button" class="cmt-btn cmt-eye" aria-pressed="false" aria-label="Show comments on the page" data-tip="Show / hide"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/><path class="cmt-slash" d="M4 4l16 16"/></svg></button>
 </div>
 <div class="cmt-layer cmt-hidden"></div>
-<script src="assets/js/main.js?v=86403d88"></script>
+<script src="assets/js/main.js?v=8a84d075"></script>
 </body>
 </html>

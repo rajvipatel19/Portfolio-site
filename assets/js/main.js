@@ -22,7 +22,11 @@ const SITE = {
     const meta = $('meta[name="theme-color"]'); if (meta) meta.content = dark ? "#2c2a46" : "#fdfcff";
   };
   setThemeUI();
+  // the hero view for the other theme loads once the page is ready (or straight away when the theme is switched)
+  const loadAllViews = () => $$(".hero-view[data-src]").forEach((i) => { if (!i.getAttribute("src")) i.src = i.dataset.src; });
+  addEventListener("load", () => setTimeout(loadAllViews, 1500), { once: true });
   themeBtns.forEach((b) => b.addEventListener("click", () => {
+    loadAllViews();
     const dark = b.dataset.setTheme === "dark";
     if (dark === (document.documentElement.dataset.theme === "dark")) return;
     document.documentElement.classList.add("theme-switching");
@@ -35,12 +39,19 @@ const SITE = {
   const samePage = (u) => u.pathname.replace(/index\.html$/, "") === location.pathname.replace(/index\.html$/, "");
 
   /* ---------- Page load / leave transition ---------- */
-  // First home visit: the single-colour cover stays until the page (and its pictures) has loaded, then opens up to reveal the site
-  // ("just a minute" shows only if that takes a while; never longer than 5 seconds). Every other page: a quick fade, as before.
+  // First home visit: the single-colour cover stays until the hero pictures have loaded, then opens up to reveal the site
+  // (a shimmer skeleton and "just a minute" show only if that takes a while; never longer than 3 seconds). Every other page: a quick fade, as before.
   const reveal = () => document.body.classList.add("loaded");
   if (document.documentElement.classList.contains("first-reveal")) {
-    if (document.readyState === "complete") requestAnimationFrame(reveal); else addEventListener("load", reveal, { once: true });
-    setTimeout(reveal, 5000);
+    // wait only for the hero pictures (not every picture on the page), and never more than 3 seconds
+    const waits = [], room = $(".hero-room");
+    if (room) { const cs = getComputedStyle(room);
+      [cs.backgroundImage, cs.webkitMaskImage || cs.maskImage].forEach((v) => { const m = /url\("?(.*?)"?\)/.exec(v || "");
+        if (m) waits.push(new Promise((ok) => { const im = new Image(); im.onload = im.onerror = ok; im.src = m[1]; })); }); }
+    const view = $(document.documentElement.dataset.theme === "dark" ? ".hero-view--night" : ".hero-view--day");
+    if (view) { view.loading = "eager"; waits.push(view.decode().catch(() => {})); }
+    Promise.all(waits).then(() => requestAnimationFrame(reveal));
+    setTimeout(reveal, 3000);
   } else {
     requestAnimationFrame(reveal); setTimeout(reveal, 600);
   }

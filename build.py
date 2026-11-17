@@ -31,7 +31,9 @@ def head(title, desc, root):
 <link rel="icon" type="image/svg+xml" href="{root}assets/img/avatar.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- fonts load in the background, so the page can draw straight away (system fonts show for a moment) -->
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="{root}assets/css/style.css?v={ASSET_V}">
 <link rel="stylesheet" href="{root}assets/css/dark.css?v={ASSET_V}">
 <script>/* dark mode: apply the saved choice before the page draws, so there is no flash */
@@ -40,7 +42,7 @@ try {{ if (localStorage.getItem("theme") === "dark") document.documentElement.da
 try {{ if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.getItem("revealed")) {{ document.documentElement.classList.add("first-reveal"); sessionStorage.setItem("revealed", "1"); }} }} catch (e) {{}}</script>
 </head>
 <body>
-<div class="page-fade" aria-hidden="true"><p class="pf-msg"><span class="pf-spark">✦</span> just a minute</p></div>
+<div class="page-fade" aria-hidden="true"><div class="pf-skel"><i class="sk-av"></i><i class="sk-nav"></i><div class="sk-hero"><i class="sk-l sk-s"></i><i class="sk-l sk-h"></i><i class="sk-l sk-h sk-h2"></i><i class="sk-l"></i><i class="sk-l"></i><i class="sk-l sk-short"></i><div class="sk-btns"><i></i><i></i></div></div></div><p class="pf-msg"><span class="pf-spark">✦</span> just a minute</p></div>
 <div class="ambient" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 <div class="grain" aria-hidden="true"></div>
 """
@@ -267,24 +269,24 @@ def bring():
         <polygon class="lit" points="70,322 441,194 806,318 435,446" fill="url(#litG)"/>
         <polyline points="70,322 435,446 806,318" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round"/>
       </svg>
-      <img class="layer base" src="assets/media/box-base.png" alt="">
-      <img class="layer lid" src="assets/media/box-lid.png" alt="">
+      <img class="layer base" src="assets/media/box-base.png" loading="lazy" decoding="async" alt="">
+      <img class="layer lid" src="assets/media/box-lid.png" loading="lazy" decoding="async" alt="">
       <span class="beam" aria-hidden="true"></span>
       <span class="sparks" aria-hidden="true"></span>
       <span class="tools"></span>
     </span>"""
     objs = [
         ob(0, "o-diary", 21, 30, 29, -3, 0, "I ask why before how",
-           f'<img src="assets/media/diary-sticker.png" alt="Open diary: questions before designing a SaaS dashboard, and a pencil wireframe"><span class="photo">{diary}</span>'),
+           f'<img src="assets/media/diary-sticker.png" loading="lazy" decoding="async" alt="Open diary: questions before designing a SaaS dashboard, and a pencil wireframe"><span class="photo">{diary}</span>'),
         ob(5, "o-dental", 80, 73, 19, 3, -2.5, "I design with a clinician's care",
-           f'<img src="assets/media/dental-sticker.png" alt="Lab coat with dental tools, a tooth model and an x-ray"><span class="photo">{dental}</span>'),
+           f'<img src="assets/media/dental-sticker.png" loading="lazy" decoding="async" alt="Lab coat with dental tools, a tooth model and an x-ray"><span class="photo">{dental}</span>'),
         ob(1, "o-sticky", 80, 29, 26, 4, -1.2, "I think in systems",
-           f'<img src="assets/media/sticky-sticker.png" alt="Sticky notes mapping a product flow"><span class="photo">{sticky}</span>'),
+           f'<img src="assets/media/sticky-sticker.png" loading="lazy" decoding="async" alt="Sticky notes mapping a product flow"><span class="photo">{sticky}</span>'),
         ob(2, "o-mac", 20, 74, 21, 6, -3.6, "I like getting my hands dirty",
-           '<img src="assets/media/macbook-sticker.png" alt="Closed MacBook">'),
+           '<img src="assets/media/macbook-sticker.png" loading="lazy" decoding="async" alt="Closed MacBook">'),
         ob(4, "o-box", 50, 31, 18, 0, -1.8, "My toolkit, AI included", box_art),
         ob(3, "o-cups", 50.5, 73, 21, -5, -4.4, "I value honest collaboration",
-           '<img src="assets/media/cups-sticker.png" alt="Three coffees and a matcha latte, like a team meeting">'),
+           '<img src="assets/media/cups-sticker.png" loading="lazy" decoding="async" alt="Three coffees and a matcha latte, like a team meeting">'),
     ]
     return f"""<section class="bring" id="bring">
   <div class="bring-head wrap" data-reveal>
@@ -356,8 +358,10 @@ def home():
 <main class="home sl-bg">
 <section class="hero">
   <div class="hero-media" aria-hidden="true">
-    <img class="hero-img hero-view hero-view--day" src="assets/media/hero-view-day.jpg" alt="" fetchpriority="high" decoding="async">
-    <img class="hero-img hero-view hero-view--night" src="assets/media/hero-view.jpg" alt="" loading="lazy" decoding="async">
+    <img class="hero-img hero-view hero-view--day" data-src="assets/media/hero-view-day.jpg" alt="" decoding="async">
+    <img class="hero-img hero-view hero-view--night" data-src="assets/media/hero-view.jpg" alt="" decoding="async">
+    <script>/* load only the view for the current theme first; the other one loads later (main.js) */
+    (function () {{ var i = document.querySelector(document.documentElement.dataset.theme === "dark" ? ".hero-view--night" : ".hero-view--day"); i.fetchPriority = "high"; i.src = i.dataset.src; }})();</script>
     {fireflies()}
     <div class="hero-room"></div>
     {sparkles}

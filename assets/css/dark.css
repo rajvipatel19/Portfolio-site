@@ -413,3 +413,7 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .cmt-actions button { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); color: var(--ink); }
 [data-theme="dark"] .cmt-btn::after { background: #f1ecff; color: #1c1730; }
 [data-theme="dark"] .cmt-toast { background: #f1ecff; color: #1c1730; }
+/* loading skeleton at night */
+[data-theme="dark"] .pf-skel { --sk: rgba(255,255,255,.09); --sk-shine: rgba(255,255,255,.14); }
+/* loading cover at night: dusk purple, not the daytime lavender (needs html.first-reveal to win over the light rule) */
+html.first-reveal[data-theme="dark"] .page-fade { background: #2c2a46; }
