@@ -411,3 +411,4 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .cmt-box input, [data-theme="dark"] .cmt-box textarea { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); color: var(--ink); }
 [data-theme="dark"] .cmt-actions button, [data-theme="dark"] .cmt-x, [data-theme="dark"] .cmt-items button { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); color: var(--ink); }
 [data-theme="dark"] .cmt-btn::after { background: #f1ecff; color: #1c1730; }
+[data-theme="dark"] .cmt-toast { background: #f1ecff; color: #1c1730; }

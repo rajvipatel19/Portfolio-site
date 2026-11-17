@@ -2472,6 +2472,10 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 .cmt-items b { display: block; font-size: 13px; }
 .cmt-items time { display: block; font-size: 11px; color: var(--ink-3); }
 .cmt-items em { display: block; margin-top: 4px; font-style: normal; font-size: 13px; color: var(--ink-2); }
+.cmt-toast { position: fixed; left: 50%; bottom: 96px; z-index: 70; transform: translateX(-50%); max-width: calc(100vw - 32px); padding: 12px 18px; border-radius: 16px;
+  font: 600 14px var(--font-body); color: #fff; background: #17151f; box-shadow: 0 12px 30px -12px rgba(30,20,70,.45); animation: cmtIn .35s var(--ease); transition: opacity .4s, transform .4s; }
+.cmt-toast.is-out { opacity: 0; transform: translate(-50%, 8px); }
+@keyframes cmtIn { from { opacity: 0; transform: translate(-50%, 8px); } }
 .cmt-empty { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-3); }
 @media (max-width: 600px) {
   .cmt-bar { bottom: 14px; gap: 4px; padding: 4px 8px 4px 4px; }

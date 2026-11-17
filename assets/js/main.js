@@ -65,15 +65,33 @@ const SITE = {
   }
 
   /* ---------- Comments, like Figma: pick the speech bubble (or press C), click anywhere, write, post ----------
-     For now comments are kept in this browser only (localStorage). Later, swap the three functions in `store`
-     for a real database so you can read and choose the ones to keep. */
+     Comments are saved in Supabase (a free online database). A new comment arrives with approved = false,
+     so nobody sees it until Rajvi ticks "approved" in the Supabase dashboard (Table Editor → comments).
+     The URL and publishable key below are meant to be public; the database rules decide what visitors can do. */
   const cBar = $(".cmt-bar");
   if (cBar) {
+    const DB = "https://bstlylauvpcwlubqzpbk.supabase.co/rest/v1/comments", KEY = "sb_publishable_ax6mrJDyFHZrHxG9r0BR6A_mpLrgpAS";
+    let cache = [];
     const store = {
-      all() { try { return JSON.parse(localStorage.getItem("comments") || "[]"); } catch (e) { return []; } },
-      save(list) { try { localStorage.setItem("comments", JSON.stringify(list)); } catch (e) {} },
-      add(c) { const l = store.all(); l.push(c); store.save(l); },
-      remove(id) { store.save(store.all().filter((c) => c.id !== id)); },
+      // only approved comments come back: the database hides the rest
+      async load(pg) {
+        try {
+          const r = await fetch(DB + "?select=id,created_at,path,fx,fy,x,y,name,body&page=eq." + encodeURIComponent(pg) + "&order=created_at", { headers: { apikey: KEY } });
+          if (!r.ok) return [];
+          return (await r.json()).map((c) => ({ id: c.id, path: c.path, fx: c.fx, fy: c.fy, x: c.x, y: c.y, name: c.name, text: c.body, time: c.created_at }));
+        } catch (e) { return []; }
+      },
+      async add(c) {
+        try {
+          const r = await fetch(DB, { method: "POST", headers: { apikey: KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
+            body: JSON.stringify({ page: c.page, path: c.path, fx: c.fx, fy: c.fy, x: c.x, y: c.y, name: c.name || null, body: c.text }) });
+          return r.ok;
+        } catch (e) { return false; }
+      },
+    };
+    const toast = (msg) => {
+      const t = document.createElement("div"); t.className = "cmt-toast"; t.setAttribute("role", "status"); t.textContent = msg;
+      document.body.appendChild(t); setTimeout(() => t.classList.add("is-out"), 4200); setTimeout(() => t.remove(), 4700);
     };
     const layer = $(".cmt-layer"), panel = $(".cmt-panel"), items = $(".cmt-items", panel), count = $(".cmt-count");
     const moveBtn = $(".cmt-move"), addBtn = $(".cmt-add"), eyeBtn = $(".cmt-eye"), allBtn = $(".cmt-all");
@@ -97,17 +115,16 @@ const SITE = {
       const r = el.getBoundingClientRect();
       return { x: r.left + scrollX + c.fx * r.width, y: r.top + scrollY + c.fy * r.height };
     };
-    const mine = () => store.all().filter((c) => c.page === page);
+    const mine = () => cache;
 
     const closePops = () => $$(".cmt-pop", layer).forEach((p) => p.remove());
     const openPop = (c, pin) => {
       closePops();
       const pop = document.createElement("div"); pop.className = "cmt-pop cmt-glass"; pop.setAttribute("role", "dialog"); pop.setAttribute("aria-label", "Comment by " + (c.name || "Guest"));
       pop.innerHTML = `<div class="cmt-who"><span class="cmt-av">${esc(initial(c.name))}</span><b>${esc(c.name || "Guest")}</b><time>${when(c.time)}</time></div><p>${esc(c.text)}</p>
-        <div class="cmt-actions"><button type="button" class="cmt-del">Delete</button><button type="button" class="cmt-close">Close</button></div>`;
+        <div class="cmt-actions"><button type="button" class="cmt-close">Close</button></div>`;
       pop.style.left = pin.style.left; pop.style.top = pin.style.top; layer.appendChild(pop);
       $(".cmt-close", pop).addEventListener("click", closePops);
-      $(".cmt-del", pop).addEventListener("click", () => { store.remove(c.id); closePops(); render(); });
       $(".cmt-close", pop).focus();
     };
     const render = () => {
@@ -147,11 +164,13 @@ const SITE = {
       text.addEventListener("input", () => (post.disabled = !text.value.trim()));
       text.addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey) && text.value.trim()) box.requestSubmit(); });
       $(".cmt-cancel", box).addEventListener("click", () => setMode(false));
-      box.addEventListener("submit", (e) => {
+      box.addEventListener("submit", async (e) => {
         e.preventDefault(); const nm = $(".cmt-name", box).value.trim();
         try { localStorage.setItem("commentName", nm); } catch (er) {}
-        store.add({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), page, ...at, name: nm, text: text.value.trim(), time: Date.now() });
-        setMode(false); render();
+        post.disabled = true; post.textContent = "Sending…";
+        const ok = await store.add({ page, ...at, name: nm, text: text.value.trim() });
+        if (ok) { setMode(false); toast("Thanks! Your comment will appear once Rajvi approves it."); }
+        else { post.disabled = false; post.textContent = "Post"; toast("Sorry, that didn't send. Please try again."); }
       });
       draft = { pin, box }; text.focus();
     };
@@ -178,6 +197,7 @@ const SITE = {
       else if (!typing && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === "v" || e.key === "V") && mode) setMode(false);
     });
     render();
+    store.load(page).then((l) => { cache = l; render(); });
     addEventListener("resize", render); addEventListener("load", render);
     new ResizeObserver(() => { if (!draft) render(); }).observe(document.body);
   }

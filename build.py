@@ -107,7 +107,7 @@ def footer(root):
 <aside class="cmt-panel" id="cmt-panel" aria-label="All comments" hidden>
   <div class="cmt-panel-head"><h2>Comments</h2><button type="button" class="cmt-x" aria-label="Close comments">&times;</button></div>
   <ol class="cmt-items"></ol>
-  <p class="cmt-empty">No comments yet. Click the speech bubble, then click anywhere on the page to leave one.</p>
+  <p class="cmt-empty">No comments here yet. Click the speech bubble, then click anywhere on the page to leave one. New comments show up once Rajvi has read them.</p>
 </aside>
 <script src="{root}assets/js/main.js?v={ASSET_V}"></script>
 </body>
