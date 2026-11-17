@@ -89,6 +89,22 @@
   document.getElementById("back").addEventListener("click", () => location.reload());
   const online = () => document.body.classList.toggle("online", navigator.onLine);
   addEventListener("online", online); addEventListener("offline", online);
+  // when the internet comes back (checked every few seconds, and right away when the phone says it's online),
+  // make sure the site really answers, then reload the page automatically
+  if (!/\/offline(\.html)?$/.test(location.pathname)) {
+    let checking = false;
+    const tryBack = async () => {
+      if (checking || !navigator.onLine) return;
+      checking = true;
+      try {
+        const r = await fetch("/?back=" + Date.now(), { method: "HEAD", cache: "no-store" });
+        if (r.ok) { document.body.classList.add("online"); location.reload(); return; }
+      } catch (e) {}
+      checking = false;
+    };
+    addEventListener("online", tryBack);
+    setInterval(tryBack, 4000);
+  }
 })();
 </script>
 </body>

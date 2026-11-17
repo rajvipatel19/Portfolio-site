@@ -1,6 +1,6 @@
 /* Service worker: when a page can't load because there's no internet, show the offline page (a little firefly game).
    It only steps in when the network fails; everything else loads normally, so the site never shows stale content. */
-const CACHE = "offline-v1";
+const CACHE = "offline-v2";
 const KEY = "/__offline__";
 
 self.addEventListener("install", (e) => {
