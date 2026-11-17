@@ -12,10 +12,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=c1b91332">
-<link rel="stylesheet" href="assets/css/dark.css?v=c1b91332">
+<link rel="stylesheet" href="assets/css/style.css?v=9bf99e5f">
+<link rel="stylesheet" href="assets/css/dark.css?v=9bf99e5f">
 <script>/* dark mode: apply the saved choice before the page draws, so there is no flash */
-try { if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
+try { if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
+/* the "just a minute" reveal plays only the first time the home page opens in a visit */
+try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.getItem("revealed")) { document.documentElement.classList.add("first-reveal"); sessionStorage.setItem("revealed", "1"); } } catch (e) {}</script>
 </head>
 <body>
 <div class="page-fade" aria-hidden="true"><p class="pf-msg"><span class="pf-spark">✦</span> just a minute</p></div>
@@ -26,7 +28,7 @@ try { if (localStorage.getItem("theme") === "dark") document.documentElement.dat
   <nav class="nav-menu glass" aria-label="Main">
     <div class="nav-links">
       <a href="about.html">About</a>
-      <a href="ai-lab.html" class="is-active" aria-current="page">AI Lab</a>
+      <a href="ai-lab.html">AI Lab</a>
       <a href="index.html#work">Projects</a>
       <a href="https://www.linkedin.com/in/rajvipatel1912" target="_blank" rel="noopener">LinkedIn</a>
       <a class="nav-resume nav-resume--menu" href="https://drive.google.com/file/d/1aLerfDv--jNq0D1PowDIvbVdaXrZtzyQ/view?usp=sharing" target="_blank" rel="noopener">Resume <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -48,21 +50,28 @@ try { if (localStorage.getItem("theme") === "dark") document.documentElement.dat
   <div class="fireflies" aria-hidden="true"><i class="ff" style="--x:34.5%;--y:54.3%;--s:6.8px;--dx:-60px;--dy:41px;--dur:11.9s;--glow:2.3s;--dl:-8.6s"></i><i class="ff" style="--x:9.3%;--y:66.2%;--s:4.7px;--dx:-57px;--dy:36px;--dur:15.6s;--glow:2.5s;--dl:-3.8s"></i><i class="ff" style="--x:61.2%;--y:87.8%;--s:6.5px;--dx:-14px;--dy:59px;--dur:9.4s;--glow:4.2s;--dl:-4.9s"></i><i class="ff" style="--x:18.7%;--y:52.9%;--s:5.6px;--dx:44px;--dy:26px;--dur:13.7s;--glow:3.7s;--dl:-6.3s"></i><i class="ff" style="--x:54.2%;--y:50.6%;--s:4.7px;--dx:-41px;--dy:47px;--dur:12.4s;--glow:2.9s;--dl:-10.0s"></i><i class="ff" style="--x:45.9%;--y:60.6%;--s:7.3px;--dx:28px;--dy:28px;--dur:13.6s;--glow:3.4s;--dl:-14.9s"></i><i class="ff" style="--x:70.2%;--y:60.1%;--s:7.9px;--dx:-53px;--dy:36px;--dur:15.1s;--glow:2.5s;--dl:-8.3s"></i><i class="ff" style="--x:9.5%;--y:76.1%;--s:7.2px;--dx:10px;--dy:55px;--dur:11.5s;--glow:3.8s;--dl:-10.1s"></i><i class="ff" style="--x:57.0%;--y:67.2%;--s:7.4px;--dx:62px;--dy:38px;--dur:14.3s;--glow:2.3s;--dl:-11.9s"></i><i class="ff" style="--x:62.9%;--y:89.7%;--s:7.4px;--dx:-30px;--dy:34px;--dur:14.3s;--glow:2.3s;--dl:-7.8s"></i><i class="ff" style="--x:20.8%;--y:52.9%;--s:4.7px;--dx:38px;--dy:23px;--dur:11.0s;--glow:3.1s;--dl:-14.8s"></i><i class="ff" style="--x:13.1%;--y:66.9%;--s:6.4px;--dx:54px;--dy:52px;--dur:15.9s;--glow:2.8s;--dl:-7.1s"></i></div>
   <div class="wrap sky-grid">
     <div class="sky-copy">
-      <p class="sky-hi hand" data-reveal>still teaching the robots some manners ✿</p>
+      <p class="sky-hi hand" data-reveal>everything I make for fun ✿</p>
       <h1 class="sky-title" data-reveal style="--d:.1s">AI Lab is<br><span class="sky-type" data-type="brewing|prototyping|learning|almost here">brewing</span><span class="sky-caret" aria-hidden="true"></span></h1>
-      <p class="sky-lede" data-reveal style="--d:.2s">A corner for my experiments with AI: prompt play, tiny tools and prototypes I build with Claude, plus notes on designing AI products people can trust. The lights are on, the furniture isn't in yet.</p>
-      <div class="sky-load" data-reveal style="--d:.3s"><span>warming up the lab…</span><div class="sky-bar"><i></i></div></div>
+      <p class="sky-lede" data-reveal style="--d:.2s">A corner for my experiments with AI: prompt play, tiny tools and prototypes I build with Claude, plus notes on designing AI products people can trust.</p>
       <div data-reveal style="--d:.4s"><div class="sky-btns"><a class="sky-btn sky-btn--dark" href="index.html#work">Meanwhile, see my work <svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="sky-btn" href="index.html#call" data-cal>Book a call</a></div></div>
     </div>
-    <div class="net" data-reveal style="--d:.3s" aria-hidden="true">
-      <svg viewBox="0 0 100 90"><line class="ln" x1="10" y1="30" x2="30" y2="12" style="--i:0"/><line class="ln" x1="30" y1="12" x2="52" y2="22" style="--i:1"/><line class="ln" x1="52" y1="22" x2="78" y2="10" style="--i:2"/><line class="ln" x1="78" y1="10" x2="92" y2="36" style="--i:3"/><line class="ln" x1="52" y1="22" x2="66" y2="42" style="--i:4"/><line class="ln" x1="92" y1="36" x2="66" y2="42" style="--i:5"/><line class="ln" x1="66" y1="42" x2="40" y2="46" style="--i:6"/><line class="ln" x1="10" y1="30" x2="40" y2="46" style="--i:7"/><line class="ln" x1="30" y1="12" x2="40" y2="46" style="--i:8"/><line class="ln" x1="40" y1="46" x2="16" y2="62" style="--i:9"/><line class="ln" x1="40" y1="46" x2="46" y2="72" style="--i:10"/><line class="ln" x1="16" y1="62" x2="46" y2="72" style="--i:11"/><line class="ln" x1="46" y1="72" x2="74" y2="66" style="--i:12"/><line class="ln" x1="66" y1="42" x2="74" y2="66" style="--i:13"/><line class="ln" x1="74" y1="66" x2="90" y2="82" style="--i:14"/><line class="ln" x1="46" y1="72" x2="26" y2="86" style="--i:15"/><line class="ln" x1="16" y1="62" x2="26" y2="86" style="--i:16"/><line class="ln" x1="92" y1="36" x2="74" y2="66" style="--i:17"/><line class="pulse" x1="10" y1="30" x2="30" y2="12" pathLength="100" style="--dl:0.00s"/><line class="pulse" x1="30" y1="12" x2="52" y2="22" pathLength="100" style="--dl:5.17s"/><line class="pulse" x1="52" y1="22" x2="78" y2="10" pathLength="100" style="--dl:4.34s"/><line class="pulse" x1="78" y1="10" x2="92" y2="36" pathLength="100" style="--dl:3.51s"/><line class="pulse" x1="52" y1="22" x2="66" y2="42" pathLength="100" style="--dl:2.68s"/><line class="pulse" x1="92" y1="36" x2="66" y2="42" pathLength="100" style="--dl:1.85s"/><line class="pulse" x1="66" y1="42" x2="40" y2="46" pathLength="100" style="--dl:1.02s"/><line class="pulse" x1="10" y1="30" x2="40" y2="46" pathLength="100" style="--dl:0.19s"/><line class="pulse" x1="30" y1="12" x2="40" y2="46" pathLength="100" style="--dl:5.36s"/><line class="pulse" x1="40" y1="46" x2="16" y2="62" pathLength="100" style="--dl:4.53s"/><line class="pulse" x1="40" y1="46" x2="46" y2="72" pathLength="100" style="--dl:3.70s"/><line class="pulse" x1="16" y1="62" x2="46" y2="72" pathLength="100" style="--dl:2.87s"/><line class="pulse" x1="46" y1="72" x2="74" y2="66" pathLength="100" style="--dl:2.04s"/><line class="pulse" x1="66" y1="42" x2="74" y2="66" pathLength="100" style="--dl:1.21s"/><line class="pulse" x1="74" y1="66" x2="90" y2="82" pathLength="100" style="--dl:0.38s"/><line class="pulse" x1="46" y1="72" x2="26" y2="86" pathLength="100" style="--dl:5.55s"/><line class="pulse" x1="16" y1="62" x2="26" y2="86" pathLength="100" style="--dl:4.72s"/><line class="pulse" x1="92" y1="36" x2="74" y2="66" pathLength="100" style="--dl:3.89s"/></svg>
-      <i class="nd" style="--x:10%;--y:33.33%;--dl:-0.0s"></i><i class="nd nd--big" style="--x:30%;--y:13.33%;--dl:-0.7s"></i><span class="nd-tag nd-tag--above" style="--x:30%;--y:13.33%;--dl:-0.9s">prompt experiments</span><i class="nd" style="--x:52%;--y:24.44%;--dl:-1.4s"></i><i class="nd" style="--x:78%;--y:11.11%;--dl:-2.1s"></i><i class="nd nd--big" style="--x:92%;--y:40.00%;--dl:-2.8s"></i><span class="nd-tag nd-tag--above nd-tag--r" style="--x:92%;--y:40.00%;--dl:-3.6s">tiny AI tools</span><i class="nd" style="--x:66%;--y:46.67%;--dl:-3.5s"></i><i class="nd" style="--x:40%;--y:51.11%;--dl:-4.2s"></i><i class="nd nd--big" style="--x:16%;--y:68.89%;--dl:-4.9s"></i><span class="nd-tag nd-tag--below nd-tag--l" style="--x:16%;--y:68.89%;--dl:-6.3s">prototypes built with Claude</span><i class="nd" style="--x:46%;--y:80.00%;--dl:-5.6s"></i><i class="nd nd--big" style="--x:74%;--y:73.33%;--dl:-6.3s"></i><span class="nd-tag nd-tag--below" style="--x:74%;--y:73.33%;--dl:-8.1s">notes on designing for AI</span><i class="nd" style="--x:90%;--y:91.11%;--dl:-7.0s"></i><i class="nd" style="--x:26%;--y:95.56%;--dl:-7.7s"></i>
+    <div class="spark" data-reveal style="--d:.3s" data-ideas="[{&quot;t&quot;: &quot;A playlist that changes with the weather outside&quot;, &quot;tags&quot;: [&quot;music&quot;, &quot;mood&quot;]}, {&quot;t&quot;: &quot;Turn a messy brain-dump into a tidy to-do list&quot;, &quot;tags&quot;: [&quot;productivity&quot;, &quot;prompt play&quot;]}, {&quot;t&quot;: &quot;A recipe maker for whatever is left in the fridge&quot;, &quot;tags&quot;: [&quot;food&quot;, &quot;tiny tool&quot;]}, {&quot;t&quot;: &quot;Moodboards from a single sentence&quot;, &quot;tags&quot;: [&quot;design&quot;, &quot;images&quot;]}, {&quot;t&quot;: &quot;A bedtime story that stars your dog&quot;, &quot;tags&quot;: [&quot;stories&quot;, &quot;fun&quot;]}, {&quot;t&quot;: &quot;Explain any bank statement like I&#x27;m five&quot;, &quot;tags&quot;: [&quot;fintech&quot;, &quot;clarity&quot;]}, {&quot;t&quot;: &quot;A gentle coach that reminds you to drink water&quot;, &quot;tags&quot;: [&quot;health&quot;, &quot;habits&quot;]}, {&quot;t&quot;: &quot;Rename 200 messy files in plain English&quot;, &quot;tags&quot;: [&quot;tiny tool&quot;, &quot;workflow&quot;]}]">
+      <button type="button" class="spark-orb" aria-label="Spark a new AI experiment idea">
+        <span class="spark-ring"></span><span class="spark-ring spark-ring--2"></span><span class="spark-core"><span class="spark-star">✦</span></span>
+        <i class="spark-dot" style="--a:0deg"></i><i class="spark-dot" style="--a:72deg"></i><i class="spark-dot" style="--a:144deg"></i><i class="spark-dot" style="--a:216deg"></i><i class="spark-dot" style="--a:288deg"></i>
+      </button>
+      <p class="spark-hint hand">tap the spark for an idea ✦</p>
+      <div class="spark-card glass" aria-live="polite">
+        <span class="spark-label">idea <b class="spark-n">#1</b></span>
+        <p class="spark-text">A playlist that changes with the weather outside</p>
+        <div class="spark-tags"><span>music</span><span>mood</span></div>
+      </div>
     </div>
   </div>
 </section>
 <section class="lab" id="experiments">
   <div class="wrap">
-    <div class="lab-head" data-reveal><span class="hand">the first one's in ✿</span><h2>Experiments</h2></div>
+    <div class="lab-head" data-reveal><h2>Experiments</h2></div>
     <article class="lab-exp">
     <div class="lab-copy" data-reveal>
       <span class="lab-num hand">experiment 01</span>
@@ -101,6 +110,6 @@ try { if (localStorage.getItem("theme") === "dark") document.documentElement.dat
     </div>
   </div>
 </footer>
-<script src="assets/js/main.js?v=c1b91332"></script>
+<script src="assets/js/main.js?v=9bf99e5f"></script>
 </body>
 </html>

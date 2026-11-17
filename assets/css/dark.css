@@ -201,7 +201,7 @@ html.theme-switching body, html.theme-switching body * { transition: background-
    ========================================================= */
 [data-theme="dark"] .sila { --sl-accent: #c4b0f5; --sl-ink: #eeeaf6; --sl-ink-2: #b9b3c8; --sl-ink-3: #8f889f; --sl-num: #4f4a70; --sl-icon: #b9a9ff; }
 [data-theme="dark"] .sila.cl { --sl-accent: #f3a740; }
-[data-theme="dark"] .sila.cl .roadmap { --sl-accent: #c4b0f5; }
+[data-theme="dark"] .sila.cl .roadmap { --sl-accent: #f3a740; }
 [data-theme="dark"] .sk { --sk-ink: #eeeaf6; --sk-ink-2: #b9b3c8; --sk-ghost: #5c5a74; --sk-lav: rgba(255,255,255,.06); }
 
 /* page backgrounds: the same soft colour journey, at night */
@@ -395,3 +395,9 @@ html.theme-switching body, html.theme-switching body * { transition: background-
   box-sizing: border-box; padding: 10px; border: 1px solid rgba(255,255,255,.2) !important; border-radius: 22px;
   background: linear-gradient(150deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
   box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 24px 50px -30px rgba(12,10,32,.7); }
+
+/* CityLockers side navigation at night: orange too */
+[data-theme="dark"] .sila.cl .sl-rail .node, [data-theme="dark"] .sila.cl .sl-side .node { border-color: rgba(243,167,64,.45); }
+@media (max-width: 1199px) { [data-theme="dark"] .sila.cl .sl-side li.active a { background: rgba(243,167,64,.16); } }
+/* AI Lab idea spark at night */
+[data-theme="dark"] .spark-tags span { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.18); }

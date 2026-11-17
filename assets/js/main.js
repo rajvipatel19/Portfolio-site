@@ -35,11 +35,15 @@ const SITE = {
   const samePage = (u) => u.pathname.replace(/index\.html$/, "") === location.pathname.replace(/index\.html$/, "");
 
   /* ---------- Page load / leave transition ---------- */
-  // the single-colour cover stays until the page (and its pictures) has loaded, then lifts to reveal the site.
-  // If loading is quick the cover is gone before "just a minute" ever appears; it never stays longer than 5 seconds.
+  // First home visit: the single-colour cover stays until the page (and its pictures) has loaded, then opens up to reveal the site
+  // ("just a minute" shows only if that takes a while; never longer than 5 seconds). Every other page: a quick fade, as before.
   const reveal = () => document.body.classList.add("loaded");
-  if (document.readyState === "complete") requestAnimationFrame(reveal); else addEventListener("load", reveal, { once: true });
-  setTimeout(reveal, 5000);
+  if (document.documentElement.classList.contains("first-reveal")) {
+    if (document.readyState === "complete") requestAnimationFrame(reveal); else addEventListener("load", reveal, { once: true });
+    setTimeout(reveal, 5000);
+  } else {
+    requestAnimationFrame(reveal); setTimeout(reveal, 600);
+  }
   window.addEventListener("pageshow", (e) => { if (e.persisted) document.body.classList.remove("leaving"); });
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a");
@@ -54,6 +58,38 @@ const SITE = {
     document.body.classList.add("leaving");
     setTimeout(() => (window.location.href = href), 320);
   });
+
+  /* ---------- Offline: register the service worker that shows the firefly game when there's no internet ---------- */
+  if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+    addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}), { once: true });
+  }
+
+  /* ---------- AI Lab: tap the spark for a new idea ---------- */
+  const spark = $(".spark");
+  if (spark) {
+    const ideas = JSON.parse(spark.dataset.ideas || "[]");
+    const orb = $(".spark-orb", spark), text = $(".spark-text", spark), tags = $(".spark-tags", spark), num = $(".spark-n", spark), card = $(".spark-card", spark);
+    let i = 0, typing = 0;
+    const show = () => {
+      i = (i + 1) % ideas.length; const idea = ideas[i];
+      num.textContent = "#" + (i + 1);
+      tags.innerHTML = idea.tags.map((t) => `<span>${t}</span>`).join("");
+      card.classList.remove("pop"); void card.offsetWidth; card.classList.add("pop");
+      orb.classList.remove("burst"); void orb.offsetWidth; orb.classList.add("burst");
+      clearInterval(typing);
+      if (reduce) { text.textContent = idea.t; return; }
+      let k = 0; text.textContent = "";
+      typing = setInterval(() => { text.textContent = idea.t.slice(0, ++k); if (k >= idea.t.length) clearInterval(typing); }, 22);
+    };
+    orb.addEventListener("click", show);
+    // the spark leans gently towards the mouse
+    if (fine && !reduce) {
+      spark.addEventListener("mousemove", (e) => { const r = orb.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) / r.width, dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+        orb.style.setProperty("--tx", (Math.max(-1, Math.min(1, dx)) * 10).toFixed(1) + "px"); orb.style.setProperty("--ty", (Math.max(-1, Math.min(1, dy)) * 10).toFixed(1) + "px"); });
+      spark.addEventListener("mouseleave", () => { orb.style.setProperty("--tx", "0px"); orb.style.setProperty("--ty", "0px"); });
+    }
+  }
 
   /* ---------- Nav: hide on scroll down, mobile menu ---------- */
   const nav = $(".nav");
@@ -142,17 +178,6 @@ const SITE = {
     });
   }, { threshold: 0.6 });
   $$("[data-count]").forEach((el) => countIO.observe(el));
-
-  /* ---------- Custom cursor ---------- */
-  if (fine && !reduce) {
-    const c = document.createElement("div"); c.className = "cursor"; document.body.appendChild(c);
-    let x = 0, y = 0, cx = 0, cy = 0;
-    addEventListener("mousemove", (e) => { x = e.clientX; y = e.clientY; c.classList.add("on"); });
-    document.addEventListener("mouseleave", () => c.classList.remove("on"));
-    const loop = () => { cx += (x - cx) * 0.18; cy += (y - cy) * 0.18; c.style.transform = `translate(${cx}px, ${cy}px)`; requestAnimationFrame(loop); };
-    loop();
-    document.addEventListener("mouseover", (e) => c.classList.toggle("big", !!e.target.closest("a, button, .cd, .desk-item, .shot")));
-  }
 
   /* ---------- Magnetic buttons ---------- */
   if (fine && !reduce) {
@@ -680,8 +705,4 @@ const SITE = {
   else box.addEventListener("click", () => (isOpen ? closeBox : openBox)());
   box.addEventListener("focus", openBox); box.addEventListener("blur", closeBox);
 
-  /* ---------- Offline: register the service worker that shows the firefly game when there's no internet ---------- */
-  if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
-    addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}), { once: true });
-  }
 })();

@@ -35,7 +35,9 @@ def head(title, desc, root):
 <link rel="stylesheet" href="{root}assets/css/style.css?v={ASSET_V}">
 <link rel="stylesheet" href="{root}assets/css/dark.css?v={ASSET_V}">
 <script>/* dark mode: apply the saved choice before the page draws, so there is no flash */
-try {{ if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; }} catch (e) {{}}</script>
+try {{ if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; }} catch (e) {{}}
+/* the "just a minute" reveal plays only the first time the home page opens in a visit */
+try {{ if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.getItem("revealed")) {{ document.documentElement.classList.add("first-reveal"); sessionStorage.setItem("revealed", "1"); }} }} catch (e) {{}}</script>
 </head>
 <body>
 <div class="page-fade" aria-hidden="true"><p class="pf-msg"><span class="pf-spark">✦</span> just a minute</p></div>
@@ -46,7 +48,7 @@ try {{ if (localStorage.getItem("theme") === "dark") document.documentElement.da
 
 def nav(root, active):
     def link(href, label, key, extra=""):
-        cls = ' class="is-active" aria-current="page"' if key == active else ""
+        cls = ""  # no item is highlighted; Projects simply jumps to the work section
         return f'<a href="{root}{href}"{cls}>{label}{extra}</a>'
     return f"""<header class="nav">
   <a class="logo" href="{root}index.html" aria-label="Rajvi Patel — home"><img class="logo-avatar" src="{root}assets/img/avatar.svg" alt="" width="46" height="46"><span class="logo-name">Rajvi <span class="logo-last">Patel</span></span></a>
@@ -656,6 +658,24 @@ def ai_net():
     </div>"""
 
 
+def ai_spark():
+    """AI Lab hero: a glowing spark you tap (or press Enter on) to get a new fun AI experiment idea, typed out on a glass card."""
+    import json
+    data = escape(json.dumps([{"t": t, "tags": tags} for t, tags in C.AI_IDEAS]))
+    return f"""<div class="spark" data-reveal style="--d:.3s" data-ideas="{data}">
+      <button type="button" class="spark-orb" aria-label="Spark a new AI experiment idea">
+        <span class="spark-ring"></span><span class="spark-ring spark-ring--2"></span><span class="spark-core"><span class="spark-star">✦</span></span>
+        <i class="spark-dot" style="--a:0deg"></i><i class="spark-dot" style="--a:72deg"></i><i class="spark-dot" style="--a:144deg"></i><i class="spark-dot" style="--a:216deg"></i><i class="spark-dot" style="--a:288deg"></i>
+      </button>
+      <p class="spark-hint hand">tap the spark for an idea ✦</p>
+      <div class="spark-card glass" aria-live="polite">
+        <span class="spark-label">idea <b class="spark-n">#1</b></span>
+        <p class="spark-text">{escape(C.AI_IDEAS[0][0])}</p>
+        <div class="spark-tags">{"".join(f'<span>{escape(x)}</span>' for x in C.AI_IDEAS[0][1])}</div>
+      </div>
+    </div>"""
+
+
 def lab_experiments():
     out = []
     for e in C.LAB_EXPERIMENTS:
@@ -678,7 +698,7 @@ def lab_experiments():
   </article>""")
     return f"""<section class="lab" id="experiments">
   <div class="wrap">
-    <div class="lab-head" data-reveal><span class="hand">the first one's in ✿</span><h2>Experiments</h2></div>
+    <div class="lab-head" data-reveal><h2>Experiments</h2></div>
     {"".join(out)}
   </div>
 </section>"""
@@ -693,15 +713,14 @@ def ai_lab():
   {fireflies(12)}
   <div class="wrap sky-grid">
     <div class="sky-copy">
-      <p class="sky-hi hand" data-reveal>still teaching the robots some manners ✿</p>
+      <p class="sky-hi hand" data-reveal>everything I make for fun ✿</p>
       <h1 class="sky-title" data-reveal style="--d:.1s">AI Lab is<br><span class="sky-type" data-type="brewing|prototyping|learning|almost here">brewing</span><span class="sky-caret" aria-hidden="true"></span></h1>
       <p class="sky-lede" data-reveal style="--d:.2s">{C.AI_LAB_TEXT}</p>
-      <div class="sky-load" data-reveal style="--d:.3s"><span>warming up the lab…</span><div class="sky-bar"><i></i></div></div>
       <div data-reveal style="--d:.4s">{sky_btns(
           f'<a class="sky-btn sky-btn--dark" href="index.html#work">Meanwhile, see my work {ARROW}</a>',
           f'<a class="sky-btn" href="index.html#call" data-cal>Book a call</a>')}</div>
     </div>
-    {ai_net()}
+    {ai_spark()}
   </div>
 </section>
 {lab_experiments()}

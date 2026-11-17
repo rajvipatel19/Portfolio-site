@@ -12,10 +12,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=c1b91332">
-<link rel="stylesheet" href="assets/css/dark.css?v=c1b91332">
+<link rel="stylesheet" href="assets/css/style.css?v=9bf99e5f">
+<link rel="stylesheet" href="assets/css/dark.css?v=9bf99e5f">
 <script>/* dark mode: apply the saved choice before the page draws, so there is no flash */
-try { if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
+try { if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
+/* the "just a minute" reveal plays only the first time the home page opens in a visit */
+try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.getItem("revealed")) { document.documentElement.classList.add("first-reveal"); sessionStorage.setItem("revealed", "1"); } } catch (e) {}</script>
 </head>
 <body>
 <div class="page-fade" aria-hidden="true"><p class="pf-msg"><span class="pf-spark">✦</span> just a minute</p></div>
@@ -25,7 +27,7 @@ try { if (localStorage.getItem("theme") === "dark") document.documentElement.dat
   <a class="logo" href="index.html" aria-label="Rajvi Patel — home"><img class="logo-avatar" src="assets/img/avatar.svg" alt="" width="46" height="46"><span class="logo-name">Rajvi <span class="logo-last">Patel</span></span></a>
   <nav class="nav-menu glass" aria-label="Main">
     <div class="nav-links">
-      <a href="about.html" class="is-active" aria-current="page">About</a>
+      <a href="about.html">About</a>
       <a href="ai-lab.html">AI Lab</a>
       <a href="index.html#work">Projects</a>
       <a href="https://www.linkedin.com/in/rajvipatel1912" target="_blank" rel="noopener">LinkedIn</a>
@@ -83,6 +85,6 @@ try { if (localStorage.getItem("theme") === "dark") document.documentElement.dat
     </div>
   </div>
 </footer>
-<script src="assets/js/main.js?v=c1b91332"></script>
+<script src="assets/js/main.js?v=9bf99e5f"></script>
 </body>
 </html>

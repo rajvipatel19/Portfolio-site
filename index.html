@@ -12,10 +12,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=c1b91332">
-<link rel="stylesheet" href="assets/css/dark.css?v=c1b91332">
+<link rel="stylesheet" href="assets/css/style.css?v=9bf99e5f">
+<link rel="stylesheet" href="assets/css/dark.css?v=9bf99e5f">
 <script>/* dark mode: apply the saved choice before the page draws, so there is no flash */
-try { if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
+try { if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
+/* the "just a minute" reveal plays only the first time the home page opens in a visit */
+try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.getItem("revealed")) { document.documentElement.classList.add("first-reveal"); sessionStorage.setItem("revealed", "1"); } } catch (e) {}</script>
 </head>
 <body>
 <div class="page-fade" aria-hidden="true"><p class="pf-msg"><span class="pf-spark">✦</span> just a minute</p></div>
@@ -27,7 +29,7 @@ try { if (localStorage.getItem("theme") === "dark") document.documentElement.dat
     <div class="nav-links">
       <a href="about.html">About</a>
       <a href="ai-lab.html">AI Lab</a>
-      <a href="index.html#work" class="is-active" aria-current="page">Projects</a>
+      <a href="index.html#work">Projects</a>
       <a href="https://www.linkedin.com/in/rajvipatel1912" target="_blank" rel="noopener">LinkedIn</a>
       <a class="nav-resume nav-resume--menu" href="https://drive.google.com/file/d/1aLerfDv--jNq0D1PowDIvbVdaXrZtzyQ/view?usp=sharing" target="_blank" rel="noopener">Resume <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
@@ -58,9 +60,9 @@ try { if (localStorage.getItem("theme") === "dark") document.documentElement.dat
   </nav>
   <div class="wrap hero-inner">
     <p class="hero-hi" data-reveal><span>Hi! I’m Rajvi</span><span class="wave" aria-hidden="true">👋</span></p>
-    <h1 class="split">AI native product designer with interest in healthtech and fintech</h1>
+    <h1 class="split">AI native product designer</h1>
     <div class="hero-side" data-reveal style="--d:.35s">
-      <p>I turn ambiguity into direction, and direction into thoughtful product experiences, bringing together product experience into B2B, B2C, and SaaS products to create products you would like to use.</p>
+      <p>I turn messy, unclear problems into a clear direction, then shape that direction into products people actually enjoy using, mostly in fintech, health-tech and e-commerce.</p>
       <div class="hero-cta">
         <a class="btn btn--dark magnetic" href="#work">See my work <svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="btn magnetic" href="#call" data-cal>Book a call <svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -461,6 +463,6 @@ try { if (localStorage.getItem("theme") === "dark") document.documentElement.dat
     </div>
   </div>
 </footer>
-<script src="assets/js/main.js?v=c1b91332"></script>
+<script src="assets/js/main.js?v=9bf99e5f"></script>
 </body>
 </html>

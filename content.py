@@ -5,8 +5,8 @@ LINKEDIN = "https://www.linkedin.com/in/rajvipatel1912"
 RESUME = "https://drive.google.com/file/d/1aLerfDv--jNq0D1PowDIvbVdaXrZtzyQ/view?usp=sharing"
 
 META_DESC = "Rajvi Patel, Senior Product Designer in Dubai. 4+ years designing B2C, B2B, health-tech and e-commerce products that are easy to understand and use."
-HERO_TITLE = "AI native product designer with interest in healthtech and fintech"
-INTRO = "I turn ambiguity into direction, and direction into thoughtful product experiences, bringing together product experience into B2B, B2C, and SaaS products to create products you would like to use."
+HERO_TITLE = "AI native product designer"
+INTRO = "I turn messy, unclear problems into a clear direction, then shape that direction into products people actually enjoy using, mostly in fintech, health-tech and e-commerce."
 
 ABOUT_BIO = [
     "I'm a Senior Product Designer based in Dubai, with 4+ years of designing products end to end, from the first research call to the final shipped screen.",
@@ -14,7 +14,7 @@ ABOUT_BIO = [
     "I've built and led a design team from scratch, been the sole designer at an early-stage startup, and shipped across mobile apps, kiosks, web platforms and client portals.",
 ]
 ABOUT_TYPING = ["a product designer", "an ex-dentist", "a coffee person", "a firefly catcher"]  # the typing line on About
-AI_LAB_TEXT = "A corner for my experiments with AI: prompt play, tiny tools and prototypes I build with Claude, plus notes on designing AI products people can trust. The lights are on, the furniture isn't in yet."
+AI_LAB_TEXT = "A corner for my experiments with AI: prompt play, tiny tools and prototypes I build with Claude, plus notes on designing AI products people can trust."
 # AI Lab experiments (shown under the AI Lab sky, in this order). "src" is the interactive file in assets/lab/.
 LAB_EXPERIMENTS = [
     {"num": "01", "src": "assets/lab/sila-wallet.html", "title": "A card you pull out of the wallet",
@@ -392,4 +392,17 @@ AI_FLOW = [
      "tools": ["design-system.md", "Claude Code"],
      "text": "I write a design-system.md file so AI coding agents build with my colours, type and components, and everything stays consistent. On urgent projects, Claude Code takes ideas straight to working code. This portfolio included.",
      "out": "Consistent, shippable product"},
+]
+
+
+# AI Lab hero: the "idea spark". Each tap shows one of these as a little idea card (fun experiments, not claims)
+AI_IDEAS = [
+    ("A playlist that changes with the weather outside", ["music", "mood"]),
+    ("Turn a messy brain-dump into a tidy to-do list", ["productivity", "prompt play"]),
+    ("A recipe maker for whatever is left in the fridge", ["food", "tiny tool"]),
+    ("Moodboards from a single sentence", ["design", "images"]),
+    ("A bedtime story that stars your dog", ["stories", "fun"]),
+    ("Explain any bank statement like I'm five", ["fintech", "clarity"]),
+    ("A gentle coach that reminds you to drink water", ["health", "habits"]),
+    ("Rename 200 messy files in plain English", ["tiny tool", "workflow"]),
 ]
