@@ -97,6 +97,17 @@ def footer(root):
     </div>
   </div>
 </footer>
+<div class="cmt-bar" role="toolbar" aria-label="Comments" aria-orientation="vertical">
+  <button type="button" class="cmt-btn cmt-add" aria-pressed="false" aria-label="Add a comment (shortcut C)" data-tip="Comment · C"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H8z"/><path d="M12 7.5v5M9.5 10h5"/></svg></button>
+  <button type="button" class="cmt-btn cmt-eye" aria-pressed="true" aria-label="Show comments on the page" data-tip="Show / hide"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg></button>
+  <button type="button" class="cmt-btn cmt-all" aria-expanded="false" aria-controls="cmt-panel" aria-label="All comments" data-tip="All comments"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 7h11M8 12h11M8 17h11"/><circle cx="4.5" cy="7" r=".9" fill="currentColor"/><circle cx="4.5" cy="12" r=".9" fill="currentColor"/><circle cx="4.5" cy="17" r=".9" fill="currentColor"/></svg><span class="cmt-count" hidden>0</span></button>
+</div>
+<div class="cmt-layer"></div>
+<aside class="cmt-panel" id="cmt-panel" aria-label="All comments" hidden>
+  <div class="cmt-panel-head"><h2>Comments</h2><button type="button" class="cmt-x" aria-label="Close comments">&times;</button></div>
+  <ol class="cmt-items"></ol>
+  <p class="cmt-empty">No comments yet. Click the speech bubble, then click anywhere on the page to leave one.</p>
+</aside>
 <script src="{root}assets/js/main.js?v={ASSET_V}"></script>
 </body>
 </html>
@@ -658,24 +669,6 @@ def ai_net():
     </div>"""
 
 
-def ai_spark():
-    """AI Lab hero: a glowing spark you tap (or press Enter on) to get a new fun AI experiment idea, typed out on a glass card."""
-    import json
-    data = escape(json.dumps([{"t": t, "tags": tags} for t, tags in C.AI_IDEAS]))
-    return f"""<div class="spark" data-reveal style="--d:.3s" data-ideas="{data}">
-      <button type="button" class="spark-orb" aria-label="Spark a new AI experiment idea">
-        <span class="spark-ring"></span><span class="spark-ring spark-ring--2"></span><span class="spark-core"><span class="spark-star">✦</span></span>
-        <i class="spark-dot" style="--a:0deg"></i><i class="spark-dot" style="--a:72deg"></i><i class="spark-dot" style="--a:144deg"></i><i class="spark-dot" style="--a:216deg"></i><i class="spark-dot" style="--a:288deg"></i>
-      </button>
-      <p class="spark-hint hand">tap the spark for an idea ✦</p>
-      <div class="spark-card glass" aria-live="polite">
-        <span class="spark-label">idea <b class="spark-n">#1</b></span>
-        <p class="spark-text">{escape(C.AI_IDEAS[0][0])}</p>
-        <div class="spark-tags">{"".join(f'<span>{escape(x)}</span>' for x in C.AI_IDEAS[0][1])}</div>
-      </div>
-    </div>"""
-
-
 def lab_experiments():
     out = []
     for e in C.LAB_EXPERIMENTS:
@@ -720,7 +713,7 @@ def ai_lab():
           f'<a class="sky-btn sky-btn--dark" href="index.html#work">Meanwhile, see my work {ARROW}</a>',
           f'<a class="sky-btn" href="index.html#call" data-cal>Book a call</a>')}</div>
     </div>
-    {ai_spark()}
+    {ai_net()}
   </div>
 </section>
 {lab_experiments()}

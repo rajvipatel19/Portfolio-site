@@ -394,15 +394,3 @@ AI_FLOW = [
      "out": "Consistent, shippable product"},
 ]
 
-
-# AI Lab hero: the "idea spark". Each tap shows one of these as a little idea card (fun experiments, not claims)
-AI_IDEAS = [
-    ("A playlist that changes with the weather outside", ["music", "mood"]),
-    ("Turn a messy brain-dump into a tidy to-do list", ["productivity", "prompt play"]),
-    ("A recipe maker for whatever is left in the fridge", ["food", "tiny tool"]),
-    ("Moodboards from a single sentence", ["design", "images"]),
-    ("A bedtime story that stars your dog", ["stories", "fun"]),
-    ("Explain any bank statement like I'm five", ["fintech", "clarity"]),
-    ("A gentle coach that reminds you to drink water", ["health", "habits"]),
-    ("Rename 200 messy files in plain English", ["tiny tool", "workflow"]),
-]

@@ -64,31 +64,120 @@ const SITE = {
     addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}), { once: true });
   }
 
-  /* ---------- AI Lab: tap the spark for a new idea ---------- */
-  const spark = $(".spark");
-  if (spark) {
-    const ideas = JSON.parse(spark.dataset.ideas || "[]");
-    const orb = $(".spark-orb", spark), text = $(".spark-text", spark), tags = $(".spark-tags", spark), num = $(".spark-n", spark), card = $(".spark-card", spark);
-    let i = 0, typing = 0;
-    const show = () => {
-      i = (i + 1) % ideas.length; const idea = ideas[i];
-      num.textContent = "#" + (i + 1);
-      tags.innerHTML = idea.tags.map((t) => `<span>${t}</span>`).join("");
-      card.classList.remove("pop"); void card.offsetWidth; card.classList.add("pop");
-      orb.classList.remove("burst"); void orb.offsetWidth; orb.classList.add("burst");
-      clearInterval(typing);
-      if (reduce) { text.textContent = idea.t; return; }
-      let k = 0; text.textContent = "";
-      typing = setInterval(() => { text.textContent = idea.t.slice(0, ++k); if (k >= idea.t.length) clearInterval(typing); }, 22);
+  /* ---------- Comments, like Figma: pick the speech bubble (or press C), click anywhere, write, post ----------
+     For now comments are kept in this browser only (localStorage). Later, swap the three functions in `store`
+     for a real database so you can read and choose the ones to keep. */
+  const cBar = $(".cmt-bar");
+  if (cBar) {
+    const store = {
+      all() { try { return JSON.parse(localStorage.getItem("comments") || "[]"); } catch (e) { return []; } },
+      save(list) { try { localStorage.setItem("comments", JSON.stringify(list)); } catch (e) {} },
+      add(c) { const l = store.all(); l.push(c); store.save(l); },
+      remove(id) { store.save(store.all().filter((c) => c.id !== id)); },
     };
-    orb.addEventListener("click", show);
-    // the spark leans gently towards the mouse
-    if (fine && !reduce) {
-      spark.addEventListener("mousemove", (e) => { const r = orb.getBoundingClientRect();
-        const dx = (e.clientX - (r.left + r.width / 2)) / r.width, dy = (e.clientY - (r.top + r.height / 2)) / r.height;
-        orb.style.setProperty("--tx", (Math.max(-1, Math.min(1, dx)) * 10).toFixed(1) + "px"); orb.style.setProperty("--ty", (Math.max(-1, Math.min(1, dy)) * 10).toFixed(1) + "px"); });
-      spark.addEventListener("mouseleave", () => { orb.style.setProperty("--tx", "0px"); orb.style.setProperty("--ty", "0px"); });
-    }
+    const layer = $(".cmt-layer"), panel = $(".cmt-panel"), items = $(".cmt-items", panel), count = $(".cmt-count");
+    const addBtn = $(".cmt-add"), eyeBtn = $(".cmt-eye"), allBtn = $(".cmt-all");
+    const page = location.pathname.replace(/\/index(\.html)?$/, "/").replace(/\.html$/, "") || "/";
+    const esc = (t) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+    const initial = (n) => (n || "Guest").trim().charAt(0).toUpperCase() || "G";
+    const when = (t) => new Date(t).toLocaleString([], { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+    let mode = false, draft = null;
+
+    // where a comment sits: the element under the click (a path from <body>) and the spot inside it, so it stays put when the layout changes
+    const pathOf = (el) => { const parts = []; while (el && el !== document.body) { const p = el.parentElement; if (!p) break; parts.unshift(el.tagName.toLowerCase() + ":nth-child(" + ([...p.children].indexOf(el) + 1) + ")"); el = p; } return "body>" + parts.join(">"); };
+    const anchorAt = (x, y) => {
+      layer.style.display = "none"; let el = document.elementFromPoint(x, y); layer.style.display = "";
+      el = el && (el.closest("section, header, footer, article, figure, .card, img, video") || el);
+      const r = el.getBoundingClientRect();
+      return { path: pathOf(el), fx: (x - r.left) / (r.width || 1), fy: (y - r.top) / (r.height || 1), x: x + scrollX, y: y + scrollY };
+    };
+    const placeOf = (c) => {
+      let el = null; try { el = document.querySelector(c.path); } catch (e) {}
+      if (!el) return { x: c.x, y: c.y };
+      const r = el.getBoundingClientRect();
+      return { x: r.left + scrollX + c.fx * r.width, y: r.top + scrollY + c.fy * r.height };
+    };
+    const mine = () => store.all().filter((c) => c.page === page);
+
+    const closePops = () => $$(".cmt-pop", layer).forEach((p) => p.remove());
+    const openPop = (c, pin) => {
+      closePops();
+      const pop = document.createElement("div"); pop.className = "cmt-pop cmt-glass"; pop.setAttribute("role", "dialog"); pop.setAttribute("aria-label", "Comment by " + (c.name || "Guest"));
+      pop.innerHTML = `<div class="cmt-who"><span class="cmt-av">${esc(initial(c.name))}</span><b>${esc(c.name || "Guest")}</b><time>${when(c.time)}</time></div><p>${esc(c.text)}</p>
+        <div class="cmt-actions"><button type="button" class="cmt-del">Delete</button><button type="button" class="cmt-close">Close</button></div>`;
+      pop.style.left = pin.style.left; pop.style.top = pin.style.top; layer.appendChild(pop);
+      $(".cmt-close", pop).addEventListener("click", closePops);
+      $(".cmt-del", pop).addEventListener("click", () => { store.remove(c.id); closePops(); render(); });
+      $(".cmt-close", pop).focus();
+    };
+    const render = () => {
+      $$(".cmt-pin:not(.cmt-pin--draft)", layer).forEach((p) => p.remove());
+      const list = mine();
+      list.forEach((c, i) => {
+        const p = placeOf(c), pin = document.createElement("button");
+        pin.type = "button"; pin.className = "cmt-pin"; pin.dataset.id = c.id;
+        pin.style.left = p.x + "px"; pin.style.top = p.y + "px"; pin.textContent = initial(c.name);
+        pin.setAttribute("aria-label", "Comment " + (i + 1) + " by " + (c.name || "Guest"));
+        pin.addEventListener("click", (e) => { e.stopPropagation(); openPop(c, pin); });
+        layer.appendChild(pin);
+      });
+      count.textContent = list.length; count.hidden = !list.length;
+      items.innerHTML = list.map((c) => `<li><button type="button" data-id="${c.id}"><span class="cmt-av">${esc(initial(c.name))}</span><span><b>${esc(c.name || "Guest")}</b><time>${when(c.time)}</time><em>${esc(c.text)}</em></span></button></li>`).join("");
+      $(".cmt-empty", panel).hidden = !!list.length;
+    };
+
+    const setMode = (on) => {
+      mode = on; addBtn.setAttribute("aria-pressed", String(on));
+      document.documentElement.classList.toggle("cmt-mode", on);
+      if (!on) cancelDraft();
+    };
+    const cancelDraft = () => { if (draft) { draft.pin.remove(); draft.box.remove(); draft = null; } };
+    const startDraft = (x, y) => {
+      cancelDraft(); closePops();
+      const at = anchorAt(x, y);
+      const pin = document.createElement("span"); pin.className = "cmt-pin cmt-pin--draft"; pin.style.left = at.x + "px"; pin.style.top = at.y + "px";
+      let name = ""; try { name = localStorage.getItem("commentName") || ""; } catch (e) {}
+      const box = document.createElement("form"); box.className = "cmt-box cmt-glass"; box.setAttribute("aria-label", "New comment");
+      box.innerHTML = `<label class="cmt-sr" for="cmt-name">Your name</label><input id="cmt-name" class="cmt-name" type="text" maxlength="40" placeholder="Your name (optional)" value="${esc(name)}" autocomplete="name">
+        <label class="cmt-sr" for="cmt-text">Comment</label><textarea id="cmt-text" class="cmt-text" rows="3" maxlength="500" placeholder="Add a comment"></textarea>
+        <div class="cmt-actions"><button type="button" class="cmt-cancel">Cancel</button><button type="submit" class="cmt-post" disabled>Post</button></div>`;
+      box.style.left = at.x + "px"; box.style.top = at.y + "px";
+      layer.append(pin, box);
+      const text = $(".cmt-text", box), post = $(".cmt-post", box);
+      text.addEventListener("input", () => (post.disabled = !text.value.trim()));
+      text.addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey) && text.value.trim()) box.requestSubmit(); });
+      $(".cmt-cancel", box).addEventListener("click", () => setMode(false));
+      box.addEventListener("submit", (e) => {
+        e.preventDefault(); const nm = $(".cmt-name", box).value.trim();
+        try { localStorage.setItem("commentName", nm); } catch (er) {}
+        store.add({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), page, ...at, name: nm, text: text.value.trim(), time: Date.now() });
+        setMode(false); render();
+      });
+      draft = { pin, box }; text.focus();
+    };
+
+    addBtn.addEventListener("click", () => setMode(!mode));
+    eyeBtn.addEventListener("click", () => { const on = eyeBtn.getAttribute("aria-pressed") !== "true"; eyeBtn.setAttribute("aria-pressed", String(on)); layer.classList.toggle("cmt-hidden", !on); });
+    const togglePanel = (open) => { panel.hidden = !open; allBtn.setAttribute("aria-expanded", String(open)); if (open) $(".cmt-x", panel).focus(); };
+    allBtn.addEventListener("click", () => togglePanel(panel.hidden));
+    $(".cmt-x", panel).addEventListener("click", () => { togglePanel(false); allBtn.focus(); });
+    items.addEventListener("click", (e) => { const btn = e.target.closest("button[data-id]"); if (!btn) return;
+      const pin = $(`.cmt-pin[data-id="${btn.dataset.id}"]`, layer); const c = mine().find((x) => x.id === btn.dataset.id);
+      if (pin && c) { layer.classList.remove("cmt-hidden"); eyeBtn.setAttribute("aria-pressed", "true");
+        scrollTo({ top: parseFloat(pin.style.top) - innerHeight / 2, behavior: reduce ? "auto" : "smooth" }); openPop(c, pin); } });
+    // in comment mode a click anywhere (except on the comment tools) places a comment instead of following links
+    document.addEventListener("click", (e) => {
+      if (!mode || e.target.closest(".cmt-bar, .cmt-box, .cmt-panel, .cmt-pop, .nav")) return;
+      e.preventDefault(); e.stopPropagation(); startDraft(e.clientX, e.clientY);
+    }, true);
+    document.addEventListener("keydown", (e) => {
+      const typing = e.target.closest("input, textarea, [contenteditable]");
+      if (e.key === "Escape") { if (draft || mode) setMode(false); closePops(); if (!panel.hidden) togglePanel(false); }
+      else if (!typing && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === "c" || e.key === "C")) setMode(!mode);
+    });
+    render();
+    addEventListener("resize", render); addEventListener("load", render);
+    new ResizeObserver(() => { if (!draft) render(); }).observe(document.body);
   }
 
   /* ---------- Nav: hide on scroll down, mobile menu ---------- */

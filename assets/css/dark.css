@@ -399,5 +399,12 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 /* CityLockers side navigation at night: orange too */
 [data-theme="dark"] .sila.cl .sl-rail .node, [data-theme="dark"] .sila.cl .sl-side .node { border-color: rgba(243,167,64,.45); }
 @media (max-width: 1199px) { [data-theme="dark"] .sila.cl .sl-side li.active a { background: rgba(243,167,64,.16); } }
-/* AI Lab idea spark at night */
-[data-theme="dark"] .spark-tags span { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.18); }
+
+/* comments at night */
+[data-theme="dark"] .cmt-btn:hover { background: rgba(255,255,255,.14); }
+[data-theme="dark"] .cmt-add[aria-pressed="true"], [data-theme="dark"] .cmt-pin, [data-theme="dark"] .cmt-av, [data-theme="dark"] .cmt-actions .cmt-post { background: #d9cffb; border-color: #d9cffb; color: #1c1730; }
+[data-theme="dark"] .cmt-pin { border-color: #2c2a46; }
+[data-theme="dark"] .cmt-pin--draft { background: #b3a4ff; }
+[data-theme="dark"] .cmt-box input, [data-theme="dark"] .cmt-box textarea { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); color: var(--ink); }
+[data-theme="dark"] .cmt-actions button, [data-theme="dark"] .cmt-x, [data-theme="dark"] .cmt-items button { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); color: var(--ink); }
+[data-theme="dark"] .cmt-btn::after { background: #f1ecff; color: #1c1730; }
