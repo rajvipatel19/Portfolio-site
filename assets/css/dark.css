@@ -420,7 +420,8 @@ html.first-reveal[data-theme="dark"] .page-fade { background: #2c2a46; }
 
 /* About stacking cards at night */
 [data-theme="dark"] .stack-do { background: #1b1830; border: 1px solid rgba(255, 255, 255, .08); }
-[data-theme="dark"] .stack-photos { background: linear-gradient(160deg, #35305a, #43375c 55%, #4a3c58); color: #f1ecff; border: 1px solid rgba(255, 255, 255, .1); }
+[data-theme="dark"] .stack-photos { background: linear-gradient(160deg, #312e4c, #33304c 55%, #35304a); color: #f1ecff; border: 1px solid rgba(255, 255, 255, .07); }
+[data-theme="dark"] .stack-photos::before { opacity: .6; }
 [data-theme="dark"] .stack-photos .stack-title em { color: #c9bcff; }
 [data-theme="dark"] .stack-photos .stack-soon { color: rgba(241, 236, 255, .72); }
 [data-theme="dark"] .lib-in { background: #f4f0e8; box-shadow: 0 14px 28px -16px rgba(8, 6, 24, .7); }

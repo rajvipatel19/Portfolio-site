@@ -2556,9 +2556,9 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 }
 /* the photo library: a curved wall on soft lavender. Two rows drift sideways (main.js); photos near the edges turn inwards and come closer,
    like the inside of a cylinder. a hovered photo grows and tilts and its row pauses. */
-.stack-photos { display: flex; flex-direction: column; background: linear-gradient(160deg, #efe8ff, #f6e6f3 55%, #fbe6dc); color: var(--ink); padding-bottom: 0; }
+.stack-photos { display: flex; flex-direction: column; background: linear-gradient(160deg, #f8f5ff, #faf5fa 55%, #fdf4ef); color: var(--ink); padding-bottom: 0; }
 .stack-photos::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(80% 60% at 50% 100%, rgba(247, 168, 120, .16), transparent 70%), radial-gradient(60% 50% at 50% 0%, rgba(138, 118, 238, .12), transparent 70%); }
+  background: radial-gradient(80% 60% at 50% 100%, rgba(247, 168, 120, .07), transparent 70%), radial-gradient(60% 50% at 50% 0%, rgba(138, 118, 238, .06), transparent 70%); }
 .stack-photos { padding-top: clamp(26px, 3.4vw, 42px); }
 .stack-photos .stack-kicker { margin-bottom: 8px; }
 .stack-photos .stack-title { margin-bottom: 4px; position: relative; font-size: clamp(28px, 3vw, 38px); }
@@ -2580,6 +2580,8 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 .lib-ph:hover { z-index: 4; }
 .lib-ph:hover .lib-in, .lib-ph:nth-child(n):hover .lib-in { transform: scale(1.14) rotate(-3deg); box-shadow: 0 24px 44px -18px rgba(60, 40, 120, .5); }
 .lib-ph:nth-child(even):hover .lib-in { transform: scale(1.14) rotate(3deg); }
-.about-type { margin-top: 6px; }
+/* About heading: one sentence, the last words type themselves in */
+.about-h1 .sky-caret { width: 3px; }
+@media (max-width: 640px) { .about-h1 { min-height: 2.2em; } } /* two lines kept, so the text below never jumps while typing */
 @media (max-width: 640px) { .lib { margin-left: -22px; margin-right: -22px; gap: 24px; padding-bottom: 40px; } .lib-in { border-radius: 4px; } }
 @media (prefers-reduced-motion: reduce) { .do-spark { animation: none; } .stack-card::after { display: none; } }

@@ -631,8 +631,7 @@ def about():
       <span class="sticker" style="left:-26px;bottom:22%;width:60px;animation-delay:-2s">{desk_sticker('heart')}</span>
     </div>
     <div class="about-copy">
-      <h1 class="split">Hi, I'm <em>Rajvi</em></h1>
-      <p class="sky-hi hand about-type" data-reveal><span class="sky-type" data-type="{words}">{C.ABOUT_TYPING[0]}</span><span class="sky-caret" aria-hidden="true"></span></p>
+      <h1 class="about-h1" data-reveal aria-label="Hi, I'm Rajvi, {C.ABOUT_TYPING[0]}">Hi, I'm Rajvi, <span class="sky-type" data-type="{words}">{C.ABOUT_TYPING[0]}</span><span class="sky-caret" aria-hidden="true"></span></h1>
       <div data-reveal style="--d:.3s">{paras}</div>
     </div>
   </div>
