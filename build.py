@@ -34,6 +34,10 @@ def head(title, desc, root):
 <!-- fonts load in the background, so the page can draw straight away (system fonts show for a moment) -->
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+<script>/* home page: start downloading the hero pictures for the current theme straight away, alongside the stylesheet */
+try {{ if (/^\/(index(\.html)?)?$/.test(location.pathname)) {{ var d = localStorage.getItem("theme") === "dark", m = "{root}assets/media/";
+  [d ? "hero-room.jpg" : "hero-room-day.jpg", d ? "hero-room-mask.png" : "hero-room-day-mask.png", d ? "hero-view.jpg" : "hero-view-day.jpg"].forEach(function (f) {{
+    var l = document.createElement("link"); l.rel = "preload"; l.as = "image"; l.href = m + f; l.fetchPriority = "high"; if (/mask/.test(f)) l.crossOrigin = "anonymous"; /* masks are fetched that way */ document.head.appendChild(l); }}); }} }} catch (e) {{}}</script>
 <link rel="stylesheet" href="{root}assets/css/style.css?v={ASSET_V}">
 <link rel="stylesheet" href="{root}assets/css/dark.css?v={ASSET_V}">
 <script>/* dark mode: apply the saved choice before the page draws, so there is no flash */

@@ -47,11 +47,11 @@ const SITE = {
     const waits = [], room = $(".hero-room");
     if (room) { const cs = getComputedStyle(room);
       [cs.backgroundImage, cs.webkitMaskImage || cs.maskImage].forEach((v) => { const m = /url\("?(.*?)"?\)/.exec(v || "");
-        if (m) waits.push(new Promise((ok) => { const im = new Image(); im.onload = im.onerror = ok; im.src = m[1]; })); }); }
+        if (m) waits.push(new Promise((ok) => { const im = new Image(); if (/mask/.test(m[1])) im.crossOrigin = "anonymous"; /* same mode as the preload, so it is not fetched twice */ im.onload = im.onerror = ok; im.src = m[1]; })); }); }
     const view = $(document.documentElement.dataset.theme === "dark" ? ".hero-view--night" : ".hero-view--day");
     if (view) { view.loading = "eager"; waits.push(view.decode().catch(() => {})); }
     Promise.all(waits).then(() => requestAnimationFrame(reveal));
-    setTimeout(reveal, 3000);
+    setTimeout(reveal, 1800);
   } else {
     requestAnimationFrame(reveal); setTimeout(reveal, 600);
   }
