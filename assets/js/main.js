@@ -330,6 +330,31 @@ const SITE = {
     }).observe(lib);
   }
 
+  /* ---------- TRIAL photo wall: drag a photo; a few seconds after you let go it swings back to its peg ---------- */
+  let gwTop = 10;
+  $$(".gw-ph").forEach((ph) => {
+    let sx = 0, sy = 0, dx = 0, dy = 0, lastX = 0, timer = 0, dragging = false;
+    const set = () => { ph.style.setProperty("--dx", dx + "px"); ph.style.setProperty("--dy", dy + "px"); };
+    ph.addEventListener("pointerdown", (e) => {
+      dragging = true; clearTimeout(timer); ph.setPointerCapture(e.pointerId);
+      sx = e.clientX - dx; sy = e.clientY - dy; lastX = e.clientX;
+      ph.classList.remove("is-back"); ph.classList.add("is-drag"); ph.style.zIndex = ++gwTop;
+    });
+    ph.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      dx = e.clientX - sx; dy = e.clientY - sy; set();
+      ph.style.setProperty("--sw", Math.max(-20, Math.min(20, (e.clientX - lastX) * 1.6)) + "deg"); // swings with the movement
+      lastX = e.clientX;
+    });
+    const drop = () => {
+      if (!dragging) return;
+      dragging = false; ph.classList.remove("is-drag"); ph.style.setProperty("--sw", "0deg");
+      timer = setTimeout(() => { ph.classList.add("is-back"); dx = dy = 0; set(); }, 2500);
+    };
+    ph.addEventListener("pointerup", drop);
+    ph.addEventListener("pointercancel", drop);
+  });
+
   /* ---------- Count-up numbers ---------- */
   const countIO = new IntersectionObserver((entries) => {
     entries.forEach((en) => {

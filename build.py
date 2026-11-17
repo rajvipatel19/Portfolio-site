@@ -655,6 +655,44 @@ def about():
     return head("About · Rajvi Patel", "About Rajvi Patel, Senior Product Designer in Dubai.", root) + body
 
 
+
+# ---------- TRIAL: photo wall (a wire grid with photos pegged onto it). Not linked anywhere yet. ----------
+# Photos are pegged straight onto three wires of the grid (y in % of the wall), spread out with a little wobble.
+WALL_ROWS = [(13.5, 7), (40.0, 8), (66.5, 7)]
+PEG_COLOURS = ["#f2c84b", "#ef7d3c", "#6cc28a", "#f39ab8", "#5fb4e8", "#a98be0", "#e8574f", "#e0c49a"]
+
+
+def wall_trial():
+    root = ""
+    photos, n = [], 0
+    for y, count in WALL_ROWS:
+        for k in range(count):
+            x = 13 + 74 * k / (count - 1) + ((n * 53) % 7 - 3) * 0.5   # evenly spread, nudged a little
+            yy = y + ((n * 29) % 5 - 2) * 0.6
+            rot = (n * 37) % 15 - 7                                   # each photo hangs at its own small angle
+            n += 1
+            peg = PEG_COLOURS[n % len(PEG_COLOURS)]
+            photos.append(f'<figure class="gw-ph" style="left:{x:.2f}%;top:{yy:.2f}%;--r:{rot}deg;--peg:{peg}">'
+                          f'<span class="gw-peg" aria-hidden="true"></span><span class="gw-in"><img src="assets/media/library/p{n:02d}.jpg" alt="" loading="lazy" decoding="async" draggable="false"></span></figure>')
+    body = f"""{nav(root, 'about')}
+<main>
+<section class="gw-sec">
+  <div class="wrap">
+    <p class="stack-kicker">trial /</p>
+    <h1 class="gw-title">My photo <em>wall</em></h1>
+    <p class="gw-hint">Drag a photo around. After a few seconds it swings back to its peg ✿</p>
+  </div>
+  <div class="gw-scroll">
+    <div class="gw-wall">
+      <div class="gw-board" aria-hidden="true"><span class="gw-nail"></span></div>
+      {"".join(photos)}
+    </div>
+  </div>
+</section>
+</main>
+{footer(root)}"""
+    return head("Photo wall (trial) · Rajvi Patel", "Trial: a photo wall.", root).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1) + body
+
 def desk_sticker(kind):
     if kind == "star":
         return '<svg viewBox="0 0 80 80"><path d="M40 6l9 20 22 3-16 15 4 22-19-10-19 10 4-22L9 29l22-3Z" fill="#f3d16f" stroke="#fff" stroke-width="5" stroke-linejoin="round"/></svg>'
@@ -1536,6 +1574,7 @@ if __name__ == "__main__":
     (ROOT / "work").mkdir(exist_ok=True)
     (ROOT / "index.html").write_text(home())
     (ROOT / "about.html").write_text(about())
+    (ROOT / "photo-wall-trial.html").write_text(wall_trial())  # trial page, not linked yet
     (ROOT / "ai-lab.html").write_text(ai_lab())
     (ROOT / "offline.html").write_text(offline())
     projs = C.PROJECTS
