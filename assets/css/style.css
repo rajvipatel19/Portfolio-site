@@ -2425,17 +2425,19 @@ body.loaded .pf-msg { animation: none; opacity: 0; transition: opacity .25s; }
 
 
 /* ---------- Comments (Figma-style): vertical glass toolbar on the right, comment cursor, pins and glass comment cards ---------- */
-.cmt-bar { position: fixed; left: 50%; bottom: 22px; z-index: 60; transform: translateX(-50%); display: flex; align-items: center; gap: 6px; padding: 6px 10px 6px 6px; border-radius: 999px;
-  background: rgba(255,255,255,.92); border: 1px solid rgba(255,255,255,.95); box-shadow: 0 1px 2px rgba(40,30,80,.06), 0 10px 28px -12px rgba(40,30,80,.22); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
-.cmt-btn { position: relative; width: 46px; height: 46px; border: 0; border-radius: 50%; display: grid; place-items: center; background: none; color: #6b6f7b; cursor: pointer; transition: background .2s, color .2s; }
-.cmt-btn:hover { background: rgba(31,26,51,.06); color: #1f1a33; }
+.cmt-bar { position: fixed; right: 16px; top: 50%; z-index: 60; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 5px; border-radius: 999px;
+  background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
+.cmt-btn { position: relative; width: 36px; height: 36px; border: 0; border-radius: 50%; display: grid; place-items: center; background: none; color: var(--ink-2); cursor: pointer; transition: background .2s, color .2s; }
+.cmt-btn svg { width: 18px; height: 18px; }
+.cmt-btn:hover { background: rgba(255,255,255,.6); color: var(--ink); }
 .cmt-btn:focus-visible { outline: 2px solid var(--title-accent); outline-offset: 2px; }
 .cmt-btn[aria-pressed="true"]:is(.cmt-move, .cmt-add) { background: #17151f; color: #fff; }
-.cmt-eye[aria-pressed="false"] { color: #a3a6b0; }
-.cmt-btn::after { content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%); padding: 6px 10px; border-radius: 10px; white-space: nowrap;
+.cmt-eye .cmt-slash { display: none; }
+.cmt-eye[aria-pressed="false"] { color: var(--ink-3); }
+.cmt-eye[aria-pressed="false"] .cmt-slash { display: inline; }
+.cmt-btn::after { content: attr(data-tip); position: absolute; right: calc(100% + 10px); top: 50%; transform: translateY(-50%); padding: 6px 10px; border-radius: 10px; white-space: nowrap;
   font: 600 12px var(--font-body); color: #fff; background: #1f1a33; opacity: 0; pointer-events: none; transition: opacity .2s; }
 .cmt-btn:hover::after, .cmt-btn:focus-visible::after { opacity: 1; }
-.cmt-count { position: absolute; top: 4px; right: 4px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px; font-size: 10px; font-weight: 700; line-height: 16px; color: #fff; background: #7b5cf0; }
 html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-bar *):not(.cmt-box):not(.cmt-box *) { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M17 3a12 12 0 1 1-5.8 22.5L2.5 29.5l2.4-8.4A12 12 0 0 1 17 3z' fill='%2317151f' stroke='white' stroke-width='2' stroke-linejoin='round'/><path d='M17 10.5v9M12.5 15h9' stroke='white' stroke-width='2.2' stroke-linecap='round'/></svg>") 3 29, crosshair !important; }
 .cmt-layer { position: absolute; left: 0; top: 0; width: 100%; height: 0; z-index: 45; }
 .cmt-layer.cmt-hidden .cmt-pin:not(.cmt-pin--draft), .cmt-layer.cmt-hidden .cmt-pop { display: none; }
@@ -2460,27 +2462,12 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 .cmt-who time { margin-left: auto; font-size: 12px; color: var(--ink-3); }
 .cmt-pop p { margin: 0 0 12px; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
 .cmt-av { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; color: #fff; background: #1f1a33; }
-.cmt-panel { position: fixed; left: 50%; bottom: 92px; z-index: 60; transform: translateX(-50%); width: 320px; max-height: 60vh; overflow: auto; padding: 16px; border-radius: 22px;
-  background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow), 0 24px 50px -20px rgba(30,20,70,.35); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
-.cmt-panel[hidden] { display: none; }
-.cmt-panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-.cmt-panel-head h2 { margin: 0; font-size: 18px; }
-.cmt-x { width: 30px; height: 30px; border: 0; border-radius: 50%; background: rgba(255,255,255,.6); font-size: 20px; line-height: 1; color: var(--ink); cursor: pointer; }
-.cmt-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.cmt-items button { width: 100%; display: flex; gap: 10px; align-items: flex-start; padding: 10px; border: 0; border-radius: 14px; background: rgba(255,255,255,.45); text-align: left; cursor: pointer; font: inherit; color: inherit; }
-.cmt-items button:hover { background: rgba(255,255,255,.75); }
-.cmt-items b { display: block; font-size: 13px; }
-.cmt-items time { display: block; font-size: 11px; color: var(--ink-3); }
-.cmt-items em { display: block; margin-top: 4px; font-style: normal; font-size: 13px; color: var(--ink-2); }
 .cmt-toast { position: fixed; left: 50%; bottom: 96px; z-index: 70; transform: translateX(-50%); max-width: calc(100vw - 32px); padding: 12px 18px; border-radius: 16px;
   font: 600 14px var(--font-body); color: #fff; background: #17151f; box-shadow: 0 12px 30px -12px rgba(30,20,70,.45); animation: cmtIn .35s var(--ease); transition: opacity .4s, transform .4s; }
 .cmt-toast.is-out { opacity: 0; transform: translate(-50%, 8px); }
 @keyframes cmtIn { from { opacity: 0; transform: translate(-50%, 8px); } }
-.cmt-empty { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-3); }
 @media (max-width: 600px) {
-  .cmt-bar { bottom: 14px; gap: 4px; padding: 4px 8px 4px 4px; }
-  .cmt-btn { width: 40px; height: 40px; }
+  .cmt-bar { right: 10px; top: auto; bottom: 16px; transform: none; padding: 4px; }
   .cmt-btn::after { display: none; }
-  .cmt-panel { left: 10px; right: 10px; bottom: 74px; transform: none; width: auto; }
   .cmt-glass { width: min(260px, calc(100vw - 80px)); }
 }

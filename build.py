@@ -97,18 +97,12 @@ def footer(root):
     </div>
   </div>
 </footer>
-<div class="cmt-bar" role="toolbar" aria-label="Comments">
+<div class="cmt-bar" role="toolbar" aria-label="Comments" aria-orientation="vertical">
   <button type="button" class="cmt-btn cmt-move" aria-pressed="true" aria-label="Browse the page (shortcut V)" data-tip="Browse · V"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 3.5l13 6.2-5.6 1.7-2.4 5.6z"/></svg></button>
   <button type="button" class="cmt-btn cmt-add" aria-pressed="false" aria-label="Add a comment (shortcut C)" data-tip="Comment · C"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 1 1-4.1 15.95L3.5 20.5l1.05-4.4A8.5 8.5 0 0 1 12 3.5z"/></svg></button>
-  <button type="button" class="cmt-btn cmt-eye" aria-pressed="true" aria-label="Show comments on the page" data-tip="Show / hide"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg></button>
-  <button type="button" class="cmt-btn cmt-all" aria-expanded="false" aria-controls="cmt-panel" aria-label="All comments" data-tip="All comments"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 7h11M8 12h11M8 17h11"/><circle cx="4.5" cy="7" r=".9" fill="currentColor"/><circle cx="4.5" cy="12" r=".9" fill="currentColor"/><circle cx="4.5" cy="17" r=".9" fill="currentColor"/></svg><span class="cmt-count" hidden>0</span></button>
+  <button type="button" class="cmt-btn cmt-eye" aria-pressed="false" aria-label="Show comments on the page" data-tip="Show / hide"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/><path class="cmt-slash" d="M4 4l16 16"/></svg></button>
 </div>
-<div class="cmt-layer"></div>
-<aside class="cmt-panel" id="cmt-panel" aria-label="All comments" hidden>
-  <div class="cmt-panel-head"><h2>Comments</h2><button type="button" class="cmt-x" aria-label="Close comments">&times;</button></div>
-  <ol class="cmt-items"></ol>
-  <p class="cmt-empty">No comments here yet. Click the speech bubble, then click anywhere on the page to leave one. New comments show up once Rajvi has read them.</p>
-</aside>
+<div class="cmt-layer cmt-hidden"></div>
 <script src="{root}assets/js/main.js?v={ASSET_V}"></script>
 </body>
 </html>

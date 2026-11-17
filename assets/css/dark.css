@@ -401,14 +401,12 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 @media (max-width: 1199px) { [data-theme="dark"] .sila.cl .sl-side li.active a { background: rgba(243,167,64,.16); } }
 
 /* comments at night */
-[data-theme="dark"] .cmt-bar { background: rgba(44,40,72,.72); border-color: rgba(255,255,255,.16); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 12px 30px -14px rgba(12,10,32,.6); }
-[data-theme="dark"] .cmt-btn { color: rgba(236,232,255,.72); }
 [data-theme="dark"] .cmt-btn:hover { background: rgba(255,255,255,.12); color: #fff; }
 [data-theme="dark"] .cmt-eye[aria-pressed="false"] { color: rgba(236,232,255,.35); }
 [data-theme="dark"] .cmt-btn[aria-pressed="true"]:is(.cmt-move, .cmt-add), [data-theme="dark"] .cmt-pin, [data-theme="dark"] .cmt-av, [data-theme="dark"] .cmt-actions .cmt-post { background: #d9cffb; border-color: #d9cffb; color: #1c1730; }
 [data-theme="dark"] .cmt-pin { border-color: #2c2a46; }
 [data-theme="dark"] .cmt-pin--draft { background: #b3a4ff; }
 [data-theme="dark"] .cmt-box input, [data-theme="dark"] .cmt-box textarea { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); color: var(--ink); }
-[data-theme="dark"] .cmt-actions button, [data-theme="dark"] .cmt-x, [data-theme="dark"] .cmt-items button { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); color: var(--ink); }
+[data-theme="dark"] .cmt-actions button { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); color: var(--ink); }
 [data-theme="dark"] .cmt-btn::after { background: #f1ecff; color: #1c1730; }
 [data-theme="dark"] .cmt-toast { background: #f1ecff; color: #1c1730; }

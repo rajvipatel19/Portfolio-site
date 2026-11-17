@@ -93,8 +93,8 @@ const SITE = {
       const t = document.createElement("div"); t.className = "cmt-toast"; t.setAttribute("role", "status"); t.textContent = msg;
       document.body.appendChild(t); setTimeout(() => t.classList.add("is-out"), 4200); setTimeout(() => t.remove(), 4700);
     };
-    const layer = $(".cmt-layer"), panel = $(".cmt-panel"), items = $(".cmt-items", panel), count = $(".cmt-count");
-    const moveBtn = $(".cmt-move"), addBtn = $(".cmt-add"), eyeBtn = $(".cmt-eye"), allBtn = $(".cmt-all");
+    const layer = $(".cmt-layer");
+    const moveBtn = $(".cmt-move"), addBtn = $(".cmt-add"), eyeBtn = $(".cmt-eye");
     const page = location.pathname.replace(/\/index(\.html)?$/, "/").replace(/\.html$/, "") || "/";
     const esc = (t) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
     const initial = (n) => (n || "Guest").trim().charAt(0).toUpperCase() || "G";
@@ -138,9 +138,6 @@ const SITE = {
         pin.addEventListener("click", (e) => { e.stopPropagation(); openPop(c, pin); });
         layer.appendChild(pin);
       });
-      count.textContent = list.length; count.hidden = !list.length;
-      items.innerHTML = list.map((c) => `<li><button type="button" data-id="${c.id}"><span class="cmt-av">${esc(initial(c.name))}</span><span><b>${esc(c.name || "Guest")}</b><time>${when(c.time)}</time><em>${esc(c.text)}</em></span></button></li>`).join("");
-      $(".cmt-empty", panel).hidden = !!list.length;
     };
 
     const setMode = (on) => {
@@ -178,21 +175,14 @@ const SITE = {
     addBtn.addEventListener("click", () => setMode(!mode));
     moveBtn.addEventListener("click", () => setMode(false));
     eyeBtn.addEventListener("click", () => { const on = eyeBtn.getAttribute("aria-pressed") !== "true"; eyeBtn.setAttribute("aria-pressed", String(on)); layer.classList.toggle("cmt-hidden", !on); });
-    const togglePanel = (open) => { panel.hidden = !open; allBtn.setAttribute("aria-expanded", String(open)); if (open) $(".cmt-x", panel).focus(); };
-    allBtn.addEventListener("click", () => togglePanel(panel.hidden));
-    $(".cmt-x", panel).addEventListener("click", () => { togglePanel(false); allBtn.focus(); });
-    items.addEventListener("click", (e) => { const btn = e.target.closest("button[data-id]"); if (!btn) return;
-      const pin = $(`.cmt-pin[data-id="${btn.dataset.id}"]`, layer); const c = mine().find((x) => x.id === btn.dataset.id);
-      if (pin && c) { layer.classList.remove("cmt-hidden"); eyeBtn.setAttribute("aria-pressed", "true");
-        scrollTo({ top: parseFloat(pin.style.top) - innerHeight / 2, behavior: reduce ? "auto" : "smooth" }); openPop(c, pin); } });
     // in comment mode a click anywhere (except on the comment tools) places a comment instead of following links
     document.addEventListener("click", (e) => {
-      if (!mode || e.target.closest(".cmt-bar, .cmt-box, .cmt-panel, .cmt-pop, .nav")) return;
+      if (!mode || e.target.closest(".cmt-bar, .cmt-box, .cmt-pop, .nav")) return;
       e.preventDefault(); e.stopPropagation(); startDraft(e.clientX, e.clientY);
     }, true);
     document.addEventListener("keydown", (e) => {
       const typing = e.target.closest("input, textarea, [contenteditable]");
-      if (e.key === "Escape") { if (draft || mode) setMode(false); closePops(); if (!panel.hidden) togglePanel(false); }
+      if (e.key === "Escape") { if (draft || mode) setMode(false); closePops(); }
       else if (!typing && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === "c" || e.key === "C")) setMode(!mode);
       else if (!typing && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === "v" || e.key === "V") && mode) setMode(false);
     });
