@@ -2565,7 +2565,7 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 .stack-photos .stack-title em { color: var(--lav-deep); }
 .stack-photos .stack-kicker, .stack-photos .stack-soon { position: relative; }
 .stack-photos .stack-soon { color: var(--ink-2); font-size: 15px; margin: 0; }
-.lib { position: relative; flex: 1; min-height: 0; display: grid; grid-template-rows: 1fr 1fr; gap: 20px; padding: clamp(14px, 2vw, 20px) 0 clamp(26px, 3vw, 38px);
+.lib { position: relative; flex: 1; min-height: 0; display: grid; grid-template-rows: 1fr 1fr; gap: clamp(30px, 3.5vw, 40px); padding: clamp(14px, 2vw, 20px) 0 clamp(44px, 5vw, 64px);
   margin: 0 calc(-1 * clamp(28px, 5vw, 64px)); }
 /* the wall fades out softly at both sides, whatever the background colour */
 .lib { -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
@@ -2581,5 +2581,5 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 .lib-ph:hover .lib-in, .lib-ph:nth-child(n):hover .lib-in { transform: scale(1.14) rotate(-3deg); box-shadow: 0 24px 44px -18px rgba(60, 40, 120, .5); }
 .lib-ph:nth-child(even):hover .lib-in { transform: scale(1.14) rotate(3deg); }
 .about-type { margin-top: 6px; }
-@media (max-width: 640px) { .lib { margin-left: -22px; margin-right: -22px; gap: 14px; padding-bottom: 28px; } .lib-in { border-radius: 4px; } }
+@media (max-width: 640px) { .lib { margin-left: -22px; margin-right: -22px; gap: 24px; padding-bottom: 40px; } .lib-in { border-radius: 4px; } }
 @media (prefers-reduced-motion: reduce) { .do-spark { animation: none; } .stack-card::after { display: none; } }
