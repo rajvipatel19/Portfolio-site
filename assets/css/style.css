@@ -2501,3 +2501,13 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
   .cmt-btn::after { display: none; }
   .cmt-glass { width: min(260px, calc(100vw - 80px)); }
 }
+
+/* ---------- Phones & tablets: keep scrolling smooth ----------
+   Live blur (glass) over drifting blurred blobs makes mobile Safari redraw everything on every frame, so sections show up late.
+   On touch screens the blobs stand still with a cheap soft edge, the faint grain is off, and the glass keeps its tint without the live blur
+   (except the top bar, the buttons over the hero photo and pop-ups). Desktop is unchanged. */
+@media (hover: none) and (pointer: coarse) {
+  .ambient .blob { animation: none; filter: none; -webkit-mask-image: radial-gradient(closest-side, #000 20%, transparent); mask-image: radial-gradient(closest-side, #000 20%, transparent); }
+  .grain { display: none; }
+  body *:not(.nav, .nav *, .hero .btn, dialog, dialog *) { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+}
