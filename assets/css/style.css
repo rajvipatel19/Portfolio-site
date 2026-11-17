@@ -2554,20 +2554,30 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
   .stack-card { height: 74vh; }
   .do-list li { gap: 12px; padding: 10px 0; }
 }
-/* the photo library: two rows drifting in opposite directions; hover a photo and it grows and tilts */
-.stack-photos { display: flex; flex-direction: column; }
-.stack-photos .stack-title { margin-bottom: 14px; }
-.lib { flex: 1; min-height: 0; display: grid; grid-template-rows: 1fr 1fr; gap: 14px; margin: clamp(18px, 3vw, 30px) calc(-1 * clamp(28px, 5vw, 64px)) 0; }
-.lib-row { min-height: 0; overflow: hidden; padding: 10px 0; margin: -10px 0; } /* a little room so a tilted photo isn't clipped */
-.lib-track { display: flex; height: 100%; width: max-content; animation: libMove 70s linear infinite; }
-.lib-row--rev .lib-track { animation-direction: reverse; animation-duration: 80s; }
-.lib-row:hover .lib-track { animation-play-state: paused; }
-@keyframes libMove { to { transform: translateX(-50%); } }
-.lib-ph { height: 100%; aspect-ratio: 3 / 4; margin: 0 14px 0 0; border-radius: 16px; overflow: hidden; position: relative;
-  box-shadow: 0 10px 24px -14px rgba(40, 30, 80, .35); transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
-.lib-ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.lib-ph:hover { transform: scale(1.12) rotate(-4deg); z-index: 2; box-shadow: 0 22px 40px -18px rgba(40, 30, 80, .5); }
-.lib-ph:nth-child(even):hover { transform: scale(1.12) rotate(4deg); }
+/* the photo library: a dark, cinematic curved wall. Two rows drift sideways (main.js); photos near the edges turn inwards and come closer,
+   like the inside of a cylinder. a hovered photo grows and tilts and its row pauses. */
+.stack-photos { display: flex; flex-direction: column; background: #0e0c14; color: #f6f3ff; padding-bottom: 0; }
+.stack-photos::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(80% 60% at 50% 100%, rgba(247, 168, 120, .12), transparent 70%), radial-gradient(60% 50% at 50% 0%, rgba(138, 118, 238, .14), transparent 70%); }
+.stack-photos { padding-top: clamp(26px, 3.4vw, 42px); }
+.stack-photos .stack-kicker { margin-bottom: 8px; }
+.stack-photos .stack-title { margin-bottom: 6px; position: relative; font-size: clamp(30px, 3.6vw, 44px); }
+.stack-photos .stack-title em { color: #f7c9a8; }
+.stack-photos .stack-kicker, .stack-photos .stack-soon { position: relative; }
+.stack-photos .stack-soon { color: rgba(246, 243, 255, .65); font-size: 15px; margin: 0; }
+.lib { position: relative; flex: 1; min-height: 0; display: grid; grid-template-rows: 1fr 1fr; gap: 12px; padding: clamp(14px, 2vw, 20px) 0 clamp(16px, 2vw, 24px);
+  margin: 0 calc(-1 * clamp(28px, 5vw, 64px)); }
+.lib::before, .lib::after { content: ""; position: absolute; top: 0; bottom: 0; width: 12%; z-index: 5; pointer-events: none; }
+.lib::before { left: 0; background: linear-gradient(90deg, #0e0c14, transparent); }
+.lib::after { right: 0; background: linear-gradient(270deg, #0e0c14, transparent); }
+.lib-row { position: relative; min-height: 0; perspective: 1100px; }
+.lib-ph { position: absolute; left: 0; top: 0; height: 100%; aspect-ratio: 3 / 4; margin: 0; will-change: transform; }
+.lib-in { display: block; width: 100%; height: 100%; border-radius: 14px; overflow: hidden; box-shadow: 0 14px 30px -16px rgba(0, 0, 0, .7);
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+.lib-in img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lib-ph:hover { z-index: 4; }
+.lib-ph:hover .lib-in { transform: scale(1.14) rotate(-3deg); box-shadow: 0 24px 44px -18px rgba(0, 0, 0, .85); }
+.lib-ph:nth-child(even):hover .lib-in { transform: scale(1.14) rotate(3deg); }
 .about-type { margin-top: 6px; }
-@media (max-width: 640px) { .lib { margin-left: -22px; margin-right: -22px; gap: 10px; } .lib-ph { margin-right: 10px; border-radius: 12px; } }
-@media (prefers-reduced-motion: reduce) { .do-spark { animation: none; } .stack-card::after { display: none; } .lib-track { animation: none; } .lib-row { overflow-x: auto; } }
+@media (max-width: 640px) { .lib { margin-left: -22px; margin-right: -22px; gap: 10px; } .lib-in { border-radius: 10px; } }
+@media (prefers-reduced-motion: reduce) { .do-spark { animation: none; } .stack-card::after { display: none; } }

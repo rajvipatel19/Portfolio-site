@@ -293,6 +293,43 @@ const SITE = {
     measure(); stackUpdate();
   }
 
+  /* ---------- About: photo library, a curved wall of photos drifting sideways ---------- */
+  const lib = $(".lib");
+  if (lib) {
+    const GAP = 12;
+    const rows = $$(".lib-row", lib).map((row, r) => ({ row, tiles: $$(".lib-ph", row), off: 0, dir: r ? 1 : -1, speed: r ? 20 : 26, paused: false }));
+    let W = 0, run = false, last = 0;
+    const layout = () => {
+      W = lib.clientWidth;
+      rows.forEach((R) => { R.tw = R.tiles[0].offsetWidth + GAP; R.total = R.tw * R.tiles.length; });
+    };
+    const place = (R) => {
+      const half = W / 2;
+      R.tiles.forEach((t, i) => {
+        const x = (((i * R.tw + R.off) % R.total) + R.total) % R.total - R.tw; // wraps around off-screen
+        const u = Math.max(-1.3, Math.min(1.3, (x + R.tw / 2 - half) / half)); // -1 left edge, 0 centre, 1 right edge
+        t.style.transform = `translate3d(${x.toFixed(1)}px,0,${(u * u * 150).toFixed(1)}px) rotateY(${(-u * 34).toFixed(2)}deg)`;
+      });
+    };
+    const tick = (now) => {
+      if (!run) return;
+      const dt = Math.min(64, now - (last || now)) / 1000; last = now;
+      rows.forEach((R) => { if (!R.paused) { R.off += R.dir * R.speed * dt; place(R); } });
+      requestAnimationFrame(tick);
+    };
+    rows.forEach((R) => {
+      R.row.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") R.paused = true; });
+      R.row.addEventListener("pointerleave", () => { R.paused = false; });
+    });
+    layout(); rows.forEach(place);
+    addEventListener("resize", () => { layout(); rows.forEach(place); });
+    // only moves while the wall is on screen
+    new IntersectionObserver(([en]) => {
+      const was = run; run = en.isIntersecting && !reduce;
+      if (run && !was) { last = 0; requestAnimationFrame(tick); }
+    }).observe(lib);
+  }
+
   /* ---------- Count-up numbers ---------- */
   const countIO = new IntersectionObserver((entries) => {
     entries.forEach((en) => {

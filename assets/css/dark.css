@@ -420,7 +420,5 @@ html.first-reveal[data-theme="dark"] .page-fade { background: #2c2a46; }
 
 /* About stacking cards at night */
 [data-theme="dark"] .stack-do { background: #1b1830; border: 1px solid rgba(255, 255, 255, .08); }
-[data-theme="dark"] .stack-photos { background: linear-gradient(160deg, #35305a, #4a3c58); color: #f1ecff; border: 1px solid rgba(255, 255, 255, .1); }
-[data-theme="dark"] .stack-photos .stack-title em { color: #c9bcff; }
-[data-theme="dark"] .stack-soon { color: rgba(241, 236, 255, .75); }
+[data-theme="dark"] .stack-photos { border: 1px solid rgba(255, 255, 255, .08); }
 [data-theme="dark"] .stack-card { box-shadow: 0 -18px 50px -30px rgba(8, 6, 24, .6); }

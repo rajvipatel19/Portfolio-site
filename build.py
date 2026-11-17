@@ -610,11 +610,14 @@ def about():
     root = ""
     paras = "".join(f"<p>{p}</p>" for p in C.ABOUT_BIO)
     words = "|".join(C.ABOUT_TYPING)
-    def lib_row(nums, rev):
-        one = "".join(f'<figure class="lib-ph"><img src="assets/media/library/p{n:02d}.jpg" alt="" loading="lazy" decoding="async" width="676" height="900"></figure>' for n in nums)
-        dup = one.replace('<figure', '<figure aria-hidden="true"')  # second copy, so the row loops without a gap
-        return f'<div class="lib-row{" lib-row--rev" if rev else ""}"><div class="lib-track">{one}{dup}</div></div>'
-    lib_rows = lib_row(range(1, 12), False) + lib_row(range(12, 23), True)
+    def lib_row(nums):
+        def tile(n, k, hidden):
+            aria = ' aria-hidden="true"' if hidden else ""
+            return f'<figure class="lib-ph"{aria}><span class="lib-in"><img src="assets/media/library/p{n:02d}.jpg" alt="" loading="lazy" decoding="async" width="676" height="900"></span></figure>'
+        nums = list(nums)
+        tiles = [tile(n, k, False) for k, n in enumerate(nums)] + [tile(n, k + 1, True) for k, n in enumerate(nums)]  # repeated, so the wall never runs out
+        return f'<div class="lib-row">{"".join(tiles)}</div>'
+    lib_rows = lib_row(range(1, 12)) + lib_row(range(12, 23))
     do_items = "".join(f'<li><span class="do-n">{i:02d}</span><span class="do-t">{t}</span></li>' for i, t in enumerate(C.ABOUT_DO, 1))
     body = f"""{nav(root, 'about')}
 <main>
