@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2c2a46">
+<title>You're offline · Rajvi Patel</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { overflow: hidden; color: #f6f3fb; font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, #2b2a4c 0%, #3b3352 45%, #4a405e 75%, #5a4a5c 100%); -webkit-tap-highlight-color: transparent; }
+  canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; touch-action: manipulation; }
+  .hills { position: fixed; left: 0; right: 0; bottom: 0; height: 26vh; pointer-events: none;
+    background: radial-gradient(120% 100% at 20% 100%, #26233d 60%, transparent 61%), radial-gradient(110% 90% at 85% 100%, #2c2945 58%, transparent 59%); }
+  .card { position: fixed; top: 7vh; left: 50%; transform: translateX(-50%); width: min(560px, calc(100% - 32px)); text-align: center; pointer-events: none; }
+  h1 { margin: 0 0 10px; font-family: "Libre Baskerville", Georgia, serif; font-weight: 600; font-size: clamp(26px, 5vw, 40px); line-height: 1.15; }
+  p { margin: 0; color: #d2cde0; font-size: clamp(15px, 2.4vw, 17px); line-height: 1.55; }
+  .hand { display: block; margin-bottom: 10px; font-family: Georgia, serif; font-style: italic; color: #d6cbff; font-size: 17px; }
+  .hud { position: fixed; left: 50%; bottom: 5vh; transform: translateX(-50%); display: flex; gap: 10px; align-items: center; }
+  .pill { padding: 10px 18px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+  button.pill { cursor: pointer; color: #1c1730; font: inherit; font-weight: 600; background: linear-gradient(180deg, #f1ecff, #d9cffb); border-color: rgba(255,255,255,.6); }
+  button.pill:focus-visible { outline: 3px solid #d6cbff; outline-offset: 3px; }
+  .back { display: none; }
+  body.online .back { display: inline-block; }
+  body.online .retry { display: none; }
+  @media (prefers-reduced-motion: reduce) { canvas { cursor: pointer; } }
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="hills" aria-hidden="true"></div>
+<div class="card">
+  <span class="hand">psst… you're offline</span>
+  <h1>The internet wandered off</h1>
+  <p>Catch the fireflies while it finds its way back. Tap or click them.</p>
+</div>
+<div class="hud">
+  <span class="pill" id="score" role="status" aria-live="polite">0 caught</span>
+  <button class="pill retry" type="button" id="retry">Try again</button>
+  <button class="pill back" type="button" id="back">You're back online, open the page</button>
+</div>
+<script>
+(() => {
+  const c = document.getElementById("sky"), x = c.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W, H, dpr; const flies = [], pops = []; let caught = 0, best = 0;
+  try { best = +localStorage.getItem("ffBest") || 0; } catch (e) {}
+  const scoreEl = document.getElementById("score");
+  const show = () => { scoreEl.textContent = caught + " caught" + (best ? " · best " + best : ""); };
+  const size = () => { dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; c.width = W * dpr; c.height = H * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  const spawn = () => ({ x: Math.random() * W, y: H * (.3 + Math.random() * .55), r: 3 + Math.random() * 3,
+    a: Math.random() * 6.28, s: (reduce ? .25 : .6) + Math.random() * (reduce ? .3 : .9), t: Math.random() * 6.28, life: 0 });
+  // (re)place fireflies whenever the window size is known or changes, so they always fill the screen
+  const fit = () => { size(); for (let i = 0; i < 14; i++) { if (!flies[i] || flies[i].x > W + 30 || flies[i].y > H || flies[i].y < H * .2) flies[i] = spawn(); } };
+  fit(); addEventListener("resize", fit); addEventListener("load", fit);
+  const catchAt = (px, py) => {
+    let hit = -1, d = 1e9;
+    flies.forEach((f, i) => { const dd = Math.hypot(f.x - px, f.y - py); if (dd < d) { d = dd; hit = i; } });
+    if (hit < 0 || d > 34) return;
+    const f = flies[hit]; pops.push({ x: f.x, y: f.y, k: 0 });
+    flies[hit] = spawn(); flies[hit].life = 0;
+    caught++; if (caught > best) { best = caught; try { localStorage.setItem("ffBest", best); } catch (e) {} }
+    show();
+  };
+  c.addEventListener("pointerdown", (e) => catchAt(e.clientX, e.clientY));
+  const tick = () => {
+    x.clearRect(0, 0, W, H);
+    flies.forEach((f) => {
+      f.a += (Math.random() - .5) * .3; f.x += Math.cos(f.a) * f.s; f.y += Math.sin(f.a) * f.s * .7; f.t += .05; f.life = Math.min(1, f.life + .02);
+      if (f.x < -20) f.x = W + 20; if (f.x > W + 20) f.x = -20; if (f.y < H * .25) f.a = Math.PI / 2; if (f.y > H * .9) f.a = -Math.PI / 2;
+      const glow = (.55 + .45 * Math.sin(f.t)) * f.life;
+      const g = x.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 6);
+      g.addColorStop(0, "rgba(255,236,170," + (.9 * glow) + ")"); g.addColorStop(.25, "rgba(255,214,120," + (.35 * glow) + ")"); g.addColorStop(1, "rgba(255,214,120,0)");
+      x.fillStyle = g; x.beginPath(); x.arc(f.x, f.y, f.r * 6, 0, 6.29); x.fill();
+      x.fillStyle = "rgba(255,248,220," + glow + ")"; x.beginPath(); x.arc(f.x, f.y, f.r * .7, 0, 6.29); x.fill();
+    });
+    for (let i = pops.length - 1; i >= 0; i--) {
+      const p = pops[i]; p.k += .04; if (p.k >= 1) { pops.splice(i, 1); continue; }
+      x.strokeStyle = "rgba(214,203,255," + (1 - p.k) + ")"; x.lineWidth = 2; x.beginPath(); x.arc(p.x, p.y, 8 + p.k * 30, 0, 6.29); x.stroke();
+      x.fillStyle = "rgba(255,248,220," + (1 - p.k) + ")"; x.font = "600 15px system-ui"; x.textAlign = "center"; x.fillText("+1", p.x, p.y - 14 - p.k * 24);
+    }
+    requestAnimationFrame(tick);
+  };
+  show(); tick();
+  document.getElementById("retry").addEventListener("click", () => location.reload());
+  document.getElementById("back").addEventListener("click", () => location.reload());
+  const online = () => document.body.classList.toggle("online", navigator.onLine);
+  addEventListener("online", online); addEventListener("offline", online);
+})();
+</script>
+</body>
+</html>

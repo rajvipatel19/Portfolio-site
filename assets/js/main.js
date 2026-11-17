@@ -35,8 +35,11 @@ const SITE = {
   const samePage = (u) => u.pathname.replace(/index\.html$/, "") === location.pathname.replace(/index\.html$/, "");
 
   /* ---------- Page load / leave transition ---------- */
-  requestAnimationFrame(() => document.body.classList.add("loaded"));
-  setTimeout(() => document.body.classList.add("loaded"), 600); // never leave the page faded out
+  // the single-colour cover stays until the page (and its pictures) has loaded, then lifts to reveal the site.
+  // If loading is quick the cover is gone before "just a minute" ever appears; it never stays longer than 5 seconds.
+  const reveal = () => document.body.classList.add("loaded");
+  if (document.readyState === "complete") requestAnimationFrame(reveal); else addEventListener("load", reveal, { once: true });
+  setTimeout(reveal, 5000);
   window.addEventListener("pageshow", (e) => { if (e.persisted) document.body.classList.remove("leaving"); });
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a");
@@ -676,4 +679,9 @@ const SITE = {
   if (!touch) { box.addEventListener("mouseenter", openBox); box.addEventListener("mouseleave", closeBox); }
   else box.addEventListener("click", () => (isOpen ? closeBox : openBox)());
   box.addEventListener("focus", openBox); box.addEventListener("blur", closeBox);
+
+  /* ---------- Offline: register the service worker that shows the firefly game when there's no internet ---------- */
+  if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+    addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}), { once: true });
+  }
 })();
