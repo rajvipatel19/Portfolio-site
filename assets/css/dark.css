@@ -401,6 +401,9 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 @media (max-width: 1199px) { [data-theme="dark"] .sila.cl .sl-side li.active a { background: rgba(243,167,64,.16); } }
 
 /* comments at night */
+[data-theme="dark"] .cmt-bar { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.22); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 6px 18px -10px rgba(12,10,32,.4); }
+[data-theme="dark"] .cmt-btn svg { filter: drop-shadow(0 0 2px rgba(20,16,40,.9)); }
+[data-theme="dark"] .cmt-btn[aria-pressed="true"] svg { filter: none; }
 [data-theme="dark"] .cmt-btn:hover { background: rgba(255,255,255,.12); color: #fff; }
 [data-theme="dark"] .cmt-eye[aria-pressed="false"] { color: rgba(236,232,255,.35); }
 [data-theme="dark"] .cmt-btn[aria-pressed="true"]:is(.cmt-move, .cmt-add), [data-theme="dark"] .cmt-pin, [data-theme="dark"] .cmt-av, [data-theme="dark"] .cmt-actions .cmt-post { background: #d9cffb; border-color: #d9cffb; color: #1c1730; }
