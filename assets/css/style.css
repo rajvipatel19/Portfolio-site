@@ -1682,7 +1682,13 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
   color: var(--ink); background: rgba(255,255,255,.92); border: 1px solid rgba(0,0,0,.06); box-shadow: 0 6px 16px -8px rgba(30,20,70,.4); cursor: pointer; transition: transform .3s var(--ease); }
 .cal-close:hover { transform: rotate(90deg); }
 html.modal-open { overflow: hidden; }
-@media (max-width: 600px) { .cal-modal { width: 100vw; height: 92vh; margin-bottom: 0; border-radius: 24px 24px 0 0; } }
+.cal-modal { height: min(760px, 90dvh); } /* dvh = the height actually visible, with the browser's own bars showing */
+/* phones: a bottom sheet that fits between Safari's bars, with its own strip at the top so the × is never hidden or covers the calendar */
+@media (max-width: 600px) {
+  .cal-modal { width: 100vw; height: 92vh; height: calc(100dvh - 12px); margin: auto 0 0; padding-top: 56px; box-sizing: border-box; border-radius: 24px 24px 0 0; }
+  .cal-modal::before { content: ""; position: absolute; top: 10px; left: 50%; width: 40px; height: 5px; margin-left: -20px; border-radius: 3px; background: rgba(30,20,70,.15); }
+  .cal-close { top: 8px; right: 10px; }
+}
 
 /* ---------- Footer scene (first version, kept for reference: layered room/view) ---------- */
 .ft--scene { --fs: 0; --fpos: 50% 50%;
