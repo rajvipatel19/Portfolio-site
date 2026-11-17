@@ -633,7 +633,6 @@ def about():
   <article class="stack-card stack-do">
     <span class="do-glow" aria-hidden="true"></span>
     <span class="do-spark" aria-hidden="true">✦</span>
-    <p class="stack-kicker">what all I do /</p>
     <h2 class="stack-title">What all I <em>do</em></h2>
     <ul class="do-list">{do_items}</ul>
   </article>

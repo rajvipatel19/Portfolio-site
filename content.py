@@ -16,7 +16,7 @@ ABOUT_BIO = [
 ]
 ABOUT_TYPING = ["a product designer", "an ex-dentist", "a coffee person", "a sunset catcher", "a baker", "an explorer"]  # the typing line on About
 # "What all I do" card on About (first of the cards that stack as you scroll)
-ABOUT_DO = ["Product design", "UX research", "Design systems", "Prototyping", "AI-native workflows", "Team leadership", "Workshops & user testing"]
+ABOUT_DO = ["Product design", "UX research", "Design systems", "Prototyping", "AI-native workflows"]
 AI_LAB_TEXT = "A corner for my experiments with AI: prompt play, tiny tools and prototypes I build with Claude, plus notes on designing AI products people can trust."
 # AI Lab experiments (shown under the AI Lab sky, in this order). "src" is the interactive file in assets/lab/.
 LAB_EXPERIMENTS = [
