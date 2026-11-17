@@ -141,9 +141,9 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 
 /* project cards on the home page: dark frosted glass */
 [data-theme="dark"] .work-grid .card { background: linear-gradient(150deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.06) 100%);
-  border-color: rgba(255,255,255,.2); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 30px 60px -36px rgba(12,10,32,.55); }
+  border-color: rgba(255,255,255,.2); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 24px 50px -34px rgba(12,10,32,.35); }
 [data-theme="dark"] .work-grid .card::after { background: linear-gradient(115deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 32%); }
-[data-theme="dark"] .work-grid .card:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 36px 70px -32px rgba(12,10,32,.6); }
+[data-theme="dark"] .work-grid .card:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 30px 60px -34px rgba(12,10,32,.4); }
 [data-theme="dark"] .card:hover h3 .go { background: var(--lav-soft); }
 
 /* ---------- small shared bits ---------- */
@@ -286,7 +286,7 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .gt-glow i { opacity: .16; }
 [data-theme="dark"] .gt { background: linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.035) 55%, rgba(255,255,255,.05) 100%);
   border-color: rgba(255,255,255,.12);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 40px 80px -50px rgba(12,10,32,.45); }
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 34px 70px -50px rgba(12,10,32,.28); }
 [data-theme="dark"] .gt::after { background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.025) 42%, transparent 54%); }
 
 /* ---------- Case studies v2: following the rules above ---------- */
@@ -401,8 +401,11 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 @media (max-width: 1199px) { [data-theme="dark"] .sila.cl .sl-side li.active a { background: rgba(243,167,64,.16); } }
 
 /* comments at night */
-[data-theme="dark"] .cmt-btn:hover { background: rgba(255,255,255,.14); }
-[data-theme="dark"] .cmt-add[aria-pressed="true"], [data-theme="dark"] .cmt-pin, [data-theme="dark"] .cmt-av, [data-theme="dark"] .cmt-actions .cmt-post { background: #d9cffb; border-color: #d9cffb; color: #1c1730; }
+[data-theme="dark"] .cmt-bar { background: rgba(44,40,72,.72); border-color: rgba(255,255,255,.16); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 12px 30px -14px rgba(12,10,32,.6); }
+[data-theme="dark"] .cmt-btn { color: rgba(236,232,255,.72); }
+[data-theme="dark"] .cmt-btn:hover { background: rgba(255,255,255,.12); color: #fff; }
+[data-theme="dark"] .cmt-eye[aria-pressed="false"] { color: rgba(236,232,255,.35); }
+[data-theme="dark"] .cmt-btn[aria-pressed="true"]:is(.cmt-move, .cmt-add), [data-theme="dark"] .cmt-pin, [data-theme="dark"] .cmt-av, [data-theme="dark"] .cmt-actions .cmt-post { background: #d9cffb; border-color: #d9cffb; color: #1c1730; }
 [data-theme="dark"] .cmt-pin { border-color: #2c2a46; }
 [data-theme="dark"] .cmt-pin--draft { background: #b3a4ff; }
 [data-theme="dark"] .cmt-box input, [data-theme="dark"] .cmt-box textarea { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); color: var(--ink); }

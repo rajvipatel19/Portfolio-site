@@ -76,7 +76,7 @@ const SITE = {
       remove(id) { store.save(store.all().filter((c) => c.id !== id)); },
     };
     const layer = $(".cmt-layer"), panel = $(".cmt-panel"), items = $(".cmt-items", panel), count = $(".cmt-count");
-    const addBtn = $(".cmt-add"), eyeBtn = $(".cmt-eye"), allBtn = $(".cmt-all");
+    const moveBtn = $(".cmt-move"), addBtn = $(".cmt-add"), eyeBtn = $(".cmt-eye"), allBtn = $(".cmt-all");
     const page = location.pathname.replace(/\/index(\.html)?$/, "/").replace(/\.html$/, "") || "/";
     const esc = (t) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
     const initial = (n) => (n || "Guest").trim().charAt(0).toUpperCase() || "G";
@@ -127,7 +127,7 @@ const SITE = {
     };
 
     const setMode = (on) => {
-      mode = on; addBtn.setAttribute("aria-pressed", String(on));
+      mode = on; addBtn.setAttribute("aria-pressed", String(on)); moveBtn.setAttribute("aria-pressed", String(!on));
       document.documentElement.classList.toggle("cmt-mode", on);
       if (!on) cancelDraft();
     };
@@ -157,6 +157,7 @@ const SITE = {
     };
 
     addBtn.addEventListener("click", () => setMode(!mode));
+    moveBtn.addEventListener("click", () => setMode(false));
     eyeBtn.addEventListener("click", () => { const on = eyeBtn.getAttribute("aria-pressed") !== "true"; eyeBtn.setAttribute("aria-pressed", String(on)); layer.classList.toggle("cmt-hidden", !on); });
     const togglePanel = (open) => { panel.hidden = !open; allBtn.setAttribute("aria-expanded", String(open)); if (open) $(".cmt-x", panel).focus(); };
     allBtn.addEventListener("click", () => togglePanel(panel.hidden));
@@ -174,6 +175,7 @@ const SITE = {
       const typing = e.target.closest("input, textarea, [contenteditable]");
       if (e.key === "Escape") { if (draft || mode) setMode(false); closePops(); if (!panel.hidden) togglePanel(false); }
       else if (!typing && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === "c" || e.key === "C")) setMode(!mode);
+      else if (!typing && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === "v" || e.key === "V") && mode) setMode(false);
     });
     render();
     addEventListener("resize", render); addEventListener("load", render);
