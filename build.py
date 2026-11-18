@@ -727,7 +727,7 @@ def ai_lab():
   <div class="wrap sky-grid">
     <div class="sky-copy">
       <p class="sky-hi hand" data-reveal>everything I make for fun ✿</p>
-      <h1 class="sky-title" data-reveal style="--d:.1s">AI Lab is<br><span class="sky-type" data-type="brewing|prototyping|learning|almost here">brewing</span><span class="sky-caret" aria-hidden="true"></span></h1>
+      <h1 class="sky-title lab-title" data-reveal style="--d:.1s">AI Lab is <span class="sky-type" data-type="brewing|prototyping|learning|almost here">brewing</span><span class="sky-caret" aria-hidden="true"></span></h1>
       <p class="sky-lede" data-reveal style="--d:.2s">{C.AI_LAB_TEXT}</p>
       <div data-reveal style="--d:.4s">{sky_btns(
           f'<a class="sky-btn sky-btn--dark" href="index.html#work">Meanwhile, see my work {ARROW}</a>',

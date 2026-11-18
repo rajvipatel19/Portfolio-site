@@ -2588,3 +2588,6 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 @media (max-width: 640px) { .about-h1 { min-height: 2.2em; } } /* two lines kept, so the text below never jumps while typing */
 @media (max-width: 640px) { .lib { margin-left: -22px; margin-right: -22px; gap: 24px; padding-bottom: 40px; } .lib-in { border-radius: 4px; } }
 @media (prefers-reduced-motion: reduce) { .do-spark { animation: none; } .stack-card::after { display: none; } }
+
+/* AI Lab title on one line ("AI Lab is brewing"); on phones it may need two, so that space is kept and nothing jumps while typing */
+@media (max-width: 640px) { .lab-title { min-height: 2.2em; } }
