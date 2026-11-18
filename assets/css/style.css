@@ -606,8 +606,8 @@ html.menu-open { overflow: hidden; } /* stop the page scrolling behind the full-
 }
 
 /* ---------- About ---------- */
-.about-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 70px; align-items: center; }
-.polaroid-wrap { position: relative; max-width: 340px; justify-self: center; width: 100%; }
+.about-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 70px; align-items: center; } /* text left, photo right */
+.polaroid-wrap { position: relative; max-width: 290px; justify-self: center; width: 100%; }
 .polaroid { padding: 16px 16px 70px; border-radius: 10px; background: #fff; box-shadow: 0 40px 70px -34px rgba(60,40,130,.45), 0 0 0 1px rgba(80,64,140,.06); transform: rotate(-3deg); transition: transform .7s var(--ease); position: relative; }
 .polaroid:hover { transform: rotate(0deg) translateY(-6px); }
 .polaroid .img-ph { aspect-ratio: 4/5; border-radius: 4px; box-shadow: none; border: 0; }

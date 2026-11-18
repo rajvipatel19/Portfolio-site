@@ -627,12 +627,12 @@ def about():
   {sky_clouds()}
   {fireflies(12)}
   <div class="wrap about-grid">
-    <div class="polaroid-wrap" data-reveal>
-      <div class="polaroid"><span class="tape"></span><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop">{me_frames}</div><span class="caption">that's me! ✿</span></div>
-    </div>
     <div class="about-copy">
       <h1 class="about-h1" data-reveal aria-label="Hi, I'm Rajvi, {C.ABOUT_TYPING[0]}">Hi, I'm Rajvi, <span class="sky-type" data-type="{words}">{C.ABOUT_TYPING[0]}</span><span class="sky-caret" aria-hidden="true"></span></h1>
       <div data-reveal style="--d:.3s">{paras}</div>
+    </div>
+    <div class="polaroid-wrap" data-reveal>
+      <div class="polaroid"><span class="tape"></span><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop">{me_frames}</div><span class="caption">that's me! ✿</span></div>
     </div>
   </div>
 </section>
