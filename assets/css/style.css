@@ -2600,3 +2600,12 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
   filter: grayscale(1) contrast(1.06); transition: filter .5s ease; }
 .me-motion img.is-on { opacity: 1; }
 .polaroid:hover .me-motion img, .me-motion.is-color img { filter: none; }
+
+/* About polaroid: a smaller caption, and a hand-written note with an arrow pointing up at the photo */
+.polaroid { padding-bottom: 54px; }
+.polaroid .caption, .hero .polaroid .caption { font-size: 21px; bottom: 15px; }
+.me-note { margin: 16px 0 0 14%; transform: rotate(-3deg); pointer-events: none; }
+.me-note .pod-arrow { width: 64px; margin: 0 0 2px 0; transform: scaleX(-1); } /* points up towards the photo */
+.me-note span { font-family: var(--font-hand); font-style: italic; font-size: 19px; line-height: 1.2; color: var(--ink-2); }
+.me-tap { display: none; }
+@media (hover: none) { .me-hover { display: none; } .me-tap { display: inline; } }

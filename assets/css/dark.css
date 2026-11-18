@@ -426,3 +426,10 @@ html.first-reveal[data-theme="dark"] .page-fade { background: #2c2a46; }
 [data-theme="dark"] .stack-photos .stack-soon { color: rgba(241, 236, 255, .72); }
 [data-theme="dark"] .lib-in { background: #f4f0e8; box-shadow: 0 14px 28px -16px rgba(8, 6, 24, .7); }
 [data-theme="dark"] .stack-card { box-shadow: 0 -18px 50px -30px rgba(8, 6, 24, .6); }
+
+/* the polaroid stays white at night, so its caption stays dark ink */
+[data-theme="dark"] .polaroid .caption { color: #2b2640; }
+/* footer: its top edge fades in softly, so there is no hard line against the section above */
+/* (only where the page itself has no painted background, e.g. About and AI Lab; home and case studies already blend) */
+[data-theme="dark"] main:not(.sl-bg):not(.cl) + .ft--scene {
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 160px); mask-image: linear-gradient(180deg, transparent 0, #000 160px); }

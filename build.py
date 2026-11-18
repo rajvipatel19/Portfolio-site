@@ -633,6 +633,7 @@ def about():
     </div>
     <div class="polaroid-wrap" data-reveal>
       <div class="polaroid"><span class="tape"></span><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop">{me_frames}</div><span class="caption">that's me! ✿</span></div>
+      <p class="me-note"><svg class="pod-arrow" viewBox="0 0 120 90" aria-hidden="true"><path d="M112 78 C 92 80, 62 70, 50 52 C 40 37, 40 22, 30 12" /><path d="M20 22 L 30 11 L 40 20" /></svg><span class="me-hover">hover on image to add colors</span><span class="me-tap">tap on image to add colors</span></p>
     </div>
   </div>
 </section>
