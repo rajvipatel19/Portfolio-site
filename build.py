@@ -646,7 +646,7 @@ def about():
   <article class="stack-card stack-photos">
     <p class="stack-kicker">through my lens /</p>
     <h2 class="stack-title">My photo <em>library</em></h2>
-    <p class="stack-soon">Sunsets, side quests and places I've wandered. Hover to take a closer look ✿</p>
+    <p class="stack-soon">Sunsets, side quests and places I've wandered ✿</p>
     <div class="lib" aria-label="Photos from my travels and side quests">{lib_rows}</div>
   </article>
 </section>

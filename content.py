@@ -2,7 +2,7 @@
 
 EMAIL = "rajvi.patel60@gmail.com"
 LINKEDIN = "https://www.linkedin.com/in/rajvipatel1912"
-RESUME = "https://drive.google.com/file/d/1aLerfDv--jNq0D1PowDIvbVdaXrZtzyQ/view?usp=sharing"
+RESUME = "https://drive.google.com/file/d/1vJuvmtALgGuoKZGn-FbhZj4Gc83R549Z/view?usp=sharing"
 
 META_DESC = "Rajvi Patel, Senior Product Designer in Dubai. 4+ years designing B2C, B2B, health-tech and e-commerce products that are easy to understand and use."
 HERO_TITLE = "AI native product designer"
@@ -16,7 +16,7 @@ ABOUT_BIO = [
 ]
 ABOUT_TYPING = ["a product designer", "an ex-dentist", "a coffee person", "a sunset catcher", "a baker", "an explorer"]  # the typing line on About
 # "What all I do" card on About (first of the cards that stack as you scroll)
-ABOUT_DO = ["Product design", "UX research", "Design systems", "Prototyping", "AI-native workflows"]
+ABOUT_DO = ["Product design", "UX research", "Design systems", "Prototyping", "AI-native workflows", "Pitch deck design"]
 AI_LAB_TEXT = "A corner for my experiments with AI: prompt play, tiny tools and prototypes I build with Claude, plus notes on designing AI products people can trust."
 # AI Lab experiments (shown under the AI Lab sky, in this order). "src" is the interactive file in assets/lab/.
 LAB_EXPERIMENTS = [
