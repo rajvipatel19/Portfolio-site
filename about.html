@@ -18,8 +18,8 @@
 try { if (/^\/(index(\.html)?)?$/.test(location.pathname)) { var d = localStorage.getItem("theme") === "dark", m = "assets/media/";
   [d ? "hero-room.jpg" : "hero-room-day.jpg", d ? "hero-room-mask.png" : "hero-room-day-mask.png", d ? "hero-view.jpg" : "hero-view-day.jpg"].forEach(function (f) {
     var l = document.createElement("link"); l.rel = "preload"; l.as = "image"; l.href = m + f; l.fetchPriority = "high"; if (/mask/.test(f)) l.crossOrigin = "anonymous"; /* masks are fetched that way */ document.head.appendChild(l); }); } } catch (e) {}</script>
-<link rel="stylesheet" href="assets/css/style.css?v=5d3c1f79">
-<link rel="stylesheet" href="assets/css/dark.css?v=5d3c1f79">
+<link rel="stylesheet" href="assets/css/style.css?v=5ce79dfd">
+<link rel="stylesheet" href="assets/css/dark.css?v=5ce79dfd">
 <script>/* dark mode: apply the saved choice before the page draws, so there is no flash */
 try { if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
 /* the "just a minute" reveal plays only the first time the home page opens in a visit */
@@ -56,7 +56,7 @@ try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.get
   <div class="fireflies" aria-hidden="true"><i class="ff" style="--x:34.5%;--y:54.3%;--s:6.8px;--dx:-60px;--dy:41px;--dur:11.9s;--glow:2.3s;--dl:-8.6s"></i><i class="ff" style="--x:9.3%;--y:66.2%;--s:4.7px;--dx:-57px;--dy:36px;--dur:15.6s;--glow:2.5s;--dl:-3.8s"></i><i class="ff" style="--x:61.2%;--y:87.8%;--s:6.5px;--dx:-14px;--dy:59px;--dur:9.4s;--glow:4.2s;--dl:-4.9s"></i><i class="ff" style="--x:18.7%;--y:52.9%;--s:5.6px;--dx:44px;--dy:26px;--dur:13.7s;--glow:3.7s;--dl:-6.3s"></i><i class="ff" style="--x:54.2%;--y:50.6%;--s:4.7px;--dx:-41px;--dy:47px;--dur:12.4s;--glow:2.9s;--dl:-10.0s"></i><i class="ff" style="--x:45.9%;--y:60.6%;--s:7.3px;--dx:28px;--dy:28px;--dur:13.6s;--glow:3.4s;--dl:-14.9s"></i><i class="ff" style="--x:70.2%;--y:60.1%;--s:7.9px;--dx:-53px;--dy:36px;--dur:15.1s;--glow:2.5s;--dl:-8.3s"></i><i class="ff" style="--x:9.5%;--y:76.1%;--s:7.2px;--dx:10px;--dy:55px;--dur:11.5s;--glow:3.8s;--dl:-10.1s"></i><i class="ff" style="--x:57.0%;--y:67.2%;--s:7.4px;--dx:62px;--dy:38px;--dur:14.3s;--glow:2.3s;--dl:-11.9s"></i><i class="ff" style="--x:62.9%;--y:89.7%;--s:7.4px;--dx:-30px;--dy:34px;--dur:14.3s;--glow:2.3s;--dl:-7.8s"></i><i class="ff" style="--x:20.8%;--y:52.9%;--s:4.7px;--dx:38px;--dy:23px;--dur:11.0s;--glow:3.1s;--dl:-14.8s"></i><i class="ff" style="--x:13.1%;--y:66.9%;--s:6.4px;--dx:54px;--dy:52px;--dur:15.9s;--glow:2.8s;--dl:-7.1s"></i></div>
   <div class="wrap about-grid">
     <div class="polaroid-wrap" data-reveal>
-      <div class="polaroid"><span class="tape"></span><div class="img-ph " style="aspect-ratio:4/5"><div class="ph-in"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="4" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="10" r="2" stroke="currentColor" stroke-width="1.6"/><path d="m4 18 5-5 4 4 2-2 5 5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><b>your photo</b><span>drop your image here</span></div></div><span class="caption">that's me! ✿</span></div>
+      <div class="polaroid"><span class="tape"></span><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop"><img class="me-f is-on" src="assets/media/me/m01.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m02.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m03.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m04.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m05.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m06.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m07.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m08.jpg" alt="" decoding="async" width="676" height="900"></div><span class="caption">that's me! ✿</span></div>
       <span class="sticker" style="right:-24px;top:18%;width:70px"><svg viewBox="0 0 80 80"><path d="M40 6l9 20 22 3-16 15 4 22-19-10-19 10 4-22L9 29l22-3Z" fill="#f3d16f" stroke="#fff" stroke-width="5" stroke-linejoin="round"/></svg></span>
       <span class="sticker" style="left:-26px;bottom:22%;width:60px;animation-delay:-2s"><svg viewBox="0 0 80 72"><path d="M40 66 10 38C-2 26 6 6 22 6c8 0 14 5 18 11 4-6 10-11 18-11 16 0 24 20 12 32Z" fill="#ffc7d8" stroke="#fff" stroke-width="5"/></svg></span>
     </div>
@@ -108,6 +108,6 @@ try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.get
   <button type="button" class="cmt-btn cmt-eye" aria-pressed="false" aria-label="Show comments on the page" data-tip="Show / hide"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/><path class="cmt-slash" d="M4 4l16 16"/></svg></button>
 </div>
 <div class="cmt-layer cmt-hidden"></div>
-<script src="assets/js/main.js?v=5d3c1f79"></script>
+<script src="assets/js/main.js?v=5ce79dfd"></script>
 </body>
 </html>

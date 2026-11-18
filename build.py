@@ -610,6 +610,8 @@ def about():
     root = ""
     paras = "".join(f"<p>{p}</p>" for p in C.ABOUT_BIO)
     words = "|".join(C.ABOUT_TYPING)
+    # stop-motion photos for the polaroid (assets/media/me/m01..m08.jpg), played in order by main.js
+    me_frames = "".join(f'<img class="me-f{" is-on" if i == 1 else ""}" src="assets/media/me/m{i:02d}.jpg" alt="" decoding="async" width="676" height="900">' for i in range(1, 9))
     def lib_row(nums):
         def tile(n, k, hidden):
             aria = ' aria-hidden="true"' if hidden else ""
@@ -626,7 +628,7 @@ def about():
   {fireflies(12)}
   <div class="wrap about-grid">
     <div class="polaroid-wrap" data-reveal>
-      <div class="polaroid"><span class="tape"></span>{img_ph('your photo', '4/5')}<span class="caption">that's me! ✿</span></div>
+      <div class="polaroid"><span class="tape"></span><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop">{me_frames}</div><span class="caption">that's me! ✿</span></div>
       <span class="sticker" style="right:-24px;top:18%;width:70px">{desk_sticker('star')}</span>
       <span class="sticker" style="left:-26px;bottom:22%;width:60px;animation-delay:-2s">{desk_sticker('heart')}</span>
     </div>

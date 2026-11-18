@@ -2591,3 +2591,10 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 
 /* AI Lab title on one line ("AI Lab is brewing"); on phones it may need two, so that space is kept and nothing jumps while typing */
 @media (max-width: 640px) { .lab-title { min-height: 2.2em; } }
+
+/* ---------- About: the polaroid plays my photos like a stop-motion clip. Black & white until you hover (or tap on a phone) ---------- */
+.me-motion { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 2px; background: #d9d6d2; }
+.me-motion img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; opacity: 0;
+  filter: grayscale(1) contrast(1.06); transition: filter .5s ease; }
+.me-motion img.is-on { opacity: 1; }
+.polaroid:hover .me-motion img, .me-motion.is-color img { filter: none; }

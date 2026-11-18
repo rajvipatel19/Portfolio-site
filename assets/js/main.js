@@ -330,6 +330,25 @@ const SITE = {
     }).observe(lib);
   }
 
+  /* ---------- About: stop-motion photos in the polaroid; each frame lands slightly off, like hand-shot stop motion ---------- */
+  const meBox = $(".me-motion");
+  if (meBox) {
+    const frames = $$("img", meBox);
+    let fi = 0;
+    if (!reduce && frames.length > 1) {
+      setInterval(() => {
+        if (document.hidden) return;
+        frames[fi].classList.remove("is-on");
+        fi = (fi + 1) % frames.length;
+        const j = (n) => (Math.random() * 2 - 1) * n;
+        frames[fi].style.transform = `translate(${j(1.6).toFixed(1)}px, ${j(1.6).toFixed(1)}px) rotate(${j(0.6).toFixed(2)}deg) scale(1.03)`;
+        frames[fi].classList.add("is-on");
+      }, 320);
+    }
+    // phones have no hover: a tap switches colour on and off
+    if (matchMedia("(hover: none)").matches) meBox.closest(".polaroid").addEventListener("click", () => meBox.classList.toggle("is-color"));
+  }
+
   /* ---------- Count-up numbers ---------- */
   const countIO = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
