@@ -31,7 +31,7 @@ const SITE = {
     if (dark === (document.documentElement.dataset.theme === "dark")) return;
     document.documentElement.classList.add("theme-switching");
     if (dark) document.documentElement.dataset.theme = "dark"; else delete document.documentElement.dataset.theme;
-    try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) {}
+    try { sessionStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) {} // remembered for this visit only
     setThemeUI();
     setTimeout(() => document.documentElement.classList.remove("theme-switching"), 450);
   }));

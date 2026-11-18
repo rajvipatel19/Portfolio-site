@@ -35,13 +35,13 @@ def head(title, desc, root):
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 <script>/* home page: start downloading the hero pictures for the current theme straight away, alongside the stylesheet */
-try {{ if (/^\/(index(\.html)?)?$/.test(location.pathname)) {{ var d = localStorage.getItem("theme") === "dark", m = "{root}assets/media/";
+try {{ if (/^\/(index(\.html)?)?$/.test(location.pathname)) {{ var d = sessionStorage.getItem("theme") === "dark", m = "{root}assets/media/";
   [d ? "hero-room.jpg" : "hero-room-day.jpg", d ? "hero-room-mask.png" : "hero-room-day-mask.png", d ? "hero-view.jpg" : "hero-view-day.jpg"].forEach(function (f) {{
     var l = document.createElement("link"); l.rel = "preload"; l.as = "image"; l.href = m + f; l.fetchPriority = "high"; if (/mask/.test(f)) l.crossOrigin = "anonymous"; /* masks are fetched that way */ document.head.appendChild(l); }}); }} }} catch (e) {{}}</script>
 <link rel="stylesheet" href="{root}assets/css/style.css?v={ASSET_V}">
 <link rel="stylesheet" href="{root}assets/css/dark.css?v={ASSET_V}">
-<script>/* dark mode: apply the saved choice before the page draws, so there is no flash */
-try {{ if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; }} catch (e) {{}}
+<script>/* every visit opens in the light theme; a switch to dark is kept only while browsing this visit (applied before the page draws, so no flash) */
+try {{ localStorage.removeItem("theme"); if (sessionStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; }} catch (e) {{}}
 /* the "just a minute" reveal plays only the first time the home page opens in a visit */
 try {{ if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.getItem("revealed")) {{ document.documentElement.classList.add("first-reveal"); sessionStorage.setItem("revealed", "1"); }} }} catch (e) {{}}</script>
 </head>
