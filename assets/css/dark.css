@@ -7,19 +7,19 @@
 /* ---------- the Light / Dark switch (both themes): a small glass pill, a white "thumb" slides to the chosen side ---------- */
 .theme-switch { position: relative; display: inline-flex; gap: 2px; padding: 3px; flex: none; border-radius: 999px;
   background: linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,.28)); border: 1px solid rgba(255,255,255,.85);
-  box-shadow: inset 0 1px 1px rgba(255,255,255,.95), 0 6px 16px -10px rgba(35,45,60,.35);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.95), 0 6px 16px -10px rgba(45,45,50,.35);
   -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5); }
 .ts-btn { position: relative; z-index: 1; width: 32px; height: 32px; border: 0; border-radius: 50%; padding: 0; display: grid; place-items: center;
   background: none; color: var(--ink-3); cursor: pointer; transition: color .3s; }
 .ts-btn:hover, .ts-btn[aria-pressed="true"] { color: var(--ink); }
 .ts-btn:focus-visible { outline: 2px solid var(--title-accent); outline-offset: 2px; }
 .ts-thumb { position: absolute; top: 3px; left: 3px; width: 32px; height: 32px; border-radius: 50%; pointer-events: none;
-  background: linear-gradient(180deg, #fff, rgba(255,255,255,.8)); box-shadow: inset 0 1px 0 #fff, 0 4px 10px -4px rgba(35,45,60,.45);
+  background: linear-gradient(180deg, #fff, rgba(255,255,255,.8)); box-shadow: inset 0 1px 0 #fff, 0 4px 10px -4px rgba(45,45,50,.45);
   transition: transform .45s var(--ease), background .3s; }
 [data-theme="dark"] .ts-thumb { transform: translateX(34px); background: linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,.16));
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 4px 10px -4px rgba(6,8,14,.5); }
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 4px 10px -4px rgba(9,9,11,.5); }
 [data-theme="dark"] .theme-switch { background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); border-color: rgba(255,255,255,.22);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 6px 16px -10px rgba(6,8,14,.5); }
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 6px 16px -10px rgba(9,9,11,.5); }
 @media (max-width: 860px) { .theme-switch { margin-right: 8px; z-index: 2; } }
 @media (prefers-reduced-motion: reduce) { .ts-thumb { transition: none; } }
 /* a soft cross-fade while switching */
@@ -28,23 +28,23 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 /* ---------- dark colours ---------- */
 [data-theme="dark"] {
   color-scheme: dark;
-  --ink: #f9fafb;
-  --ink-2: #d1d5db;
-  --ink-3: #9ca3af;
+  --ink: #fafafa;
+  --ink-2: #d4d4d8;
+  --ink-3: #a1a1aa;
   --line: rgba(255,255,255,.16);
-  --nav-link: #d1d5db;
-  --bg: #111827;
-  --lav: #9ca3af;
-  --lav-deep: #e5e7eb;
-  --lav-soft: #374151;
-  --lav-mist: #1f2937;
+  --nav-link: #d4d4d8;
+  --bg: #18181b;
+  --lav: #a1a1aa;
+  --lav-deep: #e4e4e7;
+  --lav-soft: #3f3f46;
+  --lav-mist: #27272a;
   --butter-soft: #4a4030;
   --blush: #4a3448;
   --mint: #2f4447;
-  --title-accent: #e5e7eb;
+  --title-accent: #e4e4e7;
   --glass-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.07));
   --glass-border: 1px solid rgba(255, 255, 255, 0.2);
-  --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 18px 40px -20px rgba(7,9,15,0.55);
+  --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 18px 40px -20px rgba(10,10,12,0.55);
 }
 [data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 [data-theme="dark"] .ambient .blob { opacity: .18; }
@@ -52,9 +52,9 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 
 /* ---------- buttons: the dark pill becomes a soft lavender pill so it still stands out ---------- */
 [data-theme="dark"] .btn--dark, [data-theme="dark"] .nav-resume, [data-theme="dark"] .nav .nav-links a.nav-resume--menu {
-  background: linear-gradient(180deg, #f5f6f7, #e2e4e8); color: #0b1019; border-color: rgba(255,255,255,.5);
-  box-shadow: inset 0 1px 0 #fff, 0 14px 30px -14px rgba(7,9,15,.6); }
-[data-theme="dark"] .btn:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 18px 40px -16px rgba(167,150,255,.35); }
+  background: linear-gradient(180deg, #f6f6f6, #e3e3e7); color: #111113; border-color: rgba(255,255,255,.5);
+  box-shadow: inset 0 1px 0 #fff, 0 14px 30px -14px rgba(10,10,12,.6); }
+[data-theme="dark"] .btn:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 18px 40px -16px rgba(228,228,231,.35); }
 [data-theme="dark"] .chip { color: var(--ink-2); background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.18); box-shadow: none; }
 [data-theme="dark"] .badge { background: var(--ink); color: var(--bg); }
 [data-theme="dark"] .badge--soft { background: #4f4430; color: #f6d98a; }
@@ -62,18 +62,18 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 /* ---------- phone / tablet full-screen menu ---------- */
 @media (max-width: 860px) {
   [data-theme="dark"] .nav-links { background:
-    radial-gradient(60% 45% at 15% 12%, rgba(167,150,255,.16), transparent 70%),
+    radial-gradient(60% 45% at 15% 12%, rgba(228,228,231,.16), transparent 70%),
     radial-gradient(55% 40% at 90% 88%, rgba(240,207,122,.12), transparent 70%),
-    linear-gradient(165deg, rgba(20,28,43,.97), rgba(17,24,39,.97)); }
+    linear-gradient(165deg, rgba(30,30,33,.97), rgba(26,26,30,.97)); }
 }
 
 /* ---------- hero: same picture, dimmed like evening ---------- */
 [data-theme="dark"] .hero-media .hero-view, [data-theme="dark"] .hero-room { filter: none; }
 [data-theme="dark"] .hero-media::after { background:
-  linear-gradient(90deg, rgba(16,22,36,.5) 0%, rgba(16,22,36,.32) 34%, rgba(16,22,36,0) 64%),
-  linear-gradient(180deg, rgba(16,22,36,.14) 0%, rgba(16,22,36,0) 40%); }
+  linear-gradient(90deg, rgba(24,24,28,.5) 0%, rgba(24,24,28,.32) 34%, rgba(24,24,28,0) 64%),
+  linear-gradient(180deg, rgba(24,24,28,.14) 0%, rgba(24,24,28,0) 40%); }
 @media (max-width: 600px) {
-  [data-theme="dark"] .hero-media::after { background: linear-gradient(180deg, rgba(16,22,36,.3) 0%, rgba(16,22,36,.5) 40%, rgba(16,22,36,.42) 70%, rgba(16,22,36,.12) 90%); }
+  [data-theme="dark"] .hero-media::after { background: linear-gradient(180deg, rgba(24,24,28,.3) 0%, rgba(24,24,28,.5) 40%, rgba(24,24,28,.42) 70%, rgba(24,24,28,.12) 90%); }
 }
 
 /* ---------- home page background: Pastel garden, in night colours ---------- */
@@ -81,7 +81,7 @@ html.theme-switching body, html.theme-switching body * { transition: background-
   position: relative; isolation: isolate;
   background:
     radial-gradient(60% 420px at 85% calc(100svh + 120px), rgba(226, 170, 150, .16) 0, rgba(226, 170, 150, 0) 100%),
-    linear-gradient(180deg, #161e2c 0px, #161e2c 100svh, #171f2d calc(100svh + 520px), #171f2d 30%, #1a2331 52%, #1c2634 72%, #192230 88%, #111827 100%);
+    linear-gradient(180deg, #1f1f22 0px, #1f1f22 100svh, #202024 calc(100svh + 520px), #202024 30%, #242427 52%, #26262a 72%, #232326 88%, #1a1a1e 100%);
 }
 /* stars: two layers of tiny dots that slowly twinkle out of step */
 [data-theme="dark"] main.home.sl-bg::before, [data-theme="dark"] main.home.sl-bg::after {
@@ -102,95 +102,95 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .card-media .scene::before { opacity: 0; }
 [data-theme="dark"] .card:hover .card-media .scene::before, [data-theme="dark"] .card:focus-visible .card-media .scene::before { opacity: .55; }
 [data-theme="dark"] .card h3 .go { background: rgba(255,255,255,.14); color: var(--ink); box-shadow: none; }
-[data-theme="dark"] .card:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 30px 60px -28px rgba(7,9,15,.55); }
+[data-theme="dark"] .card:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 30px 60px -28px rgba(10,10,12,.55); }
 
 /* ---------- What I bring to the table ---------- */
-[data-theme="dark"] .gt-wrap { --g1: #5a4d8f; --g2: #6a5a3c; --g3: #6a4060; }
+[data-theme="dark"] .gt-wrap { --g1: #6a6a73; --g2: #6a5a3c; --g3: #6a4060; }
 [data-theme="dark"] .gt-glow i { opacity: .5; }
 [data-theme="dark"] .gt { background: linear-gradient(145deg, rgba(255,255,255,.13) 0%, rgba(255,255,255,.06) 55%, rgba(255,255,255,.1) 100%);
-  border-color: rgba(255,255,255,.2); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 50px 90px -50px rgba(7,9,15,.6); }
+  border-color: rgba(255,255,255,.2); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 50px 90px -50px rgba(10,10,12,.6); }
 [data-theme="dark"] .gt::after { background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.04) 42%, transparent 54%); }
-[data-theme="dark"] .cloud { background: linear-gradient(180deg, rgba(34,44,58,.97), rgba(27,36,51,.95)); border-color: rgba(255,255,255,.2); box-shadow: 0 18px 34px -16px rgba(7,9,15,.6); }
-[data-theme="dark"] .cloud::before, [data-theme="dark"] .cloud::after { background: rgba(32,42,56,.97); border-color: rgba(255,255,255,.2); box-shadow: none; }
-[data-theme="dark"] .tool .tip { background: rgba(28,38,52,.97); border-color: rgba(255,255,255,.2); color: var(--ink); }
+[data-theme="dark"] .cloud { background: linear-gradient(180deg, rgba(44,44,48,.97), rgba(38,38,41,.95)); border-color: rgba(255,255,255,.2); box-shadow: 0 18px 34px -16px rgba(10,10,12,.6); }
+[data-theme="dark"] .cloud::before, [data-theme="dark"] .cloud::after { background: rgba(42,42,46,.97); border-color: rgba(255,255,255,.2); box-shadow: none; }
+[data-theme="dark"] .tool .tip { background: rgba(38,38,42,.97); border-color: rgba(255,255,255,.2); color: var(--ink); }
 [data-theme="dark"] .tool .tip span { color: #f0a7b9; }
-[data-theme="dark"] .panel { background: linear-gradient(160deg, rgba(31,41,55,.96), rgba(25,34,48,.95)); border-color: rgba(255,255,255,.2);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 30px 60px -30px rgba(7,9,15,.6); }
+[data-theme="dark"] .panel { background: linear-gradient(160deg, rgba(41,41,45,.96), rgba(35,35,38,.95)); border-color: rgba(255,255,255,.2);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 30px 60px -30px rgba(10,10,12,.6); }
 [data-theme="dark"] .panel-close { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.2); box-shadow: none; }
 [data-theme="dark"] .panel .p-tools span, [data-theme="dark"] .panel .p-proof { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.18); }
 
 /* ---------- How I work with AI ---------- */
-[data-theme="dark"] .af-line { background: linear-gradient(90deg, rgba(217,220,225,.14), rgba(217,220,225,.28), rgba(217,220,225,.14)); }
-[data-theme="dark"] .af-step[aria-selected="true"] .af-dot { background: linear-gradient(180deg, #f5f6f7, #dee1e6); color: #101624; border-color: rgba(255,255,255,.5);
-  box-shadow: 0 0 0 6px rgba(216,219,224,.2), 0 14px 30px -12px rgba(7,9,15,.6); }
+[data-theme="dark"] .af-line { background: linear-gradient(90deg, rgba(219,219,223,.14), rgba(219,219,223,.28), rgba(219,219,223,.14)); }
+[data-theme="dark"] .af-step[aria-selected="true"] .af-dot { background: linear-gradient(180deg, #f6f6f6, #e0e0e4); color: #18181c; border-color: rgba(255,255,255,.5);
+  box-shadow: 0 0 0 6px rgba(218,218,222,.2), 0 14px 30px -12px rgba(10,10,12,.6); }
 [data-theme="dark"] .af-tools li { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.18); }
 
 /* ---------- Visual journey preview ---------- */
-[data-theme="dark"] .vj-modal { background: rgba(24,32,47,.45); border-color: rgba(255,255,255,.2); }
-[data-theme="dark"] .vj-modal::backdrop { background: rgba(9,13,20,.45); }
-[data-theme="dark"] .vj-cap, [data-theme="dark"] .vj-close, [data-theme="dark"] .vj-nav { background: rgba(31,41,55,.92); border-color: rgba(255,255,255,.2); color: var(--ink); }
+[data-theme="dark"] .vj-modal { background: rgba(34,34,37,.45); border-color: rgba(255,255,255,.2); }
+[data-theme="dark"] .vj-modal::backdrop { background: rgba(13,13,16,.45); }
+[data-theme="dark"] .vj-cap, [data-theme="dark"] .vj-close, [data-theme="dark"] .vj-nav { background: rgba(41,41,45,.92); border-color: rgba(255,255,255,.2); color: var(--ink); }
 
 /* ---------- footer: meadow dimmed, top edge melts into the dark page ---------- */
 [data-theme="dark"] .ft-video { filter: brightness(.6) saturate(.85); }
-[data-theme="dark"] .ft--scene .ft-media::after { background: linear-gradient(90deg, rgba(15,21,34,.6) 0%, rgba(15,21,34,.3) 38%, rgba(15,21,34,0) 62%); }
+[data-theme="dark"] .ft--scene .ft-media::after { background: linear-gradient(90deg, rgba(23,23,26,.6) 0%, rgba(23,23,26,.3) 38%, rgba(23,23,26,0) 62%); }
 @media (max-width: 600px) {
-  [data-theme="dark"] .ft--scene .ft-media::after { background: linear-gradient(180deg, rgba(15,21,34,.6) 0%, rgba(15,21,34,.35) 45%, rgba(15,21,34,0) 65%); }
+  [data-theme="dark"] .ft--scene .ft-media::after { background: linear-gradient(180deg, rgba(23,23,26,.6) 0%, rgba(23,23,26,.35) 45%, rgba(23,23,26,0) 65%); }
 }
 [data-theme="dark"] main + .ft--scene, [data-theme="dark"] main.cl + .ft--scene, [data-theme="dark"] main.sl-bg:not(.cl) + .ft--scene {
-  background: linear-gradient(180deg, #111827 0%, rgba(17,24,39,.85) 18%, rgba(17,24,39,.4) 38%, rgba(17,24,39,0) 60%); }
+  background: linear-gradient(180deg, #1a1a1e 0%, rgba(26,26,30,.85) 18%, rgba(26,26,30,.4) 38%, rgba(26,26,30,0) 60%); }
 
 /* project cards on the home page: dark frosted glass */
 [data-theme="dark"] .work-grid .card { background: linear-gradient(150deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.06) 100%);
-  border-color: rgba(255,255,255,.2); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 24px 50px -34px rgba(7,9,15,.35); }
+  border-color: rgba(255,255,255,.2); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 24px 50px -34px rgba(10,10,12,.35); }
 [data-theme="dark"] .work-grid .card::after { background: linear-gradient(115deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 32%); }
-[data-theme="dark"] .work-grid .card:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 30px 60px -34px rgba(7,9,15,.4); }
+[data-theme="dark"] .work-grid .card:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 30px 60px -34px rgba(10,10,12,.4); }
 [data-theme="dark"] .card:hover h3 .go { background: var(--lav-soft); }
 
 /* ---------- small shared bits ---------- */
-[data-theme="dark"] .ambient .b1 { background: #5a4d8f; }
+[data-theme="dark"] .ambient .b1 { background: #6a6a73; }
 [data-theme="dark"] .ambient .b2 { background: #6a5a3c; }
-[data-theme="dark"] .ambient .b3 { background: #283241; }
-[data-theme="dark"] .ff-link span { background: rgba(26,35,49,.9); border-color: rgba(255,255,255,.2); color: var(--ink); }
+[data-theme="dark"] .ambient .b3 { background: #323237; }
+[data-theme="dark"] .ff-link span { background: rgba(36,36,39,.9); border-color: rgba(255,255,255,.2); color: var(--ink); }
 
 /* ---------- About and AI Lab: the sky becomes a night sky ---------- */
-[data-theme="dark"] .sky { background: linear-gradient(180deg, #121928 0%, #18202f 30%, #1c2634 58%, #18202f 80%, var(--bg) 100%); }
-[data-theme="dark"] .sky--about { background: linear-gradient(180deg, #121928 0%, #18202f 36%, #1b2433 64%, #18202f 84%, var(--bg) 100%); }
+[data-theme="dark"] .sky { background: linear-gradient(180deg, #1c1c1e 0%, #222225 30%, #26262a 58%, #222225 80%, var(--bg) 100%); }
+[data-theme="dark"] .sky--about { background: linear-gradient(180deg, #1c1c1e 0%, #222225 36%, #262629 64%, #222225 84%, var(--bg) 100%); }
 [data-theme="dark"] .sky-clouds i { opacity: calc(var(--o, .8) * .2); }
 [data-theme="dark"] .sky-btn, [data-theme="dark"] .sky-chip, [data-theme="dark"] .nd-tag {
-  background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.22); color: var(--ink); box-shadow: 0 10px 24px -14px rgba(7,9,15,.55); }
+  background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.22); color: var(--ink); box-shadow: 0 10px 24px -14px rgba(10,10,12,.55); }
 [data-theme="dark"] .sky-btn:hover { background: rgba(255,255,255,.2); }
-[data-theme="dark"] .sky-btn--dark { background: linear-gradient(180deg, #f5f6f7, #e2e4e8); border-color: rgba(255,255,255,.5); color: #0b1019; }
+[data-theme="dark"] .sky-btn--dark { background: linear-gradient(180deg, #f6f6f6, #e3e3e7); border-color: rgba(255,255,255,.5); color: #111113; }
 [data-theme="dark"] .sky-btn--dark:hover { background: #fff; }
 [data-theme="dark"] .sky-bar { background: rgba(255,255,255,.1); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
-[data-theme="dark"] .net .ln { stroke: rgba(217,220,225,.25); }
-[data-theme="dark"] .polaroid .img-ph { background: #242e3d; }
+[data-theme="dark"] .net .ln { stroke: rgba(219,219,223,.25); }
+[data-theme="dark"] .polaroid .img-ph { background: #2e2e33; }
 [data-theme="dark"] .lab-exp { background: linear-gradient(150deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); border-color: rgba(255,255,255,.2);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 30px 60px -36px rgba(7,9,15,.55); }
-[data-theme="dark"] .lab-stage { background: radial-gradient(80% 60% at 50% 40%, rgba(167,139,250,.28), rgba(167,139,250,0) 70%), linear-gradient(180deg, #1a2331, #192230); }
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 30px 60px -36px rgba(10,10,12,.55); }
+[data-theme="dark"] .lab-stage { background: radial-gradient(80% 60% at 50% 40%, rgba(228,228,231,.28), rgba(228,228,231,0) 70%), linear-gradient(180deg, #242427, #232326); }
 /* the embedded prototype is a light-scheme page: matching it stops the browser painting a white box behind it */
 [data-theme="dark"] .lab-stage iframe { color-scheme: light; }
 
 /* =========================================================
    DARK THEME DESIGN RULES  (apply these to anything new)
-   1. Page: the "blue hour" dusk sky. Base #111827; never pure black.
+   1. Page: the "blue hour" dusk sky. Base #1a1a1e; never pure black.
    2. Surfaces are light, desaturated glass (white at low opacity), never
       solid saturated violet, three steps only:
         band   rgba(255,255,255,.04)  – full-width tinted sections
         card   rgba(255,255,255,.11) + 1px rgba(255,255,255,.16) edge
         raised rgba(255,255,255,.16) – highlighted panels, chips, active states
-      Solid fills (only where something must cover a line) use #1f2937.
-   3. Text: headings #f6f7f8 · body #d1d5db · muted #a9a3bd.
-      Nothing that must be read goes below #a9a3bd (4.5:1 on a card).
-   4. Accents are for small labels only: lavender #d8dbe0 (SILA, SKU),
+      Solid fills (only where something must cover a line) use #29292d.
+   3. Text: headings #f7f7f7 · body #d4d4d8 · muted #acacb4.
+      Nothing that must be read goes below #acacb4 (4.5:1 on a card).
+   4. Accents are for small labels only: lavender #dadade (SILA, SKU),
       amber #f3a740 (CityLockers). A tinted area uses its accent at 10–14% opacity.
    5. Paper objects (sticky notes, rule cards, polaroids) keep their paper
-      colour, a touch softer, and always use dark ink #0a0e16.
+      colour, a touch softer, and always use dark ink #0f0f11.
    6. Screenshots, diagrams and light tables are never inverted or recoloured
       (only their frame: screenshots sit in the glass frame, never a coloured border).
       They sit in a soft frame (rounded, thin glass edge) and are dimmed by 6%
       so a white image doesn't glare on the dark page.
    7. Light textures (paper grids, dotted patterns) become a faint white grid.
-   8. Shadows are deep indigo rgba(7,9,15,.), tight and below the card
+   8. Shadows are deep indigo rgba(10,10,12,.), tight and below the card
       (never a soft light halo, never black).
    ========================================================= */
 
@@ -199,16 +199,16 @@ html.theme-switching body, html.theme-switching body * { transition: background-
    Screenshots and diagrams stay as they are; the page,
    cards and text around them go dark.
    ========================================================= */
-[data-theme="dark"] .sila { --sl-accent: #cdd1d7; --sl-ink: #eeeff2; --sl-ink-2: #b9b3c8; --sl-ink-3: #8f889f; --sl-num: #222c3a; --sl-icon: #cfd3d9; }
+[data-theme="dark"] .sila { --sl-accent: #d0d0d4; --sl-ink: #efeff1; --sl-ink-2: #babac1; --sl-ink-3: #8f8f98; --sl-num: #2c2c30; --sl-icon: #d2d2d6; }
 [data-theme="dark"] .sila.cl { --sl-accent: #f3a740; }
 [data-theme="dark"] .sila.cl .roadmap { --sl-accent: #f3a740; }
-[data-theme="dark"] .sk { --sk-ink: #eeeff2; --sk-ink-2: #b9b3c8; --sk-ghost: #27313f; --sk-lav: rgba(255,255,255,.06); }
+[data-theme="dark"] .sk { --sk-ink: #efeff1; --sk-ink-2: #babac1; --sk-ghost: #313135; --sk-lav: rgba(255,255,255,.06); }
 
 /* page backgrounds: the same soft colour journey, at night */
 /* all three case studies share the home page's blue-hour sky: dusky purple drifting into blue-violet, with twinkling stars */
 [data-theme="dark"] .sila.sl-bg, [data-theme="dark"] .sila.cl.sl-bg { position: relative; isolation: isolate; background:
   radial-gradient(60% 520px at 85% 160px, rgba(226,170,150,.14) 0, rgba(226,170,150,0) 100%),
-  linear-gradient(180deg, #161e2c 0px, #171f2d 900px, #171f2d 22%, #1a2331 45%, #1c2634 65%, #192230 85%, #111827 100%); }
+  linear-gradient(180deg, #1f1f22 0px, #202024 900px, #202024 22%, #242427 45%, #26262a 65%, #232326 85%, #1a1a1e 100%); }
 [data-theme="dark"] .sila.sl-bg::before, [data-theme="dark"] .sila.sl-bg::after {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background-image:
@@ -235,75 +235,75 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] .cl-sticky, [data-theme="dark"] .cl-sticky * { color: #17171a; }
 
 /* the side progress rail */
-[data-theme="dark"] .roadmap .node { background: #1f2937; border-color: #6d6b86; }
-[data-theme="dark"] .roadmap li.done .node { box-shadow: inset 0 0 0 3px #1f2937; }
+[data-theme="dark"] .roadmap .node { background: #29292d; border-color: #74747d; }
+[data-theme="dark"] .roadmap li.done .node { box-shadow: inset 0 0 0 3px #29292d; }
 
 /* cards and panels: white → dark surfaces */
 [data-theme="dark"] :is(.sl-card, .sl-card--line, .sl-stat, .sl-note, .cl-card, .cl-persona, .cl-comp, .cl-box, .cl-ba-card, .cl-learn-card,
   .sk-summary, .sk-problem, .sk-goal, .sk-note, .sk-persona, .sk-persona-story, .sk-result, .sk-concl) {
   background: rgba(255,255,255,.11); border-color: rgba(255,255,255,.16);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 28px -18px rgba(7,9,15,.7); }
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 28px -18px rgba(10,10,12,.7); }
 [data-theme="dark"] :is(.cl-persona-id, .cl-comp-head) { background: rgba(255,255,255,.14); }
 /* lavender-tinted panels → deep plum */
 [data-theme="dark"] :is(.sl-quotes, .sk-goal--wide, .sk-prio-card, .sk-persona-id, .sk-pill) { background: rgba(255,255,255,.16); color: var(--ink); }
-[data-theme="dark"] .sila .sl-articles { background: linear-gradient(90deg, rgba(167,150,255,.14), rgba(167,150,255,.05)); }
-[data-theme="dark"] .sila .sl-hero-band { background: linear-gradient(180deg, rgba(167,150,255,.22), rgba(167,150,255,.04)); }
+[data-theme="dark"] .sila .sl-articles { background: linear-gradient(90deg, rgba(228,228,231,.14), rgba(228,228,231,.05)); }
+[data-theme="dark"] .sila .sl-hero-band { background: linear-gradient(180deg, rgba(228,228,231,.22), rgba(228,228,231,.04)); }
 [data-theme="dark"] .cl-impact { background: rgba(243,167,64,.1); box-shadow: 0 4px 0 #e8900b; }
 [data-theme="dark"] .sila span[style*="background"], [data-theme="dark"] .sila .sl-tag { color: var(--ink); }
 /* full-width tinted bands */
 [data-theme="dark"] .sila.sl-bg :is(.sl-band-gray, .cl-gray, .cl-video-band, .sk-gray, .sk-lav) { background: rgba(255,255,255,.05); }
 [data-theme="dark"] .sila.cl.sl-bg :is(.cl-gray, .cl-video-band) { background: rgba(255,255,255,.04); }
-[data-theme="dark"] .sila.sl-bg .sk-concl-band { background: rgba(167,150,255,.06); }
+[data-theme="dark"] .sila.sl-bg .sk-concl-band { background: rgba(228,228,231,.06); }
 [data-theme="dark"] .sk-gif { background: transparent; }
-[data-theme="dark"] .cl-slider-handle { background: #242e3d; color: var(--ink); }
+[data-theme="dark"] .cl-slider-handle { background: #2e2e33; color: var(--ink); }
 [data-theme="dark"] .sila .sk-result { box-shadow: 4px 4px 0 var(--sl-accent); }
-[data-theme="dark"] .sl-note { color: var(--ink); box-shadow: 0 6px 16px rgba(7,9,15,.4); }
+[data-theme="dark"] .sl-note { color: var(--ink); box-shadow: 0 6px 16px rgba(10,10,12,.4); }
 [data-theme="dark"] .sk-hero h1 { color: var(--ink) !important; }
 [data-theme="dark"] .sk-problem { color: var(--ink); }
 [data-theme="dark"] .sl-chips span, [data-theme="dark"] .cl-chips span, [data-theme="dark"] .cl .cl-chips span { background: rgba(255,255,255,.1); color: var(--ink); }
 [data-theme="dark"] .cl .cl-chips span { background: rgba(243,167,64,.14); color: #f6c27a; }
-@media (max-width: 1199px) { [data-theme="dark"] .sila .sl-side li.active a { background: rgba(255,255,255,.12); } [data-theme="dark"] .sila .sl-side li.done a { color: #b4aec6; } }
+@media (max-width: 1199px) { [data-theme="dark"] .sila .sl-side li.active a { background: rgba(255,255,255,.12); } [data-theme="dark"] .sila .sl-side li.done a { color: #b7b7bd; } }
 /* kiosk recordings: the white-hiding blend would turn them black on a dark page, so show them as soft light panels instead */
-[data-theme="dark"] .cl-video-band video { mix-blend-mode: normal; filter: none; border-radius: 24px; box-shadow: 0 30px 60px -30px rgba(7,9,15,.55); }
+[data-theme="dark"] .cl-video-band video { mix-blend-mode: normal; filter: none; border-radius: 24px; box-shadow: 0 30px 60px -30px rgba(10,10,12,.55); }
 /* the custom cursor dot: glow instead of darken */
 [data-theme="dark"] .cursor { mix-blend-mode: screen; }
 
 /* polish round: card arrow hover stays subtle; visual journey glass frames on the night page */
 [data-theme="dark"] .card:hover h3 .go { background: rgba(255,255,255,.18); color: #fff; }
 [data-theme="dark"] .shot--img { border-color: rgba(255,255,255,.22) !important;
-  background: linear-gradient(140deg, rgba(255,255,255,.16), rgba(255,255,255,.06) 50%, rgba(226,228,232,.12)) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 24px 50px -30px rgba(7,9,15,.5); }
+  background: linear-gradient(140deg, rgba(255,255,255,.16), rgba(255,255,255,.06) 50%, rgba(227,227,231,.12)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 24px 50px -30px rgba(10,10,12,.5); }
 
 /* What I bring to the table, at night: behaves like the light theme — a soft light follows the cursor
    and faint checks appear around it — instead of a bright white streak. Glow colours match the blue-hour page. */
-[data-theme="dark"] .gt-wrap { --g1: #5d5a9c; --g2: #7a6488; --g3: #4b6690; }
+[data-theme="dark"] .gt-wrap { --g1: #777780; --g2: #72727b; --g3: #696972; }
 [data-theme="dark"] .gt-glow i { opacity: .45; }
-[data-theme="dark"] .fx-glow { background: linear-gradient(100deg, transparent calc(var(--mx) - 220px), rgba(226,228,232,.03) calc(var(--mx) - 90px),
-  rgba(226,228,232,.08) var(--mx), rgba(226,228,232,.03) calc(var(--mx) + 90px), transparent calc(var(--mx) + 220px)); }
+[data-theme="dark"] .fx-glow { background: linear-gradient(100deg, transparent calc(var(--mx) - 220px), rgba(227,227,231,.03) calc(var(--mx) - 90px),
+  rgba(227,227,231,.08) var(--mx), rgba(227,227,231,.03) calc(var(--mx) + 90px), transparent calc(var(--mx) + 220px)); }
 [data-theme="dark"] .fx-checks { background-image: linear-gradient(90deg, rgba(255,255,255,.055) 50%, transparent 50%), linear-gradient(rgba(255,255,255,.055) 50%, transparent 50%); }
 [data-theme="dark"] .gt::after { background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.05) 42%, transparent 54%); }
 /* the table at night, quieter: barely-there colour behind it, a thin glass edge, no heavy shadow */
 [data-theme="dark"] .gt-glow i { opacity: .16; }
 [data-theme="dark"] .gt { background: linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.035) 55%, rgba(255,255,255,.05) 100%);
   border-color: rgba(255,255,255,.12);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 34px 70px -50px rgba(7,9,15,.28); }
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 34px 70px -50px rgba(10,10,12,.28); }
 [data-theme="dark"] .gt::after { background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.025) 42%, transparent 54%); }
 
 /* ---------- Case studies v2: following the rules above ---------- */
-[data-theme="dark"] .sila { --sl-num: #8a85b0; }
+[data-theme="dark"] .sila { --sl-num: #96969f; }
 /* rule 3: side progress links readable */
 [data-theme="dark"] .sila .sl-rail li a, [data-theme="dark"] .sila .sl-rail li.done a,
-[data-theme="dark"] .sila .sl-side li a, [data-theme="dark"] .sila .sl-side li.done a { color: #a9a3bd; }
-[data-theme="dark"] .sila .sl-rail li.active a, [data-theme="dark"] .sila .sl-side li.active a { color: #f6f7f8; }
+[data-theme="dark"] .sila .sl-side li a, [data-theme="dark"] .sila .sl-side li.done a { color: #acacb4; }
+[data-theme="dark"] .sila .sl-rail li.active a, [data-theme="dark"] .sila .sl-side li.active a { color: #f7f7f7; }
 /* rule 5: paper objects keep paper colour with dark ink */
 [data-theme="dark"] .sl-rule--peach { background: #f3cdbf; }
 [data-theme="dark"] .sl-rule--yellow { background: #efd99c; }
 [data-theme="dark"] .cl-sticky { background: #8ccbef; }
-[data-theme="dark"] :is(.sl-rule, .cl-sticky) { box-shadow: 0 14px 24px -12px rgba(7,9,15,.6); }
-[data-theme="dark"] .sila :is(.sl-rule, .cl-sticky) :is(h3, h4, p, li, b, span, strong) { color: #0a0e16; }
-[data-theme="dark"] .sila .sl-rule p, [data-theme="dark"] .sila .cl-sticky li { color: #3a3846; }
+[data-theme="dark"] :is(.sl-rule, .cl-sticky) { box-shadow: 0 14px 24px -12px rgba(10,10,12,.6); }
+[data-theme="dark"] .sila :is(.sl-rule, .cl-sticky) :is(h3, h4, p, li, b, span, strong) { color: #0f0f11; }
+[data-theme="dark"] .sila .sl-rule p, [data-theme="dark"] .sila .cl-sticky li { color: #3c3c42; }
 /* rule 6: light screenshots, tables and diagrams sit in a soft frame */
-[data-theme="dark"] .sila :is(.sl-wide, .sk-wide) { border-radius: 16px; box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 24px 50px -30px rgba(7,9,15,.6); filter: brightness(.94); }
+[data-theme="dark"] .sila :is(.sl-wide, .sk-wide) { border-radius: 16px; box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 24px 50px -30px rgba(10,10,12,.6); filter: brightness(.94); }
 /* rule 7: light paper textures become a faint white grid */
 [data-theme="dark"] .sila .sk-pattern, [data-theme="dark"] .sila .sk-dots {
   background: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px) 0 0 / 44px 44px,
@@ -312,53 +312,53 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 /* SKU promo card: white text on its purple */
 [data-theme="dark"] .sila .sk-promo-side p { color: #fff; }
 /* rule 3: links and quotes that were deep purple become light lavender */
-[data-theme="dark"] .sila .sl-articles a, [data-theme="dark"] .sila .sl-quotes p { color: #e2e4e8; }
-[data-theme="dark"] .sila .sl-quotes p::before { background: #d8dbe0; }
+[data-theme="dark"] .sila .sl-articles a, [data-theme="dark"] .sila .sl-quotes p { color: #e3e3e7; }
+[data-theme="dark"] .sila .sl-quotes p::before { background: #dadade; }
 
 /* ---------- CityLockers at night ---------- */
 /* 1. the hero band: a brighter amber glow that stands out from the dusk page */
-[data-theme="dark"] .cl-hero-band { background: linear-gradient(180deg, rgba(232,168,105,.34) 0%, rgba(214,160,130,.16) 55%, rgba(216,219,224,.08) 100%) !important; }
+[data-theme="dark"] .cl-hero-band { background: linear-gradient(180deg, rgba(232,168,105,.34) 0%, rgba(214,160,130,.16) 55%, rgba(218,218,222,.08) 100%) !important; }
 [data-theme="dark"] .sila.cl .sl-kicker { color: #eeb06a; }
 /* 2. the impact card: plain glass, no orange */
-[data-theme="dark"] .cl-impact { background: rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 28px -18px rgba(7,9,15,.7); }
+[data-theme="dark"] .cl-impact { background: rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 28px -18px rgba(10,10,12,.7); }
 /* 3 + 4. dark grey boxes and the User A / User B bars become light grey glass */
 [data-theme="dark"] .cl-dark, [data-theme="dark"] .cl-proto { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.16); }
-[data-theme="dark"] .cl-persona-top { background: rgba(255,255,255,.18); color: #f6f7f8; }
+[data-theme="dark"] .cl-persona-top { background: rgba(255,255,255,.18); color: #f7f7f7; }
 /* 5. kiosk recordings: cropped to the tablet and set in a glass frame (instead of their white video background) */
 [data-theme="dark"] .cl-video-band video { mix-blend-mode: normal; filter: none; border-radius: 0; box-shadow: none; }
 [data-theme="dark"] .cl-vframe { display: block; width: min(790px, 100%); margin: 32px auto 0; padding: 14px; border-radius: 34px; container-type: inline-size;
   background: linear-gradient(150deg, rgba(255,255,255,.16), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.2);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 30px 60px -34px rgba(7,9,15,.7);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 30px 60px -34px rgba(10,10,12,.7);
   -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); }
 [data-theme="dark"] .cl-vclip { display: block; overflow: hidden; border-radius: 4cqi; }
 [data-theme="dark"] .cl-vframe .cl-vclip video { width: 111.5%; max-width: none; margin: -5.1% -7.4% -6.9% -4.1%; }
 [data-theme="dark"] .cl-vframe--manage .cl-vclip video { margin-top: -3.5%; margin-bottom: -8.5%; }
 /* case study section bar (tablets and phones): dark smoky glass instead of a white pill */
 @media (max-width: 1199px) {
-  [data-theme="dark"] .sl-side { background: rgba(15,21,34,.82); border: 1px solid rgba(255,255,255,.14);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 30px -16px rgba(7,9,15,.7);
+  [data-theme="dark"] .sl-side { background: rgba(23,23,26,.82); border: 1px solid rgba(255,255,255,.14);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 30px -16px rgba(10,10,12,.7);
     -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4); }
   [data-theme="dark"] .sl-side li:not(:last-child)::after { border-top-color: rgba(255,255,255,.22); }
   [data-theme="dark"] .sila .sl-side li.done::after { border-top-color: var(--sl-accent); }
   [data-theme="dark"] .sila .sl-side .node { border-color: rgba(255,255,255,.35); background: transparent; }
   [data-theme="dark"] .sila .sl-side li.done .node, [data-theme="dark"] .sila .sl-side li.active .node { border-color: var(--sl-accent); background: var(--sl-accent); }
-  [data-theme="dark"] .sila .sl-side li.active .node { box-shadow: 0 0 0 4px rgba(216,219,224,.18); }
-  [data-theme="dark"] .sila .sl-side li.active a { color: #f6f7f8; background: rgba(255,255,255,.12); }
+  [data-theme="dark"] .sila .sl-side li.active .node { box-shadow: 0 0 0 4px rgba(218,218,222,.18); }
+  [data-theme="dark"] .sila .sl-side li.active a { color: #f7f7f7; background: rgba(255,255,255,.12); }
 }
 
 /* ---------- SKU at night ---------- */
 /* 1. strong purples become dusky, desaturated lavender */
-[data-theme="dark"] .sk-promo { background: linear-gradient(160deg, #6d6396, #222c3a); }
+[data-theme="dark"] .sk-promo { background: linear-gradient(160deg, #787881, #2c2c30); }
 [data-theme="dark"] .sk-promo-side p, [data-theme="dark"] .sk-promo-logo { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.2); }
 /* the Design Process band takes the page's dusk colour (keeps its light and shade, drops the strong purple) */
-[data-theme="dark"] .sk-band { background: #141c2b; isolation: isolate; }
+[data-theme="dark"] .sk-band { background: #1e1e21; isolation: isolate; }
 [data-theme="dark"] .sk-band img { mix-blend-mode: luminosity; filter: brightness(1.55) contrast(.95); }
 /* 2. screen borders: light purple instead of deep purple */
 [data-theme="dark"] .sk-prio-card { border-color: #b9a9e8; }
 /* 3. the store animation sits in a glass frame */
 [data-theme="dark"] .sk-gif img { padding: 14px; border-radius: 30px;
   background: linear-gradient(150deg, rgba(255,255,255,.16), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.2);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 30px 60px -34px rgba(7,9,15,.7); }
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 30px 60px -34px rgba(10,10,12,.7); }
 /* 4. the storyboard line drawings turn white (colours keep their hue) */
 [data-theme="dark"] .sk-story img { filter: invert(1) hue-rotate(180deg) brightness(.95); }
 
@@ -394,42 +394,44 @@ html.theme-switching body, html.theme-switching body * { transition: background-
 [data-theme="dark"] :is(.sk-framed, .sk-step img, .sk-import-note img, .sk-import-side img) {
   box-sizing: border-box; padding: 10px; border: 1px solid rgba(255,255,255,.2) !important; border-radius: 22px;
   background: linear-gradient(150deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 24px 50px -30px rgba(7,9,15,.7); }
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 24px 50px -30px rgba(10,10,12,.7); }
 
 /* CityLockers side navigation at night: orange too */
 [data-theme="dark"] .sila.cl .sl-rail .node, [data-theme="dark"] .sila.cl .sl-side .node { border-color: rgba(243,167,64,.45); }
 @media (max-width: 1199px) { [data-theme="dark"] .sila.cl .sl-side li.active a { background: rgba(243,167,64,.16); } }
 
 /* comments at night */
-[data-theme="dark"] .cmt-bar { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.22); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 6px 18px -10px rgba(7,9,15,.4); }
-[data-theme="dark"] .cmt-btn svg { filter: drop-shadow(0 0 2px rgba(9,13,20,.9)); }
+[data-theme="dark"] .cmt-bar { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.22); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 6px 18px -10px rgba(10,10,12,.4); }
+[data-theme="dark"] .cmt-btn svg { filter: drop-shadow(0 0 2px rgba(13,13,16,.9)); }
 [data-theme="dark"] .cmt-btn[aria-pressed="true"] svg { filter: none; }
 [data-theme="dark"] .cmt-btn:hover { background: rgba(255,255,255,.12); color: #fff; }
-[data-theme="dark"] .cmt-eye[aria-pressed="false"] { color: rgba(241,242,245,.35); }
-[data-theme="dark"] .cmt-btn[aria-pressed="true"]:is(.cmt-move, .cmt-add), [data-theme="dark"] .cmt-pin, [data-theme="dark"] .cmt-av, [data-theme="dark"] .cmt-actions .cmt-post { background: #e2e4e8; border-color: #e2e4e8; color: #0b1019; }
-[data-theme="dark"] .cmt-pin { border-color: #111827; }
-[data-theme="dark"] .cmt-pin--draft { background: #cdd1d7; }
+[data-theme="dark"] .cmt-eye[aria-pressed="false"] { color: rgba(242,242,244,.35); }
+[data-theme="dark"] .cmt-btn[aria-pressed="true"]:is(.cmt-move, .cmt-add), [data-theme="dark"] .cmt-pin, [data-theme="dark"] .cmt-av, [data-theme="dark"] .cmt-actions .cmt-post { background: #e3e3e7; border-color: #e3e3e7; color: #111113; }
+[data-theme="dark"] .cmt-pin { border-color: #1a1a1e; }
+[data-theme="dark"] .cmt-pin--draft { background: #d0d0d4; }
 [data-theme="dark"] .cmt-box input, [data-theme="dark"] .cmt-box textarea { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); color: var(--ink); }
 [data-theme="dark"] .cmt-actions button { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); color: var(--ink); }
-[data-theme="dark"] .cmt-btn::after { background: #f5f6f7; color: #0b1019; }
-[data-theme="dark"] .cmt-toast { background: #f5f6f7; color: #0b1019; }
+[data-theme="dark"] .cmt-btn::after { background: #f6f6f6; color: #111113; }
+[data-theme="dark"] .cmt-toast { background: #f6f6f6; color: #111113; }
 /* loading skeleton at night */
 [data-theme="dark"] .pf-skel { --sk: rgba(255,255,255,.09); --sk-shine: rgba(255,255,255,.14); }
 /* loading cover at night: dusk purple, not the daytime lavender (needs html.first-reveal to win over the light rule) */
-html.first-reveal[data-theme="dark"] .page-fade { background: #111827; }
+html.first-reveal[data-theme="dark"] .page-fade { background: #1a1a1e; }
 
 /* About stacking cards at night */
-[data-theme="dark"] .stack-do { background: #0b1019; border: 1px solid rgba(255, 255, 255, .08); }
-[data-theme="dark"] .stack-photos { background: linear-gradient(160deg, #131b2a, #131b2a 55%, #131b2a); color: #f5f6f7; border: 1px solid rgba(255, 255, 255, .07); }
+[data-theme="dark"] .stack-do { background: #111113; border: 1px solid rgba(255, 255, 255, .08); }
+[data-theme="dark"] .stack-photos { background: linear-gradient(160deg, #1d1d20, #1d1d20 55%, #1d1d20); color: #f6f6f6; border: 1px solid rgba(255, 255, 255, .07); }
 [data-theme="dark"] .stack-photos::before { opacity: .6; }
-[data-theme="dark"] .stack-photos .stack-title em { color: #dadde2; }
-[data-theme="dark"] .stack-photos .stack-soon { color: rgba(245,246,247,.72); }
-[data-theme="dark"] .lib-in { background: #f4f0e8; box-shadow: 0 14px 28px -16px rgba(4,6,10,.7); }
-[data-theme="dark"] .stack-card { box-shadow: 0 -18px 50px -30px rgba(4,6,10,.6); }
+[data-theme="dark"] .stack-photos .stack-title em { color: #dcdce0; }
+[data-theme="dark"] .stack-photos .stack-soon { color: rgba(246,246,246,.72); }
+[data-theme="dark"] .lib-in { background: #f4f0e8; box-shadow: 0 14px 28px -16px rgba(6,6,8,.7); }
+[data-theme="dark"] .stack-card { box-shadow: 0 -18px 50px -30px rgba(6,6,8,.6); }
 
 /* the polaroid stays white at night, so its caption stays dark ink */
-[data-theme="dark"] .polaroid .caption { color: #101624; }
+[data-theme="dark"] .polaroid .caption { color: #18181c; }
 /* footer: its top edge fades in softly, so there is no hard line against the section above */
 /* (only where the page itself has no painted background, e.g. About and AI Lab; home and case studies already blend) */
 [data-theme="dark"] main:not(.sl-bg):not(.cl) + .ft--scene {
   -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 160px); mask-image: linear-gradient(180deg, transparent 0, #000 160px); }
+/* at night the corner glow on "What all I do" stays warm only (no lavender edge) */
+[data-theme="dark"] .do-glow { background: radial-gradient(closest-side, rgba(247, 168, 120, .18), rgba(232, 140, 170, .08) 45%, transparent 75%); }
