@@ -18,8 +18,8 @@
 try { if (/^\/(index(\.html)?)?$/.test(location.pathname)) { var d = sessionStorage.getItem("theme") === "dark", m = "../assets/media/";
   [d ? "hero-room.jpg" : "hero-room-day.jpg", d ? "hero-room-mask.png" : "hero-room-day-mask.png", d ? "hero-view.jpg" : "hero-view-day.jpg"].forEach(function (f) {
     var l = document.createElement("link"); l.rel = "preload"; l.as = "image"; l.href = m + f; l.fetchPriority = "high"; if (/mask/.test(f)) l.crossOrigin = "anonymous"; /* masks are fetched that way */ document.head.appendChild(l); }); } } catch (e) {}</script>
-<link rel="stylesheet" href="../assets/css/style.css?v=9f70ce75">
-<link rel="stylesheet" href="../assets/css/dark.css?v=9f70ce75">
+<link rel="stylesheet" href="../assets/css/style.css?v=d6f38f4a">
+<link rel="stylesheet" href="../assets/css/dark.css?v=d6f38f4a">
 <script>/* every visit opens in the light theme; a switch to dark is kept only while browsing this visit (applied before the page draws, so no flash) */
 try { localStorage.removeItem("theme"); if (sessionStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
 /* the "just a minute" reveal plays only the first time the home page opens in a visit */
@@ -233,6 +233,6 @@ try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.get
     </div>
   </div>
 </footer>
-<script src="../assets/js/main.js?v=9f70ce75"></script>
+<script src="../assets/js/main.js?v=d6f38f4a"></script>
 </body>
 </html>

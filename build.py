@@ -675,7 +675,7 @@ HERO_NAME = "Hi, I am Rajvi Patel"
 def hero_trial():
     root = ""
     frames = "".join(f'<img class="me-f{" is-on" if i == 1 else ""}" src="assets/media/me/m{i:02d}.jpg" alt="" decoding="async" width="676" height="900">' for i in range(1, 9))
-    quotes = "".join(f'<p class="ht-q" style="--x:{x}%;--y:{y}%;--qc:{c};--dl:{-k * 1.3:.1f}s;--du:{6 + k % 3}s;--r:{(-2.5, 2, -1.5, 2.5, -2, 1.5)[k]}deg">{escape(t)}</p>'
+    quotes = "".join(f'<p class="ht-q" style="--x:{x}%;--y:{y}%;--qc:{c};--dl:{-k * 1.3:.1f}s;--du:{6 + k % 3}s;--r:{(-2.5, 2, -1.5, 2.5, -2, 1.5)[k]}deg">“{escape(t)}”</p>'
                      for k, (t, x, y, c) in enumerate(HERO_QUOTES))
     # every letter is its own span, so each one can light up in a colour on hover (main.js)
     words = [''.join(f'<span class="ht-l">{escape(ch)}</span>' for ch in w) for w in HERO_NAME.split(" ")]
@@ -683,7 +683,7 @@ def hero_trial():
     h = home()
     a = h.index('<section class="section" id="work">'); b = h.index("</section>", a) + len("</section>")
     work = h[a:b]
-    body = (f'{nav(root, "about")}\n<main class="home sl-bg">\n'
+    body = (f'{nav(root, "about")}\n<main class="home sl-bg ht-page">\n'
             f'<section class="ht" aria-labelledby="ht-name">\n'
             f'  <div class="ht-bg" aria-hidden="true"><span class="ht-check"></span><span class="ht-glow"></span></div>\n'
             f'  <h1 class="ht-name" id="ht-name" aria-label="{escape(HERO_NAME)}"><span aria-hidden="true">{letters}</span></h1>\n'

@@ -370,12 +370,17 @@ const SITE = {
     const vid = $(".ht-video", ht);
     const pinVid = () => {
       if (!vid || innerWidth <= 900) { if (vid) vid.style.top = ""; return; }
-      vid.style.position = "relative"; vid.style.top = "";
+      vid.style.position = "relative"; vid.style.top = "0px"; // measure its natural spot (no offset)
       const start = vid.getBoundingClientRect().top + scrollY;
       vid.style.position = "";
       vid.style.top = Math.max(100, Math.round(start)) + "px";
     };
-    pinVid(); addEventListener("resize", pinVid);
+    // the next section repaints the page background lined up with the page, so the two join seamlessly
+    const nextSec = $(".ht-next"), mainEl = $("main");
+    const lineUp = () => { if (!nextSec || !mainEl) return; nextSec.style.setProperty("--mh", mainEl.offsetHeight + "px"); nextSec.style.setProperty("--off", nextSec.offsetTop + "px"); };
+    const layoutHero = () => { pinVid(); lineUp(); };
+    layoutHero(); addEventListener("resize", layoutHero); addEventListener("load", layoutHero);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutHero); // measure again once the fonts have loaded
     const bg = $(".ht-bg", ht);
     if (bg && matchMedia("(hover: hover)").matches) {
       let raf = 0, px = 0, py = 0;
