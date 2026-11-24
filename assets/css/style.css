@@ -2753,3 +2753,22 @@ main.home .ht-next > section#work { padding-bottom: var(--sec-gap); }
 .ht--sky .fireflies, .ht--sky .sky-clouds { z-index: 0; }
 .ht--sky .fireflies { opacity: 1; }
 .ht--sky { overflow-x: clip; } /* drifting clouds never poke out sideways (clip keeps the polaroid pinning working) */
+
+/* ---------- butterflies (daytime): small blue butterflies that flap and flutter; fireflies take over at night ---------- */
+.butterflies { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.bf { position: absolute; width: var(--sz); animation: bfDrift var(--du, 12s) ease-in-out var(--dl, 0s) infinite; }
+.bf svg { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 2px 3px rgba(60, 100, 180, .25)); }
+.bf path { fill: var(--bc); }
+.bf .bf-lo { opacity: .75; }
+.bf-b { fill: #2c3a5c; }
+.bf-w { transform-box: view-box; transform-origin: 20px 16px; animation: bfFlap var(--fl, .2s) ease-in-out infinite alternate; }
+@keyframes bfFlap { to { transform: scaleX(.22); } }
+@keyframes bfDrift {
+  0% { transform: translate(0, 0) rotate(-10deg); }
+  25% { transform: translate(46px, -34px) rotate(8deg); }
+  50% { transform: translate(92px, 6px) rotate(-6deg); }
+  75% { transform: translate(38px, 32px) rotate(10deg); }
+  100% { transform: translate(0, 0) rotate(-10deg); } }
+[data-theme="dark"] .butterflies { display: none; }
+html:not([data-theme="dark"]) .ht--sky .fireflies { display: none; } /* daytime: butterflies instead of fireflies */
+@media (prefers-reduced-motion: reduce) { .bf, .bf-w { animation: none; } }

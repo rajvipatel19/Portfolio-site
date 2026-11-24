@@ -574,6 +574,22 @@ def case_study(cs, nxt):
 # ---------------------------------------------------------------- about / AI lab
 # Both pages open with a "sky" scene in the footer's lavender-peach palette: drifting clouds,
 # fireflies, a typing line and soft pill buttons. The sky melts into the page at the bottom.
+
+# Small blue butterflies that flutter around (daytime sky). Each gets its own spot, size, colour and flight timing.
+BF_SPOTS = [(8, 24, 22, "#5b9cf5"), (22, 62, 18, "#7cb4ff"), (38, 16, 16, "#4a86e8"), (63, 70, 20, "#8fc1ff"), (78, 28, 24, "#5b9cf5"), (90, 58, 17, "#4a86e8"), (52, 44, 15, "#7cb4ff")]
+
+
+def butterflies():
+    wing_l = '<path d="M20 16 C 11 3, 1 4, 3 13 C 5 19, 12 20, 20 17 Z"/><path class="bf-lo" d="M20 17 C 13 21, 7 27, 11 29.5 C 15 31, 18 25, 20 18 Z"/>'
+    wing_r = '<path d="M20 16 C 29 3, 39 4, 37 13 C 35 19, 28 20, 20 17 Z"/><path class="bf-lo" d="M20 17 C 27 21, 33 27, 29 29.5 C 25 31, 22 25, 20 18 Z"/>'
+    out = []
+    for k, (x, y, size, colour) in enumerate(BF_SPOTS):
+        out.append(f'<span class="bf" style="left:{x}%;top:{y}%;--sz:{size}px;--bc:{colour};--du:{11 + (k * 3) % 7}s;--dl:{-k * 1.7:.1f}s;--fl:{0.18 + (k % 3) * 0.04:.2f}s">'
+                   f'<svg viewBox="0 0 40 32" aria-hidden="true"><g class="bf-w bf-l">{wing_l}</g><g class="bf-w bf-r">{wing_r}</g>'
+                   f'<rect class="bf-b" x="19.1" y="10" width="1.8" height="15" rx=".9"/></svg></span>')
+    return f'<div class="butterflies" aria-hidden="true">{"".join(out)}</div>'
+
+
 def sky_clouds():
     return '<div class="sky-clouds" aria-hidden="true">' + "".join(f'<i class="c{i}"></i>' for i in range(1, 6)) + "</div>"
 
@@ -673,7 +689,7 @@ def home_sky_trial():
     page = home()
     o = '<section class="ht" aria-labelledby="ht-name">\n'
     assert page.count(o) == 1
-    page = page.replace(o, f'<section class="ht ht--sky" aria-labelledby="ht-name">\n  {sky_clouds()}\n  {fireflies(12)}\n', 1)
+    page = page.replace(o, f'<section class="ht ht--sky" aria-labelledby="ht-name">\n  {sky_clouds()}\n  {fireflies(12)}\n  {butterflies()}\n', 1)
     page = page.replace("<title>Rajvi Patel · Senior Product Designer</title>", "<title>Home with sky (trial) · Rajvi Patel</title>", 1)
     return page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
 
