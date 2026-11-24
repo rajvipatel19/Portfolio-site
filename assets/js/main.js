@@ -518,29 +518,6 @@ const SITE = {
       const w = $(".pod-wheel", stage); w.classList.remove("tick"); void w.offsetWidth; w.classList.add("tick"); }));
   }
 
-  /* ---------- How I work with AI: click (or arrow-key) through the flowchart steps ---------- */
-  const afTabs = $$(".af-step");
-  if (afTabs.length) {
-    const select = (i, focus) => {
-      afTabs.forEach((t, k) => {
-        const on = k === i;
-        t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1;
-        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
-      });
-      if (focus) afTabs[i].focus();
-      afTabs[i].scrollIntoView({ block: "nearest", inline: "center", behavior: reduce ? "auto" : "smooth" });
-    };
-    afTabs.forEach((t, i) => {
-      t.addEventListener("click", () => select(i));
-      t.addEventListener("keydown", (e) => {
-        const n = afTabs.length;
-        const to = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: n - 1 }[e.key];
-        if (to === undefined) return;
-        e.preventDefault(); select((to + n) % n, true);
-      });
-    });
-  }
-
   /* ---------- Visual journey: click a tile to open it in the glass preview ---------- */
   const vj = $(".vj-modal");
   if (vj) {

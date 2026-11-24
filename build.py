@@ -222,40 +222,7 @@ AI_ICONS = {
 }
 
 
-def ai_flow():
-    """Home: an interactive flowchart of how I use AI, from research to delivery. Click a step to see its tools."""
-    def icon(k):
-        return f'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g class="ai-i ai-{k}">{AI_ICONS[k]}</g></svg>'
-    tabs, panels = [], []
-    for i, f in enumerate(C.AI_FLOW):
-        on = i == 0
-        tabs.append(f'''<button type="button" class="af-step" role="tab" id="af-tab-{i}" aria-controls="af-panel-{i}" aria-selected="{str(on).lower()}" tabindex="{0 if on else -1}" style="--i:{i}">
-      <span class="af-dot">{icon(f["icon"])}</span><span class="af-num">0{i + 1}</span><span class="af-name">{escape(f["step"])}</span>
-    </button>''')
-        tools = "".join(f'<li>{escape(x)}</li>' for x in f["tools"])
-        panels.append(f'''<div class="af-panel" role="tabpanel" id="af-panel-{i}" aria-labelledby="af-tab-{i}" tabindex="0"{"" if on else " hidden"}>
-      <div class="af-copy"><span class="hand">step 0{i + 1} · {escape(f["step"].lower())}</span><h3>{escape(f["title"])}</h3><p>{escape(f["text"])}</p></div>
-      <div class="af-side"><p class="af-label">Tools</p><ul class="af-tools">{tools}</ul>
-        <p class="af-label">What comes out</p><p class="af-out">{escape(f["out"])}</p></div>
-    </div>''')
-    return f'''<section class="af" aria-labelledby="af-title">
-  <div class="wrap">
-    <div class="bring-head af-head" data-reveal><span class="hand">{escape(C.AI_FLOW_NOTE)}</span><h2 id="af-title">{escape(C.AI_FLOW_TITLE)}</h2></div>
-    <div class="af-chart" data-reveal>
-      <div class="af-track" role="tablist" aria-label="AI workflow steps">
-        <span class="af-line" aria-hidden="true"><i></i></span>
-        {"".join(tabs)}
-      </div>
-      <p class="af-hint" aria-hidden="true">tap a step ✦</p>
-      <div class="af-card glass">{"".join(panels)}</div>
-    </div>
-    <p class="af-end" data-reveal>{escape(C.AI_FLOW_END)}</p>
-  </div>
-</section>'''
-
-
-
-# ---------- TRIAL: "How I work with AI" as scattered rectangle cards (page: ai-flow-trial.html) ----------
+# ---------- Home: "How I work with AI" as scattered rectangle cards ----------
 # Each card: icon, step name, a 1-2 line summary, tools. Very soft tint per card; grows and glows on hover.
 AFC_COLOURS = ["#8a76ee", "#e0a93a", "#ec8a6a", "#4fb88a", "#5aa2e0", "#df7aab"]
 AFC_SHORT = {  # 1-2 line versions of each step (the long texts stay in content.py)
@@ -283,16 +250,6 @@ def ai_flow_cards():
             f'    <div class="bring-head af-head" data-reveal><span class="hand">{escape(C.AI_FLOW_NOTE)}</span><h2 id="afc-title">{escape(C.AI_FLOW_TITLE)}</h2></div>\n'
             f'    <div class="afc-grid" data-reveal>{"".join(cards)}</div>\n'
             f'    <p class="af-end" data-reveal>{escape(C.AI_FLOW_END)}</p>\n  </div>\n</section>')
-
-
-def ai_flow_trial():
-    root = ""
-    body = (f'{nav(root, "about")}\n<main>\n'
-            f'<section class="afs-intro"><div class="wrap"><p class="stack-kicker">trial /</p></div></section>\n'
-            f'{ai_flow_cards()}\n'
-            f'</main>\n{footer(root)}')
-    page = head("How I work with AI (trial) · Rajvi Patel", "Trial: card version of How I work with AI.", root)
-    return page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1) + body
 
 
 def bring():
@@ -443,7 +400,7 @@ def home():
 
 {bring()}
 
-{ai_flow()}
+{ai_flow_cards()}
 
 <section class="ticker-section" aria-label="Visual journey">
   <div class="ticker-head wrap" data-reveal><span class="hand">a sneak peek of my</span><h2>Visual journey</h2></div>
@@ -1578,7 +1535,6 @@ if __name__ == "__main__":
     (ROOT / "work").mkdir(exist_ok=True)
     (ROOT / "index.html").write_text(home())
     (ROOT / "about.html").write_text(about())
-    (ROOT / "ai-flow-trial.html").write_text(ai_flow_trial())  # trial page, not linked
     (ROOT / "ai-lab.html").write_text(ai_lab())
     (ROOT / "offline.html").write_text(offline())
     projs = C.PROJECTS
