@@ -10,11 +10,15 @@ META_DESC = "Rajvi Patel, Senior Product Designer in Dubai. 4+ years designing B
 HERO_TITLE = "AI native product designer"
 INTRO = "I turn messy, unclear problems into a clear direction, then shape that direction into products people actually enjoy using, mostly in fintech, health-tech and e-commerce."
 
-ABOUT_BIO = [
-    "I'm a Senior Product Designer based in Dubai, with 4+ years of designing products end to end, from the first research call to the final shipped screen.",
-    "Before design, I trained as a dentist. That clinical background shaped how I work: listen first, explain clearly, and earn trust at every step. It's why I love fintech, health-tech and AI-native products, where clarity really matters.",
-    "I've built and led a design team from scratch, been the sole designer at an early-stage startup, and shipped across mobile apps, kiosks, web platforms and client portals.",
-    "When I'm not designing, I'm probably travelling, baking, overthinking, watching a sunset, hiking, trying new side quests, working out and living life to the fullest!",
+# About intro: the heading stays while scrolling walks through these, one at a time, each with its own photo in the polaroid
+# (photo = file name in assets/media/me/, alt = what the photo shows)
+ABOUT_STEPS = [
+    {"text": "I'm a Senior Product Designer based in Dubai, with 4+ years of designing products end to end, from the first research call to the final shipped screen. I've built and led a design team from scratch, been the sole designer at an early-stage startup, and shipped across mobile apps, kiosks, web platforms and client portals.",
+     "photo": "desk.jpg", "alt": "Rajvi smiling at her desk"},
+    {"text": "Before design, I trained as a dentist. That clinical background shaped how I work: listen first, explain clearly, and earn trust at every step. It's why I love fintech, health-tech and AI-native products, where clarity really matters.",
+     "photo": "dentist.jpg", "alt": "Rajvi in her dentist's coat at the clinic"},
+    {"text": "When I'm not designing, I'm probably travelling, baking, overthinking, watching a sunset, hiking, trying new side quests, working out and living life to the fullest!",
+     "photo": "travel.jpg", "alt": "Rajvi on a cobbled street while travelling"},
 ]
 ABOUT_TYPING = ["a product designer", "an ex-dentist", "a coffee person", "a sunset catcher", "a baker", "an explorer"]  # the typing line on About
 # "What all I do" card on About (first of the cards that stack as you scroll)

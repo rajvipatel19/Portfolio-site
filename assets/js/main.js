@@ -409,6 +409,32 @@ const SITE = {
     }
   }
 
+  /* ---------- About intro: the scroll position picks which paragraph (and photo) is showing ---------- */
+  const ab = $(".ab-scroll");
+  if (ab) {
+    const ps = $$(".ab-p", ab), pics = $$(".ab-pic", ab), ds = $$(".ab-dashes i", ab);
+    let cur = -1, tick = false;
+    const show = (k) => {
+      if (k === cur) return;
+      cur = k;
+      ps.forEach((p, i) => { p.classList.toggle("is-on", i === k); p.classList.toggle("is-past", i < k); });
+      pics.forEach((p, i) => p.classList.toggle("is-on", i === k));
+      ds.forEach((d, i) => d.classList.toggle("is-on", i === k));
+    };
+    const update = () => {
+      tick = false;
+      const span = ab.offsetHeight - innerHeight;
+      const prog = span > 0 ? Math.min(0.999, Math.max(0, -ab.getBoundingClientRect().top / span)) : 0;
+      show(Math.floor(prog * ps.length));
+    };
+    addEventListener("scroll", () => { if (!tick) { tick = true; requestAnimationFrame(update); } }, { passive: true });
+    addEventListener("resize", update);
+    update();
+    // phones have no hover: a tap switches the photo's colour on and off
+    const box = $(".ab-pics", ab);
+    if (box && matchMedia("(hover: none)").matches) box.closest(".polaroid").addEventListener("click", () => box.classList.toggle("is-color"));
+  }
+
   /* ---------- Count-up numbers ---------- */
   const countIO = new IntersectionObserver((entries) => {
     entries.forEach((en) => {

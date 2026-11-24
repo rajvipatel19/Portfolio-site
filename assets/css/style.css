@@ -2720,3 +2720,29 @@ main.home.sl-bg.ht-page { background: linear-gradient(180deg, #f1ecf3 0px, #f2ed
 
 /* Selected work sits inside .ht-next now (so the polaroid can sink behind it); keep its usual spacing below */
 main.home .ht-next > section#work { padding-bottom: var(--sec-gap); }
+
+/* ---------- About intro: the heading stays; scrolling walks through the paragraphs one at a time, and the polaroid swaps to each one's photo ---------- */
+.sky--about.ab-scroll { display: block; padding: 0; min-height: 0; height: calc(100svh + (var(--n) - 1) * 75svh); overflow: clip; } /* clip (not hidden) so the inside can stay pinned */
+.ab-pin { position: sticky; top: 0; height: 100svh; box-sizing: border-box; padding: 96px 0 30px; display: grid; align-content: center; }
+.ab-texts { display: grid; margin-top: 18px; }
+.about-copy .ab-p { grid-area: 1 / 1; margin: 0; opacity: 0; transform: translateY(16px); transition: opacity .2s ease, transform .4s var(--ease); }
+.about-copy .ab-p.is-past { transform: translateY(-16px); }
+.about-copy .ab-p.is-on { opacity: 1; transform: none; transition: opacity .45s ease .15s, transform .6s var(--ease) .1s; }
+.ab-dashes { display: flex; gap: 6px; margin-top: 24px; }
+.ab-dashes i { width: 10px; height: 3px; border-radius: 3px; background: color-mix(in srgb, var(--ink) 22%, transparent); transition: width .4s var(--ease), background .4s; }
+.ab-dashes i.is-on { width: 28px; background: var(--ink); }
+.ab-pics { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 2px; background: #d9d6d2; }
+.ab-pic { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; opacity: 0;
+  filter: grayscale(1) contrast(1.06); transition: opacity .5s ease, filter .5s ease; }
+.ab-pic.is-on { opacity: 1; }
+.polaroid:hover .ab-pic, .ab-pics.is-color .ab-pic { filter: none; }
+[data-theme="dark"] .ab-dashes i { background: rgba(255, 255, 255, .22); }
+[data-theme="dark"] .ab-dashes i.is-on { background: #f1ecff; }
+@media (max-width: 900px) {
+  .ab-pin { padding: 84px 0 20px; }
+  .ab-pin .about-grid { gap: 22px; }
+  .ab-pin .polaroid-wrap { max-width: 200px; }
+  .ab-pin .me-note { display: none; } /* no room on small screens */
+  .about-copy .ab-p { font-size: 15.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .about-copy .ab-p, .ab-pic { transition: none; } }

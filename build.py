@@ -584,10 +584,11 @@ def sky_btns(primary, secondary):
 
 def about():
     root = ""
-    paras = "".join(f"<p>{p}</p>" for p in C.ABOUT_BIO)
+    steps = C.ABOUT_STEPS
+    texts = "".join(f'<p class="ab-p{" is-on" if i == 0 else ""}">{t["text"]}</p>' for i, t in enumerate(steps))
+    pics = "".join(f'<img class="ab-pic{" is-on" if i == 0 else ""}" src="assets/media/me/{t["photo"]}" alt="{escape(t["alt"])}" decoding="async">' for i, t in enumerate(steps))
+    dashes = "".join(f'<i class="{"is-on" if i == 0 else ""}"></i>' for i in range(len(steps)))
     words = "|".join(C.ABOUT_TYPING)
-    # stop-motion photos for the polaroid (assets/media/me/m01..m08.jpg), played in order by main.js
-    me_frames = "".join(f'<img class="me-f{" is-on" if i == 1 else ""}" src="assets/media/me/m{i:02d}.jpg" alt="" decoding="async" width="676" height="900">' for i in range(1, 9))
     def lib_row(nums):
         def tile(n, k, hidden):
             aria = ' aria-hidden="true"' if hidden else ""
@@ -599,18 +600,21 @@ def about():
     do_items = "".join(f'<li><span class="do-n">{i:02d}</span><span class="do-t">{t}</span></li>' for i, t in enumerate(C.ABOUT_DO, 1))
     body = f"""{nav(root, 'about')}
 <main>
-<section class="sky sky--about">
+<section class="sky sky--about ab-scroll" style="--n:{len(steps)}">
   {sky_clouds()}
   {fireflies(12)}
+  <div class="ab-pin">
   <div class="wrap about-grid">
     <div class="about-copy">
       <h1 class="about-h1" data-reveal aria-label="Hi, I'm Rajvi, {C.ABOUT_TYPING[0]}">Hi, I'm Rajvi, <span class="sky-type" data-type="{words}">{C.ABOUT_TYPING[0]}</span><span class="sky-caret" aria-hidden="true"></span></h1>
-      <div data-reveal style="--d:.3s">{paras}</div>
+      <div class="ab-texts">{texts}</div>
+      <div class="ab-dashes" aria-hidden="true">{dashes}</div>
     </div>
     <div class="polaroid-wrap" data-reveal>
-      <div class="polaroid"><span class="tape"></span><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop">{me_frames}</div><span class="caption">that's me! ✿</span></div>
+      <div class="polaroid"><span class="tape"></span><div class="ab-pics">{pics}</div><span class="caption">that's me! ✿</span></div>
       <p class="me-note"><svg class="pod-arrow" viewBox="0 0 120 90" aria-hidden="true"><path d="M112 78 C 92 80, 62 70, 50 52 C 40 37, 40 22, 30 12" /><path d="M20 22 L 30 11 L 40 20" /></svg><span class="me-hover">hover on image to add colors</span><span class="me-tap">tap on image to add colors</span></p>
     </div>
+  </div>
   </div>
 </section>
 <section class="stack" aria-label="More about me">
