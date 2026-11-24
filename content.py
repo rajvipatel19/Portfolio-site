@@ -2,6 +2,8 @@
 
 EMAIL = "rajvi.patel60@gmail.com"
 LINKEDIN = "https://www.linkedin.com/in/rajvipatel1912"
+# Figma-style comments on the site: False hides the comment bar everywhere (turn back on with True)
+COMMENTS_ON = False
 RESUME = "https://drive.google.com/file/d/1vJuvmtALgGuoKZGn-FbhZj4Gc83R549Z/view?usp=sharing"
 
 META_DESC = "Rajvi Patel, Senior Product Designer in Dubai. 4+ years designing B2C, B2B, health-tech and e-commerce products that are easy to understand and use."

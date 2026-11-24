@@ -79,9 +79,20 @@ def nav(root, active):
 """
 
 
+# Comment bar (Figma-style comments). Shown only when COMMENTS_ON is True in content.py.
+COMMENTS_HTML = """<div class="cmt-bar" role="toolbar" aria-label="Comments" aria-orientation="vertical">
+  <button type="button" class="cmt-btn cmt-move" aria-pressed="true" aria-label="Browse the page (shortcut V)" data-tip="Browse · V"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 3.5l13 6.2-5.6 1.7-2.4 5.6z"/></svg></button>
+  <button type="button" class="cmt-btn cmt-add" aria-pressed="false" aria-label="Add a comment (shortcut C)" data-tip="Comment · C"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 1 1-4.1 15.95L3.5 20.5l1.05-4.4A8.5 8.5 0 0 1 12 3.5z"/></svg></button>
+  <button type="button" class="cmt-btn cmt-eye" aria-pressed="false" aria-label="Show comments on the page" data-tip="Show / hide"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/><path class="cmt-slash" d="M4 4l16 16"/></svg></button>
+</div>
+<div class="cmt-layer cmt-hidden"></div>
+"""
+
+
 def footer(root):
     """Footer scene: the meadow video settles into view as you reach the end of the page, with the typing 'Let's …', Resume + LinkedIn and the copyright line on top."""
     heart = '<svg class="ft-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.1C.9 8.6 3 5 6.5 5c2 0 3.5 1.1 5.5 3.2C14 6.1 15.5 5 17.5 5 21 5 23.1 8.6 21.6 11.9 19.5 16.4 12 21 12 21Z" fill="currentColor"/></svg>'
+    comments_html = COMMENTS_HTML if getattr(C, "COMMENTS_ON", True) else ""
     return f"""<footer class="ft ft--scene" id="contact">
   <div class="ft-media" aria-hidden="true">
     <video class="ft-video" src="{root}assets/media/footer-meadow.mp4" muted loop playsinline preload="none" data-autoplay></video>
@@ -103,13 +114,7 @@ def footer(root):
     </div>
   </div>
 </footer>
-<div class="cmt-bar" role="toolbar" aria-label="Comments" aria-orientation="vertical">
-  <button type="button" class="cmt-btn cmt-move" aria-pressed="true" aria-label="Browse the page (shortcut V)" data-tip="Browse · V"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 3.5l13 6.2-5.6 1.7-2.4 5.6z"/></svg></button>
-  <button type="button" class="cmt-btn cmt-add" aria-pressed="false" aria-label="Add a comment (shortcut C)" data-tip="Comment · C"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 1 1-4.1 15.95L3.5 20.5l1.05-4.4A8.5 8.5 0 0 1 12 3.5z"/></svg></button>
-  <button type="button" class="cmt-btn cmt-eye" aria-pressed="false" aria-label="Show comments on the page" data-tip="Show / hide"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/><path class="cmt-slash" d="M4 4l16 16"/></svg></button>
-</div>
-<div class="cmt-layer cmt-hidden"></div>
-<script src="{root}assets/js/main.js?v={ASSET_V}"></script>
+{comments_html}<script src="{root}assets/js/main.js?v={ASSET_V}"></script>
 </body>
 </html>
 """
@@ -655,32 +660,39 @@ def about():
 
 
 
-# ---------- TRIAL: a new hero ("I'm Rajvi Patel", stop-motion photos, floating one-liners) in a dark-grey brand colour (page: hero-trial.html) ----------
-HERO_QUOTES = [  # (text, left %, top %) around the photos on wide screens
-    ("AI native product designer", 4, 10),
-    ("messy problems → clear direction", 0, 46),
-    ("ex-dentist, now designing for trust", 7, 80),
-    ("I think in systems", 73, 6),
-    ("probably claudemaxxing now", 75, 42),
-    ("fintech · health-tech · e-commerce", 68, 79),
+# ---------- TRIAL: a new hero ("Hi, I am Rajvi Patel", stop-motion polaroid, floating coloured one-liners) in a dark-grey brand colour (page: hero-trial.html) ----------
+HERO_QUOTES = [  # (text, left %, top %, colour) around the polaroid on wide screens
+    ("AI native product designer", 5, 8, "#c2477a"),
+    ("messy problems → clear direction", 0, 44, "#2e8f63"),
+    ("ex-dentist, now designing for trust", 8, 80, "#b07a12"),
+    ("I think in systems", 74, 6, "#3478c6"),
+    ("probably claudemaxxing now", 76, 42, "#c7632b"),
+    ("fintech · health-tech · e-commerce", 68, 78, "#6b54c6"),
 ]
+HERO_NAME = "Hi, I am Rajvi Patel"
 
 
 def hero_trial():
     root = ""
     frames = "".join(f'<img class="me-f{" is-on" if i == 1 else ""}" src="assets/media/me/m{i:02d}.jpg" alt="" decoding="async" width="676" height="900">' for i in range(1, 9))
-    quotes = "".join(f'<p class="ht-q" style="--x:{x}%;--y:{y}%;--dl:{-k * 1.3:.1f}s;--du:{6 + k % 3}s;--r:{(-2.5, 2, -1.5, 2.5, -2, 1.5)[k]}deg">“{escape(t)}”</p>'
-                     for k, (t, x, y) in enumerate(HERO_QUOTES))
-    body = (f'{nav(root, "about")}\n<main>\n'
+    quotes = "".join(f'<p class="ht-q" style="--x:{x}%;--y:{y}%;--qc:{c};--dl:{-k * 1.3:.1f}s;--du:{6 + k % 3}s;--r:{(-2.5, 2, -1.5, 2.5, -2, 1.5)[k]}deg">{escape(t)}</p>'
+                     for k, (t, x, y, c) in enumerate(HERO_QUOTES))
+    # every letter is its own span, so each one can light up in a colour on hover (main.js)
+    words = [''.join(f'<span class="ht-l">{escape(ch)}</span>' for ch in w) for w in HERO_NAME.split(" ")]
+    letters = " ".join(f'<span class="ht-w">{w}</span>' for w in words)  # words never break in the middle
+    h = home()
+    a = h.index('<section class="section" id="work">'); b = h.index("</section>", a) + len("</section>")
+    work = h[a:b]
+    body = (f'{nav(root, "about")}\n<main class="home sl-bg">\n'
             f'<section class="ht" aria-labelledby="ht-name">\n'
-            f'  <h1 class="ht-name" id="ht-name">I’m Rajvi <em>Patel</em></h1>\n'
+            f'  <div class="ht-bg" aria-hidden="true"><span class="ht-check"></span><span class="ht-glow"></span></div>\n'
+            f'  <h1 class="ht-name" id="ht-name" aria-label="{escape(HERO_NAME)}"><span aria-hidden="true">{letters}</span></h1>\n'
             f'  <div class="ht-stage">\n'
-            f'    <figure class="ht-video"><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop">{frames}</div></figure>\n'
             f'    <div class="ht-quotes">{quotes}</div>\n'
+            f'    <figure class="ht-video"><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop">{frames}</div></figure>\n'
             f'  </div>\n'
-            f'  <div class="ht-cta"><a class="btn btn--dark magnetic" href="index.html#work">See my work {ARROW}</a>'
-            f'<a class="btn magnetic" href="index.html#call" data-cal>Book a call {ARROW}</a></div>\n'
-            f'</section>\n</main>\n{footer(root)}')
+            f'</section>\n'
+            f'<div class="ht-next">{work}</div>\n</main>\n{footer(root)}')
     page = head("Hero (trial) · Rajvi Patel", "Trial: a new hero.", root)
     page = page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
     return page.replace('<html lang="en">', '<html lang="en" class="brand-gray">', 1) + body

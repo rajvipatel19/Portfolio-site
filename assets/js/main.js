@@ -349,6 +349,45 @@ const SITE = {
     if (matchMedia("(hover: none)").matches) (meBox.closest(".polaroid") || meBox.parentElement).addEventListener("click", () => meBox.classList.toggle("is-color"));
   }
 
+  /* ---------- TRIAL hero: letters light up in a new colour each time; a soft glow follows the pointer and uncovers the picnic check ---------- */
+  const ht = $(".ht");
+  if (ht) {
+    const LETTER_COLOURS = ["#f06a9b", "#3fb37f", "#e9b22c", "#4a9be8", "#f08a4b", "#8a6ee8", "#2fb5b0", "#e5534b"];
+    let next = 0;
+    $$(".ht-l", ht).forEach((l) => {
+      let t = 0;
+      l.addEventListener("pointerenter", () => {
+        clearTimeout(t);
+        l.style.color = LETTER_COLOURS[next++ % LETTER_COLOURS.length];
+        l.classList.add("is-lit");
+      });
+      l.addEventListener("pointerleave", () => {
+        l.classList.remove("is-lit");
+        t = setTimeout(() => { l.style.color = ""; }, 700); // the colour lingers, then fades back
+      });
+    });
+    // the polaroid sticks exactly where it starts, so scrolling never nudges it up first (wide screens only)
+    const vid = $(".ht-video", ht);
+    const pinVid = () => {
+      if (!vid || innerWidth <= 900) { if (vid) vid.style.top = ""; return; }
+      vid.style.position = "relative"; vid.style.top = "";
+      const start = vid.getBoundingClientRect().top + scrollY;
+      vid.style.position = "";
+      vid.style.top = Math.max(100, Math.round(start)) + "px";
+    };
+    pinVid(); addEventListener("resize", pinVid);
+    const bg = $(".ht-bg", ht);
+    if (bg && matchMedia("(hover: hover)").matches) {
+      let raf = 0, px = 0, py = 0;
+      ht.addEventListener("pointermove", (e) => {
+        const r = ht.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top;
+        if (!raf) raf = requestAnimationFrame(() => { raf = 0; bg.style.setProperty("--mx", px + "px"); bg.style.setProperty("--my", py + "px"); });
+        ht.classList.add("is-hover");
+      });
+      ht.addEventListener("pointerleave", () => ht.classList.remove("is-hover"));
+    }
+  }
+
   /* ---------- Count-up numbers ---------- */
   const countIO = new IntersectionObserver((entries) => {
     entries.forEach((en) => {

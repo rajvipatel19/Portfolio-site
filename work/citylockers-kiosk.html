@@ -18,8 +18,8 @@
 try { if (/^\/(index(\.html)?)?$/.test(location.pathname)) { var d = sessionStorage.getItem("theme") === "dark", m = "../assets/media/";
   [d ? "hero-room.jpg" : "hero-room-day.jpg", d ? "hero-room-mask.png" : "hero-room-day-mask.png", d ? "hero-view.jpg" : "hero-view-day.jpg"].forEach(function (f) {
     var l = document.createElement("link"); l.rel = "preload"; l.as = "image"; l.href = m + f; l.fetchPriority = "high"; if (/mask/.test(f)) l.crossOrigin = "anonymous"; /* masks are fetched that way */ document.head.appendChild(l); }); } } catch (e) {}</script>
-<link rel="stylesheet" href="../assets/css/style.css?v=23b36645">
-<link rel="stylesheet" href="../assets/css/dark.css?v=23b36645">
+<link rel="stylesheet" href="../assets/css/style.css?v=9f70ce75">
+<link rel="stylesheet" href="../assets/css/dark.css?v=9f70ce75">
 <script>/* every visit opens in the light theme; a switch to dark is kept only while browsing this visit (applied before the page draws, so no flash) */
 try { localStorage.removeItem("theme"); if (sessionStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
 /* the "just a minute" reveal plays only the first time the home page opens in a visit */
@@ -233,12 +233,6 @@ try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.get
     </div>
   </div>
 </footer>
-<div class="cmt-bar" role="toolbar" aria-label="Comments" aria-orientation="vertical">
-  <button type="button" class="cmt-btn cmt-move" aria-pressed="true" aria-label="Browse the page (shortcut V)" data-tip="Browse · V"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 3.5l13 6.2-5.6 1.7-2.4 5.6z"/></svg></button>
-  <button type="button" class="cmt-btn cmt-add" aria-pressed="false" aria-label="Add a comment (shortcut C)" data-tip="Comment · C"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 1 1-4.1 15.95L3.5 20.5l1.05-4.4A8.5 8.5 0 0 1 12 3.5z"/></svg></button>
-  <button type="button" class="cmt-btn cmt-eye" aria-pressed="false" aria-label="Show comments on the page" data-tip="Show / hide"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/><path class="cmt-slash" d="M4 4l16 16"/></svg></button>
-</div>
-<div class="cmt-layer cmt-hidden"></div>
-<script src="../assets/js/main.js?v=23b36645"></script>
+<script src="../assets/js/main.js?v=9f70ce75"></script>
 </body>
 </html>
