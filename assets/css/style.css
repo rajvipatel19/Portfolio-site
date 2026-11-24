@@ -2680,7 +2680,7 @@ html.brand-gray[data-theme="dark"] .btn--dark, html.brand-gray[data-theme="dark"
 .ht-l { display: inline-block; transition: color .9s ease, transform .4s var(--ease); }
 .ht-l.is-lit { transition: color .12s ease, transform .2s var(--ease); transform: translateY(-4px); }
 /* the stage stretches to the bottom of the hero, so the polaroid can stick while you scroll and then slip under the next section */
-.ht-stage { position: relative; z-index: 1; flex: 1; width: min(1120px, 100%); margin-top: clamp(24px, 3.5vw, 40px); display: flex; flex-direction: column; align-items: center; }
+.ht-stage { position: relative; z-index: 1; flex: 1; width: min(1120px, 100%); margin-top: clamp(48px, 6vw, 84px); display: flex; flex-direction: column; align-items: center; }
 .ht-quotes { position: absolute; left: 0; right: 0; top: 0; height: 400px; pointer-events: none; } /* about the polaroid's height, so it sits in the middle of the lines */
 .ht-q { position: absolute; left: var(--x); top: var(--y); margin: 0; white-space: nowrap; font-family: var(--font-hand); font-style: italic;
   font-size: clamp(16px, 1.45vw, 21px); color: var(--qc); animation: htFloat var(--du, 6s) ease-in-out var(--dl, 0s) infinite alternate; }
@@ -2691,9 +2691,9 @@ html.brand-gray[data-theme="dark"] .btn--dark, html.brand-gray[data-theme="dark"
 .ht-video .me-motion { border-radius: 2px; }
 .ht-video:hover .me-motion img, .ht-video .me-motion.is-color img { filter: none; }
 /* the next section slides up over the bottom of the hero and covers the polaroid */
-/* it paints exactly the same page background (lined up by main.js), so it covers the polaroid without any visible edge */
-.ht-next { position: relative; z-index: 3; margin-top: -40vh; padding-top: 30px; background: inherit;
-  background-size: 100% var(--mh, 100%); background-position: 0 calc(-1 * var(--off, 0px)); background-repeat: no-repeat; }
+/* the next section has no background of its own (one continuous page background, so no seam);
+   the polaroid fades away as this section's top edge reaches it (main.js), as if it sinks behind it */
+.ht-next { position: relative; z-index: 3; margin-top: -40vh; padding-top: 30px; }
 /* tablets and phones: one-liners sit under the polaroid, nothing sticks */
 @media (max-width: 900px) {
   .ht { min-height: 0; padding: 110px 18px 60px; }
@@ -2710,10 +2710,10 @@ main.home > section.ht { padding: 130px 20px 0; }
 .ht-w { display: inline-block; white-space: nowrap; }
 
 /* TRIAL page background: the same soft tint as the rest of the home page, shifting gently from the very top as you scroll */
-main.home.sl-bg.ht-page { background: linear-gradient(180deg, #f1ecf3 0px, #f2ede8 700px, #ece9e6 22%, #e7eaec 42%, #e9edef 56%, #eef1f2 70%, #f3f2ee 86%, #f6f2ec 100%); }
+main.home.sl-bg.ht-page { background: linear-gradient(180deg, #f1ecf3 0px, #f2ede8 600px, #ece9e6 1100px, #e9ebed 1600px, #eef1f2 2100px, #f3f2ee 2600px, #f6f2ec 3000px); } /* fixed distances only, so colours always blend smoothly */
 [data-theme="dark"] main.home.sl-bg.ht-page { background:
     radial-gradient(60% 420px at 85% 900px, rgba(226, 170, 150, .14) 0, rgba(226, 170, 150, 0) 100%),
-    linear-gradient(180deg, #37304f 0px, #363553 700px, #323758 30%, #383c5e 52%, #3f4162 72%, #36365a 88%, #2c2a46 100%); }
+    linear-gradient(180deg, #37304f 0px, #363553 600px, #323758 1200px, #383c5e 1800px, #3f4162 2400px, #36365a 3000px, #2c2a46 3400px); }
 /* the pointer glow fades out before the next section starts, so it never leaves a line where the two meet */
 .ht-bg { -webkit-mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 58vh), transparent calc(100% - 40vh)); mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 58vh), transparent calc(100% - 40vh)); }
 @media (max-width: 900px) { .ht-bg { -webkit-mask-image: none; mask-image: none; } }

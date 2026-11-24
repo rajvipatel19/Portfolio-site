@@ -375,10 +375,22 @@ const SITE = {
       vid.style.position = "";
       vid.style.top = Math.max(100, Math.round(start)) + "px";
     };
-    // the next section repaints the page background lined up with the page, so the two join seamlessly
-    const nextSec = $(".ht-next"), mainEl = $("main");
-    const lineUp = () => { if (!nextSec || !mainEl) return; nextSec.style.setProperty("--mh", mainEl.offsetHeight + "px"); nextSec.style.setProperty("--off", nextSec.offsetTop + "px"); };
-    const layoutHero = () => { pinVid(); lineUp(); };
+    // as the next section's top edge reaches the polaroid, the polaroid fades out from the bottom up (a soft edge, never a hard cut)
+    const nextSec = $(".ht-next");
+    const FADE = 140;
+    let sinkRaf = 0;
+    const sink = () => {
+      sinkRaf = 0;
+      if (!vid || !nextSec) return;
+      const v = vid.getBoundingClientRect(), cut = nextSec.getBoundingClientRect().top - v.top; // where the section starts, inside the polaroid
+      if (cut >= v.height + FADE * 0.25) { vid.style.webkitMaskImage = vid.style.maskImage = ""; vid.style.visibility = ""; return; }
+      if (cut <= 0) { vid.style.visibility = "hidden"; return; }
+      vid.style.visibility = "";
+      const m = `linear-gradient(180deg, #000 ${Math.round(cut - FADE)}px, transparent ${Math.round(cut)}px)`;
+      vid.style.webkitMaskImage = m; vid.style.maskImage = m;
+    };
+    addEventListener("scroll", () => { if (!sinkRaf) sinkRaf = requestAnimationFrame(sink); }, { passive: true });
+    const layoutHero = () => { pinVid(); sink(); };
     layoutHero(); addEventListener("resize", layoutHero); addEventListener("load", layoutHero);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutHero); // measure again once the fonts have loaded
     const bg = $(".ht-bg", ht);
