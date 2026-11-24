@@ -2698,7 +2698,7 @@ html.brand-gray[data-theme="dark"] .btn--dark, html.brand-gray[data-theme="dark"
 @media (max-width: 900px) {
   .ht { min-height: 0; padding: 110px 18px 60px; }
   .ht-stage { flex: none; }
-  .ht-quotes { position: static; height: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; margin-top: 26px; order: 2; }
+  .ht-quotes { position: static; height: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 22px; margin-top: 30px; order: 2; }
   .ht-q { position: static; white-space: normal; }
   .ht-video { position: relative; top: auto; width: 210px; padding: 9px 9px 36px; }
   .ht-next { margin-top: 0; }
@@ -2754,28 +2754,5 @@ main.home .ht-next > section#work { padding-bottom: var(--sec-gap); }
 .ht--sky .fireflies { opacity: 1; }
 .ht--sky { overflow-x: clip; } /* drifting clouds never poke out sideways (clip keeps the polaroid pinning working) */
 
-/* ---------- butterflies (daytime): blue morphos that flap slowly and glide around; fireflies take over at night ---------- */
-.butterflies { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-.bf { position: absolute; width: var(--sz); animation: bfDrift var(--du, 26s) ease-in-out var(--dl, 0s) infinite; }
-.bf svg { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 3px 4px rgba(20, 60, 140, .28)); }
-.bf .bf-wing { fill: url(#bf-morpho); stroke: #120e1c; stroke-width: 1.5; stroke-linejoin: round; }
-.bf .bf-hind { opacity: .95; }
-.bf .bf-vein { fill: none; stroke: rgba(10, 30, 90, .35); stroke-width: .35; stroke-linecap: round; }
-.bf .bf-dot { fill: #fff; }
-.bf .bf-b { fill: #14101c; }
-.bf .bf-ant { fill: none; stroke: #14101c; stroke-width: .45; stroke-linecap: round; }
-/* slow wing beats: the wings fold towards the body and open again */
-.bf-w { transform-box: view-box; transform-origin: 20px 16px; animation: bfFlap var(--fl, .8s) ease-in-out infinite alternate; }
-@keyframes bfFlap { 0% { transform: scaleX(1); } 70% { transform: scaleX(.35); } 100% { transform: scaleX(.12); } }
-/* slow, wandering flight: drifts, tilts and turns around now and then */
-@keyframes bfDrift {
-  0%   { transform: translate(0, 0) rotate(-12deg) scaleX(1); }
-  22%  { transform: translate(70px, -40px) rotate(6deg) scaleX(1); }
-  45%  { transform: translate(130px, -6px) rotate(-4deg) scaleX(1); }
-  50%  { transform: translate(138px, 4px) rotate(10deg) scaleX(-1); }
-  72%  { transform: translate(70px, 36px) rotate(-8deg) scaleX(-1); }
-  95%  { transform: translate(6px, 8px) rotate(4deg) scaleX(-1); }
-  100% { transform: translate(0, 0) rotate(-12deg) scaleX(1); } }
-[data-theme="dark"] .butterflies { display: none; }
-html:not([data-theme="dark"]) .ht--sky .fireflies { display: none; } /* daytime: butterflies instead of fireflies */
-@media (prefers-reduced-motion: reduce) { .bf, .bf-w { animation: none; } }
+/* daytime sky: no fireflies (they only come out at night) */
+html:not([data-theme="dark"]) .ht--sky .fireflies { display: none; }

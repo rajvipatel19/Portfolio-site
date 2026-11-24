@@ -382,6 +382,7 @@ const SITE = {
     const sink = () => {
       sinkRaf = 0;
       if (!vid || !nextSec) return;
+      if (innerWidth <= 900) { vid.style.webkitMaskImage = vid.style.maskImage = ""; vid.style.visibility = ""; return; } // small screens: it doesn't stick, so no fade
       const v = vid.getBoundingClientRect();
       // once the polaroid stops sticking, it scrolls away together with the section, so it must be fully gone by then:
       // shift the fade up by however much of the polaroid would still peek out at that moment (+ a little margin)
