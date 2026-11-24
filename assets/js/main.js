@@ -382,7 +382,11 @@ const SITE = {
     const sink = () => {
       sinkRaf = 0;
       if (!vid || !nextSec) return;
-      const v = vid.getBoundingClientRect(), cut = nextSec.getBoundingClientRect().top - v.top; // where the section starts, inside the polaroid
+      const v = vid.getBoundingClientRect();
+      // once the polaroid stops sticking, it scrolls away together with the section, so it must be fully gone by then:
+      // shift the fade up by however much of the polaroid would still peek out at that moment (+ a little margin)
+      const lead = Math.max(0, v.height - parseFloat(getComputedStyle(nextSec).marginTop) * -1) + 40;
+      const cut = nextSec.getBoundingClientRect().top - v.top - lead; // where the polaroid should end, inside it
       if (cut >= v.height + FADE * 0.25) { vid.style.webkitMaskImage = vid.style.maskImage = ""; vid.style.visibility = ""; return; }
       if (cut <= 0) { vid.style.visibility = "hidden"; return; }
       vid.style.visibility = "";
