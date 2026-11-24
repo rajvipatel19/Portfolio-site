@@ -349,7 +349,7 @@ const SITE = {
     if (matchMedia("(hover: none)").matches) (meBox.closest(".polaroid") || meBox.parentElement).addEventListener("click", () => meBox.classList.toggle("is-color"));
   }
 
-  /* ---------- TRIAL hero: letters light up in a new colour each time; a soft glow follows the pointer and uncovers the picnic check ---------- */
+  /* ---------- Home hero: letters light up in a new colour each time; a soft glow follows the pointer and uncovers the picnic check ---------- */
   const ht = $(".ht");
   if (ht) {
     const LETTER_COLOURS = ["#f06a9b", "#3fb37f", "#e9b22c", "#4a9be8", "#f08a4b", "#8a6ee8", "#2fb5b0", "#e5534b"];

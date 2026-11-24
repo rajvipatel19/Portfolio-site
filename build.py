@@ -34,10 +34,6 @@ def head(title, desc, root):
 <!-- fonts load in the background, so the page can draw straight away (system fonts show for a moment) -->
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<script>/* home page: start downloading the hero pictures for the current theme straight away, alongside the stylesheet */
-try {{ if (/^\/(index(\.html)?)?$/.test(location.pathname)) {{ var d = sessionStorage.getItem("theme") === "dark", m = "{root}assets/media/";
-  [d ? "hero-room.jpg" : "hero-room-day.jpg", d ? "hero-room-mask.png" : "hero-room-day-mask.png", d ? "hero-view.jpg" : "hero-view-day.jpg"].forEach(function (f) {{
-    var l = document.createElement("link"); l.rel = "preload"; l.as = "image"; l.href = m + f; l.fetchPriority = "high"; if (/mask/.test(f)) l.crossOrigin = "anonymous"; /* masks are fetched that way */ document.head.appendChild(l); }}); }} }} catch (e) {{}}</script>
 <link rel="stylesheet" href="{root}assets/css/style.css?v={ASSET_V}">
 <link rel="stylesheet" href="{root}assets/css/dark.css?v={ASSET_V}">
 <script>/* every visit opens in the light theme; a switch to dark is kept only while browsing this visit (applied before the page draws, so no flash) */
@@ -362,35 +358,10 @@ def home():
     sparkles = "".join(f'<span class="sparkle" style="left:{l}%;top:{t}%;animation-delay:{d}s;width:{s}px;height:{s}px">{SPARK}</span>'
                        for l, t, d, s in [(12, 22, 0, 10), (78, 18, 1.2, 14), (64, 40, 2.1, 8), (30, 58, .6, 12), (88, 62, 1.8, 10), (48, 14, 2.6, 9)])
     body = f"""{nav(root, 'work')}
-<main class="home sl-bg">
-<section class="hero">
-  <div class="hero-media" aria-hidden="true">
-    <img class="hero-img hero-view hero-view--day" data-src="assets/media/hero-view-day.jpg" alt="" decoding="async">
-    <img class="hero-img hero-view hero-view--night" data-src="assets/media/hero-view.jpg" alt="" decoding="async">
-    <script>/* load only the view for the current theme first; the other one loads later (main.js) */
-    (function () {{ var i = document.querySelector(document.documentElement.dataset.theme === "dark" ? ".hero-view--night" : ".hero-view--day"); i.fetchPriority = "high"; i.src = i.dataset.src; }})();</script>
-    {fireflies()}
-    <div class="hero-room"></div>
-    {sparkles}
-  </div>
-  <nav class="ff-links" aria-label="Case studies">
-    <a class="ff-link" href="work/sila.html" aria-label="Open the SILA case study" style="--x:57%;--y:63%;--mx:10%;--my:81%;--dur:11s;--dl:-2s"><i></i><span>click on me</span></a>
-    <a class="ff-link" href="work/citylockers-kiosk.html" aria-label="Open the CityLockers Kiosk case study" style="--x:68%;--y:46%;--mx:29%;--my:84%;--dur:13s;--dl:-6s"><i></i><span>click on me</span></a>
-    <a class="ff-link" href="work/sku-platform.html" aria-label="Open the SKU Platform case study" style="--x:77%;--y:34%;--mx:47%;--my:81%;--dur:12s;--dl:-9s"><i></i><span>click on me</span></a>
-  </nav>
-  <div class="wrap hero-inner">
-    <p class="hero-hi" data-reveal><span>Hi! I’m Rajvi</span><span class="wave" aria-hidden="true">👋</span></p>
-    <h1 class="split">{C.HERO_TITLE}</h1>
-    <div class="hero-side" data-reveal style="--d:.35s">
-      <p>{C.INTRO}</p>
-      <div class="hero-cta">
-        <a class="btn btn--dark magnetic" href="#work">See my work {ARROW}</a>
-        <a class="btn magnetic" href="#call" data-cal>Book a call {ARROW}</a>
-      </div>
-    </div>
-  </div>
-</section>
+<main class="home sl-bg ht-page">
+{hero_new()}
 
+<div class="ht-next">
 <section class="section" id="work">
   <div class="wrap">
     <div class="section-head">
@@ -402,6 +373,7 @@ def home():
     </div>
   </div>
 </section>
+</div>
 
 {bring()}
 
@@ -505,7 +477,8 @@ def home():
 </section>
 </main>
 {footer(root)}"""
-    return head("Rajvi Patel · Senior Product Designer", C.META_DESC, root) + body
+    page = head("Rajvi Patel · Senior Product Designer", C.META_DESC, root)
+    return page.replace('<html lang="en">', '<html lang="en" class="brand-gray">', 1) + body  # dark-grey brand colour on the home page
 
 
 # ---------------------------------------------------------------- case study
@@ -660,7 +633,7 @@ def about():
 
 
 
-# ---------- TRIAL: a new hero ("Hi, I am Rajvi Patel", stop-motion polaroid, floating coloured one-liners) in a dark-grey brand colour (page: hero-trial.html) ----------
+# ---------- Home hero: "Hi, I am Rajvi Patel", stop-motion polaroid, floating coloured one-liners (home page uses the dark-grey brand colour) ----------
 HERO_QUOTES = [  # (text, left %, top %, colour) around the polaroid on wide screens
     ("AI native product designer", 5, 8, "#c2477a"),
     ("messy problems → clear direction", 0, 44, "#2e8f63"),
@@ -672,30 +645,22 @@ HERO_QUOTES = [  # (text, left %, top %, colour) around the polaroid on wide scr
 HERO_NAME = "Hi, I am Rajvi Patel"
 
 
-def hero_trial():
-    root = ""
+def hero_new():
+    """Home hero: "Hi, I am Rajvi Patel" (letters light up on hover), the stop-motion polaroid, floating one-liners, pointer glow over a picnic check."""
     frames = "".join(f'<img class="me-f{" is-on" if i == 1 else ""}" src="assets/media/me/m{i:02d}.jpg" alt="" decoding="async" width="676" height="900">' for i in range(1, 9))
     quotes = "".join(f'<p class="ht-q" style="--x:{x}%;--y:{y}%;--qc:{c};--dl:{-k * 1.3:.1f}s;--du:{6 + k % 3}s;--r:{(-2.5, 2, -1.5, 2.5, -2, 1.5)[k]}deg">“{escape(t)}”</p>'
                      for k, (t, x, y, c) in enumerate(HERO_QUOTES))
     # every letter is its own span, so each one can light up in a colour on hover (main.js)
     words = [''.join(f'<span class="ht-l">{escape(ch)}</span>' for ch in w) for w in HERO_NAME.split(" ")]
     letters = " ".join(f'<span class="ht-w">{w}</span>' for w in words)  # words never break in the middle
-    h = home()
-    a = h.index('<section class="section" id="work">'); b = h.index("</section>", a) + len("</section>")
-    work = h[a:b]
-    body = (f'{nav(root, "about")}\n<main class="home sl-bg ht-page">\n'
-            f'<section class="ht" aria-labelledby="ht-name">\n'
+    return (f'<section class="ht" aria-labelledby="ht-name">\n'
             f'  <div class="ht-bg" aria-hidden="true"><span class="ht-check"></span><span class="ht-glow"></span></div>\n'
             f'  <h1 class="ht-name" id="ht-name" aria-label="{escape(HERO_NAME)}"><span aria-hidden="true">{letters}</span></h1>\n'
             f'  <div class="ht-stage">\n'
             f'    <div class="ht-quotes">{quotes}</div>\n'
             f'    <figure class="ht-video"><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop">{frames}</div></figure>\n'
             f'  </div>\n'
-            f'</section>\n'
-            f'<div class="ht-next">{work}</div>\n</main>\n{footer(root)}')
-    page = head("Hero (trial) · Rajvi Patel", "Trial: a new hero.", root)
-    page = page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
-    return page.replace('<html lang="en">', '<html lang="en" class="brand-gray">', 1) + body
+            f'</section>')
 
 
 def desk_sticker(kind):
@@ -1579,7 +1544,6 @@ if __name__ == "__main__":
     (ROOT / "work").mkdir(exist_ok=True)
     (ROOT / "index.html").write_text(home())
     (ROOT / "about.html").write_text(about())
-    (ROOT / "hero-trial.html").write_text(hero_trial())  # trial page, not linked
     (ROOT / "ai-lab.html").write_text(ai_lab())
     (ROOT / "offline.html").write_text(offline())
     projs = C.PROJECTS

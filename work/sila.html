@@ -14,12 +14,8 @@
 <!-- fonts load in the background, so the page can draw straight away (system fonts show for a moment) -->
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<script>/* home page: start downloading the hero pictures for the current theme straight away, alongside the stylesheet */
-try { if (/^\/(index(\.html)?)?$/.test(location.pathname)) { var d = sessionStorage.getItem("theme") === "dark", m = "../assets/media/";
-  [d ? "hero-room.jpg" : "hero-room-day.jpg", d ? "hero-room-mask.png" : "hero-room-day-mask.png", d ? "hero-view.jpg" : "hero-view-day.jpg"].forEach(function (f) {
-    var l = document.createElement("link"); l.rel = "preload"; l.as = "image"; l.href = m + f; l.fetchPriority = "high"; if (/mask/.test(f)) l.crossOrigin = "anonymous"; /* masks are fetched that way */ document.head.appendChild(l); }); } } catch (e) {}</script>
-<link rel="stylesheet" href="../assets/css/style.css?v=dbef7a57">
-<link rel="stylesheet" href="../assets/css/dark.css?v=dbef7a57">
+<link rel="stylesheet" href="../assets/css/style.css?v=84cffa9a">
+<link rel="stylesheet" href="../assets/css/dark.css?v=84cffa9a">
 <script>/* every visit opens in the light theme; a switch to dark is kept only while browsing this visit (applied before the page draws, so no flash) */
 try { localStorage.removeItem("theme"); if (sessionStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
 /* the "just a minute" reveal plays only the first time the home page opens in a visit */
@@ -238,6 +234,6 @@ try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.get
     </div>
   </div>
 </footer>
-<script src="../assets/js/main.js?v=dbef7a57"></script>
+<script src="../assets/js/main.js?v=84cffa9a"></script>
 </body>
 </html>

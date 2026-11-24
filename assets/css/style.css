@@ -2650,7 +2650,7 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 [data-theme="dark"] .afc-tools li { background: rgba(255, 255, 255, .07); border-color: rgba(255, 255, 255, .12); }
 [data-theme="dark"] .afc:hover { box-shadow: 0 18px 36px -20px color-mix(in srgb, var(--c) 32%, transparent), 0 0 26px -10px color-mix(in srgb, var(--c) 24%, transparent); }
 
-/* ---------- TRIAL: dark-grey brand colour (only on pages whose <html> has class="brand-gray"); the soft site background stays ---------- */
+/* ---------- Dark-grey brand colour (only on pages whose <html> has class="brand-gray"); the soft site background stays ---------- */
 html.brand-gray { --lav: #6e6e76; --lav-deep: #2e2e33; --lav-soft: #e9e9ec; --lav-mist: #f4f4f6; --title-accent: #3a3a40; --nav-resume: #26262b; }
 html.brand-gray[data-theme="dark"] { --lav: #b9b9c2; --lav-deep: #dcdce2; --lav-soft: #3a3a42; --lav-mist: #2f2f36; --title-accent: #e4e4ea; }
 html.brand-gray .btn--dark, html.brand-gray .nav-resume, html.brand-gray .nav .nav-links a.nav-resume--menu { background: linear-gradient(180deg, #3a3a40, #222226); box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 14px 30px -14px rgba(20, 20, 26, .6); }
@@ -2658,7 +2658,7 @@ html.brand-gray .btn--dark:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.2
 html.brand-gray[data-theme="dark"] .btn--dark, html.brand-gray[data-theme="dark"] .nav-resume, html.brand-gray[data-theme="dark"] .nav .nav-links a.nav-resume--menu {
   background: linear-gradient(180deg, #f4f4f6, #dcdce1); color: #1e1e22; }
 
-/* ---------- TRIAL hero ---------- */
+/* ---------- Home hero ---------- */
 .ht { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
   min-height: calc(100svh + 40vh); box-sizing: border-box; padding: 130px 20px 0; }
 /* background: a soft glow follows the pointer and uncovers a picnic-blanket check underneath */
@@ -2704,12 +2704,12 @@ html.brand-gray[data-theme="dark"] .btn--dark, html.brand-gray[data-theme="dark"
   .ht-next { margin-top: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .ht-q { animation: none; } .ht-l { transition: none; } }
-/* the home page gives every section its own spacing; the trial hero keeps its own instead */
+/* the home page gives every section its own spacing; the hero keeps its own instead */
 main.home > section.ht { padding: 130px 20px 0; }
 @media (max-width: 900px) { main.home > section.ht { padding: 110px 18px 60px; } }
 .ht-w { display: inline-block; white-space: nowrap; }
 
-/* TRIAL page background: the same soft tint as the rest of the home page, shifting gently from the very top as you scroll */
+/* Home page background: the same soft tint as the rest of the home page, shifting gently from the very top as you scroll */
 main.home.sl-bg.ht-page { background: linear-gradient(180deg, #f1ecf3 0px, #f2ede8 600px, #ece9e6 1100px, #e9ebed 1600px, #eef1f2 2100px, #f3f2ee 2600px, #f6f2ec 3000px); } /* fixed distances only, so colours always blend smoothly */
 [data-theme="dark"] main.home.sl-bg.ht-page { background:
     radial-gradient(60% 420px at 85% 900px, rgba(226, 170, 150, .14) 0, rgba(226, 170, 150, 0) 100%),
@@ -2717,3 +2717,6 @@ main.home.sl-bg.ht-page { background: linear-gradient(180deg, #f1ecf3 0px, #f2ed
 /* the pointer glow fades out before the next section starts, so it never leaves a line where the two meet */
 .ht-bg { -webkit-mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 58vh), transparent calc(100% - 40vh)); mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 58vh), transparent calc(100% - 40vh)); }
 @media (max-width: 900px) { .ht-bg { -webkit-mask-image: none; mask-image: none; } }
+
+/* Selected work sits inside .ht-next now (so the polaroid can sink behind it); keep its usual spacing below */
+main.home .ht-next > section#work { padding-bottom: var(--sec-gap); }
