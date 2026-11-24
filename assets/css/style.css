@@ -2628,7 +2628,7 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 .afc:nth-child(6) { --y: 24px; --r: .7deg; }
 .afc:hover { transform: translateY(calc(var(--y, 0px) - 6px)) rotate(0deg) scale(1.04); z-index: 2;
   border-color: color-mix(in srgb, var(--c) 32%, transparent);
-  box-shadow: 0 22px 46px -18px color-mix(in srgb, var(--c) 55%, transparent), 0 0 0 6px color-mix(in srgb, var(--c) 8%, transparent), 0 0 40px -6px color-mix(in srgb, var(--c) 35%, transparent); }
+  box-shadow: 0 18px 36px -20px color-mix(in srgb, var(--c) 40%, transparent), 0 0 24px -10px color-mix(in srgb, var(--c) 22%, transparent); }
 .afc-icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; color: var(--c);
   background: color-mix(in srgb, var(--c) 14%, #fff); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 18%, transparent); }
 .afc h3 { font-family: var(--font-display); font-weight: 400; font-size: 23px; margin: 6px 0 0; }
@@ -2649,4 +2649,4 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 [data-theme="dark"] .afc { background: color-mix(in srgb, var(--c) 9%, rgba(255, 255, 255, .03)); border-color: color-mix(in srgb, var(--c) 22%, transparent); box-shadow: none; }
 [data-theme="dark"] .afc-icon { background: color-mix(in srgb, var(--c) 20%, transparent); }
 [data-theme="dark"] .afc-tools li { background: rgba(255, 255, 255, .07); border-color: rgba(255, 255, 255, .12); }
-[data-theme="dark"] .afc:hover { box-shadow: 0 22px 46px -18px color-mix(in srgb, var(--c) 45%, transparent), 0 0 44px -6px color-mix(in srgb, var(--c) 40%, transparent); }
+[data-theme="dark"] .afc:hover { box-shadow: 0 18px 36px -20px color-mix(in srgb, var(--c) 32%, transparent), 0 0 26px -10px color-mix(in srgb, var(--c) 24%, transparent); }
