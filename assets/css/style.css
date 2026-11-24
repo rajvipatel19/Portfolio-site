@@ -2756,3 +2756,7 @@ main.home .ht-next > section#work { padding-bottom: var(--sec-gap); }
 
 /* daytime sky: no fireflies (they only come out at night) */
 html:not([data-theme="dark"]) .ht--sky .fireflies { display: none; }
+
+/* every small italic line above a title is the same size on every page (the old rule was tied to the old hero) */
+:is(.section-head, .bring-head, .ticker-head, .cd-copy, .call, .lab-head, .afc-sec .af-head) .hand, .sky-hi, .lab-num { font-size: 20px; }
+@media (max-width: 600px) { :is(.section-head, .bring-head, .ticker-head, .cd-copy, .call, .lab-head, .afc-sec .af-head) .hand, .sky-hi, .lab-num { font-size: 18px; } }
