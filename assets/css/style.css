@@ -2746,3 +2746,10 @@ main.home .ht-next > section#work { padding-bottom: var(--sec-gap); }
   .about-copy .ab-p { font-size: 15.5px; }
 }
 @media (prefers-reduced-motion: reduce) { .about-copy .ab-p, .ab-pic { transition: none; } }
+
+/* ---------- TRIAL: the About sky behind the home hero (home-trial.html). It fades out at the bottom, so the page background carries on seamlessly ---------- */
+.ht--sky { background: linear-gradient(180deg, #e7def8 0%, #f0dde8 30%, #f8e2d4 52%, rgba(252, 240, 232, .75) 68%, rgba(253, 248, 244, .3) 84%, rgba(253, 252, 255, 0) 100%); }
+[data-theme="dark"] .ht--sky { background: linear-gradient(180deg, #2b2a4a 0%, #383659 30%, #4a405e 54%, rgba(57, 54, 86, .7) 76%, rgba(57, 54, 86, 0) 100%); }
+.ht--sky .fireflies, .ht--sky .sky-clouds { z-index: 0; }
+.ht--sky .fireflies { opacity: 1; }
+.ht--sky { overflow-x: clip; } /* drifting clouds never poke out sideways (clip keeps the polaroid pinning working) */

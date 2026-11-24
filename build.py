@@ -667,6 +667,17 @@ def hero_new():
             f'</section>')
 
 
+
+# ---------- TRIAL: the home page with the About page's sky (gradient, clouds, fireflies) behind the hero (page: home-trial.html, not linked) ----------
+def home_sky_trial():
+    page = home()
+    o = '<section class="ht" aria-labelledby="ht-name">\n'
+    assert page.count(o) == 1
+    page = page.replace(o, f'<section class="ht ht--sky" aria-labelledby="ht-name">\n  {sky_clouds()}\n  {fireflies(12)}\n', 1)
+    page = page.replace("<title>Rajvi Patel · Senior Product Designer</title>", "<title>Home with sky (trial) · Rajvi Patel</title>", 1)
+    return page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
+
+
 def desk_sticker(kind):
     if kind == "star":
         return '<svg viewBox="0 0 80 80"><path d="M40 6l9 20 22 3-16 15 4 22-19-10-19 10 4-22L9 29l22-3Z" fill="#f3d16f" stroke="#fff" stroke-width="5" stroke-linejoin="round"/></svg>'
@@ -1548,6 +1559,7 @@ if __name__ == "__main__":
     (ROOT / "work").mkdir(exist_ok=True)
     (ROOT / "index.html").write_text(home())
     (ROOT / "about.html").write_text(about())
+    (ROOT / "home-trial.html").write_text(home_sky_trial())  # trial page, not linked
     (ROOT / "ai-lab.html").write_text(ai_lab())
     (ROOT / "offline.html").write_text(offline())
     projs = C.PROJECTS
