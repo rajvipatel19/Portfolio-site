@@ -254,6 +254,45 @@ def ai_flow():
 </section>'''
 
 
+
+# ---------- TRIAL: "How I work with AI" as one pinned section; scrolling moves through the steps (page: ai-flow-trial.html) ----------
+AFS_COLOURS = ["#8a76ee", "#f2b84b", "#f08a6c", "#4fbf8f", "#5aa8e8", "#e67fb0"]  # one per step: icon tile + corner flower
+
+
+def ai_flow_scroll():
+    n = len(C.AI_FLOW)
+    texts, visuals, dashes = [], [], []
+    for i, f in enumerate(C.AI_FLOW):
+        on = " is-on" if i == 0 else ""
+        hidden = "" if i == 0 else ' aria-hidden="true"'
+        tools = "".join(f"<li>{escape(x)}</li>" for x in f["tools"])
+        texts.append(f'<div class="afs-copy{on}" data-i="{i}"{hidden}>'
+                     f'<span class="hand">step 0{i + 1} · {escape(f["step"].lower())}</span>'
+                     f'<h3>{escape(f["title"])}</h3><p>{escape(f["text"])}</p><ul class="afs-tools">{tools}</ul></div>')
+        visuals.append(f'<div class="afs-vis{on}" style="--c:{AFS_COLOURS[i]}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><g class="ai-i ai-{f["icon"]}">{AI_ICONS[f["icon"]]}</g></svg></div>')
+        dashes.append(f'<i class="{"is-on" if i == 0 else ""}"></i>')
+    petals = "".join(f'<ellipse cx="20" cy="9" rx="5.5" ry="9" transform="rotate({a} 20 20)"/>' for a in range(0, 360, 60))
+    flower = f'<svg class="afs-flower" viewBox="0 0 40 40" aria-hidden="true">{petals}<circle cx="20" cy="20" r="4.5" class="afs-fc"/></svg>'
+    return (f'<section class="afs" style="--n:{n}" aria-labelledby="afs-title">\n'
+            f'  <div class="afs-pin">\n    <div class="wrap">\n'
+            f'      <div class="bring-head af-head"><span class="hand">{escape(C.AI_FLOW_NOTE)}</span><h2 id="afs-title">{escape(C.AI_FLOW_TITLE)}</h2></div>\n'
+            f'      <div class="afs-card glass" style="--c:{AFS_COLOURS[0]}">\n        {flower}\n'
+            f'        <div class="afs-texts" aria-live="polite">{"".join(texts)}</div>\n'
+            f'        <div class="afs-visuals">{"".join(visuals)}</div>\n'
+            f'        <div class="afs-dashes" aria-hidden="true">{"".join(dashes)}</div>\n'
+            f'      </div>\n    </div>\n  </div>\n</section>')
+
+
+def ai_flow_trial():
+    root = ""
+    body = (f'{nav(root, "about")}\n<main>\n'
+            f'<section class="afs-intro"><div class="wrap"><p class="stack-kicker">trial /</p><p class="gw-hint">Scroll down: the card stays put and walks through the steps.</p></div></section>\n'
+            f'{ai_flow_scroll()}\n'
+            f'<section class="afs-after"><div class="wrap"><p class="af-end">{escape(C.AI_FLOW_END)}</p></div></section>\n'
+            f'</main>\n{footer(root)}')
+    page = head("How I work with AI (trial) · Rajvi Patel", "Trial: scroll version of How I work with AI.", root)
+    return page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1) + body
+
 def bring():
     P = ROOT / "partials"
     diary = (P / "diary.html").read_text()
@@ -1537,6 +1576,7 @@ if __name__ == "__main__":
     (ROOT / "work").mkdir(exist_ok=True)
     (ROOT / "index.html").write_text(home())
     (ROOT / "about.html").write_text(about())
+    (ROOT / "ai-flow-trial.html").write_text(ai_flow_trial())  # trial page, not linked
     (ROOT / "ai-lab.html").write_text(ai_lab())
     (ROOT / "offline.html").write_text(offline())
     projs = C.PROJECTS

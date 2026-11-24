@@ -2609,3 +2609,45 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 .me-note span { font-family: var(--font-hand); font-style: italic; font-size: 19px; line-height: 1.2; color: var(--ink-2); }
 .me-tap { display: none; }
 @media (hover: none) { .me-hover { display: none; } .me-tap { display: inline; } }
+
+/* ---------- TRIAL: How I work with AI, one pinned card; scrolling walks through the steps (main.js sets which one is on) ---------- */
+.afs-intro { padding: 120px 0 0; }
+.afs { position: relative; height: calc(100svh + var(--n) * 70svh); }
+.afs-pin { position: sticky; top: 0; height: 100svh; box-sizing: border-box; padding-top: 78px; display: grid; align-content: center; } /* room for the top bar */
+.afs-pin .af-head { margin-bottom: 28px; }
+.afs-card { position: relative; display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center;
+  min-height: min(56svh, 460px); padding: clamp(28px, 4vw, 52px) clamp(28px, 4vw, 56px) clamp(56px, 6vw, 72px); border-radius: 30px; overflow: hidden; }
+.afs-texts, .afs-visuals { position: relative; display: grid; }
+.afs-texts > *, .afs-visuals > * { grid-area: 1 / 1; } /* every step sits in the same spot; only the active one shows */
+.afs-copy { opacity: 0; transform: translateY(18px); transition: opacity .2s ease, transform .4s var(--ease); pointer-events: none; } /* the old step leaves fast... */
+.afs-copy.is-past { transform: translateY(-18px); }
+.afs-copy.is-on { opacity: 1; transform: none; pointer-events: auto; transition: opacity .45s ease .18s, transform .6s var(--ease) .12s; } /* ...then the new one fades in */
+.afs-copy h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 2.6vw, 36px); line-height: 1.12; margin: 8px 0 12px; }
+.afs-copy p { color: var(--ink-2); font-size: 17px; line-height: 1.6; max-width: 46ch; margin: 0; }
+.afs-tools { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; }
+.afs-tools li { font-size: 13px; padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, .7); border: 1px solid var(--line); color: var(--ink-2); }
+/* the picture side: a big drawn icon on a soft tile in the step's colour */
+.afs-vis { justify-self: center; width: min(100%, 320px); aspect-ratio: 1; border-radius: 26px; display: grid; place-items: center; color: var(--c);
+  background: radial-gradient(70% 70% at 30% 25%, #fff, color-mix(in srgb, var(--c) 16%, #fff)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 22%, transparent);
+  opacity: 0; transform: scale(.94); transition: opacity .5s var(--ease), transform .7s var(--ease); }
+.afs-vis.is-on { opacity: 1; transform: none; }
+.afs-vis svg { width: 46%; height: 46%; }
+/* little flower in the corner that changes colour with each step, and progress dashes */
+.afs-flower { position: absolute; top: 20px; right: 22px; width: 30px; height: 30px; fill: var(--c); transition: fill .5s, transform .8s var(--ease); }
+.afs-flower .afs-fc { fill: #fff6d6; }
+.afs-dashes { position: absolute; left: clamp(28px, 4vw, 56px); bottom: 26px; display: flex; gap: 6px; }
+.afs-dashes i { width: 10px; height: 3px; border-radius: 3px; background: color-mix(in srgb, var(--ink) 22%, transparent); transition: width .4s var(--ease), background .4s; }
+.afs-dashes i.is-on { width: 28px; background: var(--ink); }
+.afs-after { padding: 40px 0 120px; }
+@media (max-width: 760px) {
+  .afs-card { grid-template-columns: 1fr; gap: 20px; min-height: 0; padding: 26px 22px 52px; }
+  .afs-visuals { order: -1; }
+  .afs-vis { width: 112px; border-radius: 18px; justify-self: start; }
+  .afs-copy p { font-size: 15.5px; }
+  .afs-pin .af-head { margin-bottom: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .afs-copy, .afs-vis, .afs-dashes i { transition: none; } }
+[data-theme="dark"] .afs-tools li { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .14); }
+[data-theme="dark"] .afs-vis { background: radial-gradient(70% 70% at 30% 25%, rgba(255, 255, 255, .14), color-mix(in srgb, var(--c) 20%, transparent)); }
+[data-theme="dark"] .afs-dashes i { background: rgba(255, 255, 255, .22); }
+[data-theme="dark"] .afs-dashes i.is-on { background: #f1ecff; }
