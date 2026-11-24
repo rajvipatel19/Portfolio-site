@@ -654,6 +654,38 @@ def about():
     return head("About · Rajvi Patel", "About Rajvi Patel, Senior Product Designer in Dubai.", root) + body
 
 
+
+# ---------- TRIAL: a new hero ("I'm Rajvi Patel", stop-motion photos, floating one-liners) in a dark-grey brand colour (page: hero-trial.html) ----------
+HERO_QUOTES = [  # (text, left %, top %) around the photos on wide screens
+    ("AI native product designer", 4, 10),
+    ("messy problems → clear direction", 0, 46),
+    ("ex-dentist, now designing for trust", 7, 80),
+    ("I think in systems", 73, 6),
+    ("probably claudemaxxing now", 75, 42),
+    ("fintech · health-tech · e-commerce", 68, 79),
+]
+
+
+def hero_trial():
+    root = ""
+    frames = "".join(f'<img class="me-f{" is-on" if i == 1 else ""}" src="assets/media/me/m{i:02d}.jpg" alt="" decoding="async" width="676" height="900">' for i in range(1, 9))
+    quotes = "".join(f'<p class="ht-q" style="--x:{x}%;--y:{y}%;--dl:{-k * 1.3:.1f}s;--du:{6 + k % 3}s;--r:{(-2.5, 2, -1.5, 2.5, -2, 1.5)[k]}deg">“{escape(t)}”</p>'
+                     for k, (t, x, y) in enumerate(HERO_QUOTES))
+    body = (f'{nav(root, "about")}\n<main>\n'
+            f'<section class="ht" aria-labelledby="ht-name">\n'
+            f'  <h1 class="ht-name" id="ht-name">I’m Rajvi <em>Patel</em></h1>\n'
+            f'  <div class="ht-stage">\n'
+            f'    <figure class="ht-video"><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop">{frames}</div></figure>\n'
+            f'    <div class="ht-quotes">{quotes}</div>\n'
+            f'  </div>\n'
+            f'  <div class="ht-cta"><a class="btn btn--dark magnetic" href="index.html#work">See my work {ARROW}</a>'
+            f'<a class="btn magnetic" href="index.html#call" data-cal>Book a call {ARROW}</a></div>\n'
+            f'</section>\n</main>\n{footer(root)}')
+    page = head("Hero (trial) · Rajvi Patel", "Trial: a new hero.", root)
+    page = page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
+    return page.replace('<html lang="en">', '<html lang="en" class="brand-gray">', 1) + body
+
+
 def desk_sticker(kind):
     if kind == "star":
         return '<svg viewBox="0 0 80 80"><path d="M40 6l9 20 22 3-16 15 4 22-19-10-19 10 4-22L9 29l22-3Z" fill="#f3d16f" stroke="#fff" stroke-width="5" stroke-linejoin="round"/></svg>'
@@ -1535,6 +1567,7 @@ if __name__ == "__main__":
     (ROOT / "work").mkdir(exist_ok=True)
     (ROOT / "index.html").write_text(home())
     (ROOT / "about.html").write_text(about())
+    (ROOT / "hero-trial.html").write_text(hero_trial())  # trial page, not linked
     (ROOT / "ai-lab.html").write_text(ai_lab())
     (ROOT / "offline.html").write_text(offline())
     projs = C.PROJECTS

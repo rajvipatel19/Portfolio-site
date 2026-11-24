@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" class="brand-gray">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero (trial) · Rajvi Patel</title>
+<meta name="description" content="Trial: a new hero.">
+<meta property="og:title" content="Hero (trial) · Rajvi Patel">
+<meta property="og:description" content="Trial: a new hero.">
+<meta name="theme-color" content="#fdfcff">
+<link rel="icon" type="image/svg+xml" href="assets/img/avatar.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- fonts load in the background, so the page can draw straight away (system fonts show for a moment) -->
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+<script>/* home page: start downloading the hero pictures for the current theme straight away, alongside the stylesheet */
+try { if (/^\/(index(\.html)?)?$/.test(location.pathname)) { var d = sessionStorage.getItem("theme") === "dark", m = "assets/media/";
+  [d ? "hero-room.jpg" : "hero-room-day.jpg", d ? "hero-room-mask.png" : "hero-room-day-mask.png", d ? "hero-view.jpg" : "hero-view-day.jpg"].forEach(function (f) {
+    var l = document.createElement("link"); l.rel = "preload"; l.as = "image"; l.href = m + f; l.fetchPriority = "high"; if (/mask/.test(f)) l.crossOrigin = "anonymous"; /* masks are fetched that way */ document.head.appendChild(l); }); } } catch (e) {}</script>
+<link rel="stylesheet" href="assets/css/style.css?v=23b36645">
+<link rel="stylesheet" href="assets/css/dark.css?v=23b36645">
+<script>/* every visit opens in the light theme; a switch to dark is kept only while browsing this visit (applied before the page draws, so no flash) */
+try { localStorage.removeItem("theme"); if (sessionStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
+/* the "just a minute" reveal plays only the first time the home page opens in a visit */
+try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.getItem("revealed")) { document.documentElement.classList.add("first-reveal"); sessionStorage.setItem("revealed", "1"); } } catch (e) {}</script>
+</head>
+<body>
+<div class="page-fade" aria-hidden="true"><div class="pf-skel"><i class="sk-av"></i><i class="sk-nav"></i><div class="sk-hero"><i class="sk-l sk-s"></i><i class="sk-l sk-h"></i><i class="sk-l sk-h sk-h2"></i><i class="sk-l"></i><i class="sk-l"></i><i class="sk-l sk-short"></i><div class="sk-btns"><i></i><i></i></div></div></div><p class="pf-msg"><span class="pf-spark">✦</span> just a minute</p></div>
+<div class="ambient" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="grain" aria-hidden="true"></div>
+<header class="nav">
+  <a class="logo" href="index.html" aria-label="Rajvi Patel — home"><img class="logo-avatar" src="assets/img/avatar.svg" alt="" width="46" height="46"><span class="logo-name">Rajvi <span class="logo-last">Patel</span></span></a>
+  <nav class="nav-menu glass" aria-label="Main">
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="ai-lab.html">AI Lab</a>
+      <a href="index.html#work">Projects</a>
+      <a href="https://www.linkedin.com/in/rajvipatel1912" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="nav-resume nav-resume--menu" href="https://drive.google.com/file/d/1vJuvmtALgGuoKZGn-FbhZj4Gc83R549Z/view?usp=sharing" target="_blank" rel="noopener">Resume <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <span class="nav-divider" aria-hidden="true"></span>
+    <div class="theme-switch" role="group" aria-label="Colour theme">
+      <span class="ts-thumb" aria-hidden="true"></span>
+      <button type="button" class="ts-btn" data-set-theme="light" aria-pressed="true" aria-label="Light theme"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg></button>
+      <button type="button" class="ts-btn" data-set-theme="dark" aria-pressed="false" aria-label="Dark theme"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg></button>
+    </div>
+    <a class="nav-resume" href="https://drive.google.com/file/d/1vJuvmtALgGuoKZGn-FbhZj4Gc83R549Z/view?usp=sharing" target="_blank" rel="noopener">Resume <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+  </nav>
+</header>
+
+<main>
+<section class="ht" aria-labelledby="ht-name">
+  <h1 class="ht-name" id="ht-name">I’m Rajvi <em>Patel</em></h1>
+  <div class="ht-stage">
+    <figure class="ht-video"><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop"><img class="me-f is-on" src="assets/media/me/m01.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m02.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m03.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m04.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m05.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m06.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m07.jpg" alt="" decoding="async" width="676" height="900"><img class="me-f" src="assets/media/me/m08.jpg" alt="" decoding="async" width="676" height="900"></div></figure>
+    <div class="ht-quotes"><p class="ht-q" style="--x:4%;--y:10%;--dl:0.0s;--du:6s;--r:-2.5deg">“AI native product designer”</p><p class="ht-q" style="--x:0%;--y:46%;--dl:-1.3s;--du:7s;--r:2deg">“messy problems → clear direction”</p><p class="ht-q" style="--x:7%;--y:80%;--dl:-2.6s;--du:8s;--r:-1.5deg">“ex-dentist, now designing for trust”</p><p class="ht-q" style="--x:73%;--y:6%;--dl:-3.9s;--du:6s;--r:2.5deg">“I think in systems”</p><p class="ht-q" style="--x:75%;--y:42%;--dl:-5.2s;--du:7s;--r:-2deg">“probably claudemaxxing now”</p><p class="ht-q" style="--x:68%;--y:79%;--dl:-6.5s;--du:8s;--r:1.5deg">“fintech · health-tech · e-commerce”</p></div>
+  </div>
+  <div class="ht-cta"><a class="btn btn--dark magnetic" href="index.html#work">See my work <svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn magnetic" href="index.html#call" data-cal>Book a call <svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+</section>
+</main>
+<footer class="ft ft--scene" id="contact">
+  <div class="ft-media" aria-hidden="true">
+    <video class="ft-video" src="assets/media/footer-meadow.mp4" muted loop playsinline preload="none" data-autoplay></video>
+  </div>
+  <div class="ft-in">
+    <div class="ft-top">
+      <div>
+        <p class="ft-title">Let's <span class="ft-type" data-type="connect|collaborate|work together!">connect</span><span class="ft-caret" aria-hidden="true"></span></p>
+        <p class="ft-sub">Would love to talk about projects, growth &amp; anything design!</p>
+      </div>
+      <div class="ft-btns">
+        <a class="btn btn--dark magnetic" href="https://drive.google.com/file/d/1vJuvmtALgGuoKZGn-FbhZj4Gc83R549Z/view?usp=sharing" target="_blank" rel="noopener">Resume <svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn magnetic" href="https://www.linkedin.com/in/rajvipatel1912" target="_blank" rel="noopener">LinkedIn <svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>© <span data-year>2026</span> Rajvi Patel</p>
+      <p>Built with <svg class="ft-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.1C.9 8.6 3 5 6.5 5c2 0 3.5 1.1 5.5 3.2C14 6.1 15.5 5 17.5 5 21 5 23.1 8.6 21.6 11.9 19.5 16.4 12 21 12 21Z" fill="currentColor"/></svg> &amp; lots of coffee!</p>
+    </div>
+  </div>
+</footer>
+<div class="cmt-bar" role="toolbar" aria-label="Comments" aria-orientation="vertical">
+  <button type="button" class="cmt-btn cmt-move" aria-pressed="true" aria-label="Browse the page (shortcut V)" data-tip="Browse · V"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 3.5l13 6.2-5.6 1.7-2.4 5.6z"/></svg></button>
+  <button type="button" class="cmt-btn cmt-add" aria-pressed="false" aria-label="Add a comment (shortcut C)" data-tip="Comment · C"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 1 1-4.1 15.95L3.5 20.5l1.05-4.4A8.5 8.5 0 0 1 12 3.5z"/></svg></button>
+  <button type="button" class="cmt-btn cmt-eye" aria-pressed="false" aria-label="Show comments on the page" data-tip="Show / hide"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/><path class="cmt-slash" d="M4 4l16 16"/></svg></button>
+</div>
+<div class="cmt-layer cmt-hidden"></div>
+<script src="assets/js/main.js?v=23b36645"></script>
+</body>
+</html>

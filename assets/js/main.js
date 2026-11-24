@@ -346,7 +346,7 @@ const SITE = {
       }, 320);
     }
     // phones have no hover: a tap switches colour on and off
-    if (matchMedia("(hover: none)").matches) meBox.closest(".polaroid").addEventListener("click", () => meBox.classList.toggle("is-color"));
+    if (matchMedia("(hover: none)").matches) (meBox.closest(".polaroid") || meBox.parentElement).addEventListener("click", () => meBox.classList.toggle("is-color"));
   }
 
   /* ---------- Count-up numbers ---------- */

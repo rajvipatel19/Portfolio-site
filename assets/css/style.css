@@ -2649,3 +2649,53 @@ html.cmt-mode, html.cmt-mode body, html.cmt-mode body *:not(.cmt-bar):not(.cmt-b
 [data-theme="dark"] .afc-icon { background: color-mix(in srgb, var(--c) 20%, transparent); }
 [data-theme="dark"] .afc-tools li { background: rgba(255, 255, 255, .07); border-color: rgba(255, 255, 255, .12); }
 [data-theme="dark"] .afc:hover { box-shadow: 0 18px 36px -20px color-mix(in srgb, var(--c) 32%, transparent), 0 0 26px -10px color-mix(in srgb, var(--c) 24%, transparent); }
+
+/* ---------- TRIAL: dark-grey brand colour (only on pages whose <html> has class="brand-gray") ---------- */
+html.brand-gray { --lav: #6e6e76; --lav-deep: #2e2e33; --lav-soft: #e9e9ec; --lav-mist: #f4f4f6; --title-accent: #3a3a40; --bg: #fbfbfb; }
+html.brand-gray[data-theme="dark"] { --lav: #b9b9c2; --lav-deep: #dcdce2; --lav-soft: #3a3a42; --lav-mist: #2f2f36; --title-accent: #e4e4ea; --bg: #1f1f23; }
+html.brand-gray .ambient .blob { background: #ececee; }
+html.brand-gray[data-theme="dark"] .ambient .blob { background: #3a3a40; }
+html.brand-gray body { background: var(--bg); }
+
+/* ---------- TRIAL hero: "I'm Rajvi Patel", stop-motion photos in the middle, one-liners floating around ---------- */
+.ht { position: relative; min-height: 100svh; box-sizing: border-box; padding: 130px 20px 70px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.ht-name { font-family: var(--font-display); font-weight: 400; font-size: clamp(44px, 7vw, 92px); line-height: 1; letter-spacing: -.03em; margin: 0; }
+.ht-name em { font-style: italic; color: var(--title-accent); }
+.ht-stage { position: relative; width: min(1120px, 100%); margin: clamp(26px, 4vw, 44px) 0 0; display: grid; place-items: center; }
+.ht-video { margin: 0; width: clamp(220px, 24vw, 300px); padding: 10px; border-radius: 26px; background: rgba(255, 255, 255, .7);
+  box-shadow: 0 30px 60px -30px rgba(30, 30, 40, .45), 0 0 0 1px rgba(30, 30, 40, .06); }
+.ht-video .me-motion { border-radius: 18px; }
+.ht-video:hover .me-motion img, .ht-video .me-motion.is-color img { filter: none; }
+.ht-quotes { position: absolute; inset: 0; pointer-events: none; }
+.ht-q { position: absolute; left: var(--x); top: var(--y); margin: 0; padding: 10px 16px; border-radius: 999px; white-space: nowrap;
+  font-family: var(--font-hand); font-style: italic; font-size: clamp(15px, 1.3vw, 18px); color: var(--ink-2);
+  background: rgba(255, 255, 255, .72); border: 1px solid rgba(30, 30, 40, .07); box-shadow: 0 10px 24px -16px rgba(30, 30, 40, .35);
+  animation: htFloat var(--du, 6s) ease-in-out var(--dl, 0s) infinite alternate; }
+@keyframes htFloat { from { transform: translateY(0) rotate(var(--r, 0deg)); } to { transform: translateY(-12px) rotate(calc(var(--r, 0deg) * -1)); } }
+.ht-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: clamp(30px, 4vw, 44px); }
+[data-theme="dark"] .ht-video { background: rgba(255, 255, 255, .08); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255, 255, 255, .08); }
+[data-theme="dark"] .ht-q { background: rgba(255, 255, 255, .07); border-color: rgba(255, 255, 255, .1); color: rgba(240, 240, 245, .85); }
+/* tablets and phones: the one-liners line up under the photos instead of around them */
+@media (max-width: 900px) {
+  .ht { padding-top: 110px; }
+  .ht-quotes { position: static; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
+  .ht-stage { display: flex; flex-direction: column; align-items: center; }
+  .ht-q { position: static; white-space: normal; }
+}
+@media (max-width: 560px) {
+  .ht { padding: 100px 16px 50px; min-height: 0; }
+  .ht-video { width: 200px; padding: 8px; border-radius: 22px; }
+  .ht-quotes { gap: 8px; margin-top: 20px; }
+  .ht-q { font-size: 13.5px; padding: 7px 12px; }
+  .ht-cta { margin-top: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .ht-q { animation: none; } }
+/* TRIAL brand-gray: dark buttons and Resume in charcoal instead of navy/purple (lavender buttons become light grey at night) */
+html.brand-gray { --nav-resume: #26262b; }
+html.brand-gray .btn--dark, html.brand-gray .nav-resume, html.brand-gray .nav .nav-links a.nav-resume--menu { background: linear-gradient(180deg, #3a3a40, #222226); box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 14px 30px -14px rgba(20, 20, 26, .6); }
+html.brand-gray .btn--dark:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 18px 40px -14px rgba(20, 20, 26, .55); }
+html.brand-gray .nav-resume { box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 10px 22px -12px rgba(20, 20, 26, .6); }
+html.brand-gray[data-theme="dark"] .btn--dark, html.brand-gray[data-theme="dark"] .nav-resume, html.brand-gray[data-theme="dark"] .nav .nav-links a.nav-resume--menu {
+  background: linear-gradient(180deg, #f4f4f6, #dcdce1); color: #1e1e22; }
+html.brand-gray .cmt-btn[aria-pressed="true"]:is(.cmt-move, .cmt-add) { background: #26262b; }
+html.brand-gray[data-theme="dark"] .cmt-btn[aria-pressed="true"]:is(.cmt-move, .cmt-add) { background: #e4e4ea; color: #1e1e22; }
