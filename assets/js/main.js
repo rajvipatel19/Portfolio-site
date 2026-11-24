@@ -349,32 +349,6 @@ const SITE = {
     if (matchMedia("(hover: none)").matches) meBox.closest(".polaroid").addEventListener("click", () => meBox.classList.toggle("is-color"));
   }
 
-  /* ---------- TRIAL: How I work with AI, pinned card; the scroll position picks the step ---------- */
-  const afs = $(".afs");
-  if (afs) {
-    const copies = $$(".afs-copy", afs), vis = $$(".afs-vis", afs), dashes = $$(".afs-dashes i", afs), card = $(".afs-card", afs), flower = $(".afs-flower", afs);
-    const colours = vis.map((v) => v.style.getPropertyValue("--c"));
-    let cur = -1, ticking = false;
-    const show = (k) => {
-      if (k === cur) return;
-      cur = k;
-      copies.forEach((c, i) => { c.classList.toggle("is-on", i === k); c.classList.toggle("is-past", i < k); c.setAttribute("aria-hidden", i === k ? "false" : "true"); });
-      vis.forEach((v, i) => v.classList.toggle("is-on", i === k));
-      dashes.forEach((d, i) => d.classList.toggle("is-on", i === k));
-      card.style.setProperty("--c", colours[k]);
-      flower.style.transform = `rotate(${k * 60}deg)`;
-    };
-    const update = () => {
-      ticking = false;
-      const r = afs.getBoundingClientRect(), span = afs.offsetHeight - innerHeight;
-      const p = Math.min(0.999, Math.max(0, -r.top / span));
-      show(Math.floor(p * copies.length));
-    };
-    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-    addEventListener("resize", update);
-    update();
-  }
-
   /* ---------- Count-up numbers ---------- */
   const countIO = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
