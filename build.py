@@ -658,7 +658,7 @@ def hero_new():
     # every letter is its own span, so each one can light up in a colour on hover (main.js)
     words = [''.join(f'<span class="ht-l">{escape(ch)}</span>' for ch in w) for w in HERO_NAME.split(" ")]
     letters = " ".join(f'<span class="ht-w">{w}</span>' for w in words)  # words never break in the middle
-    return (f'<section class="ht" aria-labelledby="ht-name">\n'
+    return (f'<section class="ht ht--sky" aria-labelledby="ht-name">\n  {sky_clouds()}\n  {fireflies(12)}\n'
             f'  <div class="ht-bg" aria-hidden="true"><span class="ht-check"></span><span class="ht-glow"></span></div>\n'
             f'  <h1 class="ht-name" id="ht-name" aria-label="{escape(HERO_NAME)}"><span aria-hidden="true">{letters}</span></h1>\n'
             f'  <div class="ht-stage">\n'
@@ -666,17 +666,6 @@ def hero_new():
             f'    <figure class="ht-video"><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop">{frames}</div></figure>\n'
             f'  </div>\n'
             f'</section>')
-
-
-
-# ---------- TRIAL: the home page with the About page's sky (gradient, clouds, fireflies) behind the hero (page: home-trial.html, not linked) ----------
-def home_sky_trial():
-    page = home()
-    o = '<section class="ht" aria-labelledby="ht-name">\n'
-    assert page.count(o) == 1
-    page = page.replace(o, f'<section class="ht ht--sky" aria-labelledby="ht-name">\n  {sky_clouds()}\n  {fireflies(12)}\n', 1)
-    page = page.replace("<title>Rajvi Patel · Senior Product Designer</title>", "<title>Home with sky (trial) · Rajvi Patel</title>", 1)
-    return page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
 
 
 def desk_sticker(kind):
@@ -1560,7 +1549,6 @@ if __name__ == "__main__":
     (ROOT / "work").mkdir(exist_ok=True)
     (ROOT / "index.html").write_text(home())
     (ROOT / "about.html").write_text(about())
-    (ROOT / "home-trial.html").write_text(home_sky_trial())  # trial page, not linked
     (ROOT / "ai-lab.html").write_text(ai_lab())
     (ROOT / "offline.html").write_text(offline())
     projs = C.PROJECTS
