@@ -575,19 +575,20 @@ def case_study(cs, nxt):
 # Both pages open with a "sky" scene in the footer's lavender-peach palette: drifting clouds,
 # fireflies, a typing line and soft pill buttons. The sky melts into the page at the bottom.
 
-# Small blue butterflies that flutter around (daytime sky). Each gets its own spot, size, colour and flight timing.
-BF_SPOTS = [(8, 24, 22, "#5b9cf5"), (22, 62, 18, "#7cb4ff"), (38, 16, 16, "#4a86e8"), (63, 70, 20, "#8fc1ff"), (78, 28, 24, "#5b9cf5"), (90, 58, 17, "#4a86e8"), (52, 44, 15, "#7cb4ff")]
+# Blue morpho butterflies (daytime sky): bright blue wings with dark edges, white spots and fine veins; they flap and glide slowly.
+BF_SPOTS = [(8, 22, 30), (24, 64, 24), (40, 14, 22), (62, 72, 28), (79, 26, 34), (91, 60, 24), (52, 46, 20)]  # (left %, top %, size px)
+BF_SVG = """<g class="bf-w bf-l"><path class="bf-wing" d="M20 15 C 15 6, 7 1, 2.5 3 C 0.5 5, 2 10, 5 13 C 9 16, 15 17, 20 16.5 Z"/><path class="bf-wing bf-hind" d="M20 17 C 14 18, 8 20, 7 25 C 7 29, 11 31.5, 14.5 29 C 17 26, 19 21, 20 18 Z"/><path class="bf-vein" d="M19 15.5 L6.5 5.5 M19 16 L4 10.5 M19 16.3 L9 14.5 M19 17.6 L10 26 M19 18 L13 28"/><g class="bf-dot"><circle cx="4.6" cy="4.4" r="0.5"/><circle cx="3.3" cy="7" r="0.45"/><circle cx="4" cy="10" r="0.45"/><circle cx="8.4" cy="26.6" r="0.4"/><circle cx="10.6" cy="29.6" r="0.4"/></g></g><g class="bf-w bf-r"><path class="bf-wing" d="M 20 15 C 25 6 33 1 37.5 3 C 39.5 5 38 10 35 13 C 31 16 25 17 20 16.5 Z"/><path class="bf-wing bf-hind" d="M 20 17 C 26 18 32 20 33 25 C 33 29 29 31.5 25.5 29 C 23 26 21 21 20 18 Z"/><path class="bf-vein" d="M 21 15.5 L 33.5 5.5 M 21 16 L 36 10.5 M 21 16.3 L 31 14.5 M 21 17.6 L 30 26 M 21 18 L 27 28"/><g class="bf-dot"><circle cx="35.4" cy="4.4" r="0.5"/><circle cx="36.7" cy="7" r="0.45"/><circle cx="36" cy="10" r="0.45"/><circle cx="31.6" cy="26.6" r="0.4"/><circle cx="29.4" cy="29.6" r="0.4"/></g></g><ellipse class="bf-b" cx="20" cy="17.5" rx="1.05" ry="6"/><circle class="bf-b" cx="20" cy="10.6" r="1.25"/><path class="bf-ant" d="M20 10 Q 18.6 6 16.6 3.4 M20 10 Q 21.4 6 23.4 3.4"/>"""
 
 
 def butterflies():
-    wing_l = '<path d="M20 16 C 11 3, 1 4, 3 13 C 5 19, 12 20, 20 17 Z"/><path class="bf-lo" d="M20 17 C 13 21, 7 27, 11 29.5 C 15 31, 18 25, 20 18 Z"/>'
-    wing_r = '<path d="M20 16 C 29 3, 39 4, 37 13 C 35 19, 28 20, 20 17 Z"/><path class="bf-lo" d="M20 17 C 27 21, 33 27, 29 29.5 C 25 31, 22 25, 20 18 Z"/>'
+    defs = ('<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>'
+            '<radialGradient id="bf-morpho" cx="55%" cy="45%" r="75%"><stop offset="0" stop-color="#9be7ff"/><stop offset=".42" stop-color="#2f9df2"/>'
+            '<stop offset=".8" stop-color="#1757c4"/><stop offset="1" stop-color="#0e2f7a"/></radialGradient></defs></svg>')
     out = []
-    for k, (x, y, size, colour) in enumerate(BF_SPOTS):
-        out.append(f'<span class="bf" style="left:{x}%;top:{y}%;--sz:{size}px;--bc:{colour};--du:{11 + (k * 3) % 7}s;--dl:{-k * 1.7:.1f}s;--fl:{0.18 + (k % 3) * 0.04:.2f}s">'
-                   f'<svg viewBox="0 0 40 32" aria-hidden="true"><g class="bf-w bf-l">{wing_l}</g><g class="bf-w bf-r">{wing_r}</g>'
-                   f'<rect class="bf-b" x="19.1" y="10" width="1.8" height="15" rx=".9"/></svg></span>')
-    return f'<div class="butterflies" aria-hidden="true">{"".join(out)}</div>'
+    for k, (x, y, size) in enumerate(BF_SPOTS):
+        out.append(f'<span class="bf" style="left:{x}%;top:{y}%;--sz:{size}px;--du:{24 + (k * 5) % 11}s;--dl:{-k * 3.1:.1f}s;--fl:{0.7 + (k % 3) * 0.15:.2f}s">'
+                   f'<svg viewBox="0 0 40 32" aria-hidden="true">{BF_SVG}</svg></span>')
+    return f'<div class="butterflies" aria-hidden="true">{defs}{"".join(out)}</div>'
 
 
 def sky_clouds():
