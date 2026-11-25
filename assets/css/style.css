@@ -2812,3 +2812,14 @@ html.brand-gray:not([data-theme="dark"]) .hand { color: #46386b; }
   .ht-q { font-size: clamp(21px, 1.2vw, 26px); }
   .ht-video { width: var(--pw); padding: 14px 14px 54px; }
 }
+
+/* short laptop screens (or a small browser window): everything in the hero shrinks with the screen height so the whole polaroid fits */
+@media (min-width: 901px) and (max-height: 820px) {
+  .ht { --pw: clamp(160px, 30vh, 290px); min-height: calc(100svh + 55vh); }
+  main.home > section.ht { padding-top: clamp(100px, 18vh, 130px); }
+  .ht-next { margin-top: -55vh; } /* a longer overlap, so the bigger polaroid only starts to fade once you scroll */
+  .ht-name { font-size: clamp(40px, min(6.4vw, 9vh), 88px); }
+  .ht-stage { margin-top: clamp(56px, 11vh, 96px); }
+  .ht-quotes { height: calc(var(--pw) * 1.36); }
+  .ht-video { width: var(--pw); top: 90px; }
+}
