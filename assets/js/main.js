@@ -436,6 +436,25 @@ const SITE = {
     if (box && matchMedia("(hover: none)").matches) box.closest(".polaroid").addEventListener("click", () => box.classList.toggle("is-color"));
   }
 
+  /* ---------- "Let's talk about it": drag the coffee cups around; they stay where you leave them (inside the card) ---------- */
+  $$(".cup").forEach((cup) => {
+    const card = cup.closest(".call");
+    let sx = 0, sy = 0, dx = 0, dy = 0, dragging = false;
+    cup.addEventListener("pointerdown", (e) => { dragging = true; cup.setPointerCapture(e.pointerId); sx = e.clientX - dx; sy = e.clientY - dy; cup.classList.add("is-drag"); });
+    cup.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      dx = e.clientX - sx; dy = e.clientY - sy;
+      // keep the cup inside the card
+      const c = card.getBoundingClientRect(), r = cup.getBoundingClientRect();
+      const baseL = r.left - (parseFloat(cup.style.getPropertyValue("--dx")) || 0), baseT = r.top - (parseFloat(cup.style.getPropertyValue("--dy")) || 0);
+      dx = Math.max(c.left - baseL + 6, Math.min(c.right - baseL - r.width - 6, dx));
+      dy = Math.max(c.top - baseT + 6, Math.min(c.bottom - baseT - r.height - 6, dy));
+      cup.style.setProperty("--dx", dx + "px"); cup.style.setProperty("--dy", dy + "px");
+    });
+    const drop = () => { dragging = false; cup.classList.remove("is-drag"); };
+    cup.addEventListener("pointerup", drop); cup.addEventListener("pointercancel", drop);
+  });
+
   /* ---------- Count-up numbers ---------- */
   const countIO = new IntersectionObserver((entries) => {
     entries.forEach((en) => {

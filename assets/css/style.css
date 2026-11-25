@@ -2760,3 +2760,33 @@ html:not([data-theme="dark"]) .ht--sky .fireflies { display: none; }
 /* every small italic line above a title is the same size on every page, and stays about half the title's size:
    20px on laptops, shrinking with the screen to 15px on phones */
 :is(.section-head, .bring-head, .ticker-head, .cd-copy, .call, .lab-head, .afc-sec .af-head) .hand, .sky-hi, .lab-num { font-size: clamp(15px, 1.6vw, 20px); }
+
+/* ---------- "Let's talk about it": text and buttons in the middle, a floating coffee photo at each end (drag them around, main.js) ---------- */
+.call.call--cups { grid-template-columns: 1fr minmax(0, 560px) 1fr; gap: clamp(12px, 3vw, 40px); text-align: center; }
+.call--cups .call-mid p { margin-left: auto; margin-right: auto; }
+.call--cups .call-actions { justify-content: center; }
+.cup { justify-self: center; width: clamp(110px, 13vw, 180px); cursor: grab; touch-action: none; user-select: none;
+  position: relative; z-index: 2; transform: translate(var(--dx, 0px), var(--dy, 0px)); }
+.cup.is-drag { cursor: grabbing; }
+.cup img { display: block; width: 100%; height: auto; pointer-events: none;
+  animation: cupFloat 4.6s ease-in-out infinite; }
+.cup--r img { animation-duration: 5.4s; animation-delay: -2s; }
+.cup.is-drag img { animation-play-state: paused; }
+@keyframes cupFloat { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-12px) rotate(3deg); } }
+[data-theme="dark"] .cup { filter: drop-shadow(0 14px 16px rgba(0, 0, 0, .45)); }
+/* phones: the cups sit small at the two bottom corners, the text stays in the middle */
+@media (max-width: 760px) {
+  .call.call--cups { grid-template-columns: 1fr; padding-bottom: 96px; }
+  .cup { position: absolute; bottom: 14px; width: 88px; }
+  .cup--l { left: 18px; } .cup--r { right: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .cup img { animation: none; } }
+/* a little less space between the hero and Selected work */
+.ht-next { padding-top: 0; }
+main.home .ht-next > section#work { padding-top: 60px; }
+@media (max-width: 900px) { main.home .ht-next > section#work { padding-top: 40px; } }
+
+/* the coffee photos come from a sticker with a white background: show only the round saucer (soft edge); the shadow follows that shape */
+.cup { filter: drop-shadow(0 14px 16px rgba(80, 55, 30, .2)); }
+.cup--l img { -webkit-mask-image: radial-gradient(ellipse 46.5% 46.5% at 50% 54%, #000 96%, transparent 100%); mask-image: radial-gradient(ellipse 46.5% 46.5% at 50% 54%, #000 96%, transparent 100%); }
+.cup--r img { -webkit-mask-image: radial-gradient(ellipse 43% 48.5% at 51% 49%, #000 96%, transparent 100%); mask-image: radial-gradient(ellipse 43% 48.5% at 51% 49%, #000 96%, transparent 100%); }

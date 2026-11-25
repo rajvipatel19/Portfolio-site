@@ -457,9 +457,9 @@ def home():
 
 <section class="section" id="call">
   <div class="wrap">
-    <div class="call glass" data-reveal>
-      <div>
-        <span class="hand">got a project or a role?</span>
+    <div class="call call--cups glass" data-reveal>
+      <div class="cup cup--l" title="drag me"><img src="assets/media/cup-latte.png" alt="A latte with heart latte art" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="call-mid">
         <h2>Let's talk about it</h2>
         <p>Would love to talk about projects, growth &amp; anything design. Pick a time that works for you, it's a relaxed 30-minute chat.</p>
         <div class="call-actions">
@@ -468,6 +468,7 @@ def home():
         </div>
         <p class="call-mail">or email me at <a href="mailto:{C.EMAIL}">{C.EMAIL}</a></p>
       </div>
+      <div class="cup cup--r" title="drag me"><img src="assets/media/cup-cappuccino.png" alt="A cappuccino dusted with cocoa" loading="lazy" decoding="async" draggable="false"></div>
     </div>
   </div>
   <dialog class="cal-modal" aria-label="Book a call with Rajvi">
@@ -641,11 +642,11 @@ def about():
 # ---------- Home hero: "Hi, I am Rajvi Patel", stop-motion polaroid, floating coloured one-liners (home page uses the dark-grey brand colour) ----------
 HERO_QUOTES = [  # (text, left %, top %, colour) around the polaroid on wide screens
     ("AI native product designer", 5, 8, "#c2477a"),
-    ("messy problems → clear direction", 0, 44, "#2e8f63"),
-    ("ex-dentist, now designing for trust", 8, 80, "#b07a12"),
+    ("messy problems → clear direction", 0, 44, "#3478c6"),
+    ("ex-dentist, now designing for trust", 8, 80, "#c2477a"),
     ("I think in systems", 74, 6, "#3478c6"),
-    ("probably claudemaxxing now", 76, 42, "#c7632b"),
-    ("fintech · health-tech · e-commerce", 68, 78, "#6b54c6"),
+    ("probably claudemaxxing now", 76, 42, "#c2477a"),
+    ("fintech · health-tech · e-commerce", 68, 78, "#3478c6"),
 ]
 HERO_NAME = "Hi, I am Rajvi Patel"
 
