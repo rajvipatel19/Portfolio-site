@@ -641,12 +641,12 @@ def about():
 
 # ---------- Home hero: "Hi, I am Rajvi Patel", stop-motion polaroid, floating coloured one-liners (home page uses the dark-grey brand colour) ----------
 HERO_QUOTES = [  # (text, left %, top %, colour) around the polaroid on wide screens
-    ("AI native product designer", 5, 8, "#3f3f46"),
-    ("messy problems → clear direction", 0, 44, "#a1a1aa"),
-    ("ex-dentist, now designing for trust", 8, 80, "#3f3f46"),
-    ("I think in systems", 74, 6, "#a1a1aa"),
-    ("probably claudemaxxing now", 76, 42, "#3f3f46"),
-    ("fintech · health-tech · e-commerce", 68, 78, "#a1a1aa"),
+    ("AI native product designer", 5, 8, "#27272a"),
+    ("messy problems → clear direction", 0, 44, "#71717a"),
+    ("ex-dentist, now designing for trust", 8, 80, "#27272a"),
+    ("I think in systems", 74, 6, "#71717a"),
+    ("probably claudemaxxing now", 76, 42, "#27272a"),
+    ("fintech · health-tech · e-commerce", 68, 78, "#71717a"),
 ]
 HERO_NAME = "Hi, I am Rajvi Patel"
 
