@@ -2802,3 +2802,13 @@ html.brand-gray:not([data-theme="dark"]) .hand { color: #46386b; }
 /* AI Lab: no intro section; the page opens straight on the experiments */
 .sky--lab { display: none; }
 .sky--lab + .lab { padding-top: clamp(110px, 14vh, 150px); }
+
+/* very wide screens: the hero grows with the screen so it doesn't look empty (laptops and phones unchanged) */
+@media (min-width: 1600px) {
+  .ht { --pw: clamp(290px, 17vw, 380px); padding-top: clamp(130px, 11vh, 170px); }
+  .ht-name { font-size: clamp(88px, 5.2vw, 120px); }
+  .ht-stage { width: min(1600px, 76vw); margin-top: clamp(84px, 5vw, 110px); }
+  .ht-quotes { height: calc(var(--pw) * 1.31); }
+  .ht-q { font-size: clamp(21px, 1.2vw, 26px); }
+  .ht-video { width: var(--pw); padding: 14px 14px 54px; }
+}
