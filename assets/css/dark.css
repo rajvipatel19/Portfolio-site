@@ -514,9 +514,5 @@ html.first-reveal[data-theme="dark"] .page-fade { background: #1a1a1e; }
 [data-theme="dark"] .lab-copy .sky-btn { background: #e8e6ec; border-color: #e8e6ec; color: #1b1a1f; box-shadow: 0 12px 26px -16px rgba(0,0,0,.6); }
 [data-theme="dark"] .lab-copy .sky-btn:hover { background: #fff; border-color: #fff; }
 
-/* hero hover (dark): the pointer uncovers the check grid in dusky violet and rose, over a soft dusk sky, from deep night at the top through dusty violet and mauve to warm taupe at the bottom */
-[data-theme="dark"] .ht-check { background:
-    repeating-linear-gradient(0deg, rgba(196, 150, 160, .13) 0 24px, transparent 24px 48px),
-    repeating-linear-gradient(90deg, rgba(160, 140, 196, .13) 0 24px, transparent 24px 48px),
-    linear-gradient(180deg, rgba(32,31,38,0) 0%, rgba(51,46,57,.5) 42%, rgba(77,66,74,.6) 62%, rgba(86,62,67,.6) 76%, rgba(109,92,85,.6) 100%); }
-[data-theme="dark"] .ht-glow { background: radial-gradient(circle 320px at var(--mx) var(--my), rgba(214, 176, 156, .07), transparent 70%); }
+/* hero hover (dark): no pattern or glow on the background; only the letters of the name react to the pointer */
+[data-theme="dark"] .ht-check, [data-theme="dark"] .ht-glow { display: none; }
