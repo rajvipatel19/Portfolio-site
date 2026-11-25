@@ -1430,135 +1430,179 @@ def sku_page():
 
 
 def trainix_page():
-    """Trainix design system case study: SKU-style sections, with the live design system platform embedded."""
+    """Trainix design system case study, in the SILA layout, with the live design system platform embedded."""
     root = "../"
     LIVE = "../assets/lab/trainix-ds.html"
-    rail, bar = cs_rail([("context", "Context"), ("summary", "Project summary"), ("problem", "The problem"), ("goals", "The goals"),
-                         ("discover", "Discover"), ("decisions", "Key decisions"), ("system", "The system"), ("accessibility", "Accessibility"),
-                         ("results", "Results"), ("takeaways", "Key takeaways"), ("conclusion", "Conclusion")])
-    problems = ["<b>Three sets of names.</b> Figma, the UI kit and the code called the same colour three different things",
-                "<b>One-off styles crept in.</b> Without tokens, every new screen risked a new grey, radius or button",
-                "<b>Handoff by eye.</b> The developer had to interpret pictures instead of matching names",
-                "<b>Dense, regulated screens.</b> Long tables, statuses and audit records that can feel heavy and stressful"]
-    prios = ["<b>Quiet chrome, loud content:</b> the sidebar fades into the page so the data does the talking",
-             "<b>Restraint with colour:</b> brand blue only for the main action, links and focus; red only for errors",
-             "<b>Calm tables:</b> no zebra stripes or vertical lines, the person first, one place for row actions",
-             "<b>Soft status badges:</b> a dot and a word on a pale tint, never colour alone",
-             "<b>Every state designed:</b> skeletons while loading, an action when empty, a retry on error"]
-    notes_l = ["Teams trust tools that stay calm under a lot of data",
-               "Designers and developers argue less when they share the same words",
-               "A component library without written rules drifts within weeks"]
-    notes_r = ["An AI coding assistant needs explicit rules, or it invents new styles",
-               "Status shown only by red and green fails people with colour blindness",
-               "Empty, loading and error moments are where enterprise tools lose trust"]
-    tk = lambda items: "".join(f'<div class="sk-note" data-reveal>{SK_CMD}<p>{t}</p></div>' for t in items)
-    decisions = [("Figma names are code names", "<b>bg-brand-solid</b> in Figma is <b>bg-brand-solid</b> in Tailwind. Handoff became matching words, not reading pixels."),
-                 ("Two tiers of tokens", "Raw primitives like <b>blue/700</b> feed <b>51 semantic tokens</b> named by their job. Components only ever use the semantic ones."),
-                 ("Restyle a proven kit", "Untitled UI React gave accessible behaviour through React Aria. I rebuilt its look to match my Figma library instead of starting from zero.")]
-    tries = ["<b>Components:</b> click any cell in a state matrix and watch the React code update",
-             "<b>Colours:</b> drag the brand hue; every component and contrast score updates live",
-             "<b>Publish:</b> draft token changes, then publish them as a new library version",
-             "<b>Accessibility:</b> open a failing pairing and apply the suggested fix",
-             "<b>Developers &amp; AI:</b> the 8 rules that keep an AI assistant on-system"]
-    a11y = [("Warning text · 3.56:1", "Orange warning text on white sat below the 4.5:1 needed for small text. Fix: map it one shade darker."),
+    secs = [("context", "The context"), ("problem", "The problem"), ("research", "Research"),
+            ("discovery", "Discovery"), ("users", "Who it’s for"), ("constraints", "Constraints"),
+            ("decisions", "Key decisions"), ("system", "The system"), ("accessibility", "Accessibility"),
+            ("impact", "Impact"), ("learnings", "Learnings")]
+    stations = "".join(f'<li><a href="#{i}"><span class="node"></span>{n}</a></li>' for i, n in secs)
+
+    team = [("Three sets of names", "Figma, the UI kit and the code called the same colour three different things"),
+            ("One-off styles", "Without tokens, every new screen risked a new grey, radius or button"),
+            ("Handoff by eye", "The developer had to read pictures instead of matching names"),
+            ("An AI that improvises", "Without written rules, an AI coding assistant invents new styles")]
+    users = [("Heavy screens", "Long tables, statuses and deadlines feel overwhelming in a compliance tool"),
+             ("Colour-only status", "Red and green badges fail people with colour blindness"),
+             ("Blank moments", "Empty lists, slow loads and errors often get no design at all"),
+             ("Records that must not change", "Training records and audit logs need to look and behave read-only")]
+    learned = [("Quiet chrome, loud content", "The sidebar fades into the page so the data does the talking."),
+               ("Restraint with colour", "Brand blue only for the main action, links and focus. Red only for errors."),
+               ("Calm tables", "No zebra stripes or vertical lines. The person first, one place for row actions."),
+               ("Every state designed", "Skeletons while loading, an action when empty, a retry on error.")]
+    notes = ["The same colour had three names across Figma, the kit and code",
+             "Status relied on colour alone in the starter components",
+             "Loading, empty and error states were missing from most screens",
+             "Nothing stopped one-off buttons, greys and spacing from creeping in",
+             "Rules lived in people’s heads, not anywhere an AI could read"]
+    peach = [("Records stay read-only", "Training records, audit logs and old SOP versions get no edit or delete buttons."),
+             ("No compliance claims", "The interface never says “21 CFR Part 11 compliant” or “GxP compliant”."),
+             ("The server decides", "Scores and pass/fail come from the backend. The interface only shows them.")]
+    yellow = [("Visible focus everywhere", "Every interactive part shows a focus ring on keyboard focus."),
+              ("Status is never colour alone", "Every badge and alert carries a word or an icon."),
+              ("Every input is labelled", "Visible labels, hints below, errors that say how to fix them.")]
+    tiers = [("Primitive", "The raw palette: <b>blue/700</b>, <b>neutral/300</b>. Never used directly in components."),
+             ("Semantic token", "Named by its job: <b>bg-brand-solid</b>, <b>text-tertiary</b>. 51 of them, the same in Figma and code."),
+             ("Component", "The <b>Primary button</b> reads bg-brand-solid. Change the primitive once and every component follows.")]
+    decisions = [("Figma names are code names", "bg-brand-solid in Figma is bg-brand-solid in Tailwind. Handoff became matching words."),
+                 ("Restyle a proven kit<br>instead of starting from zero", "Untitled UI React gave accessible behaviour. I rebuilt its look to match my Figma library."),
+                 ("Write the rules down,<br>for people and for AI", "13 principles and 8 AI rules live at the top of the design system file.")]
+    tries = [("Components", "Click any cell in a state matrix. The variant, size and React code update with it."),
+             ("Colours", "Drag the brand hue. Every component and contrast score updates live, then publish it as a new version."),
+             ("Usage", "Every component shows when to use it, its specs, and a Do and a Don’t."),
+             ("Developers &amp; AI", "The rules that keep an AI coding assistant on-system, and the Figma-to-code naming.")]
+    a11y = [("Warning text · 3.56:1", "Orange text on white sat below the 4.5:1 small text needs. Fix: one shade darker."),
             ("Warning badge · about 3.3:1", "Orange on its pale tint failed too. The audit suggests the smallest change that passes."),
-            ("Error badge · about 4.0:1", "Red on its pink tint was close but under AA. One step darker passes, with no change to the look.")]
-    results = [("20 components", "Every state drawn in Figma and built in code: 14 stable, 2 in code only, 4 in progress, each labelled honestly."),
-               ("51 semantic tokens", "Every colour in the product named by its job, tied to one primitive palette, the same in Figma and code."),
-               ("13 principles · 8 AI rules", "Written down with a Do and a Don’t each, so designers, developers and the AI build the same way.")]
-    keys = ["Names are the real handoff. Once Figma and code share words, a review becomes “does it match?” instead of “what did you mean?”",
-            "Design the boring states first. Loading, empty and error screens are where trust is won or lost in a compliance tool.",
-            "Let the system check itself. Live contrast checks caught issues my eyes had already accepted.",
-            "Rules scale better than reviews. Writing them for an AI assistant made them clearer for people too."]
+            ("Error badge · about 4.0:1", "Close, but under AA. One step darker passes with no visible change to the look.")]
+    impact = [("20 components", "Every state drawn and built: 14 stable, 2 in code only, 4 in progress, each labelled honestly"),
+              ("51 semantic tokens", "Every colour named by its job, tied to one palette, identical in Figma and code"),
+              ("13 principles · 8 AI rules", "Each with a Do and a Don’t, so people and the AI build the same way")]
 
     body = f"""{nav(root, 'work')}
-<main class="sila sk sl-bg">
-{rail}
+<main class="sila sl-bg">
+<aside class="roadmap sl-rail" aria-label="Case study sections">
+  <a class="sl-rail-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to work</a>
+  <ol><span class="progress"></span>{stations}</ol>
+</aside>
 <div class="sl-main">
-<section class="sl-hero sk-hero">
+<section class="sl-hero">
   <div class="in">
     <a class="sl-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Go Back</a>
-    <h1>Trainix Design System</h1>
-    <div class="sk-meta">
-      <div><p>Role</p><b>Product designer</b><b>Design system</b><b>Front-end build</b></div>
-      <div><p>Duration</p><b>Oct – Nov 2026</b></div>
-      <div><p>Team</p><b>Designer 🙋🏻‍♀️</b><b>1 Backend Developer</b></div>
-      <div class="sk-links"><a href="{LIVE}" target="_blank" rel="noopener">Open the live system {SK_EXT}</a></div>
-    </div>
-    <div class="sk-context" id="context"><h2 class="sk-ghost">Context</h2><p>Trainix helps pharma and clinical teams manage SOPs, assessments, training events and audit trails. Before designing a single screen, I built the design system that every screen would share.</p></div>
+    <p class="sl-kicker">TRAINIX - DESIGN SYSTEM FOR PHARMA TRAINING</p>
+    <h1>One design language for a dense, regulated training platform, from Figma tokens to working React components</h1>
   </div>
-  <div class="sk-hero-img tx-hero"><div class="tx-embed"><iframe src="{LIVE}#overview" title="Trainix design system, live" loading="lazy"></iframe></div></div>
+  <div class="sl-hero-band tx-band"><div class="tx-embed"><iframe src="{LIVE}#overview" title="Trainix design system, live" loading="lazy"></iframe></div></div>
 </section>
-{bar}
 
-<section class="sl-sec" id="summary"><div class="in">
-  <div class="sk-split"><div><p class="sk-kick">Designer who ships</p><h2>Project summary</h2></div>
-    <p class="sk-lead">I owned Trainix <b>end to end</b>: research, the <b>Figma library</b>, and the <b>React front end</b>, built with an AI coding assistant. The result is <b>one design language</b> that designers, developers and the AI all follow, from colour tokens to the last button state.</p></div>
+<aside class="roadmap glass sl-side" aria-label="Case study sections">
+  <h4>the roadmap ✿</h4>
+  <ol><span class="progress"></span>{stations}</ol>
+</aside>
+
+<section class="sl-sec" id="context"><div class="in">
+  <p class="sl-eyebrow">THE CONTEXT</p>
+  <h2><em>Trainix</em> helps pharma and clinical teams manage SOPs, assessments, training events and audit trails in one place.</h2>
+  <p class="sl-lead">Admins run the whole organisation, managers look after their department, and employees see only their own training. I owned the design end to end and built the front end myself, with an AI coding assistant, while a backend developer built the API. Before designing any screens, I built the system both of us would build on.</p>
+  <div class="sl-chips"><span>Design system</span><span>Figma library</span><span>Front-end build</span><span>Accessibility</span></div>
 </div></section>
 
 <section class="sl-sec" id="problem"><div class="in">
-  <div class="sk-split"><div><p class="sk-kick">But first!</p><h2>The Problem</h2></div>
-    <p class="sk-lead">A regulated tool needs to show <b>a lot of data</b> without feeling heavy, and we started with <b>no shared language</b> between design and code.</p></div>
-  <div class="sk-problems">{''.join(f'<div class="sk-problem" data-reveal>{p}</div>' for p in problems)}</div>
+  <p class="sl-eyebrow">THE PROBLEM</p>
+  <h2>What the team and the users faced</h2>
+  <h3 class="sl-sub">Team problems</h3>
+  <div class="sl-grid4">{sl_numcards(team)}</div>
+  <h3 class="sl-sub">User problems</h3>
+  <div class="sl-grid4">{sl_numcards(users)}</div>
+  <p class="sl-trust" data-reveal>Consistency is the “product” in a compliance tool</p>
 </div></section>
 
-<section class="sl-sec sk-tight-top" id="goals"><div class="in">
-  {sk_intro("Not to forget", "The Goals")}
-  <div class="sk-goals">
-    <div class="sk-goal sk-goal--wide" data-reveal><h3>User</h3><p>Make a <b>dense, regulated tool feel calm</b> and clear for admins, managers and employees.</p></div>
-    <div class="sk-goal" data-reveal><h3>Team</h3><p>Turn handoff into <b>matching names</b>, not reading pictures</p></div>
-    <div class="sk-goal" data-reveal><h3>Design</h3><p><b>One library</b>, every state designed, nothing one-off</p></div>
+<section class="sl-sec sl-band-gray" id="research"><div class="in">
+  <p class="sl-eyebrow">THE RESEARCH</p>
+  <h2>What tools people trust with dense data get right</h2>
+  <p class="sl-lead">I studied Linear, Stripe, Zoho, Deel, Remote, Apollo and Mixpanel. I borrowed their principles, not their look: Trainix kept its own blue, its own type and its own tokens.</p>
+  <div class="sl-grid4">{sl_numcards(learned)}</div>
+</div></section>
+
+<section class="sl-sec" id="discovery"><div class="in">
+  <p class="sl-eyebrow">DISCOVERY</p>
+  <h2>UX problems identified</h2>
+  <div class="sl-notes">{''.join(f'<div class="sl-note" data-reveal>{n}</div>' for n in notes)}</div>
+</div></section>
+
+<section class="sl-sec" id="users"><div class="in">
+  <p class="sl-eyebrow">WHO IT’S FOR</p>
+  <h2>Three builders, one language.<br>A designer, a developer and an AI assistant.</h2>
+  <div class="sl-persona">
+    <div class="sl-card" data-reveal><h4>Who uses the system</h4>
+      <p><b>The designer</b> draws every screen from the Figma library.</p>
+      <p><b>The developer</b> connects screens to the Django backend and needs names that match.</p>
+      <p><b>The AI coding assistant</b> builds components and screens, and needs rules it can read.</p></div>
+    <div class="sl-card sl-quotes" data-reveal>
+      <p>“Which grey is the border, and what is it called in code?”</p>
+      <p>“Is there already a component for this, or do I make one?”</p>
+      <p>“What should this look like while it loads, or when it’s empty?”</p></div>
   </div>
 </div></section>
 
-<section class="sl-sec" id="discover"><div class="in">
-  {sk_intro("Let’s", "Discover")}
-  {sk_head("", "What I studied", "I looked at tools people already trust with dense data: <b>Linear, Stripe, Zoho, Deel, Remote, Apollo and Mixpanel</b>. I borrowed their principles, not their look. Trainix kept its own blue, type and tokens.")}
-  <div class="sk-prio"><h2 class="sk-ghost">What they get right</h2><div class="sk-prio-cards">{''.join(f'<div class="sk-prio-card" data-reveal><span>{i+1}.</span><p>{p}</p></div>' for i, p in enumerate(prios))}</div></div>
-</div></section>
-<section class="sl-sec sk-lav"><div class="in">
-  {sk_intro("Everything that shaped the system", "What the research changed")}
-  <div class="sk-notes"><div>{tk(notes_l)}</div><div class="sk-notes-r">{tk(notes_r)}</div></div>
+<section class="sl-sec" id="constraints"><div class="in">
+  <p class="sl-eyebrow">CONSTRAINTS</p>
+  <h2>Designing inside the rules</h2>
+  <p class="sl-lead sl-lead--s">A training platform for regulated teams has rules the design can’t bend, and rules it chooses to keep.</p>
+  <h3 class="sl-sub sl-sub--l">Product rules and accessibility rules</h3>
+  <div class="sl-rules">
+    <div>{''.join(f'<div class="sl-rule sl-rule--peach" data-reveal><h4>{t}</h4><p>{d}</p></div>' for t, d in peach)}</div>
+    <div>{''.join(f'<div class="sl-rule sl-rule--yellow" data-reveal><h4>{t}</h4><p>{d}</p></div>' for t, d in yellow)}</div>
+  </div>
+  <h3 class="sl-sub sl-sub--l">Two tiers of tokens</h3>
+  <p class="sl-lead sl-lead--s">Components never touch raw colours. They use semantic tokens named by their job, which point to one primitive palette.</p>
+  <div class="sl-grid3">{sl_numcards(tiers, "sl-card sl-card--line")}</div>
 </div></section>
 
 <section class="sl-sec" id="decisions"><div class="in">
-  {sk_intro("The calls that", "Key decisions")}
-  <div class="sk-results">{''.join(f'<div class="sk-result" data-reveal><h3>{t}</h3><p>{d}</p></div>' for t, d in decisions)}</div>
-  <p class="sk-sub tx-small">Smaller calls that mattered: skeletons for content and spinners only inside buttons · errors appear when you leave a field and clear the moment it is fixed · buttons say exactly what they do (Create, Assign, Approve), never Submit.</p>
+  <p class="sl-eyebrow">KEY DECISIONS</p>
+  <h2>Decisions that shaped the system</h2>
+  <div class="sl-grid3">{sl_numcards(decisions, "sl-card sl-card--line")}</div>
 </div></section>
 
-<section class="sl-sec sk-gray" id="system"><div class="in">
-  {sk_intro("Don’t just read about it", "Try the system")}
-  <p class="sk-sub sk-center">This is the design system itself, not screenshots. Every colour, radius and state comes from the same tokens the product uses.</p>
+<section class="sl-sec" id="system"><div class="in">
+  <p class="sl-eyebrow">THE SYSTEM</p>
+  <h2>See it in action</h2>
+  <p class="sl-lead">This is the design system itself, not screenshots. Click around: every colour, radius and state comes from the same tokens the product uses.</p>
   <div class="tx-embed tx-embed--lg" data-reveal><iframe src="{LIVE}#button" title="Trainix design system: components" loading="lazy"></iframe></div>
-  <p class="sk-center tx-open"><a class="sk-proto" href="{LIVE}" target="_blank" rel="noopener">Open it full screen {SK_EXT}</a></p>
-  <div class="sk-features tx-tries"><ul>{''.join(f'<li>{x}</li>' for x in tries)}</ul></div>
+  <p class="tx-open"><a class="sl-open" href="{LIVE}" target="_blank" rel="noopener">Open it full screen {ARROW}</a></p>
+  {sl_points(tries)}
 </div></section>
 
-<section class="sl-sec" id="accessibility"><div class="in">
-  {sk_split("Accessibility", "The system runs a WCAG contrast audit on every token change. It flagged three real issues in the Trainix colours, each with a one-step fix.")}
-  <div class="sk-results">{''.join(f'<div class="sk-result" data-reveal><h3>{t}</h3><p>{d}</p></div>' for t, d in a11y)}</div>
-  <p class="sk-sub tx-small">Also built in: visible focus rings on keyboard focus, labelled inputs, status always shown with a word, reduced-motion support, and a colour-vision simulator.</p>
+<section class="sl-sec sl-band-dark" id="accessibility"><div class="in">
+  <p class="sl-eyebrow">ACCESSIBILITY</p>
+  <h2>The system checks itself</h2>
+  <p class="sl-lead">A WCAG contrast audit runs on every token change. It flagged three real issues in the Trainix colours, each with a one-step fix.</p>
+  <div class="sl-row" data-reveal>
+    <div class="sl-row-media tx-media"><div class="tx-embed tx-embed--sm"><iframe src="{LIVE}#accessibility" title="Trainix design system: contrast audit" loading="lazy"></iframe></div></div>
+    <div class="sl-row-text">{sl_points(a11y)}</div>
+  </div>
 </div></section>
 
-<section class="sl-sec sk-gray" id="results"><div class="in">
-  <h2 class="sk-h">Results</h2><p class="sk-sub">Counted from the system itself, not projections:</p>
-  <div class="sk-results">{''.join(f'<div class="sk-result" data-reveal><h3>{t}</h3><p>{d}</p></div>' for t, d in results)}</div>
+<section class="sl-sec" id="impact"><div class="in">
+  <p class="sl-eyebrow">IMPACT</p>
+  <h2>What the system delivers</h2>
+  <div class="sl-impact">{''.join(f'<div class="sl-card" data-reveal><span class="sl-arrow">{SL_ICON}</span><h4>{t}</h4><p>{d}</p></div>' for t, d in impact)}</div>
 </div></section>
-<section class="sl-sec sk-gray sk-tight-top" id="takeaways"><div class="in">
-  <h2 class="sk-h sk-center">Key takeaways</h2>
-  <div class="sk-keys">{''.join(f'<div class="sk-note sk-note--lg" data-reveal>{SK_CMD}<p>{k}</p></div>' for k in keys)}</div>
-</div></section>
-<section class="sl-sec"><div class="in">
-  <div class="sk-forward"><h2 class="sk-ghost">Looking Forward</h2><div><p>Next for the Trainix design system:</p><ul><li>Fix the three contrast pairings and publish v1.1</li><li>Tablet and mobile layouts: collapsible sidebar, drawer, scrolling tables</li><li>Finish Table, Modal, Tooltip and Progress in Figma</li><li>Add a date picker, file upload and slideout panel</li></ul></div></div>
-</div></section>
-<section class="sl-sec sk-concl-band" id="conclusion"><div class="in">
-  <div class="sk-concl" data-reveal><h2>Conclusion</h2><p>Trainix shows how I work on complex products: research first, principles written down, and a system that designers, developers and an AI assistant can all follow. In a compliance tool, calm is a feature.</p></div>
+
+<section class="sl-sec" id="learnings"><div class="in">
+  <p class="sl-eyebrow">LEARNINGS &amp; NEXT STEPS</p>
+  <h2>A design system is a promise, kept in two places</h2>
+  <h3 class="sl-sub sl-sub--m">Learnings</h3>
+  {sl_points([("Names are the real handoff.", "Once Figma and code share words, a review becomes “does it match?” instead of “what did you mean?”"), ("Design the boring states first.", "Loading, empty and error screens are where trust is won or lost in a compliance tool."), ("Rules scale better than reviews.", "Writing them for an AI assistant made them clearer for people too.")])}
+  <h3 class="sl-sub sl-sub--m">What I would do next</h3>
+  <ul class="sl-points sl-points--inline">{''.join(f'<li>{SL_ICON}<p><b>{t}</b> {d}</p></li>' for t, d in [("Fix the three contrast pairings", "and publish v1.1"), ("Tablet and mobile layouts", "collapsible sidebar, drawer, scrolling tables"), ("Finish in Figma", "Table, Modal, Tooltip and Progress"), ("New components", "date picker, file upload and a slideout panel")])}</ul>
+  <p class="sl-quote" data-reveal>“In a compliance tool, calm is a feature”</p>
 </div></section>
 </div>
 </main>
 {footer(root)}"""
-    return head("Trainix Design System · Rajvi Patel", "A calm, information-dense design system for Trainix, a pharmacovigilance training platform, built in Figma and shipped as a React library.", root) + body
+    return head("Trainix Design System · Rajvi Patel", "One design language for Trainix, a pharmacovigilance training platform: tokens, components and written rules, from Figma to React.", root) + body
 
 
 def offline():
