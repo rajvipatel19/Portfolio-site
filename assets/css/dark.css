@@ -435,3 +435,88 @@ html.first-reveal[data-theme="dark"] .page-fade { background: #1a1a1e; }
   -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 160px); mask-image: linear-gradient(180deg, transparent 0, #000 160px); }
 /* at night the corner glow on "What all I do" stays warm only (no lavender edge) */
 [data-theme="dark"] .do-glow { background: radial-gradient(closest-side, rgba(247, 168, 120, .18), rgba(232, 140, 170, .08) 45%, transparent 75%); }
+
+/* dark mode: half as many fireflies (every other one is hidden) */
+[data-theme="dark"] .fireflies .ff:nth-child(even) { display: none; }
+
+/* ================= Dark mode refresh ================= */
+/* page background: the deep, slightly violet night of the song section, with small stars all over */
+[data-theme="dark"] {
+  --night: #1b1a1f;
+  --stars:
+    radial-gradient(circle at 120px 90px, rgba(255,255,255,.5) 0 .8px, transparent 1.4px),
+    radial-gradient(circle at 430px 380px, rgba(255,255,255,.4) 0 .7px, transparent 1.3px),
+    radial-gradient(circle at 300px 610px, rgba(255,255,255,.55) 0 1px, transparent 1.6px);
+  --stars-size: 560px 560px, 640px 640px, 720px 720px;
+}
+[data-theme="dark"] body { background-color: var(--night); background-image: var(--stars); background-size: var(--stars-size); }
+[data-theme="dark"] main.home.sl-bg.ht-page {
+  background: var(--stars), radial-gradient(60% 420px at 85% 900px, rgba(226,170,150,.1) 0, rgba(226,170,150,0) 100%), var(--night);
+  background-size: var(--stars-size), auto, auto; }
+[data-theme="dark"] .ht--sky { background: transparent; }
+
+/* hero one-liners: brighter so they read easily */
+[data-theme="dark"] .ht-q { color: color-mix(in srgb, var(--qc) 22%, #fff); }
+
+/* "How I work with AI" cards: a much softer glow on hover */
+[data-theme="dark"] .afc:hover { box-shadow: 0 12px 24px -20px color-mix(in srgb, var(--c) 22%, transparent); }
+
+/* project cards: solid greys, a step lighter than the page, with the picture panel one step lighter again */
+[data-theme="dark"] .work-grid .card { background: linear-gradient(160deg, #2b2a30 0%, #242328 100%); border: 1px solid rgba(255,255,255,.07);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 20px 40px -30px rgba(0,0,0,.6); -webkit-backdrop-filter: none; backdrop-filter: none; }
+[data-theme="dark"] .work-grid .card::after { background: linear-gradient(115deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,0) 32%); }
+[data-theme="dark"] .work-grid .card:hover { border-color: rgba(255,255,255,.12); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 26px 50px -30px rgba(0,0,0,.7); }
+[data-theme="dark"] .work-grid .card .scene { background: #35343b; }
+[data-theme="dark"] .work-grid .card .chip { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.1); }
+
+/* footer: a dusk sky just after sunset (violet up top, pink, then orange at the horizon), everything a little darker */
+[data-theme="dark"] .ft-video { filter: brightness(.55) saturate(.6); }
+[data-theme="dark"] .ft-media::before { mix-blend-mode: color;
+  background: linear-gradient(180deg, rgba(104,88,140,.8) 0%, rgba(140,104,140,.72) 26%, rgba(176,122,128,.62) 44%, rgba(190,146,116,.5) 56%, rgba(190,146,116,0) 70%); }
+[data-theme="dark"] .ft--scene .ft-media::after { background: linear-gradient(90deg, rgba(22,16,34,.55) 0%, rgba(22,16,34,.2) 42%, rgba(22,16,34,0) 62%); }
+@media (max-width: 860px) { [data-theme="dark"] .ft--scene .ft-media::after { background: linear-gradient(180deg, rgba(22,16,34,.5) 0%, rgba(22,16,34,.2) 45%, rgba(22,16,34,0) 65%); } }
+[data-theme="dark"] .ft--scene .ft-sub { color: #d6cfe2; }
+
+/* AI Lab: colour and hierarchy at night (violet, pink, peach and mint) */
+[data-theme="dark"] .sky--lab { background:
+    radial-gradient(45% 60% at 80% 35%, rgba(124,92,230,.26), transparent 70%),
+    radial-gradient(40% 50% at 10% 90%, rgba(236,120,160,.14), transparent 70%), transparent; }
+[data-theme="dark"] .sky--lab .sky-hi { color: #f6a8c6; }
+[data-theme="dark"] .sky--lab .sky-type { background: linear-gradient(90deg, #b9a4ff, #ff9ec4 55%, #ffc58a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+[data-theme="dark"] .sky--lab .sky-caret { background: #ff9ec4; }
+[data-theme="dark"] .sky--lab .sky-lede { color: #cfc9dc; }
+[data-theme="dark"] .net .ln { stroke: rgba(185,164,255,.45); }
+[data-theme="dark"] .nd { background: radial-gradient(circle, #fff 0%, #cdbcff 45%, rgba(185,164,255,0) 74%); box-shadow: 0 0 14px 5px rgba(160,130,255,.55); }
+[data-theme="dark"] .nd:nth-of-type(3n+2) { background: radial-gradient(circle, #fff 0%, #ffb7d3 45%, rgba(255,158,196,0) 74%); box-shadow: 0 0 14px 5px rgba(255,140,190,.5); }
+[data-theme="dark"] .nd:nth-of-type(3n) { background: radial-gradient(circle, #fff 0%, #ffd7a8 45%, rgba(255,197,138,0) 74%); box-shadow: 0 0 14px 5px rgba(255,190,120,.5); }
+[data-theme="dark"] .nd-tag { color: #ece6ff; background: rgba(124,92,230,.18); border-color: rgba(185,164,255,.35); box-shadow: 0 10px 22px -14px rgba(0,0,0,.6); }
+[data-theme="dark"] .sky--lab .sky-btn--dark {
+  background: linear-gradient(135deg, #8a6cf0, #6247cc); border-color: transparent; color: #fff; box-shadow: 0 14px 30px -14px rgba(124,92,230,.7); }
+[data-theme="dark"] .lab-head h2::after { content: ""; display: block; width: 64px; height: 3px; margin-top: 14px; border-radius: 3px;
+  background: linear-gradient(90deg, #b9a4ff, #ff9ec4, #ffc58a); }
+[data-theme="dark"] .lab-exp { background: linear-gradient(150deg, rgba(124,92,230,.16) 0%, rgba(236,120,160,.06) 55%, rgba(255,197,138,.05) 100%), #211f27;
+  border: 1px solid rgba(185,164,255,.2); box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 30px 60px -40px rgba(124,92,230,.45); }
+[data-theme="dark"] .lab-num { color: #ffc58a; }
+[data-theme="dark"] .lab-exp h2 { color: #fff; }
+[data-theme="dark"] .lab-copy > p:not(.lab-try) { color: #cfc9dc; }
+[data-theme="dark"] .lab-copy .lab-try { color: #8fe3cf; }
+[data-theme="dark"] .lab-steps { padding: 14px 18px 14px 40px; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); color: #e4e0ec; }
+[data-theme="dark"] .lab-steps li::marker { font-weight: 700; }
+[data-theme="dark"] .lab-steps li:nth-child(4n+1)::marker { color: #b9a4ff; }
+[data-theme="dark"] .lab-steps li:nth-child(4n+2)::marker { color: #ff9ec4; }
+[data-theme="dark"] .lab-steps li:nth-child(4n+3)::marker { color: #ffc58a; }
+[data-theme="dark"] .lab-steps li:nth-child(4n)::marker { color: #8fe3cf; }
+[data-theme="dark"] .lab-tags .sky-chip { color: #f1edf7; }
+[data-theme="dark"] .lab-tags .sky-chip:nth-child(1) { background: rgba(185,164,255,.14); border-color: rgba(185,164,255,.35); }
+[data-theme="dark"] .lab-tags .sky-chip:nth-child(2) { background: rgba(255,158,196,.12); border-color: rgba(255,158,196,.32); }
+[data-theme="dark"] .lab-tags .sky-chip:nth-child(3) { background: rgba(143,227,207,.11); border-color: rgba(143,227,207,.3); }
+[data-theme="dark"] .lab-stage { background: radial-gradient(70% 70% at 50% 40%, rgba(124,92,230,.2), transparent 75%), #18171c; }
+[data-theme="dark"] .lab-copy .sky-btn { background: #e8e6ec; border-color: #e8e6ec; color: #1b1a1f; box-shadow: 0 12px 26px -16px rgba(0,0,0,.6); }
+[data-theme="dark"] .lab-copy .sky-btn:hover { background: #fff; border-color: #fff; }
+
+/* hero hover (dark): the pointer uncovers the check grid in dusky violet and rose, over a soft dusk sky, from deep night at the top through dusty violet and mauve to warm taupe at the bottom */
+[data-theme="dark"] .ht-check { background:
+    repeating-linear-gradient(0deg, rgba(196, 150, 160, .13) 0 24px, transparent 24px 48px),
+    repeating-linear-gradient(90deg, rgba(160, 140, 196, .13) 0 24px, transparent 24px 48px),
+    linear-gradient(180deg, rgba(32,31,38,0) 0%, rgba(51,46,57,.5) 42%, rgba(77,66,74,.6) 62%, rgba(86,62,67,.6) 76%, rgba(109,92,85,.6) 100%); }
+[data-theme="dark"] .ht-glow { background: radial-gradient(circle 320px at var(--mx) var(--my), rgba(214, 176, 156, .07), transparent 70%); }

@@ -2776,9 +2776,14 @@ html:not([data-theme="dark"]) .ht--sky .fireflies { display: none; }
 [data-theme="dark"] .cup { filter: drop-shadow(0 14px 16px rgba(0, 0, 0, .45)); }
 /* phones: the cups sit small at the two bottom corners, the text stays in the middle */
 @media (max-width: 760px) {
-  .call.call--cups { grid-template-columns: 1fr; padding-bottom: 96px; }
-  .cup { position: absolute; bottom: 14px; width: 88px; }
+  .call.call--cups { grid-template-columns: 1fr; padding-bottom: 56px; }
+  .cup { position: absolute; bottom: 30px; width: 88px; }
   .cup--l { left: 18px; } .cup--r { right: 18px; }
+}
+/* narrow phones: the email line is wide, so the cups go a little lower to stay clear of it */
+@media (max-width: 480px) {
+  .call.call--cups { padding-bottom: 84px; }
+  .cup { bottom: 12px; width: 76px; }
 }
 @media (prefers-reduced-motion: reduce) { .cup img { animation: none; } }
 /* a little less space between the hero and Selected work */
@@ -2790,3 +2795,10 @@ main.home .ht-next > section#work { padding-top: 60px; }
 .cup { filter: drop-shadow(0 14px 16px rgba(80, 55, 30, .2)); }
 .cup--l img { -webkit-mask-image: radial-gradient(ellipse 46.5% 46.5% at 50% 54%, #000 96%, transparent 100%); mask-image: radial-gradient(ellipse 46.5% 46.5% at 50% 54%, #000 96%, transparent 100%); }
 .cup--r img { -webkit-mask-image: radial-gradient(ellipse 43% 48.5% at 51% 49%, #000 96%, transparent 100%); mask-image: radial-gradient(ellipse 43% 48.5% at 51% 49%, #000 96%, transparent 100%); }
+
+/* the small italic line above a title is dark purple again on the home page too (light mode; dark mode keeps its light grey so it stays readable) */
+html.brand-gray:not([data-theme="dark"]) .hand { color: #46386b; }
+
+/* AI Lab: no intro section; the page opens straight on the experiments */
+.sky--lab { display: none; }
+.sky--lab + .lab { padding-top: clamp(110px, 14vh, 150px); }
