@@ -367,6 +367,10 @@ CASE_STUDIES = [
                "More e-commerce platform integrations"]),
    ]},
  ]},
+
+# ======================================================================= TRAINIX DESIGN SYSTEM
+# Its page is written by trainix_page() in build.py; only the slug and name are needed here.
+{"slug": "trainix-design-system", "name": "Trainix Design System"},
 ]
 
 
