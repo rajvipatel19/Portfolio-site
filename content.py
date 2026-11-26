@@ -47,6 +47,10 @@ PROJECTS = [
      "meta": "E-commerce · B2B SaaS",
      "summary": "A platform letting online sellers source, manage and sell products globally without holding inventory. Connect a store, import products, start selling.",
      "tags": ["B2B", "Dropshipping", "Dashboard", "0→1"]},
+    {"slug": "trainix-design-system", "name": "Trainix Design System", "scene": "trainix", "badge": "LIVE DEMO", "wide": True,
+     "meta": "Enterprise · Design system",
+     "summary": "A design system for an enterprise pharma training platform, built so designers, developers and AI agents all build the same way. 20 components, 51 tokens and written rules for AI.",
+     "tags": ["Design system", "AI workflow", "Accessibility", "Enterprise"]},
 ]
 
 CASE_STUDIES = [

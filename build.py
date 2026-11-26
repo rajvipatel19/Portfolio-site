@@ -171,7 +171,8 @@ def img_ph(label="Image coming soon", ratio="16/9", extra_cls=""):
 # ---------------------------------------------------------------- scenes
 CARD_ART = {"sila": ("scene--lav", "sila.png", "SILA app: verify-identity home screen and the send-money screen"),
             "kiosk": ("scene--butter", "citylockers.png", "CityLockers kiosk welcome screen"),
-            "sku": ("scene--mix", "sku.png", "SKU Platform product catalogue on a tablet")}
+            "sku": ("scene--mix", "sku.png", "SKU Platform product catalogue on a tablet"),
+            "trainix": ("scene--lav", "trainix.png", "Trainix design system: the Button page with its state matrix, on a tablet")}
 
 
 def card_art(kind):
