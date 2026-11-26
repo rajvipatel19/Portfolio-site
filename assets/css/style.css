@@ -2860,3 +2860,6 @@ html.brand-gray:not([data-theme="dark"]) .hand { color: #46386b; }
   .ht-quotes { height: calc(var(--pw) * 1.36); }
   .ht-video { width: var(--pw); top: 90px; }
 }
+/* Trainix home card: a lighter lavender panel */
+.scene--lav.scene--trx { background: radial-gradient(120% 90% at 20% 10%, #fbf9ff 0%, #f3efff 55%, #ebe5ff 100%); }
+.card-media .scene--lav.scene--trx::before { background: linear-gradient(1deg, rgba(196, 178, 232, .18) 0%, rgba(250, 248, 253, .15) 95%); }
