@@ -58,7 +58,7 @@ try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.get
     <p class="sl-kicker">TRAINIX - ENTERPRISE DESIGN SYSTEM FOR PHARMA TRAINING</p>
     <h1>One design language for an enterprise training platform, so designers, developers and AI agents all build the same way</h1>
   </div>
-  <div class="sl-hero-band tx-band"><div class="tx-reel" role="img" aria-label="A short looping demo of the Trainix design system: the pointer opens the Button page from the overview"><div class="tx-zoom"><div class="tx-stage"><iframe src="../assets/lab/trainix-ds.html?embed#overview" title="" tabindex="-1" aria-hidden="true"></iframe><span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div></div></div>
+  <div class="sl-hero-band tx-band"><div class="tx-reel" role="img" aria-label="A short looping demo of the Trainix design system: the pointer opens Button, then Select and its states"><div class="tx-zoom"><div class="tx-stage"><iframe src="../assets/lab/trainix-ds.html?embed#overview" title="" tabindex="-1" aria-hidden="true"></iframe><span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div></div></div>
   <script>(function(){var r=document.querySelector(".tx-reel");if(!r)return;var z=r.querySelector(".tx-zoom"),st=r.querySelector(".tx-stage"),f=r.querySelector("iframe"),cur=r.querySelector(".tx-cursor"),rip=r.querySelector(".tx-ripple");
 var fit=1;function size(){fit=r.clientWidth/1280;st.style.transform="scale("+fit+")"}size();if(window.ResizeObserver)new ResizeObserver(size).observe(r);else addEventListener("resize",size);
 if(matchMedia("(prefers-reduced-motion: reduce)").matches){cur.style.display="none";return}
@@ -79,11 +79,11 @@ function loop(){T.forEach(clearTimeout);T=[];
   at(500,function(){var p=pos(nav("button"),34);put(p,1600);zoom(1.6,p,1600)});
   at(2250,function(){click(pos(nav("button"),34),function(){go("button")})});
   at(2700,function(){zoom(1,null,1400);put(pos("#canvas",null),1400)});
-  moveClick(4600,nav("input"),34,function(){go("input")},1100);
-  ["Filled","Focused","Error"].forEach(function(st,i){var sel='[data-cell="default|'+st+'"]',t=6400+i*2400;at(t,function(){reveal(sel)});moveClick(t+750,sel,null,function(){var c=el(sel);c&&c.click()},900)});
-  moveClick(13800,nav("overview"),34,function(){go("overview")},1200);
-  at(15500,function(){put({x:760,y:560},1100)});
-  at(16800,loop)}
+  moveClick(4600,nav("select"),34,function(){go("select")},1100);
+  ["Placeholder","Filled","Error","Open"].forEach(function(st,i){var sel='button[data-v="'+st+'"]';moveClick(6600+i*1900,sel,null,function(){var c=el(sel);c&&c.click()},900)});
+  moveClick(14400,nav("overview"),34,function(){go("overview")},1200);
+  at(16100,function(){put({x:760,y:560},1100)});
+  at(17400,loop)}
 if(f.contentDocument&&f.contentDocument.readyState==="complete")setTimeout(loop,400);else f.addEventListener("load",function(){setTimeout(loop,400)},{once:true})})();</script>
 </section>
 
