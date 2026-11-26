@@ -65,6 +65,9 @@ if(matchMedia("(prefers-reduced-motion: reduce)").matches){cur.style.display="no
 var T=[],first=true;function at(ms,fn){T.push(setTimeout(fn,ms))}
 function el(sel){try{return f.contentDocument.querySelector(sel)}catch(e){return null}}
 function pos(sel,dx){var a=el(sel);if(!a)return{x:640,y:400};var b=a.getBoundingClientRect();return{x:dx!=null?b.left+dx:b.left+b.width/2,y:b.top+b.height/2}}
+function reveal(sel){var c=el(sel);if(!c)return;var d=f.contentDocument,p=c.parentElement;
+  while(p&&p!==d.body){var o=f.contentWindow.getComputedStyle(p).overflowX;if((o==="auto"||o==="scroll")&&p.scrollWidth>p.clientWidth){var pr=p.getBoundingClientRect(),cr=c.getBoundingClientRect();p.scrollTo({left:p.scrollLeft+cr.left-pr.left-(pr.width-cr.width)/2,behavior:"smooth"});break}p=p.parentElement}
+  var cv=d.getElementById("canvas");if(cv){var vr=cv.getBoundingClientRect(),r2=c.getBoundingClientRect(),over=r2.bottom-(vr.bottom-40);if(over>0)cv.scrollTo({top:cv.scrollTop+over,behavior:"smooth"})}}
 function nav(h){return'#navlist a[href="#'+h+'"]'}
 function go(h){try{var w=f.contentWindow;if(w.location.hash==="#"+h)return;w.history.replaceState(null,"","#"+h);w.dispatchEvent(new w.HashChangeEvent("hashchange"))}catch(e){}}
 function put(p,ms){cur.style.transition="transform "+ms+"ms cubic-bezier(.65,0,.35,1)";cur.style.transform="translate("+p.x+"px,"+p.y+"px)"}
@@ -77,10 +80,10 @@ function loop(){T.forEach(clearTimeout);T=[];
   at(2250,function(){click(pos(nav("button"),34),function(){go("button")})});
   at(2700,function(){zoom(1,null,1400);put(pos("#canvas",null),1400)});
   moveClick(4600,nav("input"),34,function(){go("input")},1100);
-  ["Filled","Focused","Error"].forEach(function(st,i){moveClick(6600+i*1700,'[data-cell="default|'+st+'"]',null,function(){var c=el('[data-cell="default|'+st+'"]');c&&c.click()},900)});
-  moveClick(11800,nav("overview"),34,function(){go("overview")},1200);
-  at(13500,function(){put({x:760,y:560},1100)});
-  at(14800,loop)}
+  ["Filled","Focused","Error"].forEach(function(st,i){var sel='[data-cell="default|'+st+'"]',t=6400+i*2400;at(t,function(){reveal(sel)});moveClick(t+750,sel,null,function(){var c=el(sel);c&&c.click()},900)});
+  moveClick(13800,nav("overview"),34,function(){go("overview")},1200);
+  at(15500,function(){put({x:760,y:560},1100)});
+  at(16800,loop)}
 if(f.contentDocument&&f.contentDocument.readyState==="complete")setTimeout(loop,400);else f.addEventListener("load",function(){setTimeout(loop,400)},{once:true})})();</script>
 </section>
 
