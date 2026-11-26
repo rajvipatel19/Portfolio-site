@@ -1464,7 +1464,7 @@ def trainix_page():
     LIVE = "../assets/lab/trainix-ds.html"
     secs = [("context", "The context"), ("ai", "Systems &amp; AI"), ("discovery", "Discovery"),
             ("research", "Research"), ("users", "Who it’s for"), ("constraints", "The rules"),
-            ("decisions", "Key decisions"), ("system", "The system"), ("accessibility", "Accessibility"),
+            ("decisions", "Key decisions"), ("system", "The system"), ("compare", "Before &amp; after"), ("accessibility", "Accessibility"),
             ("impact", "Impact"), ("learnings", "Learnings")]
     stations = "".join(f'<li><a href="#{i}"><span class="node"></span>{n}</a></li>' for i, n in secs)
 
@@ -1596,9 +1596,16 @@ def trainix_page():
   <p class="sl-eyebrow">THE SYSTEM</p>
   <h2>See it in action</h2>
   <p class="sl-lead">Click around: every colour, radius and state comes from the same tokens the product uses.</p>
-  <div class="tx-embed tx-embed--lg" data-reveal><iframe src="{LIVE}?embed&v={DS_V}#button" title="Trainix design system: components" loading="lazy"></iframe></div>
-  <p class="tx-open"><a class="sl-open" href="{LIVE}?v={DS_V}" target="_blank" rel="noopener">Open it full screen {ARROW}</a></p>
+  <div class="tx-embed tx-embed--lg" data-reveal><iframe src="{LIVE}?embed#button" title="Trainix design system: components" loading="lazy"></iframe></div>
+  <p class="tx-open"><a class="sl-open" href="{LIVE}" target="_blank" rel="noopener">Open it full screen {ARROW}</a></p>
   {sl_points(tries)}
+</div></section>
+
+<section class="sl-sec" id="compare"><div class="in">
+  <p class="sl-eyebrow">BEFORE &amp; AFTER</p>
+  <h2>What changed once the rules were written down</h2>
+  <p class="sl-lead">Drag each slider. The same request to the AI agent, before and after it had the system to read. Each pair recreates a real problem from the build.</p>
+  <div class="tx-ba-grid tx-gap">{tx_compare()}</div>
 </div></section>
 
 <section class="sl-sec sl-band-dark" id="accessibility"><div class="in">
@@ -1606,7 +1613,7 @@ def trainix_page():
   <h2>The system checks itself</h2>
   <p class="sl-lead">A WCAG contrast audit runs on every token change. It flagged three real issues in the Trainix colours, each with a one-step fix.</p>
   <div class="sl-row" data-reveal>
-    <div class="sl-row-media tx-media"><div class="tx-embed tx-embed--sm"><iframe src="{LIVE}?embed&v={DS_V}#accessibility" title="Trainix design system: contrast audit" loading="lazy"></iframe></div></div>
+    <div class="sl-row-media tx-media"><div class="tx-embed tx-embed--sm"><iframe src="{LIVE}?embed#accessibility" title="Trainix design system: contrast audit" loading="lazy"></iframe></div></div>
     <div class="sl-row-text">{sl_points(a11y)}</div>
   </div>
 </div></section>
@@ -1635,11 +1642,51 @@ def tx_reel(live, cls="", lazy=False):
     """Looping demo of the live Trainix design system: a pointer opens Button (with a zoom), then Select and its states."""
     load = ' loading="lazy"' if lazy else ""
     return (f'<div class="tx-reel {cls}" role="img" aria-label="A looping demo of the Trainix design system: the pointer opens Button, then Select and its states">'
-            f'<div class="tx-zoom"><div class="tx-stage"><iframe src="{live}?embed&v={DS_V}#overview" title="" tabindex="-1" aria-hidden="true"{load}></iframe>'
+            f'<div class="tx-zoom"><div class="tx-stage"><iframe src="{live}?embed#overview" title="" tabindex="-1" aria-hidden="true"{load}></iframe>'
             '<span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div></div>'
             f'<script>{TX_REEL_JS}</script>')
 
 
+TX_BA = [
+    ("Buttons", "AI generated inconsistent buttons", "AI used defined component variants",
+     '<div class="ba-btns"><span style="background:linear-gradient(90deg,#8b5cf6,#ec4899);color:#fff;border-radius:999px;padding:10px 22px;font-weight:700">Submit</span>'
+     '<span style="background:#16a34a;color:#fff;border-radius:2px;padding:5px 10px;font-size:11px">Go</span>'
+     '<span style="border:2px dashed #94a3b8;border-radius:14px;padding:12px 18px;color:#334155;background:#fff;font-family:Georgia,serif">Save changes!!</span>'
+     '<span style="background:#3b82f6;color:#fff;border-radius:6px;padding:8px 14px;box-shadow:0 5px 0 #1e40af;text-transform:uppercase;letter-spacing:.08em;font-size:12px">OK</span></div>',
+     '<div class="ba-btns"><span class="ba-b ba-b--pri">Create department</span><span class="ba-b ba-b--sec">Cancel</span>'
+     '<span class="ba-b ba-b--ter">Export</span><span class="ba-b ba-b--des">Archive</span></div>'),
+    ("Colours", "Colours were hardcoded", "Semantic tokens used consistently",
+     '<div class="ba-col"><pre class="ba-code">.card  { background: <i>#F7F7F9</i>; }\n.btn   { color: <i>#3B5BDB</i>; }\n.link  { color: <i>#2F4FD8</i>; }\n.badge { border: 1px solid <i>#DDD</i>; }</pre>'
+     '<div class="ba-sw"><span style="background:#3B5BDB"></span><span style="background:#2F4FD8"></span><span style="background:#1D4ED8"></span><span style="background:#4263EB"></span><em>4 blues for one brand</em></div></div>',
+     '<div class="ba-col"><pre class="ba-code">&lt;Card  className="<b>bg-secondary</b>"&gt;\n&lt;Button color="<b>primary</b>"&gt;\n&lt;a className="<b>text-brand-secondary</b>"&gt;\n&lt;Badge className="<b>border-primary</b>"&gt;</pre>'
+     '<div class="ba-sw"><span style="background:#1D44D8"></span><em>bg-brand-solid, one blue everywhere</em></div></div>'),
+    ("States", "States were often missing", "Loading, empty, error and focus states documented",
+     '<div class="ba-states"><div><small>Loading</small><p class="ba-blank"></p></div><div><small>Empty</small><p class="ba-undef">undefined</p></div>'
+     '<div><small>Error</small><p class="ba-raw">TypeError: cannot read properties of null</p></div><div><small>Focus</small><p class="ba-in"></p></div></div>',
+     '<div class="ba-states"><div><small>Loading</small><p class="ba-skel"><i></i><i></i><i></i></p></div>'
+     '<div><small>Empty</small><p class="ba-empty">No employees yet<span class="ba-b ba-b--pri ba-b--xs">Add employee</span></p></div>'
+     '<div><small>Error</small><p class="ba-err">Couldn’t load employees<span class="ba-b ba-b--sec ba-b--xs">Try again</span></p></div>'
+     '<div><small>Focus</small><p class="ba-in ba-in--focus"></p></div></div>'),
+    ("Names", "Names differed between Figma and code", "Shared naming conventions",
+     '<div class="ba-names"><p><small>Figma</small><code>Primary/Blue 600</code><b class="ba-x">✕</b></p><p><small>UI kit</small><code>brand-600</code><b class="ba-x">✕</b></p><p><small>Code</small><code>#1D4ED8</code><b class="ba-x">✕</b></p></div>',
+     '<div class="ba-names"><p><small>Figma</small><code>bg-brand-solid</code><b class="ba-ok">✓</b></p><p><small>UI kit</small><code>bg-brand-solid</code><b class="ba-ok">✓</b></p><p><small>Code</small><code>bg-brand-solid</code><b class="ba-ok">✓</b></p></div>'),
+]
+
+TX_BA_JS = 'document.querySelectorAll(".tx-ba input").forEach(function(i){var b=i.closest(".tx-ba");function set(){b.style.setProperty("--p",i.value+"%")}i.addEventListener("input",set);set()});'
+
+
+def tx_compare():
+    """Before / after sliders for the Trainix case study (recreated examples)."""
+    knob = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    out = []
+    for name, before, after, b_html, a_html in TX_BA:
+        out.append(f'<figure class="tx-ba-card" data-reveal><div class="tx-ba" style="--p:50%">'
+                   f'<div class="tx-ba-pane tx-ba-after" aria-hidden="true">{a_html}<span class="tx-ba-tag tx-ba-tag--after">After</span></div>'
+                   f'<div class="tx-ba-pane tx-ba-before" aria-hidden="true">{b_html}<span class="tx-ba-tag tx-ba-tag--before">Before</span></div>'
+                   f'<span class="tx-ba-handle" aria-hidden="true"><span class="tx-ba-knob">{knob}</span></span>'
+                   f'<input type="range" min="0" max="100" value="50" aria-label="{name}: drag to compare before and after"></div>'
+                   f'<figcaption><span><b>Before</b>{before}</span><span><b>After</b>{after}</span></figcaption></figure>')
+    return "".join(out) + f"<script>{TX_BA_JS}</script>"
 def offline():
     """Shown by the service worker (sw.js) when a page can't load because there's no internet.
     Everything is inside this one file, so it works with no connection at all."""
