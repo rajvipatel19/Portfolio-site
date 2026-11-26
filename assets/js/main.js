@@ -509,6 +509,14 @@ const SITE = {
     new IntersectionObserver(([en]) => { en.isIntersecting ? v.play().catch(() => {}) : v.pause(); }, { threshold: 0.35 }).observe(card);
   });
 
+  /* ---------- Home card videos: show the frame once the first picture is in ---------- */
+  $$(".card-reel").forEach((r) => {
+    const m = $("video, img", r); if (!m) return;
+    const on = () => { r.classList.add("is-ready"); r.closest(".scene")?.classList.add("is-ready"); };
+    if (m.tagName === "IMG") { m.complete && m.naturalWidth ? on() : m.addEventListener("load", on, { once: true }); }
+    else { m.readyState >= 2 ? on() : m.addEventListener("loadeddata", on, { once: true }); }
+  });
+
   /* ---------- Hero video (falls back to soft mesh if missing) ---------- */
   const hv = $(".hero-media video");
   if (hv) {

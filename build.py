@@ -10,6 +10,7 @@ import content as C
 ROOT = Path(__file__).parent
 import hashlib
 ASSET_V = hashlib.md5((ROOT / "assets/css/style.css").read_bytes() + (ROOT / "assets/css/dark.css").read_bytes() + (ROOT / "assets/js/main.js").read_bytes()).hexdigest()[:8]
+DS_V = hashlib.md5((ROOT / "assets/lab/trainix-ds.html").read_bytes()).hexdigest()[:8]  # version tag for the Trainix demo, so browsers load a fresh copy after every change
 
 ARROW = '<svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 ARROW_UR = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -175,10 +176,35 @@ CARD_ART = {"sila": ("scene--lav", "sila.png", "SILA app: verify-identity home s
             "trainix": ("scene--lav scene--trx", "trainix.png", "Trainix design system: the Button page with its state matrix, on a tablet")}
 
 
+# Moving picture for each home card, taken from its case study: (file in assets/media, width/height, label, crop)
+# SILA: the phone is cropped out of its video (clip-path). CityLockers / SKU: only the screen is shown, without the
+# tablet / laptop around it: (top, right, bottom, left) = how much of the video, in %, lies outside the screen.
+CARD_REEL = {"sila": ("sila/flow-send.mp4", "408/844", "SILA send money flow on a phone", "clip-path: inset(0.4% 1.4% 0.5% 1.4% round 18.4% / 8.9%)"),
+             "kiosk": ("citylockers/flow-booking.mp4", "1658/1312", "CityLockers booking flow on the kiosk", (9.7, 6.5, 12.7, 6.5)),
+             "sku": ("sku/store-flow.gif", "1080/920", "SKU Platform store connection flow", (15.8, 10.0, 18.6, 10.5))}
+
+
+def card_reel(kind):
+    """The case study's video over the card's still picture: SILA as a phone, the others in the same glass frame as the Trainix demo."""
+    src, ar, label, crop = CARD_REEL[kind]
+    if src.endswith(".gif"):
+        inner = f'<img src="assets/media/{src}" alt="{label}" loading="lazy" decoding="async">'
+    else:
+        inner = (f'<video src="assets/media/{src}"{f" style={chr(34)}{crop}{chr(34)}" if isinstance(crop, str) else ""} muted loop playsinline '
+                 f'preload="none" data-autoplay aria-label="{label}"></video>')
+    if isinstance(crop, str):
+        return f'<div class="card-reel card-reel--phone" style="--ar:{ar}">{inner}</div>'
+    t, r, b, l = crop
+    w, h = (int(n) for n in ar.split("/"))
+    fw, fh = (100 - l - r) / 100, (100 - t - b) / 100  # share of the video that is screen
+    style = f"--sar:{w * fw:.0f}/{h * fh:.0f};--fw:{fw:.3f};--fh:{fh:.3f};--l:{l / 100:.3f};--t:{t / 100:.3f}"
+    return f'<div class="card-frame"><div class="card-reel card-reel--screen card-reel--{kind}" style="{style}">{inner}</div></div>'
+
+
 def card_art(kind):
     """Home page card picture (same images as the Framer site), on the card's soft coloured panel."""
     bg, img, alt = CARD_ART[kind]
-    live = tx_reel("assets/lab/trainix-ds.html", "tx-reel--card", lazy=True) if kind == "trainix" else ""  # live demo plays over the still picture
+    live = f'<div class="card-frame">{tx_reel("assets/lab/trainix-ds.html", "tx-reel--card", lazy=True)}</div>' if kind == "trainix" else card_reel(kind)  # demo or video plays over the still picture
     extra = " scene--live" if live else ""
     return f'<div class="scene {bg}{extra}"><img class="card-img" src="assets/media/cards/{img}" alt="{alt}" loading="lazy" decoding="async">{live}</div>'
 
@@ -1570,8 +1596,8 @@ def trainix_page():
   <p class="sl-eyebrow">THE SYSTEM</p>
   <h2>See it in action</h2>
   <p class="sl-lead">Click around: every colour, radius and state comes from the same tokens the product uses.</p>
-  <div class="tx-embed tx-embed--lg" data-reveal><iframe src="{LIVE}?embed#button" title="Trainix design system: components" loading="lazy"></iframe></div>
-  <p class="tx-open"><a class="sl-open" href="{LIVE}" target="_blank" rel="noopener">Open it full screen {ARROW}</a></p>
+  <div class="tx-embed tx-embed--lg" data-reveal><iframe src="{LIVE}?embed&v={DS_V}#button" title="Trainix design system: components" loading="lazy"></iframe></div>
+  <p class="tx-open"><a class="sl-open" href="{LIVE}?v={DS_V}" target="_blank" rel="noopener">Open it full screen {ARROW}</a></p>
   {sl_points(tries)}
 </div></section>
 
@@ -1580,7 +1606,7 @@ def trainix_page():
   <h2>The system checks itself</h2>
   <p class="sl-lead">A WCAG contrast audit runs on every token change. It flagged three real issues in the Trainix colours, each with a one-step fix.</p>
   <div class="sl-row" data-reveal>
-    <div class="sl-row-media tx-media"><div class="tx-embed tx-embed--sm"><iframe src="{LIVE}?embed#accessibility" title="Trainix design system: contrast audit" loading="lazy"></iframe></div></div>
+    <div class="sl-row-media tx-media"><div class="tx-embed tx-embed--sm"><iframe src="{LIVE}?embed&v={DS_V}#accessibility" title="Trainix design system: contrast audit" loading="lazy"></iframe></div></div>
     <div class="sl-row-text">{sl_points(a11y)}</div>
   </div>
 </div></section>
@@ -1609,7 +1635,7 @@ def tx_reel(live, cls="", lazy=False):
     """Looping demo of the live Trainix design system: a pointer opens Button (with a zoom), then Select and its states."""
     load = ' loading="lazy"' if lazy else ""
     return (f'<div class="tx-reel {cls}" role="img" aria-label="A looping demo of the Trainix design system: the pointer opens Button, then Select and its states">'
-            f'<div class="tx-zoom"><div class="tx-stage"><iframe src="{live}?embed#overview" title="" tabindex="-1" aria-hidden="true"{load}></iframe>'
+            f'<div class="tx-zoom"><div class="tx-stage"><iframe src="{live}?embed&v={DS_V}#overview" title="" tabindex="-1" aria-hidden="true"{load}></iframe>'
             '<span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div></div>'
             f'<script>{TX_REEL_JS}</script>')
 

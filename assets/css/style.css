@@ -2873,3 +2873,35 @@ html.brand-gray:not([data-theme="dark"]) .hand { color: #46386b; }
 .tx-band .tx-reel { border: 1px solid rgba(29, 68, 216, .16); box-shadow: 0 0 0 10px rgba(255, 255, 255, .7), 0 0 0 11px rgba(29, 68, 216, .1), 0 40px 70px -24px rgba(29, 68, 216, .32), 0 4px 12px rgba(17, 24, 39, .06); }
 .tx-band .tx-reel:hover { box-shadow: 0 0 0 10px rgba(255, 255, 255, .8), 0 0 0 11px rgba(29, 68, 216, .12), 0 50px 90px -26px rgba(29, 68, 216, .38), 0 4px 12px rgba(17, 24, 39, .06); }
 :root:not([data-theme="dark"]) .sl-hero-band.tx-band { background: linear-gradient(180deg, rgba(234, 241, 255, .8) 0%, rgba(190, 210, 252, .6) 100%); }
+
+/* home cards: the case study video plays in a rounded frame over the still picture, like the Trainix demo */
+/* every video is the same height as the Trainix demo; no white box behind it */
+.card-reel { position: absolute; left: 50%; top: 50%; height: 78cqh; min-height: 0; max-width: 86cqw; aspect-ratio: var(--ar); translate: -50% -50%; border-radius: 12px; overflow: hidden; box-shadow: 0 18px 36px -16px rgba(31, 42, 55, .35); opacity: 0; transition: opacity .6s, transform .7s var(--ease); }
+.card-media .card-reel video, .card-reel img { position: static; z-index: auto; opacity: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+.card-reel.is-ready { opacity: 1; }
+.card:hover .card-reel { transform: scale(1.03); }
+/* SILA: the video is cropped to the phone, which is the frame */
+.card-reel--phone { width: calc(78cqh * var(--ar)); border-radius: 0; overflow: visible; box-shadow: none; filter: drop-shadow(0 18px 22px rgba(31, 42, 55, .28)); }
+/* CityLockers and SKU: only the screen (the tablet / laptop around it is cut away), the same height as the Trainix demo */
+.card-reel--screen { height: min(53.75cqw, 82.5cqh); max-width: none; aspect-ratio: var(--sar); background: #fff; }
+.card-media .card-reel--screen video, .card-reel--screen img { position: absolute; max-width: none; width: calc(100% / var(--fw)); height: calc(100% / var(--fh)); left: calc(-100% * var(--l) / var(--fw)); top: calc(-100% * var(--t) / var(--fh)); object-fit: fill; }
+/* one see-through glass frame around the Trainix, CityLockers and SKU screens (the screen sits inside it) */
+.card-frame { position: absolute; left: 50%; top: 50%; translate: -50% -50%; padding: 8px; border-radius: 20px; background: linear-gradient(135deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, .06)); -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4); border: 1px solid rgba(255, 255, 255, .5); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), 0 22px 44px -18px rgba(31, 42, 55, .32); opacity: 0; transition: opacity .6s, transform .7s var(--ease); }
+.card-frame:has(.is-ready, .tx-ready) { opacity: 1; }
+.card:hover .card-frame { transform: scale(1.03); }
+.card-frame .card-reel, .card-frame .tx-reel--card { position: relative; left: auto; top: auto; translate: none; display: block; border: 0; box-shadow: none; transform: none !important; }
+.card-frame .tx-reel--card { width: min(84cqw, 129cqh); }
+.card-frame .card-reel--screen { height: min(52.5cqw, 80.5cqh); }
+/* CityLockers and SKU: exactly the Trainix box (16:10, same width); the screen fills the width, lined up at its top, and any extra height is cut at the bottom */
+.card-frame .card-reel--sku { height: auto; width: min(84cqw, 129cqh); aspect-ratio: 16 / 10; }
+.card-media .card-frame .card-reel--sku img { left: 0; top: 0; height: auto; translate: calc(-100% * var(--l)) calc(-100% * var(--t)); }
+/* hide every card's still picture once its video or demo is showing (it was showing through the glass as a grey haze on Trainix) */
+.scene--live:has(.is-ready, .tx-ready) .card-img { opacity: 0; }
+/* every card shows its own colour all the time (what used to appear only on hover), like the Trainix card */
+.card-media .scene::before { opacity: 1; }
+/* SILA: a big iPhone (its own frame, no glass) that starts near the top of the card and runs off the bottom edge */
+.card-media .card-reel--phone { top: 14cqh; translate: -50% 0; height: auto; width: min(46cqw, 60cqh); max-width: none; }
+.card-media .scene:has(.card-reel--phone) { overflow: hidden; }
+/* once the video shows, the still picture underneath fades away */
+.card-media .card-img { transition: transform .7s var(--ease), opacity .6s; }
+.scene--live.is-ready .card-img { opacity: 0; }

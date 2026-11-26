@@ -14,8 +14,8 @@
 <!-- fonts load in the background, so the page can draw straight away (system fonts show for a moment) -->
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="../assets/css/style.css?v=2ccc30c0">
-<link rel="stylesheet" href="../assets/css/dark.css?v=2ccc30c0">
+<link rel="stylesheet" href="../assets/css/style.css?v=efc08ecc">
+<link rel="stylesheet" href="../assets/css/dark.css?v=efc08ecc">
 <script>/* every visit opens in the light theme; a switch to dark is kept only while browsing this visit (applied before the page draws, so no flash) */
 try { localStorage.removeItem("theme"); if (sessionStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
 /* the "just a minute" reveal plays only the first time the home page opens in a visit */
@@ -58,7 +58,7 @@ try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.get
     <p class="sl-kicker">TRAINIX - ENTERPRISE DESIGN SYSTEM FOR PHARMA TRAINING</p>
     <h1>One design language for an enterprise training platform, so designers, developers and AI agents all build the same way</h1>
   </div>
-  <div class="sl-hero-band tx-band"><div class="tx-reel " role="img" aria-label="A looping demo of the Trainix design system: the pointer opens Button, then Select and its states"><div class="tx-zoom"><div class="tx-stage"><iframe src="../assets/lab/trainix-ds.html?embed#overview" title="" tabindex="-1" aria-hidden="true"></iframe><span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div></div><script>(function(){document.querySelectorAll(".tx-reel:not([data-on])").forEach(function(r){r.dataset.on=1;var z=r.querySelector(".tx-zoom"),st=r.querySelector(".tx-stage"),f=r.querySelector("iframe"),cur=r.querySelector(".tx-cursor"),rip=r.querySelector(".tx-ripple");
+  <div class="sl-hero-band tx-band"><div class="tx-reel " role="img" aria-label="A looping demo of the Trainix design system: the pointer opens Button, then Select and its states"><div class="tx-zoom"><div class="tx-stage"><iframe src="../assets/lab/trainix-ds.html?embed&v=b986cffc#overview" title="" tabindex="-1" aria-hidden="true"></iframe><span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div></div><script>(function(){document.querySelectorAll(".tx-reel:not([data-on])").forEach(function(r){r.dataset.on=1;var z=r.querySelector(".tx-zoom"),st=r.querySelector(".tx-stage"),f=r.querySelector("iframe"),cur=r.querySelector(".tx-cursor"),rip=r.querySelector(".tx-ripple");
 var fit=1;function size(){fit=r.clientWidth/1280;st.style.transform="scale("+fit+")"}size();if(window.ResizeObserver)new ResizeObserver(size).observe(r);else addEventListener("resize",size);
 if(matchMedia("(prefers-reduced-motion: reduce)").matches){cur.style.display="none";return}
 var T=[],first=true;function at(ms,fn){T.push(setTimeout(fn,ms))}
@@ -158,8 +158,8 @@ var dd=f.contentDocument;if(dd&&dd.readyState==="complete"&&dd.location.href!=="
   <p class="sl-eyebrow">THE SYSTEM</p>
   <h2>See it in action</h2>
   <p class="sl-lead">Click around: every colour, radius and state comes from the same tokens the product uses.</p>
-  <div class="tx-embed tx-embed--lg" data-reveal><iframe src="../assets/lab/trainix-ds.html?embed#button" title="Trainix design system: components" loading="lazy"></iframe></div>
-  <p class="tx-open"><a class="sl-open" href="../assets/lab/trainix-ds.html" target="_blank" rel="noopener">Open it full screen <svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+  <div class="tx-embed tx-embed--lg" data-reveal><iframe src="../assets/lab/trainix-ds.html?embed&v=b986cffc#button" title="Trainix design system: components" loading="lazy"></iframe></div>
+  <p class="tx-open"><a class="sl-open" href="../assets/lab/trainix-ds.html?v=b986cffc" target="_blank" rel="noopener">Open it full screen <svg class="arr" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
   <ul class="sl-points"><li><svg class="sl-ic" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 5.3 17.6 8.9 14 12.5 10.4 8.9ZM19.1 10.4 22.7 14 19.1 17.6 15.5 14ZM8.9 10.4 12.5 14 8.9 17.6 5.3 14ZM14 15.5 17.6 19.1 14 22.7 10.4 19.1Z" fill="currentColor"/></svg><div><h4>Components</h4><p>Click any cell in a state matrix. The variant, size and React code update with it.</p></div></li><li><svg class="sl-ic" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 5.3 17.6 8.9 14 12.5 10.4 8.9ZM19.1 10.4 22.7 14 19.1 17.6 15.5 14ZM8.9 10.4 12.5 14 8.9 17.6 5.3 14ZM14 15.5 17.6 19.1 14 22.7 10.4 19.1Z" fill="currentColor"/></svg><div><h4>Colours</h4><p>Drag the brand hue. Every component and contrast score updates live, then publish it as a new version.</p></div></li><li><svg class="sl-ic" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 5.3 17.6 8.9 14 12.5 10.4 8.9ZM19.1 10.4 22.7 14 19.1 17.6 15.5 14ZM8.9 10.4 12.5 14 8.9 17.6 5.3 14ZM14 15.5 17.6 19.1 14 22.7 10.4 19.1Z" fill="currentColor"/></svg><div><h4>Usage</h4><p>Every component shows when to use it, its specs, and a Do and a Don’t.</p></div></li><li><svg class="sl-ic" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 5.3 17.6 8.9 14 12.5 10.4 8.9ZM19.1 10.4 22.7 14 19.1 17.6 15.5 14ZM8.9 10.4 12.5 14 8.9 17.6 5.3 14ZM14 15.5 17.6 19.1 14 22.7 10.4 19.1Z" fill="currentColor"/></svg><div><h4>Developers &amp; AI</h4><p>The rules that keep an AI coding assistant on-system, and the Figma-to-code naming.</p></div></li></ul>
 </div></section>
 
@@ -168,7 +168,7 @@ var dd=f.contentDocument;if(dd&&dd.readyState==="complete"&&dd.location.href!=="
   <h2>The system checks itself</h2>
   <p class="sl-lead">A WCAG contrast audit runs on every token change. It flagged three real issues in the Trainix colours, each with a one-step fix.</p>
   <div class="sl-row" data-reveal>
-    <div class="sl-row-media tx-media"><div class="tx-embed tx-embed--sm"><iframe src="../assets/lab/trainix-ds.html?embed#accessibility" title="Trainix design system: contrast audit" loading="lazy"></iframe></div></div>
+    <div class="sl-row-media tx-media"><div class="tx-embed tx-embed--sm"><iframe src="../assets/lab/trainix-ds.html?embed&v=b986cffc#accessibility" title="Trainix design system: contrast audit" loading="lazy"></iframe></div></div>
     <div class="sl-row-text"><ul class="sl-points"><li><svg class="sl-ic" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 5.3 17.6 8.9 14 12.5 10.4 8.9ZM19.1 10.4 22.7 14 19.1 17.6 15.5 14ZM8.9 10.4 12.5 14 8.9 17.6 5.3 14ZM14 15.5 17.6 19.1 14 22.7 10.4 19.1Z" fill="currentColor"/></svg><div><h4>Warning text · 3.56:1</h4><p>Orange text on white sat below the 4.5:1 small text needs. Fix: one shade darker.</p></div></li><li><svg class="sl-ic" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 5.3 17.6 8.9 14 12.5 10.4 8.9ZM19.1 10.4 22.7 14 19.1 17.6 15.5 14ZM8.9 10.4 12.5 14 8.9 17.6 5.3 14ZM14 15.5 17.6 19.1 14 22.7 10.4 19.1Z" fill="currentColor"/></svg><div><h4>Warning badge · about 3.3:1</h4><p>Orange on its pale tint failed too. The audit suggests the smallest change that passes.</p></div></li><li><svg class="sl-ic" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 5.3 17.6 8.9 14 12.5 10.4 8.9ZM19.1 10.4 22.7 14 19.1 17.6 15.5 14ZM8.9 10.4 12.5 14 8.9 17.6 5.3 14ZM14 15.5 17.6 19.1 14 22.7 10.4 19.1Z" fill="currentColor"/></svg><div><h4>Error badge · about 4.0:1</h4><p>Close, but under AA. One step darker passes with no visible change to the look.</p></div></li></ul></div>
   </div>
 </div></section>
@@ -207,6 +207,6 @@ var dd=f.contentDocument;if(dd&&dd.readyState==="complete"&&dd.location.href!=="
     </div>
   </div>
 </footer>
-<script src="../assets/js/main.js?v=2ccc30c0"></script>
+<script src="../assets/js/main.js?v=efc08ecc"></script>
 </body>
 </html>
