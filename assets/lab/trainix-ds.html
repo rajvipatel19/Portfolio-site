@@ -664,7 +664,6 @@ table.tok{width:100%;border-collapse:collapse;min-width:640px}
       <button class="btn btn-sm h-secondary menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false"><i data-lucide="menu"></i></button>
       <div class="crumbs" id="crumbs"></div>
       <div class="top-right">
-        <span class="chip ver-top">Figma names = code names</span>
       </div>
     </header>
     <div class="work" id="work"></div>
@@ -807,7 +806,7 @@ function apply(){var R=resolve(S.draft),root=document.documentElement.style;
 
 /* ================= HELPERS ================= */
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-function ic(n,cls){return'<i data-lucide="'+n+'"'+(cls?' class="'+cls+'"':"")+'></i>'}
+function ic(n,cls){if(n==="universal-access")return'<svg class="lucide'+(cls?" "+cls:"")+'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="7" r="1.3" fill="currentColor" stroke="none"/><path d="M7.5 9.5l4.5 1 4.5-1M12 10.5v3.5l-2.5 4.5M12 14l2.5 4.5"/></svg>';return'<i data-lucide="'+n+'"'+(cls?' class="'+cls+'"':"")+'></i>'}
 function icons(){if(window.lucide)try{lucide.createIcons({attrs:{"stroke-width":2}})}catch(e){}}
 function seg(id,opts,val,extra){return'<div class="seg" role="group" data-seg="'+id+'"'+(extra||"")+'>'+opts.map(function(o){var v=typeof o==="string"?o:o[0],l=typeof o==="string"?o:o[1];return'<button type="button" data-v="'+esc(v)+'" aria-pressed="'+(String(v)===String(val))+'">'+esc(l)+'</button>'}).join("")+'</div>'}
 function copyText(txt,label){var done=function(){toast({type:"success",description:label||"Copied to clipboard"})};
@@ -1156,7 +1155,7 @@ function renderNav(){var r=route(),fails=audit(S.draft).filter(function(a){retur
   var link=function(t){return'<a href="#'+t[0]+'"'+(r===t[0]?' aria-current="page"':"")+'>'+ic(t[2])+t[1]+(t[0]==="accessibility"?'<span class="count'+(fails?"":" ok")+'" aria-label="'+fails+' contrast issues">'+(fails||ic("check"))+'</span>':"")+'</a>'};
   var h='<div class="nav-group">'+link(["overview","Overview","house"])+'</div>'+
    '<div class="nav-group"><div class="nav-label">Foundations</div>'+[["tokens","Colours","palette"],["typography","Typography","type"],["spacing","Spacing & shape","ruler"]].map(link).join("")+'</div>'+
-   '<div class="nav-group"><div class="nav-label">Guidelines</div>'+[["accessibility","Accessibility","contrast"],["guidelines","Developers & AI","code"]].map(link).join("")+'</div>';
+   '<div class="nav-group"><div class="nav-label">Guidelines</div>'+[["accessibility","Accessibility","universal-access"],["guidelines","Developers & AI","code"]].map(link).join("")+'</div>';
   var q=(UI.q||"").trim().toLowerCase(),shown=0;
   GROUPS.forEach(function(g){var ks=g[1].filter(function(k){return!q||COMP[k].name.toLowerCase().indexOf(q)>-1||g[0].toLowerCase().indexOf(q)>-1});if(!ks.length)return;shown+=ks.length;
     h+='<div class="nav-group"><div class="nav-label">'+g[0]+'</div>'+ks.map(function(k){var c=COMP[k],dc=c.status==="draft"?" warn":c.status==="code"?" codeonly":"",tt=c.status==="draft"?"Draft: not in Figma or code yet":c.status==="code"?"Built in code, not in Figma yet":"Stable: in Figma and code";
@@ -1277,7 +1276,7 @@ function viewOverview(){var stable=ORDER.filter(function(k){return!COMP[k].statu
   var canvas='<div class="hero"><span class="eyebrow">Trainix design system · v'+S.version.join(".")+'</span><h1>One design language for every Trainix screen</h1><p>Tokens, components and written rules for Trainix, a training platform for pharmacovigilance teams. Designed in Figma, built in React, and named the same in both.</p><div class="row"><a class="btn btn-md h-primary" href="#button">'+ic("layout-grid")+'Explore components</a><a class="btn btn-md h-secondary" href="#tokens">'+ic("palette")+'Edit brand colours</a></div></div>'+
    '<div class="stats"><div class="stat"><b>'+SEM.length+'</b><span>semantic colour tokens</span></div><div class="stat"><b>'+ORDER.length+'</b><span>components · '+stable+' stable</span></div><div class="stat"><b>'+PRINCIPLES.length+'</b><span>design principles</span></div><div class="stat"><b>4</b><span>states on every screen</span></div></div>'+
    '<div class="sec-label"><span>What’s inside</span><span></span></div><div class="tiles">'+
-   [["tokens","palette","Foundations","Colours, typography, spacing, radius and shadows as tokens"],["button","layout-grid","Components",ORDER.length+" components with every state, usage and code"],["accessibility","contrast","Accessibility","Live WCAG contrast audit and a colour-vision simulator"],["guidelines","code","Developers & AI","Rules for AI, Figma-to-code naming, folders and writing rules"]].map(function(t){return'<a class="tile" href="#'+t[0]+'">'+ic(t[1])+'<b>'+t[2]+'</b><span>'+t[3]+'</span></a>'}).join("")+'</div>'+
+   [["tokens","palette","Foundations","Colours, typography, spacing, radius and shadows as tokens"],["button","layout-grid","Components",ORDER.length+" components with every state, usage and code"],["accessibility","universal-access","Accessibility","Live WCAG contrast audit and a colour-vision simulator"],["guidelines","code","Developers & AI","Rules for AI, Figma-to-code naming, folders and writing rules"]].map(function(t){return'<a class="tile" href="#'+t[0]+'">'+ic(t[1])+'<b>'+t[2]+'</b><span>'+t[3]+'</span></a>'}).join("")+'</div>'+
    '<div class="sec-label"><span>How the tiers connect</span><span>change the primitive once, every component follows</span></div><div class="card chain"><div class="lnk"><small>Primitive</small><span><span class="sw" style="background:'+b["bg-brand-solid"]+'"></span>'+refLabel(refOf("bg-brand-solid",S.draft))+'</span></div>'+ic("arrow-right")+'<div class="lnk"><small>Semantic token</small><span>bg-brand-solid</span></div>'+ic("arrow-right")+'<div class="lnk"><small>Component</small>'+btn("primary","sm","Default","Create department","Leading")+'</div></div>'+
    '<div class="sec-label"><span>Principles</span><span>followed on every screen</span></div><div class="card princ"><div class="pr head"><span>#</span><span>Principle</span><span>Do</span><span>Don’t</span></div>'+PRINCIPLES.map(function(p,i){return'<div class="pr"><span class="n">'+(i<9?"0":"")+(i+1)+'</span><b>'+p[0]+'</b><span class="d">'+ic("check")+'<span>'+p[1]+'</span></span><span class="x">'+ic("x")+'<span>'+p[2]+'</span></span></div>'}).join("")+'</div>';
   var ins='<div class="field"><div class="field-label"><span>Status key</span></div><div class="legend"><div><span class="dot"></span>Stable: in Figma and in code</div><div><span class="dot codeonly"></span>In code only: to add to Figma</div><div><span class="dot warn"></span>Draft: not finished in Figma yet</div></div></div><hr class="div">'+
