@@ -14,8 +14,8 @@
 <!-- fonts load in the background, so the page can draw straight away (system fonts show for a moment) -->
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="assets/css/style.css?v=e15cb306">
-<link rel="stylesheet" href="assets/css/dark.css?v=e15cb306">
+<link rel="stylesheet" href="assets/css/style.css?v=a94b3655">
+<link rel="stylesheet" href="assets/css/dark.css?v=a94b3655">
 <script>/* every visit opens in the light theme; a switch to dark is kept only while browsing this visit (applied before the page draws, so no flash) */
 try { localStorage.removeItem("theme"); if (sessionStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
 /* the "just a minute" reveal plays only the first time the home page opens in a visit */
@@ -82,21 +82,46 @@ try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.get
     <p>A bag storage kiosk for Dubai tourists who want to explore the city hands-free. 2,000+ bookings, under 4 minutes each.</p>
     <div class="tags"><span class="chip">B2C</span><span class="chip">Kiosk UX</span><span class="chip">Shipped</span></div>
   </div>
-</a><a class="card glass tilt card--wide" href="work/sku-platform.html" data-video="" data-reveal style="--d:0.16s">
+</a><a class="card glass tilt card--wide" href="work/trainix-design-system.html" data-video="" data-reveal style="--d:0.16s">
+  <div class="card-media"><div class="scene scene--lav scene--live"><img class="card-img" src="assets/media/cards/trainix.png" alt="Trainix design system: the Button page with its state matrix, on a tablet" loading="lazy" decoding="async"><div class="tx-reel tx-reel--card" role="img" aria-label="A looping demo of the Trainix design system: the pointer opens Button, then Select and its states"><div class="tx-zoom"><div class="tx-stage"><iframe src="assets/lab/trainix-ds.html?embed#overview" title="" tabindex="-1" aria-hidden="true" loading="lazy"></iframe><span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div></div><script>(function(){document.querySelectorAll(".tx-reel:not([data-on])").forEach(function(r){r.dataset.on=1;var z=r.querySelector(".tx-zoom"),st=r.querySelector(".tx-stage"),f=r.querySelector("iframe"),cur=r.querySelector(".tx-cursor"),rip=r.querySelector(".tx-ripple");
+var fit=1;function size(){fit=r.clientWidth/1280;st.style.transform="scale("+fit+")"}size();if(window.ResizeObserver)new ResizeObserver(size).observe(r);else addEventListener("resize",size);
+if(matchMedia("(prefers-reduced-motion: reduce)").matches){cur.style.display="none";return}
+var T=[],first=true;function at(ms,fn){T.push(setTimeout(fn,ms))}
+function el(sel){try{return f.contentDocument.querySelector(sel)}catch(e){return null}}
+function pos(sel,dx){var a=el(sel);if(!a)return{x:640,y:400};var b=a.getBoundingClientRect();return{x:dx!=null?b.left+dx:b.left+b.width/2,y:b.top+b.height/2}}
+function reveal(sel){var c=el(sel);if(!c)return;var d=f.contentDocument,p=c.parentElement;
+  while(p&&p!==d.body){var o=f.contentWindow.getComputedStyle(p).overflowX;if((o==="auto"||o==="scroll")&&p.scrollWidth>p.clientWidth){var pr=p.getBoundingClientRect(),cr=c.getBoundingClientRect();p.scrollTo({left:p.scrollLeft+cr.left-pr.left-(pr.width-cr.width)/2,behavior:"smooth"});break}p=p.parentElement}
+  var cv=d.getElementById("canvas");if(cv){var vr=cv.getBoundingClientRect(),r2=c.getBoundingClientRect(),over=r2.bottom-(vr.bottom-40);if(over>0)cv.scrollTo({top:cv.scrollTop+over,behavior:"smooth"})}}
+function nav(h){return'#navlist a[href="#'+h+'"]'}
+function go(h){try{var w=f.contentWindow;if(w.location.hash==="#"+h)return;w.history.replaceState(null,"","#"+h);w.dispatchEvent(new w.HashChangeEvent("hashchange"))}catch(e){}}
+function put(p,ms){cur.style.transition="transform "+ms+"ms cubic-bezier(.65,0,.35,1)";cur.style.transform="translate("+p.x+"px,"+p.y+"px)"}
+function zoom(s,p,ms){z.style.transition="transform "+ms+"ms cubic-bezier(.65,0,.35,1)";if(p)z.style.transformOrigin=(p.x*fit)+"px "+(p.y*fit)+"px";z.style.transform="scale("+s+")"}
+function click(p,fn){cur.classList.add("tx-press");rip.style.left=p.x+"px";rip.style.top=p.y+"px";rip.classList.remove("tx-go");void rip.offsetWidth;rip.classList.add("tx-go");setTimeout(function(){cur.classList.remove("tx-press");fn&&fn()},220)}
+function moveClick(t,sel,dx,fn,mv){at(t,function(){put(pos(sel,dx),mv||1000)});at(t+(mv||1000)+150,function(){click(pos(sel,dx),fn)})}
+function loop(){T.forEach(clearTimeout);T=[];
+  if(first){go("overview");put({x:760,y:560},0);first=false}
+  at(500,function(){var p=pos(nav("button"),34);put(p,1600);zoom(1.6,p,1600)});
+  at(2250,function(){click(pos(nav("button"),34),function(){go("button")})});
+  at(2700,function(){zoom(1,null,1400);put(pos("#canvas",null),1400)});
+  moveClick(4600,nav("select"),34,function(){go("select")},1100);
+  ["Placeholder","Filled","Error","Open"].forEach(function(st,i){var sel='button[data-v="'+st+'"]';moveClick(6600+i*1900,sel,null,function(){var c=el(sel);c&&c.click()},900)});
+  moveClick(14400,nav("overview"),34,function(){go("overview")},1200);
+  at(16100,function(){put({x:760,y:560},1100)});
+  at(17400,loop)}
+var dd=f.contentDocument;if(dd&&dd.readyState==="complete"&&dd.location.href!=="about:blank"){r.classList.add("tx-ready");setTimeout(loop,400)}else f.addEventListener("load",function(){r.classList.add("tx-ready");setTimeout(loop,400)},{once:true})})})();</script></div></div>
+  <div class="card-body">
+    <div class="card-meta">Enterprise · Design system <span class="badge">LIVE DEMO</span></div>
+    <h3>Trainix Design System <span class="go"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></h3>
+    <p>A design system for an enterprise pharma training platform, built so designers, developers and AI agents all build the same way. 20 components, 51 tokens and written rules for AI.</p>
+    <div class="tags"><span class="chip">Design system</span><span class="chip">AI workflow</span><span class="chip">Accessibility</span><span class="chip">Enterprise</span></div>
+  </div>
+</a><a class="card glass tilt card--wide" href="work/sku-platform.html" data-video="" data-reveal style="--d:0.24s">
   <div class="card-media"><div class="scene scene--mix"><img class="card-img" src="assets/media/cards/sku.png" alt="SKU Platform product catalogue on a tablet" loading="lazy" decoding="async"></div></div>
   <div class="card-body">
     <div class="card-meta">E-commerce · B2B SaaS <span class="badge">SHIPPED</span></div>
     <h3>SKU Platform <span class="go"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></h3>
     <p>A platform letting online sellers source, manage and sell products globally without holding inventory. Connect a store, import products, start selling.</p>
     <div class="tags"><span class="chip">B2B</span><span class="chip">Dropshipping</span><span class="chip">Dashboard</span><span class="chip">0→1</span></div>
-  </div>
-</a><a class="card glass tilt card--wide" href="work/trainix-design-system.html" data-video="" data-reveal style="--d:0.24s">
-  <div class="card-media"><div class="scene scene--lav"><img class="card-img" src="assets/media/cards/trainix.png" alt="Trainix design system: the Button page with its state matrix, on a tablet" loading="lazy" decoding="async"></div></div>
-  <div class="card-body">
-    <div class="card-meta">Enterprise · Design system <span class="badge">LIVE DEMO</span></div>
-    <h3>Trainix Design System <span class="go"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10 10 4M5 4h5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></h3>
-    <p>A design system for an enterprise pharma training platform, built so designers, developers and AI agents all build the same way. 20 components, 51 tokens and written rules for AI.</p>
-    <div class="tags"><span class="chip">Design system</span><span class="chip">AI workflow</span><span class="chip">Accessibility</span><span class="chip">Enterprise</span></div>
   </div>
 </a>
     </div>
@@ -418,6 +443,6 @@ try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.get
     </div>
   </div>
 </footer>
-<script src="assets/js/main.js?v=e15cb306"></script>
+<script src="assets/js/main.js?v=a94b3655"></script>
 </body>
 </html>

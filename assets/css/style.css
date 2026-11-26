@@ -1163,6 +1163,12 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .tx-ripple.tx-go { animation: txRipple .6s ease-out; }
 @keyframes txRipple { from { opacity: 1; transform: scale(.3); } to { opacity: 0; transform: scale(1.6); } }
 .tx .tx-grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* the same demo inside the home page card, over the still picture */
+.scene--live { container-type: size; }
+.tx-reel--card { position: absolute; left: 50%; top: 50%; width: min(86cqw, 132cqh); translate: -50% -50%; border-radius: 12px; box-shadow: 0 18px 36px -16px rgba(31, 42, 55, .35); opacity: 0; transition: opacity .6s, transform .7s var(--ease); }
+.tx-reel--card.tx-ready { opacity: 1; }
+.tx-reel--card:hover { transform: none; }
+.card:hover .tx-reel--card { transform: scale(1.03); }
 @media (prefers-reduced-motion: reduce) { .tx-reel, .tx-reel:hover { transform: none; transition: none; } }
 @media (max-width: 700px) { .tx-reel { border-radius: 14px; } .tx .tx-grid2 { grid-template-columns: 1fr; } }
 

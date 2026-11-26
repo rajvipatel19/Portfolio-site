@@ -14,8 +14,8 @@
 <!-- fonts load in the background, so the page can draw straight away (system fonts show for a moment) -->
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="../assets/css/style.css?v=e15cb306">
-<link rel="stylesheet" href="../assets/css/dark.css?v=e15cb306">
+<link rel="stylesheet" href="../assets/css/style.css?v=a94b3655">
+<link rel="stylesheet" href="../assets/css/dark.css?v=a94b3655">
 <script>/* every visit opens in the light theme; a switch to dark is kept only while browsing this visit (applied before the page draws, so no flash) */
 try { localStorage.removeItem("theme"); if (sessionStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
 /* the "just a minute" reveal plays only the first time the home page opens in a visit */
@@ -58,8 +58,7 @@ try { if (/^\/(index(\.html)?)?$/.test(location.pathname) && !sessionStorage.get
     <p class="sl-kicker">TRAINIX - ENTERPRISE DESIGN SYSTEM FOR PHARMA TRAINING</p>
     <h1>One design language for an enterprise training platform, so designers, developers and AI agents all build the same way</h1>
   </div>
-  <div class="sl-hero-band tx-band"><div class="tx-reel" role="img" aria-label="A short looping demo of the Trainix design system: the pointer opens Button, then Select and its states"><div class="tx-zoom"><div class="tx-stage"><iframe src="../assets/lab/trainix-ds.html?embed#overview" title="" tabindex="-1" aria-hidden="true"></iframe><span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div></div></div>
-  <script>(function(){var r=document.querySelector(".tx-reel");if(!r)return;var z=r.querySelector(".tx-zoom"),st=r.querySelector(".tx-stage"),f=r.querySelector("iframe"),cur=r.querySelector(".tx-cursor"),rip=r.querySelector(".tx-ripple");
+  <div class="sl-hero-band tx-band"><div class="tx-reel " role="img" aria-label="A looping demo of the Trainix design system: the pointer opens Button, then Select and its states"><div class="tx-zoom"><div class="tx-stage"><iframe src="../assets/lab/trainix-ds.html?embed#overview" title="" tabindex="-1" aria-hidden="true"></iframe><span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div></div><script>(function(){document.querySelectorAll(".tx-reel:not([data-on])").forEach(function(r){r.dataset.on=1;var z=r.querySelector(".tx-zoom"),st=r.querySelector(".tx-stage"),f=r.querySelector("iframe"),cur=r.querySelector(".tx-cursor"),rip=r.querySelector(".tx-ripple");
 var fit=1;function size(){fit=r.clientWidth/1280;st.style.transform="scale("+fit+")"}size();if(window.ResizeObserver)new ResizeObserver(size).observe(r);else addEventListener("resize",size);
 if(matchMedia("(prefers-reduced-motion: reduce)").matches){cur.style.display="none";return}
 var T=[],first=true;function at(ms,fn){T.push(setTimeout(fn,ms))}
@@ -84,7 +83,7 @@ function loop(){T.forEach(clearTimeout);T=[];
   moveClick(14400,nav("overview"),34,function(){go("overview")},1200);
   at(16100,function(){put({x:760,y:560},1100)});
   at(17400,loop)}
-if(f.contentDocument&&f.contentDocument.readyState==="complete")setTimeout(loop,400);else f.addEventListener("load",function(){setTimeout(loop,400)},{once:true})})();</script>
+var dd=f.contentDocument;if(dd&&dd.readyState==="complete"&&dd.location.href!=="about:blank"){r.classList.add("tx-ready");setTimeout(loop,400)}else f.addEventListener("load",function(){r.classList.add("tx-ready");setTimeout(loop,400)},{once:true})})})();</script></div>
 </section>
 
 <aside class="roadmap glass sl-side" aria-label="Case study sections">
@@ -208,6 +207,6 @@ if(f.contentDocument&&f.contentDocument.readyState==="complete")setTimeout(loop,
     </div>
   </div>
 </footer>
-<script src="../assets/js/main.js?v=e15cb306"></script>
+<script src="../assets/js/main.js?v=a94b3655"></script>
 </body>
 </html>

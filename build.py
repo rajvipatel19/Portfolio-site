@@ -178,7 +178,9 @@ CARD_ART = {"sila": ("scene--lav", "sila.png", "SILA app: verify-identity home s
 def card_art(kind):
     """Home page card picture (same images as the Framer site), on the card's soft coloured panel."""
     bg, img, alt = CARD_ART[kind]
-    return f'<div class="scene {bg}"><img class="card-img" src="assets/media/cards/{img}" alt="{alt}" loading="lazy" decoding="async"></div>'
+    live = tx_reel("assets/lab/trainix-ds.html", "tx-reel--card", lazy=True) if kind == "trainix" else ""  # live demo plays over the still picture
+    extra = " scene--live" if live else ""
+    return f'<div class="scene {bg}{extra}"><img class="card-img" src="assets/media/cards/{img}" alt="{alt}" loading="lazy" decoding="async">{live}</div>'
 
 
 def scene(kind):
@@ -1477,11 +1479,8 @@ def trainix_page():
               ("51 semantic tokens", "Every colour named by its job, tied to one palette, identical in Figma and code"),
               ("13 principles · 8 AI rules", "Each with a Do and a Don’t, so people and the AI build the same way")]
 
-    reel = (f'<div class="tx-zoom"><div class="tx-stage"><iframe src="{LIVE}?embed#overview" title="" tabindex="-1" aria-hidden="true"></iframe>'
-            '<span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div>')
 
 
-    REEL_JS = '(function(){var r=document.querySelector(".tx-reel");if(!r)return;var z=r.querySelector(".tx-zoom"),st=r.querySelector(".tx-stage"),f=r.querySelector("iframe"),cur=r.querySelector(".tx-cursor"),rip=r.querySelector(".tx-ripple");\nvar fit=1;function size(){fit=r.clientWidth/1280;st.style.transform="scale("+fit+")"}size();if(window.ResizeObserver)new ResizeObserver(size).observe(r);else addEventListener("resize",size);\nif(matchMedia("(prefers-reduced-motion: reduce)").matches){cur.style.display="none";return}\nvar T=[],first=true;function at(ms,fn){T.push(setTimeout(fn,ms))}\nfunction el(sel){try{return f.contentDocument.querySelector(sel)}catch(e){return null}}\nfunction pos(sel,dx){var a=el(sel);if(!a)return{x:640,y:400};var b=a.getBoundingClientRect();return{x:dx!=null?b.left+dx:b.left+b.width/2,y:b.top+b.height/2}}\nfunction reveal(sel){var c=el(sel);if(!c)return;var d=f.contentDocument,p=c.parentElement;\n  while(p&&p!==d.body){var o=f.contentWindow.getComputedStyle(p).overflowX;if((o==="auto"||o==="scroll")&&p.scrollWidth>p.clientWidth){var pr=p.getBoundingClientRect(),cr=c.getBoundingClientRect();p.scrollTo({left:p.scrollLeft+cr.left-pr.left-(pr.width-cr.width)/2,behavior:"smooth"});break}p=p.parentElement}\n  var cv=d.getElementById("canvas");if(cv){var vr=cv.getBoundingClientRect(),r2=c.getBoundingClientRect(),over=r2.bottom-(vr.bottom-40);if(over>0)cv.scrollTo({top:cv.scrollTop+over,behavior:"smooth"})}}\nfunction nav(h){return\'#navlist a[href="#\'+h+\'"]\'}\nfunction go(h){try{var w=f.contentWindow;if(w.location.hash==="#"+h)return;w.history.replaceState(null,"","#"+h);w.dispatchEvent(new w.HashChangeEvent("hashchange"))}catch(e){}}\nfunction put(p,ms){cur.style.transition="transform "+ms+"ms cubic-bezier(.65,0,.35,1)";cur.style.transform="translate("+p.x+"px,"+p.y+"px)"}\nfunction zoom(s,p,ms){z.style.transition="transform "+ms+"ms cubic-bezier(.65,0,.35,1)";if(p)z.style.transformOrigin=(p.x*fit)+"px "+(p.y*fit)+"px";z.style.transform="scale("+s+")"}\nfunction click(p,fn){cur.classList.add("tx-press");rip.style.left=p.x+"px";rip.style.top=p.y+"px";rip.classList.remove("tx-go");void rip.offsetWidth;rip.classList.add("tx-go");setTimeout(function(){cur.classList.remove("tx-press");fn&&fn()},220)}\nfunction moveClick(t,sel,dx,fn,mv){at(t,function(){put(pos(sel,dx),mv||1000)});at(t+(mv||1000)+150,function(){click(pos(sel,dx),fn)})}\nfunction loop(){T.forEach(clearTimeout);T=[];\n  if(first){go("overview");put({x:760,y:560},0);first=false}\n  at(500,function(){var p=pos(nav("button"),34);put(p,1600);zoom(1.6,p,1600)});\n  at(2250,function(){click(pos(nav("button"),34),function(){go("button")})});\n  at(2700,function(){zoom(1,null,1400);put(pos("#canvas",null),1400)});\n  moveClick(4600,nav("select"),34,function(){go("select")},1100);\n  ["Placeholder","Filled","Error","Open"].forEach(function(st,i){var sel=\'button[data-v="\'+st+\'"]\';moveClick(6600+i*1900,sel,null,function(){var c=el(sel);c&&c.click()},900)});\n  moveClick(14400,nav("overview"),34,function(){go("overview")},1200);\n  at(16100,function(){put({x:760,y:560},1100)});\n  at(17400,loop)}\nif(f.contentDocument&&f.contentDocument.readyState==="complete")setTimeout(loop,400);else f.addEventListener("load",function(){setTimeout(loop,400)},{once:true})})();'
 
     body = f"""{nav(root, 'work')}
 <main class="sila sl-bg tx">
@@ -1496,8 +1495,7 @@ def trainix_page():
     <p class="sl-kicker">TRAINIX - ENTERPRISE DESIGN SYSTEM FOR PHARMA TRAINING</p>
     <h1>One design language for an enterprise training platform, so designers, developers and AI agents all build the same way</h1>
   </div>
-  <div class="sl-hero-band tx-band"><div class="tx-reel" role="img" aria-label="A short looping demo of the Trainix design system: the pointer opens Button, then Select and its states">{reel}</div></div>
-  <script>{REEL_JS}</script>
+  <div class="sl-hero-band tx-band">{tx_reel(LIVE)}</div>
 </section>
 
 <aside class="roadmap glass sl-side" aria-label="Case study sections">
@@ -1602,6 +1600,18 @@ def trainix_page():
 </main>
 {footer(root)}"""
     return head("Trainix Design System · Rajvi Patel", "One design language for Trainix, an enterprise pharma training platform: tokens, components and written rules that keep people and AI agents consistent.", root) + body
+
+
+TX_REEL_JS = '(function(){document.querySelectorAll(".tx-reel:not([data-on])").forEach(function(r){r.dataset.on=1;var z=r.querySelector(".tx-zoom"),st=r.querySelector(".tx-stage"),f=r.querySelector("iframe"),cur=r.querySelector(".tx-cursor"),rip=r.querySelector(".tx-ripple");\nvar fit=1;function size(){fit=r.clientWidth/1280;st.style.transform="scale("+fit+")"}size();if(window.ResizeObserver)new ResizeObserver(size).observe(r);else addEventListener("resize",size);\nif(matchMedia("(prefers-reduced-motion: reduce)").matches){cur.style.display="none";return}\nvar T=[],first=true;function at(ms,fn){T.push(setTimeout(fn,ms))}\nfunction el(sel){try{return f.contentDocument.querySelector(sel)}catch(e){return null}}\nfunction pos(sel,dx){var a=el(sel);if(!a)return{x:640,y:400};var b=a.getBoundingClientRect();return{x:dx!=null?b.left+dx:b.left+b.width/2,y:b.top+b.height/2}}\nfunction reveal(sel){var c=el(sel);if(!c)return;var d=f.contentDocument,p=c.parentElement;\n  while(p&&p!==d.body){var o=f.contentWindow.getComputedStyle(p).overflowX;if((o==="auto"||o==="scroll")&&p.scrollWidth>p.clientWidth){var pr=p.getBoundingClientRect(),cr=c.getBoundingClientRect();p.scrollTo({left:p.scrollLeft+cr.left-pr.left-(pr.width-cr.width)/2,behavior:"smooth"});break}p=p.parentElement}\n  var cv=d.getElementById("canvas");if(cv){var vr=cv.getBoundingClientRect(),r2=c.getBoundingClientRect(),over=r2.bottom-(vr.bottom-40);if(over>0)cv.scrollTo({top:cv.scrollTop+over,behavior:"smooth"})}}\nfunction nav(h){return\'#navlist a[href="#\'+h+\'"]\'}\nfunction go(h){try{var w=f.contentWindow;if(w.location.hash==="#"+h)return;w.history.replaceState(null,"","#"+h);w.dispatchEvent(new w.HashChangeEvent("hashchange"))}catch(e){}}\nfunction put(p,ms){cur.style.transition="transform "+ms+"ms cubic-bezier(.65,0,.35,1)";cur.style.transform="translate("+p.x+"px,"+p.y+"px)"}\nfunction zoom(s,p,ms){z.style.transition="transform "+ms+"ms cubic-bezier(.65,0,.35,1)";if(p)z.style.transformOrigin=(p.x*fit)+"px "+(p.y*fit)+"px";z.style.transform="scale("+s+")"}\nfunction click(p,fn){cur.classList.add("tx-press");rip.style.left=p.x+"px";rip.style.top=p.y+"px";rip.classList.remove("tx-go");void rip.offsetWidth;rip.classList.add("tx-go");setTimeout(function(){cur.classList.remove("tx-press");fn&&fn()},220)}\nfunction moveClick(t,sel,dx,fn,mv){at(t,function(){put(pos(sel,dx),mv||1000)});at(t+(mv||1000)+150,function(){click(pos(sel,dx),fn)})}\nfunction loop(){T.forEach(clearTimeout);T=[];\n  if(first){go("overview");put({x:760,y:560},0);first=false}\n  at(500,function(){var p=pos(nav("button"),34);put(p,1600);zoom(1.6,p,1600)});\n  at(2250,function(){click(pos(nav("button"),34),function(){go("button")})});\n  at(2700,function(){zoom(1,null,1400);put(pos("#canvas",null),1400)});\n  moveClick(4600,nav("select"),34,function(){go("select")},1100);\n  ["Placeholder","Filled","Error","Open"].forEach(function(st,i){var sel=\'button[data-v="\'+st+\'"]\';moveClick(6600+i*1900,sel,null,function(){var c=el(sel);c&&c.click()},900)});\n  moveClick(14400,nav("overview"),34,function(){go("overview")},1200);\n  at(16100,function(){put({x:760,y:560},1100)});\n  at(17400,loop)}\nvar dd=f.contentDocument;if(dd&&dd.readyState==="complete"&&dd.location.href!=="about:blank"){r.classList.add("tx-ready");setTimeout(loop,400)}else f.addEventListener("load",function(){r.classList.add("tx-ready");setTimeout(loop,400)},{once:true})})})();'
+
+
+def tx_reel(live, cls="", lazy=False):
+    """Looping demo of the live Trainix design system: a pointer opens Button (with a zoom), then Select and its states."""
+    load = ' loading="lazy"' if lazy else ""
+    return (f'<div class="tx-reel {cls}" role="img" aria-label="A looping demo of the Trainix design system: the pointer opens Button, then Select and its states">'
+            f'<div class="tx-zoom"><div class="tx-stage"><iframe src="{live}?embed#overview" title="" tabindex="-1" aria-hidden="true"{load}></iframe>'
+            '<span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div></div>'
+            f'<script>{TX_REEL_JS}</script>')
 
 
 def offline():
