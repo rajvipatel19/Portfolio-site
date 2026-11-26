@@ -1433,29 +1433,27 @@ def trainix_page():
     """Trainix design system case study, in the SILA layout, with the live design system platform embedded."""
     root = "../"
     LIVE = "../assets/lab/trainix-ds.html"
-    secs = [("context", "The context"), ("problem", "The problem"), ("research", "Research"),
-            ("discovery", "Discovery"), ("users", "Who it’s for"), ("constraints", "Constraints"),
+    secs = [("context", "The context"), ("ai", "Systems &amp; AI"), ("discovery", "Discovery"),
+            ("research", "Research"), ("users", "Who it’s for"), ("constraints", "The rules"),
             ("decisions", "Key decisions"), ("system", "The system"), ("accessibility", "Accessibility"),
             ("impact", "Impact"), ("learnings", "Learnings")]
     stations = "".join(f'<li><a href="#{i}"><span class="node"></span>{n}</a></li>' for i, n in secs)
 
-    team = [("Three sets of names", "Figma, the UI kit and the code called the same colour three different things"),
-            ("One-off styles", "Without tokens, every new screen risked a new grey, radius or button"),
-            ("Handoff by eye", "The developer had to read pictures instead of matching names"),
-            ("An AI that improvises", "Without written rules, an AI coding assistant invents new styles")]
-    users = [("Heavy screens", "Long tables, statuses and deadlines feel overwhelming in a compliance tool"),
-             ("Colour-only status", "Red and green badges fail people with colour blindness"),
-             ("Blank moments", "Empty lists, slow loads and errors often get no design at all"),
-             ("Records that must not change", "Training records and audit logs need to look and behave read-only")]
+    ai = [("AI agents need a source of truth", "An AI coding agent builds fast, but only as consistently as the rules it can read. The design system is that rulebook."),
+          ("No rules? AI writes its own", "When a rule is missing, the AI doesn’t ask. It fills the gap with its own taste, a little differently every time."),
+          ("The system is the brief", "Tokens, component specs and written rules become the prompt behind every screen, so people and AI build the same way.")]
     learned = [("Quiet chrome, loud content", "The sidebar fades into the page so the data does the talking."),
                ("Restraint with colour", "Brand blue only for the main action, links and focus. Red only for errors."),
                ("Calm tables", "No zebra stripes or vertical lines. The person first, one place for row actions."),
                ("Every state designed", "Skeletons while loading, an action when empty, a retry on error.")]
-    notes = ["The same colour had three names across Figma, the kit and code",
-             "Status relied on colour alone in the starter components",
-             "Loading, empty and error states were missing from most screens",
-             "Nothing stopped one-off buttons, greys and spacing from creeping in",
-             "Rules lived in people’s heads, not anywhere an AI could read"]
+    notes = ["Asked for a table, the AI invented a new grey, a new radius and a purple badge",
+             "Two screens built a day apart came back with two different button styles",
+             "Without rules, the AI fell back on generic “AI slop”: gradients, oversized cards and emoji icons",
+             "It hardcoded colour values instead of tokens, so one brand change meant hunting through files",
+             "Loading, empty and error states were skipped unless asked for every single time",
+             "Status shown by colour alone, and generic “Submit” buttons everywhere",
+             "The same colour had three names across Figma, the UI kit and code",
+             "Rules lived in my head, not anywhere an AI could read"]
     peach = [("Records stay read-only", "Training records, audit logs and old SOP versions get no edit or delete buttons."),
              ("No compliance claims", "The interface never says “21 CFR Part 11 compliant” or “GxP compliant”."),
              ("The server decides", "Scores and pass/fail come from the backend. The interface only shows them.")]
@@ -1479,8 +1477,11 @@ def trainix_page():
               ("51 semantic tokens", "Every colour named by its job, tied to one palette, identical in Figma and code"),
               ("13 principles · 8 AI rules", "Each with a Do and a Don’t, so people and the AI build the same way")]
 
+    scenes = [("overview", "Principles"), ("button", "Components"), ("tokens", "Colours")]
+    reel = "".join(f'<div class="tx-scene tx-scene--{i + 1}"><div class="tx-zoom"><iframe src="{LIVE}?embed#{h}" title="" tabindex="-1" aria-hidden="true"></iframe></div><span class="tx-scene-tag">{t}</span></div>' for i, (h, t) in enumerate(scenes))
+
     body = f"""{nav(root, 'work')}
-<main class="sila sl-bg">
+<main class="sila sl-bg tx">
 <aside class="roadmap sl-rail" aria-label="Case study sections">
   <a class="sl-rail-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to work</a>
   <ol><span class="progress"></span>{stations}</ol>
@@ -1489,10 +1490,11 @@ def trainix_page():
 <section class="sl-hero">
   <div class="in">
     <a class="sl-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Go Back</a>
-    <p class="sl-kicker">TRAINIX - DESIGN SYSTEM FOR PHARMA TRAINING</p>
-    <h1>One design language for a dense, regulated training platform, from Figma tokens to working React components</h1>
+    <p class="sl-kicker">TRAINIX - ENTERPRISE DESIGN SYSTEM FOR PHARMA TRAINING</p>
+    <h1>One design language for an enterprise training platform, built so designers, developers and AI agents all build the same way</h1>
   </div>
-  <div class="sl-hero-band tx-band"><div class="tx-embed"><iframe src="{LIVE}#overview" title="Trainix design system, live" loading="lazy"></iframe></div></div>
+  <div class="sl-hero-band tx-band"><div class="tx-reel" role="img" aria-label="A looping tour of the Trainix design system: overview, components and colours">{reel}</div></div>
+  <script>(function(){{var r=document.querySelector(".tx-reel");if(!r)return;function fit(){{r.style.setProperty("--fit",r.clientWidth/1280)}}fit();if(window.ResizeObserver)new ResizeObserver(fit).observe(r);else addEventListener("resize",fit)}})();</script>
 </section>
 
 <aside class="roadmap glass sl-side" aria-label="Case study sections">
@@ -1502,38 +1504,36 @@ def trainix_page():
 
 <section class="sl-sec" id="context"><div class="in">
   <p class="sl-eyebrow">THE CONTEXT</p>
-  <h2><em>Trainix</em> helps pharma and clinical teams manage SOPs, assessments, training events and audit trails in one place.</h2>
-  <p class="sl-lead">Admins run the whole organisation, managers look after their department, and employees see only their own training. I owned the design end to end and built the front end myself, with an AI coding assistant, while a backend developer built the API. Before designing any screens, I built the system both of us would build on.</p>
+  <h2><em>Trainix</em> is an enterprise platform that helps pharma and clinical teams manage SOPs, assessments, training events and audit trails in one place.</h2>
+  <p class="sl-lead">Admins run the whole organisation, managers look after their department, and employees see only their own training. I owned the design end to end and built the front end myself with an AI coding agent, while a backend developer built the API. Before designing any screens, I built the system all three of us would build on.</p>
   <div class="sl-chips"><span>Design system</span><span>Figma library</span><span>Front-end build</span><span>Accessibility</span></div>
 </div></section>
 
-<section class="sl-sec" id="problem"><div class="in">
-  <p class="sl-eyebrow">THE PROBLEM</p>
-  <h2>What the team and the users faced</h2>
-  <h3 class="sl-sub">Team problems</h3>
-  <div class="sl-grid4">{sl_numcards(team)}</div>
-  <h3 class="sl-sub">User problems</h3>
-  <div class="sl-grid4">{sl_numcards(users)}</div>
-  <p class="sl-trust" data-reveal>Consistency is the “product” in a compliance tool</p>
-</div></section>
-
-<section class="sl-sec sl-band-gray" id="research"><div class="in">
-  <p class="sl-eyebrow">THE RESEARCH</p>
-  <h2>What tools people trust with dense data get right</h2>
-  <p class="sl-lead">I studied Linear, Stripe, Zoho, Deel, Remote, Apollo and Mixpanel. I borrowed their principles, not their look: Trainix kept its own blue, its own type and its own tokens.</p>
-  <div class="sl-grid4">{sl_numcards(learned)}</div>
+<section class="sl-sec" id="ai"><div class="in">
+  <p class="sl-eyebrow">DESIGN SYSTEMS IN THE AI ERA</p>
+  <h2>AI doesn’t ask. It fills every gap with its own taste.</h2>
+  <p class="sl-lead">Today a lot of front-end code is written by AI agents. That changes what a design system is for: it isn’t only a library for people, it’s the rulebook an agent reads before it writes a line of code. This project is how I make a system consistent enough to work with AI.</p>
+  <div class="sl-grid3 tx-gap">{sl_numcards(ai, "sl-card sl-card--line")}</div>
 </div></section>
 
 <section class="sl-sec" id="discovery"><div class="in">
   <p class="sl-eyebrow">DISCOVERY</p>
   <h2>UX problems identified</h2>
+  <p class="sl-lead sl-lead--s">What actually happened when I built screens with an AI agent before the system existed: mediocre, inconsistent design, a little different every time.</p>
   <div class="sl-notes">{''.join(f'<div class="sl-note" data-reveal>{n}</div>' for n in notes)}</div>
+</div></section>
+
+<section class="sl-sec sl-band-gray" id="research"><div class="in">
+  <p class="sl-eyebrow">THE RESEARCH</p>
+  <h2>What tools people trust with dense data get right</h2>
+  <p class="sl-lead">I studied Linear, Stripe, Zoho, Deel, Remote, Apollo and Mixpanel.</p>
+  <div class="sl-grid4 tx-gap">{sl_numcards(learned)}</div>
 </div></section>
 
 <section class="sl-sec" id="users"><div class="in">
   <p class="sl-eyebrow">WHO IT’S FOR</p>
   <h2>Three builders, one language.<br>A designer, a developer and an AI assistant.</h2>
-  <div class="sl-persona">
+  <div class="sl-persona tx-gap">
     <div class="sl-card" data-reveal><h4>Who uses the system</h4>
       <p><b>The designer</b> draws every screen from the Figma library.</p>
       <p><b>The developer</b> connects screens to the Django backend and needs names that match.</p>
@@ -1546,9 +1546,9 @@ def trainix_page():
 </div></section>
 
 <section class="sl-sec" id="constraints"><div class="in">
-  <p class="sl-eyebrow">CONSTRAINTS</p>
-  <h2>Designing inside the rules</h2>
-  <p class="sl-lead sl-lead--s">A training platform for regulated teams has rules the design can’t bend, and rules it chooses to keep.</p>
+  <p class="sl-eyebrow">THE RULES</p>
+  <h2>Rules the system never bends</h2>
+  <p class="sl-lead sl-lead--s">Some rules come from the product, some from accessibility. Both are written into the system, so a person and an AI agent follow them the same way.</p>
   <h3 class="sl-sub sl-sub--l">Product rules and accessibility rules</h3>
   <div class="sl-rules">
     <div>{''.join(f'<div class="sl-rule sl-rule--peach" data-reveal><h4>{t}</h4><p>{d}</p></div>' for t, d in peach)}</div>
@@ -1568,8 +1568,8 @@ def trainix_page():
 <section class="sl-sec" id="system"><div class="in">
   <p class="sl-eyebrow">THE SYSTEM</p>
   <h2>See it in action</h2>
-  <p class="sl-lead">This is the design system itself, not screenshots. Click around: every colour, radius and state comes from the same tokens the product uses.</p>
-  <div class="tx-embed tx-embed--lg" data-reveal><iframe src="{LIVE}#button" title="Trainix design system: components" loading="lazy"></iframe></div>
+  <p class="sl-lead">Click around: every colour, radius and state comes from the same tokens the product uses.</p>
+  <div class="tx-embed tx-embed--lg" data-reveal><iframe src="{LIVE}?embed#button" title="Trainix design system: components" loading="lazy"></iframe></div>
   <p class="tx-open"><a class="sl-open" href="{LIVE}" target="_blank" rel="noopener">Open it full screen {ARROW}</a></p>
   {sl_points(tries)}
 </div></section>
@@ -1579,7 +1579,7 @@ def trainix_page():
   <h2>The system checks itself</h2>
   <p class="sl-lead">A WCAG contrast audit runs on every token change. It flagged three real issues in the Trainix colours, each with a one-step fix.</p>
   <div class="sl-row" data-reveal>
-    <div class="sl-row-media tx-media"><div class="tx-embed tx-embed--sm"><iframe src="{LIVE}#accessibility" title="Trainix design system: contrast audit" loading="lazy"></iframe></div></div>
+    <div class="sl-row-media tx-media"><div class="tx-embed tx-embed--sm"><iframe src="{LIVE}?embed#accessibility" title="Trainix design system: contrast audit" loading="lazy"></iframe></div></div>
     <div class="sl-row-text">{sl_points(a11y)}</div>
   </div>
 </div></section>
@@ -1591,18 +1591,15 @@ def trainix_page():
 </div></section>
 
 <section class="sl-sec" id="learnings"><div class="in">
-  <p class="sl-eyebrow">LEARNINGS &amp; NEXT STEPS</p>
+  <p class="sl-eyebrow">LEARNINGS</p>
   <h2>A design system is a promise, kept in two places</h2>
-  <h3 class="sl-sub sl-sub--m">Learnings</h3>
-  {sl_points([("Names are the real handoff.", "Once Figma and code share words, a review becomes “does it match?” instead of “what did you mean?”"), ("Design the boring states first.", "Loading, empty and error screens are where trust is won or lost in a compliance tool."), ("Rules scale better than reviews.", "Writing them for an AI assistant made them clearer for people too.")])}
-  <h3 class="sl-sub sl-sub--m">What I would do next</h3>
-  <ul class="sl-points sl-points--inline">{''.join(f'<li>{SL_ICON}<p><b>{t}</b> {d}</p></li>' for t, d in [("Fix the three contrast pairings", "and publish v1.1"), ("Tablet and mobile layouts", "collapsible sidebar, drawer, scrolling tables"), ("Finish in Figma", "Table, Modal, Tooltip and Progress"), ("New components", "date picker, file upload and a slideout panel")])}</ul>
+  {sl_points([("A defined system is mandatory when working with AI.", "It’s like working with a team, except this team never asks. It applies its own knowledge, so every rule I didn’t write became a guess."), ("Design the boring states first.", "Loading, empty and error screens are where trust is won or lost in a compliance tool."), ("Rules scale better than reviews.", "Writing them for an AI agent made them clearer for people too.")])}
   <p class="sl-quote" data-reveal>“In a compliance tool, calm is a feature”</p>
 </div></section>
 </div>
 </main>
 {footer(root)}"""
-    return head("Trainix Design System · Rajvi Patel", "One design language for Trainix, a pharmacovigilance training platform: tokens, components and written rules, from Figma to React.", root) + body
+    return head("Trainix Design System · Rajvi Patel", "One design language for Trainix, an enterprise pharma training platform: tokens, components and written rules that keep people and AI agents consistent.", root) + body
 
 
 def offline():

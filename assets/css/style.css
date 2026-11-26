@@ -1145,6 +1145,23 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .sl-open { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: #1f2a37; color: #fff; font-weight: 600; font-size: 14px; text-decoration: none; }
 .sl-open:hover { background: #111827; }
 @media (max-width: 700px) { .tx-embed { height: 620px; border-radius: 14px; } .tx-embed--lg { height: 680px; } .tx-embed--sm { height: 560px; } .sl-hero-band.tx-band { padding: 32px 12px; } }
+.tx .sl-chips span { background: #fff; border: 1px solid #d9d0fb; box-shadow: 0 1px 2px rgba(31, 42, 55, .06); }
+.tx .tx-gap { margin-top: 40px; }
+.tx .sl-notes { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 700px) { .tx .sl-notes { grid-template-columns: 1fr 1fr; } .tx .tx-gap { margin-top: 28px; } }
+/* Trainix hero: a looping tour of the live platform (3 scenes, cross-fade + slow zoom in and out) */
+.tx-reel { position: relative; width: min(1100px, 100%); aspect-ratio: 16 / 10; border-radius: 20px; overflow: hidden; background: #fff; border: 1px solid rgba(17, 24, 39, .08); box-shadow: 0 30px 60px -24px rgba(31, 42, 55, .32); }
+.tx-scene, .tx-zoom { position: absolute; inset: 0; animation: txFade 21s cubic-bezier(.65, 0, .35, 1) infinite both; }
+.tx-zoom { animation-name: txZoom; animation-delay: inherit; transform-origin: var(--o, 50% 40%); }
+.tx-zoom iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 800px; border: 0; transform: scale(var(--fit, .8)); transform-origin: 0 0; pointer-events: none; }
+.tx-scene--1 { --o: 30% 28%; }
+.tx-scene--2 { --o: 55% 42%; animation-delay: 7s; }
+.tx-scene--3 { --o: 62% 38%; animation-delay: 14s; }
+.tx-scene-tag { position: absolute; left: 16px; bottom: 16px; padding: 6px 14px; border-radius: 999px; background: rgba(17, 24, 39, .8); color: #fff; font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+@keyframes txFade { 0% { opacity: 0; } 4% { opacity: 1; } 33% { opacity: 1; } 37% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes txZoom { 0% { transform: scale(1.04); } 4% { transform: scale(1); } 12% { transform: scale(1); } 22% { transform: scale(1.32); } 26% { transform: scale(1.32); } 32% { transform: scale(1); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .tx-scene, .tx-zoom { animation: none; } .tx-scene { opacity: 0; } .tx-scene--1 { opacity: 1; } }
+@media (max-width: 700px) { .tx-reel { border-radius: 14px; } .tx-scene-tag { left: 10px; bottom: 10px; font-size: 11px; padding: 4px 10px; } }
 
 .sk-kick { font-size: 16px; color: var(--sl-accent); margin-bottom: 4px; }
 .sila .sk h2, .sk .sk-summary h2, .sk .sk-split h2 { font-size: 48px; font-weight: 500; line-height: 1.25; color: var(--sk-ink); max-width: none; }
