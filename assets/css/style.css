@@ -1135,7 +1135,7 @@ body.leaving .page-fade { opacity: 1; transition-duration: .35s; }
 .sk-hero-img { margin-top: 56px; height: 560px; overflow: hidden; }
 .sk-hero-img img { width: 100%; height: 100%; object-fit: cover; }
 /* Trainix case study: the live design system platform, embedded */
-.sl-hero-band.tx-band { height: auto; padding: 56px clamp(16px, 4vw, 48px) 56px; background: linear-gradient(180deg, rgba(191, 213, 254, .7) 0%, rgba(29, 68, 216, .55) 100%); }
+.sl-hero-band.tx-band { height: auto; padding: 56px clamp(16px, 4vw, 48px) 56px; background: linear-gradient(180deg, rgba(225, 235, 254, .75) 0%, rgba(150, 182, 250, .55) 100%); }
 .tx-band .tx-embed { width: min(1100px, 100%); }
 .tx-embed { position: relative; height: min(76vh, 700px); border-radius: 20px; overflow: hidden; background: #fff; border: 1px solid rgba(17, 24, 39, .08); box-shadow: 0 30px 60px -24px rgba(31, 42, 55, .32); }
 .tx-embed--lg { margin-top: 32px; height: min(82vh, 760px); }
@@ -2860,6 +2860,6 @@ html.brand-gray:not([data-theme="dark"]) .hand { color: #46386b; }
   .ht-quotes { height: calc(var(--pw) * 1.36); }
   .ht-video { width: var(--pw); top: 90px; }
 }
-/* Trainix home card: a lighter lavender panel */
-.scene--lav.scene--trx { background: radial-gradient(120% 90% at 20% 10%, #fbf9ff 0%, #f3efff 55%, #ebe5ff 100%); }
-.card-media .scene--lav.scene--trx::before { background: linear-gradient(1deg, rgba(196, 178, 232, .18) 0%, rgba(250, 248, 253, .15) 95%); }
+/* Trainix home card: a light blue panel */
+.scene--lav.scene--trx { background: radial-gradient(120% 90% at 20% 10%, #f8fbff 0%, #eef4ff 55%, #e4edff 100%); }
+.card-media .scene--lav.scene--trx::before { background: linear-gradient(1deg, rgba(160, 190, 250, .18) 0%, rgba(246, 249, 255, .15) 95%); }
