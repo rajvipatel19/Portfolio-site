@@ -1464,7 +1464,6 @@ def trainix_page():
              ("Semantic token", "Named by its job: <b>bg-brand-solid</b>, <b>text-tertiary</b>. 51 of them, the same in Figma and code."),
              ("Component", "The <b>Primary button</b> reads bg-brand-solid. Change the primitive once and every component follows.")]
     decisions = [("Figma names are code names", "bg-brand-solid in Figma is bg-brand-solid in Tailwind. Handoff became matching words."),
-                 ("Restyle a proven kit<br>instead of starting from zero", "Untitled UI React gave accessible behaviour. I rebuilt its look to match my Figma library."),
                  ("Write the rules down,<br>for people and for AI", "13 principles and 8 AI rules live at the top of the design system file.")]
     tries = [("Components", "Click any cell in a state matrix. The variant, size and React code update with it."),
              ("Colours", "Drag the brand hue. Every component and contrast score updates live, then publish it as a new version."),
@@ -1477,8 +1476,11 @@ def trainix_page():
               ("51 semantic tokens", "Every colour named by its job, tied to one palette, identical in Figma and code"),
               ("13 principles · 8 AI rules", "Each with a Do and a Don’t, so people and the AI build the same way")]
 
-    scenes = [("overview", "Principles"), ("button", "Components"), ("tokens", "Colours")]
-    reel = "".join(f'<div class="tx-scene tx-scene--{i + 1}"><div class="tx-zoom"><iframe src="{LIVE}?embed#{h}" title="" tabindex="-1" aria-hidden="true"></iframe></div><span class="tx-scene-tag">{t}</span></div>' for i, (h, t) in enumerate(scenes))
+    reel = (f'<div class="tx-zoom"><div class="tx-stage"><iframe src="{LIVE}?embed#overview" title="" tabindex="-1" aria-hidden="true"></iframe>'
+            '<span class="tx-ripple"></span><svg class="tx-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#111827" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div>')
+
+
+    REEL_JS = '(function(){var r=document.querySelector(".tx-reel");if(!r)return;var z=r.querySelector(".tx-zoom"),st=r.querySelector(".tx-stage"),f=r.querySelector("iframe"),cur=r.querySelector(".tx-cursor"),rip=r.querySelector(".tx-ripple");\nvar fit=1;function size(){fit=r.clientWidth/1280;st.style.transform="scale("+fit+")"}size();if(window.ResizeObserver)new ResizeObserver(size).observe(r);else addEventListener("resize",size);\nif(matchMedia("(prefers-reduced-motion: reduce)").matches){cur.style.display="none";return}\nvar T=[];function at(ms,fn){T.push(setTimeout(fn,ms))}\nfunction target(){try{var a=f.contentDocument.querySelector(\'#navlist a[href="#button"]\');if(a){var b=a.getBoundingClientRect();return{x:b.left+34,y:b.top+b.height/2}}}catch(e){}return{x:90,y:470}}\nfunction go(h){try{var w=f.contentWindow;if(w.location.hash==="#"+h)return;w.history.replaceState(null,"","#"+h);w.dispatchEvent(new w.HashChangeEvent("hashchange"))}catch(e){}}\nfunction put(x,y,ms){cur.style.transition="transform "+ms+"ms cubic-bezier(.65,0,.35,1)";cur.style.transform="translate("+x+"px,"+y+"px)"}\nfunction zoom(s,x,y,ms){z.style.transition="transform "+ms+"ms cubic-bezier(.65,0,.35,1)";if(x!=null)z.style.transformOrigin=(x*fit)+"px "+(y*fit)+"px";z.style.transform="scale("+s+")"}\nfunction loop(){T.forEach(clearTimeout);T=[];\n  go("overview");zoom(1,null,null,0);put(760,560,0);r.classList.remove("tx-fade");\n  at(900,function(){var t=target();put(t.x,t.y,1700);zoom(1.7,t.x,t.y,1700)});\n  at(2800,function(){var t=target();cur.classList.add("tx-press");rip.style.left=t.x+"px";rip.style.top=t.y+"px";rip.classList.remove("tx-go");void rip.offsetWidth;rip.classList.add("tx-go")});\n  at(3050,function(){cur.classList.remove("tx-press");go("button")});\n  at(3400,function(){zoom(1,null,null,1500);put(640,330,1500)});\n  at(7600,function(){r.classList.add("tx-fade")});\n  at(8200,loop)}\nif(f.contentDocument&&f.contentDocument.readyState==="complete")setTimeout(loop,400);else f.addEventListener("load",function(){setTimeout(loop,400)},{once:true})})();'
 
     body = f"""{nav(root, 'work')}
 <main class="sila sl-bg tx">
@@ -1491,10 +1493,10 @@ def trainix_page():
   <div class="in">
     <a class="sl-back" href="../index.html#work"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Go Back</a>
     <p class="sl-kicker">TRAINIX - ENTERPRISE DESIGN SYSTEM FOR PHARMA TRAINING</p>
-    <h1>One design language for an enterprise training platform, built so designers, developers and AI agents all build the same way</h1>
+    <h1>One design language for an enterprise training platform, so designers, developers and AI agents all build the same way</h1>
   </div>
-  <div class="sl-hero-band tx-band"><div class="tx-reel" role="img" aria-label="A looping tour of the Trainix design system: overview, components and colours">{reel}</div></div>
-  <script>(function(){{var r=document.querySelector(".tx-reel");if(!r)return;function fit(){{r.style.setProperty("--fit",r.clientWidth/1280)}}fit();if(window.ResizeObserver)new ResizeObserver(fit).observe(r);else addEventListener("resize",fit)}})();</script>
+  <div class="sl-hero-band tx-band"><div class="tx-reel" role="img" aria-label="A short looping demo of the Trainix design system: the pointer opens the Button page from the overview">{reel}</div></div>
+  <script>{REEL_JS}</script>
 </section>
 
 <aside class="roadmap glass sl-side" aria-label="Case study sections">
@@ -1562,7 +1564,7 @@ def trainix_page():
 <section class="sl-sec" id="decisions"><div class="in">
   <p class="sl-eyebrow">KEY DECISIONS</p>
   <h2>Decisions that shaped the system</h2>
-  <div class="sl-grid3">{sl_numcards(decisions, "sl-card sl-card--line")}</div>
+  <div class="sl-grid3 tx-grid2">{sl_numcards(decisions, "sl-card sl-card--line")}</div>
 </div></section>
 
 <section class="sl-sec" id="system"><div class="in">
@@ -1593,8 +1595,7 @@ def trainix_page():
 <section class="sl-sec" id="learnings"><div class="in">
   <p class="sl-eyebrow">LEARNINGS</p>
   <h2>A design system is a promise, kept in two places</h2>
-  {sl_points([("A defined system is mandatory when working with AI.", "It’s like working with a team, except this team never asks. It applies its own knowledge, so every rule I didn’t write became a guess."), ("Design the boring states first.", "Loading, empty and error screens are where trust is won or lost in a compliance tool."), ("Rules scale better than reviews.", "Writing them for an AI agent made them clearer for people too.")])}
-  <p class="sl-quote" data-reveal>“In a compliance tool, calm is a feature”</p>
+  <div class="tx-gap">{sl_points([("A defined system is mandatory when working with AI.", "It’s like working with a team, except this team never asks. It applies its own knowledge, so every rule I didn’t write became a guess."), ("Design the boring states first.", "Loading, empty and error screens are where trust is won or lost in a compliance tool."), ("Rules scale better than reviews.", "Writing them for an AI agent made them clearer for people too.")])}</div>
 </div></section>
 </div>
 </main>
