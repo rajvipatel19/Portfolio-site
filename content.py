@@ -45,7 +45,7 @@ PROJECTS = [
      "tags": ["B2C", "Kiosk UX", "Shipped"]},
     {"slug": "trainix-design-system", "name": "Trainix Design System", "scene": "trainix", "badge": "LIVE DEMO",
      "meta": "Enterprise · Design system",
-     "summary": "A design system for an enterprise pharma training platform, built so designers, developers and AI agents all build the same way. 20 components, 51 tokens and written rules for AI.",
+     "summary": "A design system for an enterprise pharma training platform, written so AI coding agents follow it too.",
      "tags": ["Design system", "AI workflow", "Accessibility", "Enterprise"]},
     {"slug": "sku-platform", "name": "SKU Platform", "scene": "sku", "badge": "SHIPPED",
      "meta": "E-commerce · B2B SaaS",
