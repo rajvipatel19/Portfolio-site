@@ -38,7 +38,7 @@ PROJECTS = [
     {"slug": "sila", "name": "SILA", "scene": "sila", "badge": "MVP",
      "meta": "Fintech · Mobile app",
      "summary": "A money transfer app helping UAE expats send money to India without hidden fees, silent holds or heavy signup paperwork.",
-     "tags": ["B2C", "Remittance", "Progressive KYC"]},
+     "tags": ["Freelance", "B2C", "Remittance", "Progressive KYC"]},
     {"slug": "citylockers-kiosk", "name": "CityLockers Kiosk", "scene": "kiosk", "badge": "SHIPPED",
      "meta": "Travel tech · Touch kiosk",
      "summary": "A bag storage kiosk for Dubai tourists who want to explore the city hands-free. 2,000+ bookings, under 4 minutes each.",
