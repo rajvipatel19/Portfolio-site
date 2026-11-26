@@ -2863,3 +2863,9 @@ html.brand-gray:not([data-theme="dark"]) .hand { color: #46386b; }
 /* Trainix home card: a light blue panel */
 .scene--lav.scene--trx { background: radial-gradient(120% 90% at 20% 10%, #f8fbff 0%, #eef4ff 55%, #e4edff 100%); }
 .card-media .scene--lav.scene--trx::before { background: linear-gradient(1deg, rgba(160, 190, 250, .18) 0%, rgba(246, 249, 255, .15) 95%); }
+/* Trainix case study: a lighter page background (light theme only) */
+:root:not([data-theme="dark"]) .sila.sl-bg.tx {
+  background:
+    radial-gradient(circle at 92% 140px, rgba(255, 232, 210, .25) 0, rgba(255, 232, 210, 0) 320px),
+    linear-gradient(180deg, #f6f4fe 0px, #f6f8fe 900px, #f6f4fd 40%, #faf4f8 70%, #f6f0e5 100%);
+}
