@@ -2957,3 +2957,11 @@ html.brand-gray:not([data-theme="dark"]) .hand { color: #46386b; }
 .ba-x { color: #d92d20; } .ba-ok { color: #079455; }
 @media (max-width: 900px) { .tx-ba-grid { grid-template-columns: 1fr; } }
 @media (max-width: 480px) { .tx-ba { height: 340px; } .tx-ba-pane { padding: 44px 14px 14px; } .ba-states > div { min-height: 0; } .ba-raw { word-break: break-word; } .tx-ba-card figcaption { grid-template-columns: 1fr; gap: 8px; } }
+/* Trainix case study: compact accessibility band */
+.sl-sec.tx-a11y { padding: 56px 0; }
+.tx-a11y-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+.tx-a11y-row > div { display: grid; gap: 4px; padding: 18px 20px; border-radius: 14px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .1); }
+.tx-a11y-row b { font-size: 28px; line-height: 1.2; color: #fda29b; font-weight: 600; }
+.tx-a11y-row span { font-size: 16px; font-weight: 600; color: #f4f4f5; }
+.tx-a11y-row em { font-style: normal; font-size: 14px; color: #a1a1aa; }
+@media (max-width: 700px) { .tx-a11y-row { grid-template-columns: 1fr; gap: 10px; } .sl-sec.tx-a11y { padding: 40px 0; } }

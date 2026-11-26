@@ -1465,7 +1465,7 @@ def trainix_page():
     secs = [("context", "The context"), ("ai", "Systems &amp; AI"), ("discovery", "Discovery"),
             ("research", "Research"), ("users", "Who it’s for"), ("constraints", "The rules"),
             ("decisions", "Key decisions"), ("system", "The system"), ("compare", "Before &amp; after"), ("accessibility", "Accessibility"),
-            ("impact", "Impact"), ("learnings", "Learnings")]
+            ("impact", "Outcome"), ("learnings", "Learnings")]
     stations = "".join(f'<li><a href="#{i}"><span class="node"></span>{n}</a></li>' for i, n in secs)
 
     ai = [("AI agents need a source of truth", "An AI coding agent builds fast, but only as consistently as the rules it can read. The design system is that rulebook."),
@@ -1498,9 +1498,7 @@ def trainix_page():
              ("Colours", "Drag the brand hue. Every component and contrast score updates live, then publish it as a new version."),
              ("Usage", "Every component shows when to use it, its specs, and a Do and a Don’t."),
              ("Developers &amp; AI", "The rules that keep an AI coding assistant on-system, and the Figma-to-code naming.")]
-    a11y = [("Warning text · 3.56:1", "Orange text on white sat below the 4.5:1 small text needs. Fix: one shade darker."),
-            ("Warning badge · about 3.3:1", "Orange on its pale tint failed too. The audit suggests the smallest change that passes."),
-            ("Error badge · about 4.0:1", "Close, but under AA. One step darker passes with no visible change to the look.")]
+    a11y = [("3.56:1", "Warning text"), ("3.3:1", "Warning badge"), ("4.0:1", "Error badge")]
     impact = [("20 components", "Every state drawn and built: 14 stable, 2 in code only, 4 in progress, each labelled honestly"),
               ("51 semantic tokens", "Every colour named by its job, tied to one palette, identical in Figma and code"),
               ("13 principles · 8 AI rules", "Each with a Do and a Don’t, so people and the AI build the same way")]
@@ -1608,18 +1606,15 @@ def trainix_page():
   <div class="tx-ba-grid tx-gap">{tx_compare()}</div>
 </div></section>
 
-<section class="sl-sec sl-band-dark" id="accessibility"><div class="in">
+<section class="sl-sec sl-band-dark tx-a11y" id="accessibility"><div class="in">
   <p class="sl-eyebrow">ACCESSIBILITY</p>
   <h2>The system checks itself</h2>
-  <p class="sl-lead">A WCAG contrast audit runs on every token change. It flagged three real issues in the Trainix colours, each with a one-step fix.</p>
-  <div class="sl-row" data-reveal>
-    <div class="sl-row-media tx-media"><div class="tx-embed tx-embed--sm"><iframe src="{LIVE}?embed#accessibility" title="Trainix design system: contrast audit" loading="lazy"></iframe></div></div>
-    <div class="sl-row-text">{sl_points(a11y)}</div>
-  </div>
+  <p class="sl-lead">A WCAG contrast audit runs on every token change. It caught three colour pairs below the 4.5:1 that small text needs. Each passes one shade darker.</p>
+  <div class="tx-a11y-row">{''.join(f'<div data-reveal><b>{r}</b><span>{t}</span><em>Fix: one shade darker</em></div>' for r, t in a11y)}</div>
 </div></section>
 
 <section class="sl-sec" id="impact"><div class="in">
-  <p class="sl-eyebrow">IMPACT</p>
+  <p class="sl-eyebrow">OUTCOME</p>
   <h2>What the system delivers</h2>
   <div class="sl-impact">{''.join(f'<div class="sl-card" data-reveal><span class="sl-arrow">{SL_ICON}</span><h4>{t}</h4><p>{d}</p></div>' for t, d in impact)}</div>
 </div></section>
