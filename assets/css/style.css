@@ -2957,3 +2957,7 @@ html.brand-gray:not([data-theme="dark"]) .hand { color: #46386b; }
 .ba-x { color: #d92d20; } .ba-ok { color: #079455; }
 @media (max-width: 900px) { .tx-ba-grid { grid-template-columns: 1fr; } }
 @media (max-width: 480px) { .tx-ba { height: 340px; } .tx-ba-pane { padding: 44px 14px 14px; } .ba-states > div { min-height: 0; } .ba-raw { word-break: break-word; } .tx-ba-card figcaption { grid-template-columns: 1fr; gap: 8px; } }
+/* Home hero: one line about me under the name */
+.ht-sub { position: relative; z-index: 1; max-width: 720px; margin: 20px auto 0; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.55; color: #52525b; text-wrap: balance; }
+.ht-sub + .ht-stage { margin-top: clamp(36px, 4vw, 64px); }
+[data-theme="dark"] .ht-sub { color: #babac1; }

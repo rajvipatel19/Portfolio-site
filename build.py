@@ -678,6 +678,8 @@ HERO_QUOTES = [  # (text, left %, top %, colour) around the polaroid on wide scr
     ("fintech · health-tech · e-commerce", 68, 78, "#71717a"),
 ]
 HERO_NAME = "Hi, I am Rajvi Patel"
+HERO_SUB = ("Product Designer working across health-tech, fintech, enterprise SaaS and AI-assisted product development. "
+            "I turn complex product problems into clear, scalable experiences.")
 
 
 def hero_new():
@@ -691,6 +693,7 @@ def hero_new():
     return (f'<section class="ht ht--sky" aria-labelledby="ht-name">\n  {sky_clouds()}\n  {fireflies(12)}\n'
             f'  <div class="ht-bg" aria-hidden="true"><span class="ht-check"></span><span class="ht-glow"></span></div>\n'
             f'  <h1 class="ht-name" id="ht-name" aria-label="{escape(HERO_NAME)}"><span aria-hidden="true">{letters}</span></h1>\n'
+            f'  <p class="ht-sub">{HERO_SUB}</p>\n'
             f'  <div class="ht-stage">\n'
             f'    <div class="ht-quotes">{quotes}</div>\n'
             f'    <figure class="ht-video"><div class="me-motion" role="img" aria-label="Photos of Rajvi at her desk with a laptop">{frames}</div></figure>\n'
